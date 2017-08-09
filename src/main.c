@@ -14,30 +14,24 @@
 
 void	fill_struct(t_rtv *rtv, char k)
 {
-	rtv->angles[0] = 0;
-	rtv->angles[1] = 0;
-	rtv->angles[2] = 0;
-	rtv->lightening = 1;
-	set_camera(&rtv->cam, create_vector(60, 40, -100), create_vector(0, 0, 0), 90);
+	rtv->lightening = ON;
+	rtv->light_model = LAMBERT;
+	rtv->reflective_depth = 1;
+	set_camera(&rtv->cam, create_vector(0, 0, 0), create_vector(0, 0, 0), 45, 1);
 	if (k == '1')
 		scene_1(rtv);
-	else if (k == '2')
-		scene_2(rtv);
-	else if (k == '3')
-		scene_3(rtv);
-	else if (k == '4')
-		scene_4(rtv);
-	else if (k == '5')
-		scene_5(rtv);
 	rtv->light_num = 3;
-	rtv->l = (t_light *)malloc(sizeof(t_light) * rtv->light_num);
-	fill_light(&rtv->l[0], create_vector(0, 100, -800), "FFFFFF");
-	fill_light(&rtv->l[1], create_vector(0, 0, 500), "FFFFFF");
-	fill_light(&rtv->l[2], create_vector(200, 100, -1500), "FFFFFF");
+	if(!(rtv->l = (t_light *)malloc(sizeof(t_light) * rtv->light_num)))
+		malloc_error();
+	fill_light(&rtv->global_light, 0, create_vector(0, 0, 0),  create_color_struct(0.2, 0.2, 0.2, 0), create_vector(0, 0, 0), create_vector(0, 0, 0), 0, 0);
+	fill_light(&rtv->l[0], POINT_LIGHT, create_vector(80, 10, 0), create_color_struct(0.3, 0.3, 0.3, 0), create_vector(1, 0.0014, 0.000007), create_vector(0, 0, 0), 0, 0);
+	fill_light(&rtv->l[1], SPOT_LIGHT, create_vector(20, -10, 0), create_color_struct(0.9, 0.9, 0.9, 0), create_vector(1, 0, 0), create_vector(0, 0.25, 1), 20, 5);
+	fill_light(&rtv->l[2], DIRECTIONAL_LIGHT, create_vector(0, 0, 0), create_color_struct(0.1, 0.1, 0.1, 0), create_vector(0, 0, 0), create_vector(4, -10, 10), 0, 0);
 }
 
 void	usage(void)
 {
+	//написати нормальний usage !!!
 	char *s;
 
 	s = "usage: ./Rtv1 scene_number\n\t1 - Sphere;\n\t2 - Cone;\
@@ -50,7 +44,7 @@ int		main(int argc, char **argv)
 {
 	t_rtv		rtv;
 
-	if (argc != 2)
+	if (argc < 2)
 		usage();
 	if (ft_strlen(argv[1]) != 1 || *argv[1] < '1' || *argv[1] > '5')
 		usage();
