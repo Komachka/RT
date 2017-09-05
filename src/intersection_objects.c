@@ -323,17 +323,16 @@ int 	intersection_torus(t_ray *ray, void *tr, double *t)
 int 	intersection_triangle(t_ray *r, void *triangle, double *t)
 {
 	t_triangle	*tr;
-	t_vect		point;
 	t_vect 		c[3];
 	double		t0;
 	int 		i;
+	t_vect 		point;
 
 	i = 0;
 	tr = (t_triangle *)triangle;
-	if (vector_dot_product(&tr->norm, &r->dir) != 0)
+	if (vector_dot_product(&tr->norm, &r->dir))
 	{
-		point = vector_substract(&tr->a, &r->origin);
-		t0 = vector_dot_product(&tr->norm, &point) / vector_dot_product(&tr->norm, &r->dir);	
+		t0 = vector_dot_product(&tr->norm, &tr->a) / vector_dot_product(&tr->norm, &r->dir);	
 		if (t0 > 0.00001f)
 		 {
 		 	point = intersection_point(t0, r);
@@ -343,14 +342,12 @@ int 	intersection_triangle(t_ray *r, void *triangle, double *t)
 			c[A] = vector_cross_product(&tr->edge_ba, &c[A]);
 			c[B] = vector_cross_product(&tr->edge_cb, &c[B]);
 			c[C] = vector_cross_product(&tr->edge_ac, &c[C]);
-			if ((vector_dot_product(&tr->norm, &c[A]) > 0) && (vector_dot_product(&tr->norm, &c[B]) > 0) && (vector_dot_product(&tr->norm, &c[C]) > 0))
-			{
+			if ((vector_dot_product(&tr->norm, &c[A]) > 0.00001f) && (vector_dot_product(&tr->norm, &c[B]) > 0.00001f) && (vector_dot_product(&tr->norm, &c[C]) > 0.00001f))
 				if (t0 > 0.00001f)
-			{	
-		 	i = 1;
-				*t = t0;	
-			}
-		}
+				{	
+		 			i = 1;
+					*t = t0;	
+				}
 		}
 	}
 	return (i);
