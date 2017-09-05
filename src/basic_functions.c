@@ -46,15 +46,17 @@ int		mouse_hook(int bn, int x, int y, t_rtv *rtv)
 
 void	key_funct_2(int k, t_rtv *rtv)
 {
-	if (k == 49)
+	if (k == SPACE)
 		rtv->lightening = rtv->lightening == 0 ? 1 : 0;
-	else if (k == 69)
+	if (k == KEY_B)
+		rtv->bg_color = rtv->bg_color == 0 ? 1 : 0;
+	else if (k == PLUS)
 		rtv->cam.pos.z += 5;
-	else if (k == 78)
+	else if (k == MINUS)
 		rtv->cam.pos.z -= 5;
-	else if (k == 35)
+	else if (k == KEY_P)
 		set_zero_vect(&rtv->cam.pos);
-	else if (k == 15)
+	else if (k == KEY_R)
 	{
 		rtv->cam.rotate[X] = 0;
 		rtv->cam.rotate[Y] = 0;
@@ -64,37 +66,37 @@ void	key_funct_2(int k, t_rtv *rtv)
 
 void	key_funct_1(int k, t_rtv *rtv)
 {
-	if (k == 125)
+	if (k == DOWN)
 		rtv->cam.rotate[X] += 0.1;
-	else if (k == 126)
+	else if (k == UP)
 		rtv->cam.rotate[X] -= 0.1;
 	else if (k == 115)
 		rtv->cam.rotate[Z] += 0.1;
 	else if (k == 119)
 		rtv->cam.rotate[Z] -= 0.1;
-	else if (k == 124)
+	else if (k == RIGHT)
 		rtv->cam.rotate[Y] -= 0.1;
-	else if (k == 123)
+	else if (k == LEFT)
 		rtv->cam.rotate[Y] += 0.1;
 }
 
 void	key_funct_3(int k, t_rtv *rtv)
 {
-	if (k == 24 && rtv->light_model == LAMBERT)
+	if (k == TOP_PLUS && rtv->light_model == LAMBERT)
 		rtv->global_light.intensity = calculate_color(1.2, \
 			&rtv->global_light.intensity);
-	else if (k == 27 && rtv->light_model == LAMBERT)
+	else if (k == TOP_MINUS && rtv->light_model == LAMBERT)
 		rtv->global_light.intensity = calculate_color(0.8, \
 			&rtv->global_light.intensity);
-	else if (k == 18)
+	else if (k == TOP_NUM_1)
 		rtv->light_model = LAMBERT;
-	else if (k == 19)
+	else if (k == TOP_NUM_2)
 		rtv->light_model = CARTOON;
 }
 
 int		my_key_funct(int k, t_rtv *rtv)
 {
-	if (k == 53)
+	if (k == ESC)
 		delstruct(rtv);
 	key_funct_1(k, rtv);
 	key_funct_2(k, rtv);

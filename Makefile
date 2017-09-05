@@ -11,7 +11,7 @@
 #******************************************************************************#
 
 NAME = RT
-CFLAGS = -Wall -Wextra -Werror -O3
+CFLAGS =  -O3
 MLXSRC = libraries/minilibx_macos
 LIBMLX = libraries/minilibx_macos/libmlx.a
 DSRC = ./src

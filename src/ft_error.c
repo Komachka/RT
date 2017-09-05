@@ -12,7 +12,7 @@
 
 #include "rtv1.h"
 
-void	calloc_error(void)
+void	malloc_error(void)
 {
 	ft_putendl("Cann't alocate memory\n");
 	exit(1);

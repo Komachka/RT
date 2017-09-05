@@ -12,6 +12,31 @@
 
 #include "rtv1.h"
 
+t_vect 		triangle_norm_vector(void *obj, t_vect *point)
+{
+	t_vect	norm;
+	t_triangle	*tr;
+
+	tr = (t_triangle *)obj;
+	if (vector_dot_product(&tr->norm, point) > 0.000001f)
+		norm = change_vector_direction(&tr->norm);
+	else
+		norm = tr->norm;
+	return (norm);
+}
+
+t_vect		torus_norm_vector(void *obj, t_vect *point) // переробити на норм функцію
+{
+	t_vect 		norm;
+	t_torus		*t;
+	t_vect a;
+	 a = *point;
+
+	t = (t_torus *)obj;
+	norm = t->dir;
+	return (norm);
+}
+
 t_vect		sphere_norm_vector(void *obj, t_vect *point)
 {
 	t_vect		norm;

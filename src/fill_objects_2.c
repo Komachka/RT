@@ -18,7 +18,9 @@ void	fill_light(t_light *l, int type, t_vect pos, t_color intensity, t_vect atte
 	{
 		l->pos = pos;
 		l->intensity = intensity;
-		l->atten_const = attenuation;
+		l->k_const = attenuation.x;
+		l->k_linear = attenuation.y;
+		l->k_quadratic = attenuation.z;
 		l->type = type;
 		l->direction = normalize_vector(&direction);
 		l->outer_cone = cos(degrees_to_radians(angle / 2.0 + outer_cut));
@@ -27,7 +29,7 @@ void	fill_light(t_light *l, int type, t_vect pos, t_color intensity, t_vect atte
 	}
 }
 
-void	set_camera(t_camera *cam, t_vect p, t_vect angle, double fv, double l_dir)
+void	set_camera(t_camera *cam, t_vect p, t_vect angle, int type, double fv, double l_dir, double fy_andle)
 {
 	cam->pos = p;
 	cam->rotate[X] = degrees_to_radians(angle.x);
@@ -35,10 +37,12 @@ void	set_camera(t_camera *cam, t_vect p, t_vect angle, double fv, double l_dir)
 	cam->rotate[Z] = degrees_to_radians(angle.z);
 	cam->image_aspect_ratio = (double)WX / (double)WY;
 	cam->scale = tan(degrees_to_radians(fv) / 2);
+	cam->type = type;
+	cam->fisheye_angle = fy_andle;
 	cam->lk_dir = l_dir;
 }
 
-void	set_material(t_figure *f, t_color am, t_color dif, t_color spec, double shine, char *cl, double reflective)
+void	set_material(t_figure *f, t_color am, t_color dif, t_color spec, double shine, char *cl, double reflective, double transparency, double refraction)
 {
 	f->material.ambient = am;
 	f->material.diffuse = dif;
@@ -46,4 +50,9 @@ void	set_material(t_figure *f, t_color am, t_color dif, t_color spec, double shi
 	f->material.shininess = shine;
 	f->material.cl = create_color(cl);
 	f->material.reflective = reflective;
+	f->material.transparency = transparency;
+	f->material.refraction = refraction;
+	f->material.texture = 0;
 }
+
+// void  set_texture

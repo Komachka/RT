@@ -12,6 +12,30 @@
 
 #include "rtv1.h"
 
+void 	fill_triangle(t_figure *f, t_vect a, t_vect b, t_vect c)
+{
+	t_triangle *tr;
+	t_vect tm1;
+	t_vect tm2;
+
+	f->id = TRIANGLE;
+	if (!(f->object = (t_triangle *)malloc(sizeof(t_triangle))))
+		malloc_error();
+	tr = (t_triangle *)f->object;
+	tr->a = a;
+	tr->b = b;
+	tr->c = c;
+	tm1 = vector_substract(&b, &a);
+	tm2 = vector_substract(&c, &a);
+	tr->norm = vector_cross_product(&a, &b);
+	tr->norm = normalize_vector(&tr->norm);
+	tr->edge_ba = tm1;
+	tr->edge_cb = vector_substract(&c, &b);
+	tr->edge_ac = vector_substract(&a, &c);
+	f->intersection_object = &intersection_triangle;
+	f->norm_vector = &triangle_norm_vector;
+}
+
 void	fill_sphere(t_figure *f, t_vect pos, double rd)
 {
 	t_sphere *s;
@@ -68,4 +92,20 @@ void	fill_cylinder(t_figure *f, t_vect p, t_vect d, double rd)
 	c->r = rd;
 	f->intersection_object = &intersection_cylinder;
 	f->norm_vector = &cylinder_norm_vector;
+}
+
+void	fill_torus(t_figure *f, t_vect p, t_vect d, double min_r, double maj_r)
+{
+	t_torus *t;
+
+	f->id = TORUS;
+	if (!(f->object = (t_torus *)malloc(sizeof(t_torus))))
+		malloc_error();
+	t = (t_torus *)f->object;
+	t->pos = p;
+	t->dir = normalize_vector(&d);
+	t->min_r = min_r;
+	t->maj_r = maj_r;
+	f->intersection_object = &intersection_torus;
+	f->norm_vector = &torus_norm_vector;
 }

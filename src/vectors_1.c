@@ -12,38 +12,48 @@
 
 #include "rtv1.h"
 
-double		vector_dot_product(t_vect *v1, t_vect *v2)
+double		vector_dot_product(t_vect *a, t_vect *b)
 {
-	return (v1->x * v2->x + v1->y * v2->y + v1->z * v2->z);
+	return (a->x * b->x + a->y * b->y + a->z * b->z);
 }
 
-t_vect		vector_add(t_vect *v1, t_vect *v2)
+t_vect 		vector_cross_product(t_vect *a, t_vect *b)
 {
 	t_vect v;
 
-	v.x = v1->x + v2->x;
-	v.y = v1->y + v2->y;
-	v.z = v1->z + v2->z;
+	v.x = a->y * b->z - a->z * b->y;
+	v.y = a->z * b->x - a->x * b->z;
+	v.z = a->x * b->y - a->y * b->x;
 	return (v);
 }
 
-t_vect		vector_substract(t_vect *v1, t_vect *v2)
+t_vect		vector_add(t_vect *a, t_vect *b)
 {
 	t_vect v;
 
-	v.x = v1->x - v2->x;
-	v.y = v1->y - v2->y;
-	v.z = v1->z - v2->z;
+	v.x = a->x + b->x;
+	v.y = a->y + b->y;
+	v.z = a->z + b->z;
 	return (v);
 }
 
-t_vect		vector_mult(double i, t_vect *v1)
+t_vect		vector_substract(t_vect *a, t_vect *b)
 {
 	t_vect v;
 
-	v.x = v1->x * i;
-	v.y = v1->y * i;
-	v.z = v1->z * i;
+	v.x = a->x - b->x;
+	v.y = a->y - b->y;
+	v.z = a->z - b->z;
+	return (v);
+}
+
+t_vect		vector_mult(double i, t_vect *a)
+{
+	t_vect v;
+
+	v.x = a->x * i;
+	v.y = a->y * i;
+	v.z = a->z * i;
 	return (v);
 }
 

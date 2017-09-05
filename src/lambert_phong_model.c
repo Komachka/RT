@@ -14,21 +14,32 @@
 
 static void	ambient_component(t_additional *st, t_rtv *rtv)
 {
-	st->a = mult_color_coefs(st->mat.ambient, rtv->global_light.intensity);
-	st->a = mult_color_coefs(st->a, st->mat.cl);
+	if (st->mat.transparency > 0.0001f)
+		set_zero_color(&st->a);
+	else
+		{
+			st->a = mult_color_coefs(st->mat.ambient, rtv->global_light.intensity);
+			st->a = mult_color_coefs(st->a, st->mat.cl);
+		}
 }
 
 static void	diffuse_component(t_light *l, t_additional *st, t_final_color *c)
 {
 	double diff;
 
-	diff = st->spot_coef * vector_dot_product(&st->norm, \
+	if (st->mat.transparency > 0.0001f)
+		set_zero_color(&c->d);
+	else
+	{
+		diff = st->spot_coef * vector_dot_product(&st->norm, \
 		&st->rev_light_ray.dir);
 	if (diff < 0.0001f)
 		diff = 0;
+	st->diff += diff;
 	c->d = mult_color_coefs(calculate_color(diff, &l->intensity), st->mat.cl);
 	c->d = mult_color_coefs(c->d, st->mat.diffuse);
 	c->d = calculate_color(st->attenuation, &c->d);
+	}
 }
 
 static void		specular_component(t_light *l, t_additional *st, t_vect *cam, t_final_color *c)
@@ -54,56 +65,91 @@ static void		specular_component(t_light *l, t_additional *st, t_vect *cam, t_fin
 
 static void		lignt_attenuation(t_additional *st, t_light *l)
 {
-	if (K_CONST == 0 && K_LINEAR == 0 && K_QUADRATIC == 0)
+	if (l->k_const == 0 && l->k_linear == 0 && l->k_quadratic == 0)
 		st->attenuation = 1;
 	else
-		st->attenuation = min(1.00 / (K_CONST + K_LINEAR * st->len + K_QUADRATIC * pow(st->len, 2)), 1);
+		st->attenuation = min(1.00 / (l->k_const + l->k_linear * st->len + l->k_quadratic * pow(st->len, 2)), 1);
 }
 
-int  	reflection_component(t_additional *st, int depth, t_rtv *rtv)
+t_color  reflection_component(t_additional *st, t_rtv *rtv, int recursive_depth, double coef)
 {
-	t_vect bias;
-	int i;
 	int k;
-	int figure;
 	double t;
-	double far;
-	t_vect norm;
-	t_vect point;
-	int res;
 	t_vect tmp;
+	t_color res;
 
-	k = -1;
-	i = -1;
-	res = 0;
-	figure = -1;
+	
 	t_ray r;
-	r.origin = st->point;
 	tmp = st->primary_ray.dir;
 	r.dir = reflected_vector(&tmp, &st->norm);
-	bias = vector_mult(0.001, &r.dir);
-	r.origin = vector_add(&r.origin, &bias);
-	while (++i < depth)
+	r.origin = adding_bias(&st->point, &r.dir);
+	t = INFINITY;
+	if ((k = complicated_intersection(rtv, &r, &t)) != -1)
 	{
-		t = INFINITY;
-		if ((k = complicated_intersection(rtv, &r, &t)) == -1)
-			break;
-		figure = k;
-		far = t;
-		point = intersection_point(t, &r);
-		norm = find_norm(rtv, figure, &point, &r.dir);
-		r.origin = point;
-		r.dir = reflected_vector(&r.dir, &norm);
-		bias = vector_mult(0.001, &r.dir);
-		r.origin = vector_add(&r.origin, &bias);
+		res = colorizing(rtv, k, t, &r, recursive_depth + 1);
+		res = calculate_color(coef, & res);
 	}
-	if (figure != -1)
+	else 
+	{	
+		if (rtv->bg_color == ON)
+			res = calculate_color(coef, &rtv->background_color);
+		else
+			set_zero_color(&res);
+	}
+	return (res);
+}
+
+double fresnel_reflect_amount(double n1, double n2, t_vect *norm, t_vect *incident)
+{
+	double r0;
+	double cos_x;
+	double n;
+	double sint2;
+	double x;
+	double ret;
+
+	r0 = (n1 - n2)/(n1 + n2);
+	r0 *= r0;
+	cos_x = -vector_dot_product(norm, incident);
+	if (n1 > n2)
 	{
-	st->r = rtv->objects[figure].material.cl;	
-	//	st->r = colorizing(rtv, figure, far, &r);
-		res = 1;
+		n = n1 / n2;
+		sint2 = n * n * (1.0 - cos_x * cos_x);
+		if (sint2 > 1.00f)
+			return (1.0);
+		cos_x = sqrt(1.0 - sint2);
 	}
-	return(res);
+	x = 1.0 - cos_x;
+	ret = r0 + (1.0 - r0) * x * x * x * x * x;
+	return (ret);
+}
+
+t_color refractive_component(t_additional *st, t_rtv *rtv, int recursive_depth)
+{	
+	int k;
+	double t;
+	t_vect tmp;
+	t_color res;
+	double coef;
+
+
+	t_ray r;
+	tmp = st->primary_ray.dir;
+	r.dir = refracted_vector(&st->norm, &tmp, rtv->air_coef, st->mat.refraction);
+	r.origin = adding_bias(&st->point, &r.dir);
+	t = INFINITY;
+	coef = fresnel_reflect_amount(rtv->air_coef, st->mat.refraction, &st->norm, &tmp);
+	st->mat.reflective = coef;
+	if (rtv->bg_color == ON)
+		res = calculate_color(coef, &rtv->background_color);
+	else
+		set_zero_color(&res);
+	if ((k = complicated_intersection(rtv, &r, &t)) != -1)
+	{
+		res = colorizing(rtv, k, t, &r, recursive_depth + 1);
+		res = calculate_color(1 - coef, & res);
+	}
+	return (res);
 }
 
 t_color  final_color(t_final_color *lights, t_rtv *rtv, t_additional *s)
@@ -127,32 +173,34 @@ t_color  final_color(t_final_color *lights, t_rtv *rtv, t_additional *s)
 		total_spec.b += lights[i].s.b;
 		total_spec.al += lights[i].s.al;
 	}
-	if (!s->refl)
-		s->r = total_diff;
-	total_diff = proportional_color_distribution(&s->r, &total_diff, s->mat.reflective);
-	res.r = min(s->a.r + total_diff.r + total_spec.r, 1);
-	res.g = min(s->a.g + total_diff.g + total_spec.g, 1);
-	res.b = min(s->a.b + total_diff.b + total_spec.b, 1);
+	if (s->mat.reflective > 0.001f)
+	{
+		total_diff = calculate_color(1 - s->mat.reflective, &total_diff);
+		s->a = proportional_color_distribution(&s->r, &s->a, s->mat.reflective);
+	}
+	res.r = min(s->a.r + s->r.r + s->refr.r + total_diff.r + total_spec.r, 1);
+	res.g = min(s->a.g + s->r.g + s->refr.g + total_diff.g + total_spec.g, 1);
+	res.b = min(s->a.b + s->r.b + s->refr.b + total_diff.b + total_spec.b, 1);
 	res.al = min(s->a.al + total_diff.al + total_spec.al, 1);
 	return (res);
 }
 
-t_color lambert_phong_model(t_rtv *rtv, t_additional *s)
+t_color lambert_phong_model(t_rtv *rtv, t_additional *s, int recursive_depth)
 {
 	int				k;
 	t_final_color	lights[rtv->light_num];
 	t_color res;
 
 	k = -1;
-	s->refl = 1.00;
 	set_zero_color(&s->r);
+	set_zero_color(&s->refr);
 	ambient_component(s, rtv);
-	 while (++k < rtv->light_num)
+	while (++k < rtv->light_num)
 	{
 		create_light_ray(&rtv->l[k], s);
 		lignt_attenuation(s, &rtv->l[k]);
 		if (!shadow(rtv, &s->rev_light_ray, s->len))
-		{
+		{	
 			diffuse_component(&rtv->l[k], s, &lights[k]);
 			specular_component(&rtv->l[k], s, &rtv->cam.pos, &lights[k]);
 		}
@@ -162,9 +210,14 @@ t_color lambert_phong_model(t_rtv *rtv, t_additional *s)
 			set_zero_color(&lights[k].s);
 		}
 	}
-	if (s->mat.reflective > 0.001f)
-		if (!(reflection_component(s, rtv->reflective_depth, rtv)))
-			s->refl = 0.00;
+	if (recursive_depth < rtv->recursive_depth)
+		if (s->mat.transparency > 0.001f)
+			s->refr = refractive_component(s, rtv, recursive_depth);
+	if (recursive_depth < rtv->recursive_depth)
+	{
+		if (s->mat.reflective > 0.001f)
+			s->r = reflection_component(s, rtv, recursive_depth, s->mat.reflective);
+	}
 	res = final_color(lights, rtv, s);
 	return (res);
 }

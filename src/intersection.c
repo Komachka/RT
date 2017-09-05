@@ -30,7 +30,7 @@ int			complicated_intersection(t_rtv *rtv, t_ray *r, double *point)
 	return (k);
 }
 
-void		intersection(t_rtv *rtv, t_ray *r, int x, int y)
+t_color		intersection(t_rtv *rtv, t_ray *r)
 {
 	double		t;
 	t_color		c;
@@ -40,14 +40,18 @@ void		intersection(t_rtv *rtv, t_ray *r, int x, int y)
 	t = INFINITY;
 	k = -1;
 	figure = complicated_intersection(rtv, r, &t);
+	set_zero_color(&c);
 	if (figure != -1)
 	{
 		if (rtv->lightening == ON)
-			c = colorizing(rtv, figure, t, r);
+			c = colorizing(rtv, figure, t, r, 0);
 		else
 			c = rtv->objects[figure].material.cl;
-		paint_image(rtv, x, y, &c);
 	}
+	else
+		if (rtv->bg_color == ON)
+			c = rtv->background_color;
+	return (c);
 }
 
 t_vect		intersection_point(double t, t_ray *r)

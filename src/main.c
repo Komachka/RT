@@ -15,18 +15,21 @@
 void	fill_struct(t_rtv *rtv, char k)
 {
 	rtv->lightening = ON;
+	rtv->bg_color = OFF;
+	rtv->background_color = create_color("FFEFD5");
 	rtv->light_model = LAMBERT;
-	rtv->reflective_depth = 1;
-	set_camera(&rtv->cam, create_vector(0, 0, 0), create_vector(0, 0, 0), 45, 1);
+	rtv->recursive_depth = 3;
+
+	rtv->samples_grid = 1; // ніколи не може бути меншим за 1 !!!!, задається в карті
+	rtv->samples_per_pixel = pow(rtv->samples_grid, 2);
+	rtv->delta_aliasing = 1.0 / (2.0 * rtv->samples_grid);
+	
+	rtv->air_coef = 1.00029;
+
+	set_camera(&rtv->cam, create_vector(0, 0, 0), create_vector(0, 0, 0), STANDART, 45, 1, 270);
 	if (k == '1')
 		scene_1(rtv);
-	rtv->light_num = 3;
-	if(!(rtv->l = (t_light *)malloc(sizeof(t_light) * rtv->light_num)))
-		malloc_error();
-	fill_light(&rtv->global_light, 0, create_vector(0, 0, 0),  create_color_struct(0.2, 0.2, 0.2, 0), create_vector(0, 0, 0), create_vector(0, 0, 0), 0, 0);
-	fill_light(&rtv->l[0], POINT_LIGHT, create_vector(80, 10, 0), create_color_struct(0.3, 0.3, 0.3, 0), create_vector(1, 0.0014, 0.000007), create_vector(0, 0, 0), 0, 0);
-	fill_light(&rtv->l[1], SPOT_LIGHT, create_vector(20, -10, 0), create_color_struct(0.9, 0.9, 0.9, 0), create_vector(1, 0, 0), create_vector(0, 0.25, 1), 20, 5);
-	fill_light(&rtv->l[2], DIRECTIONAL_LIGHT, create_vector(0, 0, 0), create_color_struct(0.1, 0.1, 0.1, 0), create_vector(0, 0, 0), create_vector(4, -10, 10), 0, 0);
+	
 }
 
 void	usage(void)
@@ -34,7 +37,7 @@ void	usage(void)
 	//написати нормальний usage !!!
 	char *s;
 
-	s = "usage: ./Rtv1 scene_number\n\t1 - Sphere;\n\t2 - Cone;\
+	s = "usage: ./RT scene_number\n\t1 - Sphere;\n\t2 - Cone;\
 	\n\t3 - Cylinder;\n\t4 - Multiple objects;\n\t5 - Box;";
 	ft_putendl(s);
 	exit(0);

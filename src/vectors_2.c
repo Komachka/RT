@@ -55,6 +55,27 @@ t_vect		reflected_vector(t_vect *v, t_vect *norm)
 	return (refl);
 }
 
+t_vect		refracted_vector(t_vect *norm, t_vect *incident, double n1, double n2)
+{
+
+	double n;
+	double c1;
+	double c2;
+	t_vect res;
+
+	set_zero_vect(&res);
+	n = n1 / n2;
+	c1 = -vector_dot_product(norm, incident);
+	c2 = sqrt(1.00 - n * n * (1.00 - c1 * c1));
+	t_vect tmp1;
+	t_vect tmp2;
+
+	tmp1 = vector_mult(n, incident);
+	tmp2 = vector_mult(n * c1 - c2, norm);
+	res = vector_add(&tmp1, &tmp2);
+	return(res);
+}
+
 t_vect		change_vector_direction(t_vect *v)
 {
 	t_vect new;
