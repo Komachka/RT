@@ -66,6 +66,8 @@ void	key_funct_2(int k, t_rtv *rtv)
 
 void	key_funct_1(int k, t_rtv *rtv)
 {
+	t_triangle *tr;
+	tr = (t_triangle *)rtv->objects[5].object;
 	if (k == DOWN)
 		rtv->cam.rotate[X] += 0.1;
 	else if (k == UP)

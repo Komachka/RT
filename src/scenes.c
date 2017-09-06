@@ -37,7 +37,7 @@ void	scene_1(t_rtv *rtv)
 	set_material(&rtv->objects[4], create_color_struct(1, 1, 1, 0), create_color_struct(1, 1, 1, 0), create_color_struct(0, 0, 0, 0), 7, "00CED1", 0, 0, 0);
 
 	fill_triangle(&rtv->objects[5], create_vector(-15, 40, 100), create_vector(20, 40, 100), create_vector(3, 70, 100));
-	set_material(&rtv->objects[5], create_color_struct(1, 1, 1, 0), create_color_struct(1, 1, 1, 0), create_color_struct(0, 0, 0, 0), 7, "00CED1", 0, 0, 0);
+	set_material(&rtv->objects[5], create_color_struct(1, 1, 1, 0), create_color_struct(1, 1, 1, 0), create_color_struct(1, 1, 1, 0), 7, "00CED1", 0, 0, 0);
 
 	rtv->light_num = 3;
 	if(!(rtv->l = (t_light *)malloc(sizeof(t_light) * rtv->light_num)))

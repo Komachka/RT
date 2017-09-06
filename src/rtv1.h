@@ -23,10 +23,6 @@
 # define Y 1
 # define Z 2
 
-# define A 0
-# define B 1
-# define C 2
-
 # define ON 1
 # define OFF 0
 
@@ -209,13 +205,12 @@ typedef struct s_torus
 
 typedef struct s_triangle
 {
-	t_vect 		norm;
 	t_vect   	a;
 	t_vect   	b;
 	t_vect   	c;
-	t_vect  	edge_ac;
-	t_vect  	edge_ba;
-	t_vect  	edge_cb;
+	t_vect  	v0;
+	t_vect  	v1;
+	t_vect 		norm;
 }				t_triangle;
 
 

@@ -98,7 +98,7 @@ t_vect		find_norm(t_rtv *rtv, int f, t_vect *point, t_vect *r_dir)
 {
 	t_vect norm;
 
-	if (rtv->objects[f].id == 2)
+	if (rtv->objects[f].id == PLANE || rtv->objects[f].id == TRIANGLE)
 		norm = rtv->objects[f].norm_vector(rtv->objects[f].object, r_dir);
 	else
 		norm = rtv->objects[f].norm_vector(rtv->objects[f].object, point);

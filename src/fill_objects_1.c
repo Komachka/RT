@@ -25,13 +25,10 @@ void 	fill_triangle(t_figure *f, t_vect a, t_vect b, t_vect c)
 	tr->a = a;
 	tr->b = b;
 	tr->c = c;
-	tm1 = vector_substract(&b, &a);
-	tm2 = vector_substract(&c, &a);
-	tr->norm = vector_cross_product(&tm1, &tm2);
+	tr->v0 = vector_substract(&b, &a);
+	tr->v1 = vector_substract(&c, &a);
+	tr->norm = vector_cross_product(&tr->v0, &tr->v1);
 	tr->norm = normalize_vector(&tr->norm);	
-	tr->edge_ba = tm1;
-	tr->edge_cb = vector_substract(&c, &b);
-	tr->edge_ac = vector_substract(&a, &c);
 	f->intersection_object = &intersection_triangle;
 	f->norm_vector = &triangle_norm_vector;
 }

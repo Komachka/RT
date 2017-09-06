@@ -320,38 +320,40 @@ int 	intersection_torus(t_ray *ray, void *tr, double *t)
 }
 
 
-int 	intersection_triangle(t_ray *r, void *triangle, double *t)
+int 	intersection_triangle(t_ray *r, void *triangle, double *t) // Möller–Trumbore intersection algorithm
 {
 	t_triangle	*tr;
-	t_vect 		c[3];
-	double		t0;
-	int 		i;
-	t_vect 		point;
+	double 		det;
+	double 		u;
+	double 		v;
+	t_vect 		tvec;
+	t_vect 		qvec;
+	double 		t0;
 
-	i = 0;
 	tr = (t_triangle *)triangle;
-	if (vector_dot_product(&tr->norm, &r->dir))
+	t_vect pvec = vector_cross_product(&r->dir, &tr->v1);
+	det = vector_dot_product(&tr->v0, &pvec);
+	if (fabs(det) > 0.000001f)
 	{
-		t0 = vector_dot_product(&tr->norm, &tr->a) / vector_dot_product(&tr->norm, &r->dir);	
-		if (t0 > 0.00001f)
-		 {
-		 	point = intersection_point(t0, r);
-			c[A] = vector_substract(&point, &tr->a);
-			c[B] = vector_substract(&point, &tr->b);
-			c[C] = vector_substract(&point, &tr->c);
-			c[A] = vector_cross_product(&tr->edge_ba, &c[A]);
-			c[B] = vector_cross_product(&tr->edge_cb, &c[B]);
-			c[C] = vector_cross_product(&tr->edge_ac, &c[C]);
-			if ((vector_dot_product(&tr->norm, &c[A]) > 0.00001f) && (vector_dot_product(&tr->norm, &c[B]) > 0.00001f) && (vector_dot_product(&tr->norm, &c[C]) > 0.00001f))
-				if (t0 > 0.00001f)
-				{	
-		 			i = 1;
-					*t = t0;	
-				}
+		det = 1.0 / det;
+		tvec = vector_substract(&r->origin, &tr->a);
+		u = vector_dot_product(&tvec, &pvec) * det;
+		if (u < 0.0f || u > 1.0f)
+			return(0);
+		qvec = vector_cross_product(&tvec, &tr->v0);
+		v = vector_dot_product(&r->dir, &qvec) * det;
+		if (v < 0.0f || u + v > 1.0f)
+	 		return (0);
+	 	t0 = vector_dot_product(&tr->v1, &qvec) * det;
+	 	if (t0 > 0.000001f)
+	 	{	
+	 		*t = t0;
+	 		return(1);
 		}
 	}
-	return (i);
+	return (0);
 }
+
 
 int		intersection_cylinder(t_ray *r, void *c, double *t)
 {
