@@ -34,16 +34,19 @@ SRC = main.c \
 	  menu.c \
 	  solving_equations.c \
 	  json_get_scene.c \
-	  json_validate_rtv_and_camera.c \
-	  json_validate_vector_and_color.c \
-	  json_validate_light.c \
-	  json_validate_objects.c \
-	  json_validate_object.c \
-	  json_validate_figures.c \
-	  json_validate_more_figures.c \
-	  json_validate_rest_figures.c \
-	  json_valid_value.c \
 	  json_valid_data.c \
+	  json_valid_data_2.c \
+	  json_valid_value.c \
+	  json_validate_even_more_figures.c \
+	  json_validate_figures.c \
+	  json_validate_light.c \
+	  json_validate_more_figures.c \
+	  json_validate_object.c \
+	  json_validate_objects.c \
+	  json_validate_rest_figures.c \
+	  json_validate_rtv_and_camera.c \
+	  json_validate_texture.c \
+	  json_validate_vector_and_color.c \
 	  filters.c \
 	  animation.c \
 	  mapping_texture.c \

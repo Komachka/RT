@@ -90,8 +90,17 @@
                 },
                 "Shininess"    : 20,
                 "Reflective"   : 0,
-                "Transparency" : 0.8,
+                "Transparency" : 0,
                 "Refraction"   : 1.015
+            },
+            "Texture"  : {
+                "Type"          : "PERLIN",
+                "Octaves"       : 3,
+                "Amplitude"     : 1,
+                "Persistence"   : 0.5,
+                "Exponent"      : 5.56,
+                "Frequency"     : {"x" : 0.9, "y" : 0.9, "z" : 0.9},
+                "Frequency Att" : {"x" : 2, "y" : 2, "z" : 2}
             }
         },
         {
@@ -122,6 +131,52 @@
                     "Alpha" : 0
                 },
                 "Shininess"    : 5,
+                "Reflective"   : 0,
+                "Transparency" : 0,
+                "Refraction"   : 1
+            }
+        },
+        {
+            "Id"       : "PLANE_WITH_HOLE",
+            "Object"   : {
+                "Normal Vector"      : {"x" : 0, "y" : 0, "z" : 1},
+                "Point On The Plane" : {"x" : 0, "y" : 0, "z" : 1500},
+                "Holes"              : [
+                    {
+                        "Position" : {"x" : 0, "y" : 30, "z" : 180},
+                        "Radius"   : 20
+                    },
+                    {
+                        "Position" : {"x" : 40, "y" : -20, "z" : 180},
+                        "Radius"   : 20
+                    },
+                    {
+                        "Position" : {"x" : -40, "y" : 80, "z" : 180},
+                        "Radius"   : 20
+                    }
+                ]
+            },
+            "Material" : {
+                "Color"        : "F0A30A",
+                "Ambient"      : {
+                    "Red"   : 0.8,
+                    "Green" : 0.8,
+                    "Blue"  : 0.8,
+                    "Alpha" : 0
+                },
+                "Diffuse"      : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Specular"     : {
+                    "Red"   : 0,
+                    "Green" : 0,
+                    "Blue"  : 0,
+                    "Alpha" : 0
+                },
+                "Shininess"    : 0,
                 "Reflective"   : 0,
                 "Transparency" : 0,
                 "Refraction"   : 1
@@ -357,6 +412,15 @@
                 "Reflective"   : 0,
                 "Transparency" : 0,
                 "Refraction"   : 1
+            },
+            "Texture"  : {
+                "Type"          : "PERLIN",
+                "Octaves"       : 3,
+                "Amplitude"     : 1,
+                "Persistence"   : 0.5,
+                "Exponent"      : 5.56,
+                "Frequency"     : {"x" : 0.9, "y" : 0.9, "z" : 0.9},
+                "Frequency Att" : {"x" : 2, "y" : 2, "z" : 2}
             }
         },
         {
@@ -392,6 +456,15 @@
                 "Reflective"   : 0,
                 "Transparency" : 0,
                 "Refraction"   : 1
+            },
+            "Texture"  : {
+                "Type"          : "PERLIN",
+                "Octaves"       : 3,
+                "Amplitude"     : 1,
+                "Persistence"   : 1,
+                "Exponent"      : 1.06,
+                "Frequency"     : {"x" : 0.79, "y" : 0.79, "z" : 0.79},
+                "Frequency Att" : {"x" : 1, "y" : 1, "z" : 1}
             }
         },
         {

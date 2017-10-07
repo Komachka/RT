@@ -21,7 +21,7 @@ char	*get_json_string(const char *name)
 
 	VAR_INT(file_size, 0);
 	str = join("scenes/", name);
-	if ((fd = open(str, O_RDONLY)) < 0)
+	if ((fd = open(str, O_RDONLY)) < 0 || (read(fd, buff, 0)) < 0)
 		return (0);
 	while ((bytes = read(fd, buff, 1023)))
 		file_size += bytes;
@@ -40,7 +40,7 @@ void	fill_else(t_rtv *rtv)
 	rtv->lightening = ON;
 	rtv->bg_color = OFF;
 	rtv->samples_per_pixel = pow(rtv->samples_grid, 2);
-	rtv->samples = rtv->lightening = ON ? rtv->samples_per_pixel : 1;
+	rtv->samples = rtv->lightening == ON ? rtv->samples_per_pixel : 1;
 	rtv->delta_aliasing = 1.0 / (2.0 * rtv->samples_grid);
 	//rtv->air_coef = 1.00029; - скоріше за все треба видалити
 	rtv->expos = -2.0f;

@@ -14,8 +14,8 @@
 
 char	*validate_objects_next_2(cJSON *tmp[], cJSON *material[], t_figure *fig)
 {
-	char	*arr[14];
-	int		num[13];
+	char	*arr[15];
+	int		num[14];
 
 	VAR_INT(index, -1);
 	valid_data(arr, "Id");
@@ -67,16 +67,45 @@ char	*validate_objects_next(cJSON *tmp[], t_figure *figure)
 	return (validate_objects_next_2(tmp, material, figure));
 }
 
+char	*validate_object_texture(cJSON *obj, t_figure *figure)
+{
+	cJSON	*tmp[2];
+	char	*arr[1];
+
+	figure->texturing = OFF;
+	if ((tmp[0] = cJSON_GetObjectItemCaseSensitive(obj, "Texture")))
+	{
+		if (!(tmp[1] = cJSON_GetObjectItemCaseSensitive(tmp[0], "Type")) ||
+				(!cmp("MAPPING", tmp[1]->valuestring) &&
+			!cmp("PERLIN", tmp[1]->valuestring)))
+			return ("Invalid \"Texture\"->\"Type\".");
+		figure->texture.type = PERLIN;
+		if (cmp("MAPPING", tmp[1]->valuestring))
+		{
+			valid_data_2(arr, "Textures");
+			VAR_INT(i, -1);
+			while (++i < (int)(sizeof(arr) / sizeof(char*)))
+				if (!cmp(arr[i], tmp[1]->valuestring))
+					return ("No MAPPING for figure");
+			figure->texture.type = MAPPING;
+		}
+		figure->texturing = ON;
+		return (validate_texture(tmp[0], figure));
+	}
+	return (0);
+}
+
 char	*validate_objects(cJSON *obj, t_rtv *rtv)
 {
 	cJSON	*tmp[3];
 	char	*arr[4];
 	char	*str;
 
+	if (!obj || obj->type != cJSON_Array)
+		return ("Invalid Objects Array");
 	valid_data(arr, "Objects");
 	rtv->figure_num = cJSON_GetArraySize(obj);
-	if (!(rtv->objects = (t_figure *)malloc(sizeof(t_figure) *
-											rtv->figure_num)))
+	if (!(rtv->objects = (t_figure*)malloc(sizeof(t_figure) * rtv->figure_num)))
 		malloc_error();
 	VAR_INT(counter, -1);
 	while (++counter < rtv->figure_num)
@@ -87,7 +116,9 @@ char	*validate_objects(cJSON *obj, t_rtv *rtv)
 					cJSON_GetArrayItem(obj, counter), arr[index])))
 				return (arr[index]);
 		rtv->objects[counter].id = -1;
-		if ((str = validate_objects_next(tmp, &rtv->objects[counter])))
+		if ((str = validate_objects_next(tmp, &rtv->objects[counter])) ||
+			(str = validate_object_texture(cJSON_GetArrayItem(obj, counter),
+									&rtv->objects[counter])))
 			return (str);
 	}
 	return (0);

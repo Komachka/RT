@@ -646,6 +646,7 @@ char			*validate_cylinder(cJSON *tmp[], t_figure *figure);
 char			*validate_cone(cJSON *tmp[], t_figure *figure);
 char			*validate_torus(cJSON *tmp[], t_figure *figure);
 char			*validate_plane(cJSON *tmp[], t_figure *figure);
+char			*validate_plane_with_hole(cJSON *tmp[], t_figure *figure);
 char			*validate_triangle(cJSON *tmp[], t_figure *figure);
 char			*validate_disc(cJSON *tmp[], t_figure *figure);
 char			*validate_ellipsoid(cJSON *tmp[], t_figure *figure);
@@ -654,11 +655,14 @@ char			*validate_limited_cylinder(cJSON *tmp[], t_figure *figure);
 char			*validate_limited_cone(cJSON *tmp[], t_figure *figure);
 char			*validate_limited_paraboloid(cJSON *tmp[], t_figure *figure);
 char			*validate_limited_sphere(cJSON *tmp[], t_figure *figure);
+char			*validate_texture(cJSON *obj, t_figure *figure);
 _Bool			validate_vector(cJSON *obj, t_vect *vect);
 _Bool			validate_color(cJSON *obj, t_color *color);
 void			valid_data(char *arr[], char *type);
+void			valid_data_2(char *arr[], char *type);
 void			valid_id_list(int arr[]);
 _Bool			valid_hex(char *str);
+
 
 /*
 ** loading bar ????
