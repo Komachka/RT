@@ -35,7 +35,8 @@ char	*validate_objects_next_2(cJSON *tmp[], cJSON *material[], t_figure *fig)
 		(fig->material.transparency = material[6]->valuedouble) < 0)
 		return ("Invalid \"Transparency\" value.");
 	if (material[7]->type != cJSON_Number ||
-		(fig->material.refraction = material[7]->valuedouble) < 1)
+		(fig->material.refraction = material[7]->valuedouble) < 1 ||
+			fig->material.refraction > 1.6)
 		return ("Invalid \"Refraction\" value.");
 	return (validate_object(tmp[1], fig, fig->id));
 }
