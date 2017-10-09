@@ -17,13 +17,15 @@
     },
     "Skybox"                  : {
         "Radius" : 10,
-        "Color"  : "555555",
+        "Color"  : "BB0000",
         "Texture"  : {
-            "Type"       : "CONTOURS",
-            "Contour"    : "AA0000",
-            "Background" : "FFFFFF",
-            "Thickness"  : 0.1,
-            "Frequency"  : 2
+            "Type"          : "PERLIN",
+            "Octaves"       : 3,
+            "Amplitude"     : 1,
+            "Persistence"   : 0.5,
+            "Exponent"      : 5.56,
+            "Frequency"     : {"x" : 0.9, "y" : 0.9, "z" : 0.9},
+            "Frequency Att" : {"x" : 2, "y" : 2, "z" : 2}
         }
     },
     "Light"                   : [
@@ -221,6 +223,13 @@
                 "Reflective"   : 0.2,
                 "Transparency" : 0,
                 "Refraction"   : 1
+            },
+            "Texture"  : {
+                "Type"       : "CONTOURS",
+                "Contour"    : "AA0000",
+                "Background" : "FFFFFF",
+                "Thickness"  : 0.1,
+                "Frequency"  : 2
             }
         },
         {
