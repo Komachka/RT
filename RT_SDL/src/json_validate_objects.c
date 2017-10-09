@@ -15,12 +15,12 @@
 char	*validate_objects_next_2(cJSON *tmp[], cJSON *material[], t_figure *fig)
 {
 	char	*arr[15];
-	int		num[14];
+	int		num[15];
 
 	VAR_INT(index, -1);
 	valid_data(arr, "Id");
 	valid_id_list(num);
-	while (arr[++index])
+	while (++index < 15)
 		if (cmp(arr[index], tmp[0]->valuestring))
 			fig->id = num[index];
 	if (fig->id < 0)
@@ -37,7 +37,6 @@ char	*validate_objects_next_2(cJSON *tmp[], cJSON *material[], t_figure *fig)
 	if (material[7]->type != cJSON_Number ||
 		(fig->material.refraction = material[7]->valuedouble) < 1)
 		return ("Invalid \"Refraction\" value.");
-	fig->material.texture = 0;
 	return (validate_object(tmp[1], fig, fig->id));
 }
 
@@ -53,11 +52,7 @@ char	*validate_objects_next(cJSON *tmp[], t_figure *figure)
 			return (arr[i]);
 	if (!valid_hex(material[0]->valuestring))
 		return ("Invalid \"Color\" value.");
-	VAR_INT(color, ft_atoi_base(material[0]->valuestring, 16));
-	figure->material.cl = (t_color){(unsigned char)(color >> 16) / 255.0,
-									(unsigned char)(color >> 8) / 255.0,
-									(unsigned char)color / 255.0,
-									(unsigned char)(color >> 24) / 100.0};
+	figure->material.cl = create_color(material[0]->valuestring);
 	if (validate_color(material[1], &figure->material.ambient))
 		return ("Invalid \"Ambient\" value.");
 	if (validate_color(material[2], &figure->material.diffuse))
@@ -67,29 +62,39 @@ char	*validate_objects_next(cJSON *tmp[], t_figure *figure)
 	return (validate_objects_next_2(tmp, material, figure));
 }
 
+char	*get_texture_type(char *type, t_figure *figure)
+{
+	int		num[6];
+	char	*arr[6];
+
+	VAR_INT(i, -1);
+	valid_data_2(arr, "Textures");
+	valid_id_list_2(num);
+	figure->texture.type = -1;
+	while (++i < 6)
+		if (cmp(arr[i], type))
+			figure->texture.type = num[i];
+	if (figure->texture.type < 0)
+		return ("Invalid \"Texture\"->\"Type\".");
+	if (figure->texture.type == MAPPING && figure->id != SPHERE)
+		return ("No MAPPING for figure");
+	figure->texturing = ON;
+	return (0);
+}
+
 char	*validate_object_texture(cJSON *obj, t_figure *figure)
 {
 	cJSON	*tmp[2];
-	char	*arr[1];
+	char	*str;
 
 	figure->texturing = OFF;
 	if ((tmp[0] = cJSON_GetObjectItemCaseSensitive(obj, "Texture")))
 	{
 		if (!(tmp[1] = cJSON_GetObjectItemCaseSensitive(tmp[0], "Type")) ||
-				(!cmp("MAPPING", tmp[1]->valuestring) &&
-			!cmp("PERLIN", tmp[1]->valuestring)))
+				!(tmp[1]->valuestring))
 			return ("Invalid \"Texture\"->\"Type\".");
-		figure->texture.type = PERLIN;
-		if (cmp("MAPPING", tmp[1]->valuestring))
-		{
-			valid_data_2(arr, "Textures");
-			VAR_INT(i, -1);
-			while (++i < (int)(sizeof(arr) / sizeof(char*)))
-				if (!cmp(arr[i], tmp[1]->valuestring))
-					return ("No MAPPING for figure");
-			figure->texture.type = MAPPING;
-		}
-		figure->texturing = ON;
+		if ((str = get_texture_type(tmp[1]->valuestring, figure)))
+			return (str);
 		return (validate_texture(tmp[0], figure));
 	}
 	return (0);

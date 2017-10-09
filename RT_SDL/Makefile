@@ -1,5 +1,5 @@
 NAME = RT
-CC = gcc
+CC = gcc -Wall -Wextra -Werror
 CFLAGS = -F./libraries/SDL -O3
 JSON = ./libraries/JSON/cJSON.c
 SDL_FLAGS =  -framework SDL2 -framework SDL2_image -framework SDL2_ttf
@@ -45,12 +45,15 @@ SRC = main.c \
 	  json_validate_objects.c \
 	  json_validate_rest_figures.c \
 	  json_validate_rtv_and_camera.c \
-	  json_validate_texture.c \
+	  json_validate_textures_and_skybox.c \
+	  json_validate_procedural_textures.c \
 	  json_validate_vector_and_color.c \
 	  filters.c \
 	  animation.c \
 	  mapping_texture.c \
 	  perlin_noise_texture.c \
+	  procedural_textures.c \
+	  create_skybox.c
 
 OBJ	= $(addprefix $(DSRC)/,$(SRC:.c=.o))
 OBJJSON = $(JSON:.c=.o)
@@ -65,10 +68,10 @@ $(NAME) : $(OBJ) $(OBJJSON)
 
 clean:
 	rm -rf $(OBJ) $(OBJJSON)
-	
+
 fclean: clean
 	rm -rf $(NAME)
-	
+
 re: fclean all
 
 sdl2:

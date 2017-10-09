@@ -28,6 +28,7 @@ void	valid_id_list(int arr[])
 	arr[11] = LIMITED_PARABOLOID;
 	arr[12] = LIMITED_SPHERE;
 	arr[13] = PLANE_WITH_HOLE;
+	arr[14] = DISC_WITH_HOLE;
 }
 
 void	even_more_valid_data(char *arr[], char *type)
@@ -48,7 +49,7 @@ void	even_more_valid_data(char *arr[], char *type)
 		arr[11] = "LIMITED_PARABOLOID";
 		arr[12] = "LIMITED_SPHERE";
 		arr[13] = "PLANE_WITH_HOLE";
-		arr[14] = 0;
+		arr[14] = "DISC_WITH_HOLE";
 	}
 	else if (cmp(type, "Objects"))
 	{

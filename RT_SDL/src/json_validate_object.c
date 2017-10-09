@@ -16,6 +16,10 @@ char	*validate_object_next_2(cJSON *object, t_figure *figure, int id)
 {
 	cJSON *tmp[4];
 
+	if (id == DISC_WITH_HOLE &&
+			(tmp[0] = cJSON_GetObjectItemCaseSensitive(object, "Disc")) &&
+			(tmp[1] = cJSON_GetObjectItemCaseSensitive(object, "Hole")))
+		return (validate_disc_with_hole(tmp, figure));
 	if ((tmp[0] = cJSON_GetObjectItemCaseSensitive(object, "Normal Vector")) &&
 	(tmp[1] = cJSON_GetObjectItemCaseSensitive(object, "Point On The Plane")))
 	{
@@ -31,7 +35,7 @@ char	*validate_object_next(cJSON *object, t_figure *figure, int id)
 {
 	cJSON *tmp[4];
 
-	if (id == PLANE || id == PLANE_WITH_HOLE)
+	if (id == PLANE || id == PLANE_WITH_HOLE || id == DISC_WITH_HOLE)
 		return (validate_object_next_2(object, figure, id));
 	if (id == TRIANGLE &&
 		(tmp[0] = cJSON_GetObjectItemCaseSensitive(object, "Vertex A")) &&
@@ -70,10 +74,11 @@ char	*validate_object_2(cJSON *tmp[], cJSON *obj, t_figure *figure, int id)
 		(tmp[2] = cJSON_GetObjectItemCaseSensitive(obj, "Radius")) &&
 		(tmp[3] = cJSON_GetObjectItemCaseSensitive(obj, "Cut")) &&
 		(tmp[4] = cJSON_GetObjectItemCaseSensitive(obj, "Caps")))
-		return (id == LIMITED_CYLINDER ?
-				validate_limited_cylinder(tmp, figure) :
-				validate_limited_sphere(tmp, figure));
-		return ("Some Object Error");
+	{
+		return ((id == LIMITED_CYLINDER ? validate_limited_cylinder :
+				validate_limited_sphere)(tmp, figure));
+	}
+	return ("Some Object Error");
 }
 
 char	*validate_object(cJSON *object, t_figure *figure, int id)

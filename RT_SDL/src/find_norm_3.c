@@ -78,7 +78,9 @@ t_vect		find_norm(t_rtv *rtv, int f, t_vect *point, t_vect *r_dir)
 {
 	t_vect norm;
 
-	if (rtv->objects[f].id == PLANE || rtv->objects[f].id == TRIANGLE || rtv->objects[f].id == DISC || rtv->objects[f].id == PLANE_WITH_HOLE)
+	if (rtv->objects[f].id == PLANE || rtv->objects[f].id == TRIANGLE ||
+		rtv->objects[f].id == DISC || rtv->objects[f].id == PLANE_WITH_HOLE ||
+		rtv->objects[f].id == DISC_WITH_HOLE)
 		norm = rtv->objects[f].norm_vector(rtv->objects[f].object, r_dir);
 	else
 		norm = rtv->objects[f].norm_vector(rtv->objects[f].object, point);
@@ -95,5 +97,18 @@ t_vect		plane_with_hole_norm_vector(void *obj, t_vect *point)
 		norm = change_vector_direction(&p->norm);
 	else
 		norm = p->norm;
+	return (norm);
+}
+
+t_vect		disc_with_hole_norm_vector(void *obj, t_vect *point)
+{
+	t_vect	norm;
+	t_disc_with_hole	*p;
+
+	p = (t_disc_with_hole *)obj;
+	if (vector_dot_product(&p->disc.norm, point) > PRECISION)
+		norm = change_vector_direction(&p->disc.norm);
+	else
+		norm = p->disc.norm;
 	return (norm);
 }

@@ -80,7 +80,7 @@ int				intersection_limited_sphere(t_ray *r, void *sphere, double *t)
 	t_equation			n;
 	t_limited_sphere	*s;
 	double				cap[4];
-	t_disс				ttm;
+	t_disc				ttm;
 
 	cap[0] = -1;
 	cap[1] = -1;
@@ -122,6 +122,23 @@ int		intersection_plane_with_hole(t_ray *r, void *obj, double *t)
 		point = vector_substract(&p->point, &r->origin);
 		t0 = vector_dot_product(&p->norm, &point) / \
 			vector_dot_product(&p->norm, &r->dir);
+		return(check_solving(t, t0));
+	}
+	return (0);
+}
+
+int		intersection_disc_with_hole(t_ray *r, void *obj, double *t)
+{
+	t_disc_with_hole *p;
+	double	t0;
+	int i;
+
+	i = -1;
+	p = (t_disc_with_hole *)obj;
+	if (intersection_disc(r, &p->disc, &t0))
+	{
+		if (intersection_disc(r, &p->hole, &t0))
+			return(0);
 		return(check_solving(t, t0));
 	}
 	return (0);
