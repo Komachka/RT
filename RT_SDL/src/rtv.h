@@ -35,7 +35,7 @@
 
 # define WIDTH 1400
 # define HEIGHT 1000
-
+# define SCENSES 6
 # define FILTERWIDTH 3 //чи використовується?
 # define FILTERHEIGHT 3
 
@@ -101,7 +101,29 @@ typedef struct	s_scene_menu
 	int					menu_hight;
 	SDL_Rect			menu_scene_rect;
 	t_scene_menu_box	*menu_boxes;
-}				t_scene_munu;
+}			t_scene_munu;
+
+
+/*
+** structures for menu
+*/
+
+typedef struct	s_box
+{
+	SDL_Rect	rect;
+	SDL_Texture	*scene;
+}				t_box;
+
+
+
+typedef struct	s_menu
+{
+	SDL_Window		*window;
+	unsigned int	window_id;
+	SDL_Renderer	*renderer;
+	SDL_Event		e;
+	t_box			boxes[SCENSES+1];
+}				t_menu;
 
 /*
 ** basic structures
@@ -513,24 +535,7 @@ typedef struct	s_quartic_eq
 	double	root[4];
 }				t_quartic_eq;
 
-/*
-** structures for menu
-*/
 
-typedef struct	s_box
-{
-	SDL_Rect	rect;
-	SDL_Texture	*scene;
-}				t_box;
-
-typedef struct	s_menu
-{
-	SDL_Window		*window;
-	unsigned int	window_id;
-	SDL_Renderer	*renderer;
-	SDL_Event		e;
-	t_box			boxes[6];
-}				t_menu;
 
 
 /*

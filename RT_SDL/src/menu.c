@@ -1,5 +1,6 @@
 #include "rtv.h"
 
+
 void ft_init_rects(t_menu *menu)
 {
 	menu->boxes[0].rect.x = 0;
@@ -76,7 +77,7 @@ void ft_menu(t_menu *menu, t_rtv *rtv)
 	ft_init_rects(menu);
 	ft_init_textures(menu);
 	SDL_RenderClear(menu->renderer);
-	ft_render_copy(menu);
+	//ft_render_copy(menu);
 	SDL_RenderPresent(menu->renderer);
 
 	while (!done)
@@ -88,7 +89,7 @@ void ft_menu(t_menu *menu, t_rtv *rtv)
 					menu->e.window.windowID == menu->window_id)
 			{
 				int i = 1;
-				while (i < 7)
+				while (i <= SCENSES)
 				{
 					SDL_DestroyTexture(menu->boxes[i].scene);
 					i++;
@@ -107,7 +108,7 @@ void ft_menu(t_menu *menu, t_rtv *rtv)
 				y_mouse = menu->e.motion.y;
 
 				int i = 1;
-				while (i < 10)
+				while (i <= SCENSES)
 				{
 					if (x_mouse >= menu->boxes[i].rect.x && x_mouse <=
 							menu->boxes[i].rect.x + menu->boxes[i].rect.w &&
