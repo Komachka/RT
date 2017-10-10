@@ -115,12 +115,8 @@
                 "Refraction"   : 1.015
             },
             "Texture"  : {
-<<<<<<< HEAD
                 "Type"          : "MAPPING",
                 "Path"          : "image/hexagon.png",
-=======
-                "Type"          : "PERLIN",
->>>>>>> kz
                 "Octaves"       : 3,
                 "Amplitude"     : 1,
                 "Persistence"   : 0.5,

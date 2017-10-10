@@ -93,7 +93,7 @@ void ft_menu(t_menu *menu, t_rtv *rtv)
 	int y_mouse;
 
 	done = 0;
-<
+
 	if ((menu->window = SDL_CreateWindow("RT", SDL_WINDOWPOS_CENTERED,
 									SDL_WINDOWPOS_CENTERED, WIDTH, HEIGHT,
 									SDL_WINDOW_OPENGL)) == NULL)
