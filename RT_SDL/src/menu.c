@@ -61,6 +61,21 @@ void ft_render_copy(t_menu *menu)
 	}
 }
 
+void	ft_which_scene(t_rtv *rtv, int i)
+{
+	char *scene_name;
+	char *end;
+	char *name;
+
+	scene_name = "scene";
+	end = ".json";
+	name = join(scene_name, ft_itoa(i));
+	name = join(name, end);
+	get_scene(name, rtv);
+}
+
+
+
 void ft_menu(t_menu *menu, t_rtv *rtv)
 {
 	int done;
@@ -137,7 +152,7 @@ void ft_menu(t_menu *menu, t_rtv *rtv)
 				x_mouse = menu->e.button.x;
 				y_mouse = menu->e.button.y;
 				int i = 1;
-				while (i < 10)
+				while (i <= SCENSES)
 				{
 					if (x_mouse >= menu->boxes[i].rect.x && x_mouse <=
 							menu->boxes[i].rect.x + menu->boxes[i].rect.w &&
@@ -145,7 +160,7 @@ void ft_menu(t_menu *menu, t_rtv *rtv)
 							y_mouse <= menu->boxes[i].rect.y +
 									menu->boxes[i].rect.h)
 					{
-						get_scene("scene1.json", rtv);
+						ft_which_scene(rtv, i);
 						basic_function(rtv);
 					}
 					i++;

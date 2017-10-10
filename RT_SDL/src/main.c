@@ -23,10 +23,10 @@ int		main(void)
 {
 	t_rtv		rtv;
 	t_menu		menu;
-
+	
 	ft_menu(&menu, &rtv);
-//	get_scene("scenes/scene1.json", &rtv);
-	fill_struct(&rtv); // додати в зчитування
-	basic_function(&rtv);
+	//get_scene("scene1.json", &rtv);
+	//fill_struct(&rtv); // додати в зчитування
+	//basic_function(&rtv);
 	return (0);
 }

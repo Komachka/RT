@@ -761,5 +761,7 @@ int				my_key_funct(t_rtv *rtv);
 void			ft_redraw(t_rtv *rtv);
 void			ft_take_picture(t_rtv *rtv);
 void			ft_menu(t_menu *menu, t_rtv *rtv);
+void			ft_which_scene(t_rtv *rtv, int i);
+char			*ft_itoa(int n);
 
 #endif
