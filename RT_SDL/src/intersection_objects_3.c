@@ -38,7 +38,7 @@ int				intersection_limited_cylinder(t_ray *r, void *cyl, double *t)
 	t_equation			n;
 	int					res;
 	double				cap[4];
-	t_disс				ttm[2];
+	t_disc				ttm[2];
 
 	cap[0] = -1;
 	cap[1] = -1;
@@ -107,7 +107,7 @@ int				intersection_limited_cone(t_ray *r, void *cone, double *t)
 	double			t0;
 	t_equation		n;
 	double			cap[4];
-	t_disс			ttm[2];
+	t_disc			ttm[2];
 
 	cap[0] = -1;
 	cap[1] = -1;

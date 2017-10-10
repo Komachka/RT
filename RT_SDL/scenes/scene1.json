@@ -11,9 +11,22 @@
     },
     "Camera"                  : {
         "Type"                 : "STANDART",
-        "Position"             : {"x" : 0, "y" : 0, "z" : -100},
-        "Camera Rotate Angles" : [0, 0, 0],
+        "Position"             : {"x" : 0, "y" : 0, "z" : -50},
+        "Camera Rotate Angles" : [0, 5, 0],
         "FOV"                  : 45
+    },
+    "Skybox"                  : {
+        "Radius" : 10,
+        "Color"  : "BB0000",
+        "Texture"  : {
+            "Type"          : "PERLIN",
+            "Octaves"       : 3,
+            "Amplitude"     : 1,
+            "Persistence"   : 0.5,
+            "Exponent"      : 5.56,
+            "Frequency"     : {"x" : 0.9, "y" : 0.9, "z" : 0.9},
+            "Frequency Att" : {"x" : 2, "y" : 2, "z" : 2}
+        }
     },
     "Light"                   : [
         {
@@ -32,8 +45,12 @@
         },
         {
             "Type"                              : "SPOT_LIGHT",
-            "Position"                          : {"x" : 20, "y" : -10, "z" : 0},
-            "Direction"                         : {"x" : 0, "y" : 0.25, "z" : 1},
+            "Position"                          : {
+                "x" : 20, "y" : -10, "z" : 0
+            },
+            "Direction"                         : {
+                "x" : 0, "y" : 0.25, "z" : 1
+            },
             "Intensity"                         : {
                 "Red"   : 0.9,
                 "Green" : 0.9,
@@ -49,7 +66,9 @@
         {
             "Type"                              : "DIRECTIONAL_LIGHT",
             "Position"                          : {"x" : 0, "y" : 0, "z" : 0},
-            "Direction"                         : {"x" : 4, "y" : -10, "z" : 10},
+            "Direction"                         : {
+                "x" : 4, "y" : -10, "z" : 10
+            },
             "Intensity"                         : {
                 "Red"   : 0.1,
                 "Green" : 0.1,
@@ -90,8 +109,17 @@
                 },
                 "Shininess"    : 20,
                 "Reflective"   : 0,
-                "Transparency" : 0.8,
+                "Transparency" : 0,
                 "Refraction"   : 1.015
+            },
+            "Texture"  : {
+                "Type"          : "PERLIN",
+                "Octaves"       : 3,
+                "Amplitude"     : 1,
+                "Persistence"   : 0.5,
+                "Exponent"      : 5.56,
+                "Frequency"     : {"x" : 0.9, "y" : 0.9, "z" : 0.9},
+                "Frequency Att" : {"x" : 2, "y" : 2, "z" : 2}
             }
         },
         {
@@ -128,6 +156,44 @@
             }
         },
         {
+            "Id"       : "PLANE_WITH_HOLE",
+            "Object"   : {
+                "Normal Vector"      : {"x" : 0, "y" : 0, "z" : 1},
+                "Point On The Plane" : {"x" : 0, "y" : 0, "z" : 1500},
+                "Holes"              : [
+                    {
+                        "Position" : {"x" : 200, "y" : 400, "z" : 180},
+                        "Radius"   : 500
+                    }
+                ]
+            },
+            "Material" : {
+                "Color"        : "F0A30A",
+                "Ambient"      : {
+                    "Red"   : 0.8,
+                    "Green" : 0.8,
+                    "Blue"  : 0.8,
+                    "Alpha" : 0
+                },
+                "Diffuse"      : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Specular"     : {
+                    "Red"   : 0,
+                    "Green" : 0,
+                    "Blue"  : 0,
+                    "Alpha" : 0
+                },
+                "Shininess"    : 0,
+                "Reflective"   : 0,
+                "Transparency" : 0,
+                "Refraction"   : 1
+            }
+        },
+        {
             "Id"       : "PLANE",
             "Object"   : {
                 "Point On The Plane" : {"x" : 10, "y" : -50, "z" : 30},
@@ -157,6 +223,13 @@
                 "Reflective"   : 0.2,
                 "Transparency" : 0,
                 "Refraction"   : 1
+            },
+            "Texture"  : {
+                "Type"       : "CONTOURS",
+                "Contour"    : "AA0000",
+                "Background" : "FFFFFF",
+                "Thickness"  : 0.1,
+                "Frequency"  : 2
             }
         },
         {
@@ -224,6 +297,15 @@
                 "Reflective"   : 0,
                 "Transparency" : 0,
                 "Refraction"   : 1
+            },
+            "Texture"  : {
+                "Type"          : "JUPITER",
+                "Band"          : "00cbff",
+                "Background"    : "0026e2",
+                "Vortices"      : 0,
+                "Bands"         : 0.4,
+                "Perturbations" : 0.9,
+                "Bands Fade"    : 0.9
             }
         },
         {
@@ -293,11 +375,59 @@
             }
         },
         {
+            "Id"       : "DISC_WITH_HOLE",
+            "Object"   : {
+                "Disc" : {
+                    "Position"      : {"x" : 0, "y" : 25, "z" : 100},
+                    "Normal Vector" : {"x" : 10, "y" : 10, "z" : 10},
+                    "Radius"        : 15
+                },
+                "Hole" : {
+                    "Position" : {"x" : 0, "y" : 25, "z" : 100},
+                    "Radius"   : 10
+                }
+            },
+            "Material" : {
+                "Color"        : "0000EF",
+                "Ambient"      : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Diffuse"      : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Specular"     : {
+                    "Red"   : 0,
+                    "Green" : 0,
+                    "Blue"  : 0,
+                    "Alpha" : 0
+                },
+                "Shininess"    : 0,
+                "Reflective"   : 0,
+                "Transparency" : 0,
+                "Refraction"   : 1
+            },
+            "Texture"  : {
+                "Type"          : "JUPITER",
+                "Band"          : "302D27",
+                "Background"    : "59564E",
+                "Vortices"      : 0,
+                "Bands"         : 0.4,
+                "Perturbations" : 0.9,
+                "Bands Fade"    : 0.9
+            }
+        },
+        {
             "Id"       : "ELLIPSOID",
             "Object"   : {
                 "Position" : {"x" : -20, "y" : -20, "z" : 80},
                 "Size x"   : 7,
-                "Size y"   : 7,
+                "Size y"   : 9,
                 "Size z"   : 5
             },
             "Material" : {
@@ -324,6 +454,13 @@
                 "Reflective"   : 0,
                 "Transparency" : 0,
                 "Refraction"   : 1
+            },
+            "Texture"  : {
+                "Type"       : "CONTOURS",
+                "Contour"    : "AA0000",
+                "Background" : "FFFFFF",
+                "Thickness"  : 0.1,
+                "Frequency"  : 2
             }
         },
         {
@@ -357,6 +494,13 @@
                 "Reflective"   : 0,
                 "Transparency" : 0,
                 "Refraction"   : 1
+            },
+            "Texture"  : {
+                "Type"      : "CAUSTIC",
+                "Color 1"   : "42f4b6",
+                "Color 2"   : "f8fca6",
+                "Sharpness" : 0,
+                "Coverage"  : 0.8
             }
         },
         {
@@ -392,6 +536,21 @@
                 "Reflective"   : 0,
                 "Transparency" : 0,
                 "Refraction"   : 1
+            },
+            "Texture"  : {
+                "Type"      : "PLASMA",
+                "Frequency" : {
+                    "Red"   : 3.08,
+                    "Green" : 0.1,
+                    "Blue"  : 4.25,
+                    "Alpha" : 0
+                },
+                "Phase"     : {
+                    "Red"   : -1.2,
+                    "Green" : 2.4,
+                    "Blue"  : 0.8,
+                    "Alpha" : 0
+                }
             }
         },
         {
@@ -467,7 +626,7 @@
         {
             "Id"       : "LIMITED_SPHERE",
             "Object"   : {
-                "Position"  : {"x" : -5, "y" : -10, "z" : 0},
+                "Position"  : {"x" : 5, "y" : -10, "z" : 0},
                 "Direction" : {"x" : 0.2, "y" : -1, "z" : 0.4},
                 "Radius"    : 5,
                 "Cut"       : -2,

@@ -12,14 +12,31 @@
 
 #include "rtv.h"
 
+char	*validate_object_next_2(cJSON *object, t_figure *figure, int id)
+{
+	cJSON *tmp[4];
+
+	if (id == DISC_WITH_HOLE &&
+			(tmp[0] = cJSON_GetObjectItemCaseSensitive(object, "Disc")) &&
+			(tmp[1] = cJSON_GetObjectItemCaseSensitive(object, "Hole")))
+		return (validate_disc_with_hole(tmp, figure));
+	if ((tmp[0] = cJSON_GetObjectItemCaseSensitive(object, "Normal Vector")) &&
+	(tmp[1] = cJSON_GetObjectItemCaseSensitive(object, "Point On The Plane")))
+	{
+		if (id == PLANE)
+			return (validate_plane(tmp, figure));
+		if ((tmp[2] = cJSON_GetObjectItemCaseSensitive(object, "Holes")))
+			return (validate_plane_with_hole(tmp, figure));
+	}
+	return ("Some Object Error");
+}
+
 char	*validate_object_next(cJSON *object, t_figure *figure, int id)
 {
 	cJSON *tmp[4];
 
-	if (id == PLANE &&
-		(tmp[0] = cJSON_GetObjectItemCaseSensitive(object, "Normal Vector")) &&
-	(tmp[1] = cJSON_GetObjectItemCaseSensitive(object, "Point On The Plane")))
-		return (validate_plane(tmp, figure));
+	if (id == PLANE || id == PLANE_WITH_HOLE || id == DISC_WITH_HOLE)
+		return (validate_object_next_2(object, figure, id));
 	if (id == TRIANGLE &&
 		(tmp[0] = cJSON_GetObjectItemCaseSensitive(object, "Vertex A")) &&
 		(tmp[1] = cJSON_GetObjectItemCaseSensitive(object, "Vertex B")) &&
@@ -32,8 +49,7 @@ char	*validate_object_next(cJSON *object, t_figure *figure, int id)
 	{
 		if (id == PARABOLOID)
 			return (validate_paraboloid(tmp, figure));
-		if (id == LIMITED_PARABOLOID &&
-			(tmp[3] = cJSON_GetObjectItemCaseSensitive(object, "Cut")))
+		if ((tmp[3] = cJSON_GetObjectItemCaseSensitive(object, "Cut")))
 			return (validate_limited_paraboloid(tmp, figure));
 	}
 	return ("Some Object Error");
@@ -58,10 +74,11 @@ char	*validate_object_2(cJSON *tmp[], cJSON *obj, t_figure *figure, int id)
 		(tmp[2] = cJSON_GetObjectItemCaseSensitive(obj, "Radius")) &&
 		(tmp[3] = cJSON_GetObjectItemCaseSensitive(obj, "Cut")) &&
 		(tmp[4] = cJSON_GetObjectItemCaseSensitive(obj, "Caps")))
-		return (id == LIMITED_CYLINDER ?
-				validate_limited_cylinder(tmp, figure) :
-				validate_limited_sphere(tmp, figure));
-		return ("Some Object Error");
+	{
+		return ((id == LIMITED_CYLINDER ? validate_limited_cylinder :
+				validate_limited_sphere)(tmp, figure));
+	}
+	return ("Some Object Error");
 }
 
 char	*validate_object(cJSON *object, t_figure *figure, int id)

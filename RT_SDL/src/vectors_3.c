@@ -45,3 +45,8 @@ t_vect		project_point_on_plane(t_vect *point, t_vect *pl_point, t_vect *pl_norm)
 	v = vector_mult(vector_dot_product(&v, pl_norm), pl_norm);
 	return (vector_add(point, &v));
 }
+
+t_vect		mult_vectors_coordinates(t_vect *v1, t_vect *v2)
+{
+	return(create_vector(v1->x * v2->x, v1->y * v2->y, v1->z * v2->z));
+}

@@ -1,6 +1,7 @@
 #include "rtv.h"
 
-void	ft_init_rects(t_menu *menu)
+
+void ft_init_rects(t_menu *menu)
 {
 	menu->boxes[0].rect.x = 0;
 	menu->boxes[0].rect.y = 0;
@@ -32,50 +33,63 @@ void	ft_init_rects(t_menu *menu)
 	menu->boxes[6].rect.h = 270;
 }
 
-void	ft_init_textures(t_menu *menu)
+void ft_init_textures(t_menu *menu)
 {
 	menu->boxes[0].scene = IMG_LoadTexture(menu->renderer, "/image/fone1.png");
-	menu->boxes[1].scene = IMG_LoadTexture(menu->renderer, "/image/scene_2.BMP");
-	menu->boxes[2].scene = IMG_LoadTexture(menu->renderer, "/image/scene_1.jpg");
-	menu->boxes[3].scene = IMG_LoadTexture(menu->renderer, "/image/scene_1.jpg");
-	menu->boxes[4].scene = IMG_LoadTexture(menu->renderer, "/image/scene_1.jpg");
-	menu->boxes[5].scene = IMG_LoadTexture(menu->renderer, "/image/scene_1.jpg");
-	menu->boxes[6].scene = IMG_LoadTexture(menu->renderer, "/image/scene_1.jpg");
+	menu->boxes[1].scene = IMG_LoadTexture(menu->renderer,
+										   "/image/scene_2.BMP");
+	menu->boxes[2].scene = IMG_LoadTexture(menu->renderer,
+										   "/image/scene_1.jpg");
+	menu->boxes[3].scene = IMG_LoadTexture(menu->renderer,
+										   "/image/scene_1.jpg");
+	menu->boxes[4].scene = IMG_LoadTexture(menu->renderer,
+										   "/image/scene_1.jpg");
+	menu->boxes[5].scene = IMG_LoadTexture(menu->renderer,
+										   "/image/scene_1.jpg");
+	menu->boxes[6].scene = IMG_LoadTexture(menu->renderer,
+										   "/image/scene_1.jpg");
 }
 
-void	ft_render_copy(t_menu *menu)
+void ft_render_copy(t_menu *menu)
 {
 	int i = 6;
 	while (i >= 0)
 	{
-		SDL_RenderCopy(menu->renderer, menu->boxes[i].scene, NULL, &menu->boxes[i].rect);
+		SDL_RenderCopy(menu->renderer, menu->boxes[i].scene, NULL,
+					   &menu->boxes[i].rect);
 		i--;
 	}
 }
 
-void	ft_menu(t_menu *menu, t_rtv *rtv)
+void ft_menu(t_menu *menu, t_rtv *rtv)
 {
-	int	done;
+	int done;
 	int x_mouse;
 	int y_mouse;
 
 	done = 0;
-	menu->window = SDL_CreateWindow("RT", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIDTH, HEIGHT, SDL_WINDOW_OPENGL);
+	menu->window = SDL_CreateWindow("RT", SDL_WINDOWPOS_CENTERED,
+									SDL_WINDOWPOS_CENTERED, WIDTH, HEIGHT,
+									SDL_WINDOW_OPENGL);
 	menu->window_id = SDL_GetWindowID(menu->window);
-    menu->renderer = SDL_CreateRenderer(menu->window, -1, SDL_RENDERER_ACCELERATED);
+	menu->renderer = SDL_CreateRenderer(menu->window, -1,
+										SDL_RENDERER_ACCELERATED);
 	ft_init_rects(menu);
 	ft_init_textures(menu);
 	SDL_RenderClear(menu->renderer);
-	ft_render_copy(menu);
+	//ft_render_copy(menu);
 	SDL_RenderPresent(menu->renderer);
 
-	while(!done)
+	while (!done)
 	{
-		while(SDL_PollEvent(&menu->e))
+		while (SDL_PollEvent(&menu->e))
 		{
-			if ((menu->e.key.keysym.sym == SDLK_ESCAPE || menu->e.type == SDL_QUIT) && menu->e.window.windowID == menu->window_id) {
+			if ((menu->e.key.keysym.sym == SDLK_ESCAPE ||
+					menu->e.type == SDL_QUIT) &&
+					menu->e.window.windowID == menu->window_id)
+			{
 				int i = 1;
-				while (i < 7)
+				while (i <= SCENSES)
 				{
 					SDL_DestroyTexture(menu->boxes[i].scene);
 					i++;
@@ -86,7 +100,7 @@ void	ft_menu(t_menu *menu, t_rtv *rtv)
 				SDL_Quit();
 				exit(0);
 
-            }
+			}
 
 			if (menu->e.type == SDL_MOUSEMOTION)
 			{
@@ -94,19 +108,23 @@ void	ft_menu(t_menu *menu, t_rtv *rtv)
 				y_mouse = menu->e.motion.y;
 
 				int i = 1;
-				while (i < 10)
+				while (i <= SCENSES)
 				{
-					if (x_mouse >= menu->boxes[i].rect.x && x_mouse <= menu->boxes[i].rect.x + menu->boxes[i].rect.w &&
-						y_mouse >= menu->boxes[i].rect.y && y_mouse <= menu->boxes[i].rect.y + menu->boxes[i].rect.h)
+					if (x_mouse >= menu->boxes[i].rect.x && x_mouse <=
+							menu->boxes[i].rect.x + menu->boxes[i].rect.w &&
+							y_mouse >= menu->boxes[i].rect.y && y_mouse <=
+							menu->boxes[i].rect.y + menu->boxes[i].rect.h)
 					{
-						SDL_SetTextureColorMod(menu->boxes[i].scene, 150, 150, 200);
+						SDL_SetTextureColorMod(menu->boxes[i].scene, 150, 150,
+											   200);
 						SDL_RenderClear(menu->renderer);
 						ft_render_copy(menu);
 						SDL_RenderPresent(menu->renderer);
 					}
 					else
 					{
-						SDL_SetTextureColorMod(menu->boxes[i].scene, 255, 255, 255);
+						SDL_SetTextureColorMod(menu->boxes[i].scene, 255, 255,
+											   255);
 						SDL_RenderClear(menu->renderer);
 						ft_render_copy(menu);
 						SDL_RenderPresent(menu->renderer);
@@ -116,23 +134,25 @@ void	ft_menu(t_menu *menu, t_rtv *rtv)
 
 			}
 			if (menu->e.button.button == SDL_BUTTON_LEFT)
+			{
+				x_mouse = menu->e.button.x;
+				y_mouse = menu->e.button.y;
+				int i = 1;
+				while (i < 10)
 				{
-					x_mouse = menu->e.button.x;
-					y_mouse = menu->e.button.y;
-					int i = 1;
-						while (i < 10)
-						{
-							if (x_mouse >= menu->boxes[i].rect.x && x_mouse <= menu->boxes[i].rect.x + menu->boxes[i].rect.w &&
+					if (x_mouse >= menu->boxes[i].rect.x && x_mouse <=
+							menu->boxes[i].rect.x + menu->boxes[i].rect.w &&
 							y_mouse >= menu->boxes[i].rect.y &&
-							y_mouse <= menu->boxes[i].rect.y + menu->boxes[i].rect.h)
-							{
-								get_scene("scene1.json", rtv);
-								basic_function(rtv);
-							}
-							i++;
-						}
-
+							y_mouse <= menu->boxes[i].rect.y +
+									menu->boxes[i].rect.h)
+					{
+						get_scene("scene1.json", rtv);
+						basic_function(rtv);
+					}
+					i++;
 				}
+
+			}
 		}
 	}
 }

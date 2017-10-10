@@ -12,12 +12,12 @@
 
 #include "rtv.h"
 
-t_vect		disс_norm_vector(void *obj, t_vect *point)
+t_vect		disc_norm_vector(void *obj, t_vect *point)
 {
 	t_vect	norm;
-	t_disс	*d;
+	t_disc	*d;
 
-	d = (t_disс *)obj;
+	d = (t_disc *)obj;
 	if (vector_dot_product(&d->norm, point) > PRECISION)
 		norm = change_vector_direction(&d->norm);
 	else

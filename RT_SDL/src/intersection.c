@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersection.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kzahreba <kzahreba@student.unit.ua>        +#+  +:+       +#+        */
+/*   By: kzahreba <kzahreba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/07 19:02:54 by kzahreba          #+#    #+#             */
-/*   Updated: 2017/09/28 17:27:51 by askochul         ###   ########.fr       */
+/*   Updated: 2017/10/01 21:16:23 by kzahreba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,23 +32,6 @@ int			complicated_intersection(t_rtv *rtv, t_ray *r, double *point)
 	return (k);
 }
 
-t_color 	create_skybox(t_rtv *rtv, t_ray *r)
-{
-	t_color col;
-	t_equation n;
-	t_vect dist;
-	set_zero_color(&col);
-
-	n.a = vector_dot_product(&r->dir, &r->dir);
-	dist = vector_substract(&r->origin, &rtv->skybox.pos);
-	n.b = 2 * vector_dot_product(&dist, &r->dir);
-	n.c = vector_dot_product(&dist, &dist) - (rtv->skybox.r * rtv->skybox.r);
-	if(select_value(n.root, quadratic_equation(&n)))
-		col = rtv->skybox.cl;
-		//додати текстури		
-	return (col);
-}
-
 t_color		intersection(t_rtv *rtv, t_ray *r)
 {
 	double		t;
@@ -67,11 +50,16 @@ t_color		intersection(t_rtv *rtv, t_ray *r)
 		else
 			c = rtv->objects[figure].material.cl;
 	}
-	else if (figure == -1 && rtv->sk == ON)
-		c = create_skybox(rtv, r);
+	else if (rtv->sk == ON)
+	{
+		if (rtv->lightening == ON)
+			c = creating_skybox(rtv, r);
+		else
+			c = rtv->skybox.cl;
+	}
 	else
-		if (rtv->bg_color == ON)
-			c = rtv->background_color;
+	if (rtv->bg_color == ON)
+		c = rtv->background_color;
 	return (c);
 }
 
