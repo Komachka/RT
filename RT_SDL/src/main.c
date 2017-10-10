@@ -12,12 +12,6 @@
 
 #include "rtv.h"
 
-void	fill_struct(t_rtv *rtv)
-{
-	rtv->sk = OFF;
-	rtv->skybox.pos = rtv->cam.pos;
-	rtv->skybox.r = 1000;
-}
 
 int		main(void)
 {
@@ -25,8 +19,6 @@ int		main(void)
 	t_menu		menu;
 	
 	ft_menu(&menu, &rtv);
-	//get_scene("scene1.json", &rtv);
-	//fill_struct(&rtv); // додати в зчитування
-	//basic_function(&rtv);
+
 	return (0);
 }

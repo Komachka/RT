@@ -19,6 +19,7 @@
         "Radius" : 10,
         "Color"  : "BB0000",
         "Texture"  : {
+
             "Type"          : "MAPPING",
             "Path"          : "image/test.png",
             "Octaves"       : 3,
@@ -114,8 +115,12 @@
                 "Refraction"   : 1.015
             },
             "Texture"  : {
+<<<<<<< HEAD
                 "Type"          : "MAPPING",
                 "Path"          : "image/hexagon.png",
+=======
+                "Type"          : "PERLIN",
+>>>>>>> kz
                 "Octaves"       : 3,
                 "Amplitude"     : 1,
                 "Persistence"   : 0.5,
