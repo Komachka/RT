@@ -84,10 +84,9 @@ void ft_menu(t_menu *menu, t_rtv *rtv)
 	{
 		while (SDL_PollEvent(&menu->e))
 		{
-			if ((menu->e.key.keysym.sym == SDLK_ESCAPE ||
-					menu->e.type == SDL_QUIT) &&
-					menu->e.window.windowID == menu->window_id)
-			{
+			if (((menu->e.type == SDL_KEYDOWN && menu->e.key.keysym.sym == SDLK_ESCAPE) || menu->e.window.event == SDL_WINDOWEVENT_CLOSE) &&
+				menu->window_id == menu->e.window.windowID)			
+{
 				int i = 1;
 				while (i <= SCENSES)
 				{

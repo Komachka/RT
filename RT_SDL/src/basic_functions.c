@@ -96,11 +96,13 @@ void	basic_function(t_rtv *rtv)
 	{
 		while (SDL_PollEvent(&rtv->e))
 		{
-			if ((rtv->e.key.keysym.sym == SDLK_ESCAPE ||\
-						rtv->e.type == SDL_QUIT) &&\
-					rtv->e.window.windowID == rtv->window_id)
-				done = 1;
-			else if (rtv->e.type == SDL_KEYUP)
+			if (((rtv->e.type == SDL_KEYDOWN && rtv->e.key.keysym.sym == SDLK_ESCAPE) || rtv->e.window.event == SDL_WINDOWEVENT_CLOSE) &&
+                                       rtv->window_id == rtv->e.window.windowID)
+                       {
+                                done = 1;
+                               //SDL_Log(" keysym %u", rtv->e.key.keysym.sym);
+                       }
+            else if (rtv->e.type == SDL_KEYUP)
 				my_key_funct(rtv);
 		}
 	}
