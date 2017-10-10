@@ -28,3 +28,25 @@ _Bool	valid_hex(char *str)
 	}
 	return (0);
 }
+
+_Bool	valid_color(cJSON *obj, t_color *color)
+{
+	cJSON	*tmp[4];
+	char	*arr[5];
+
+	arr[0] = "Red";
+	arr[1] = "Green";
+	arr[2] = "Blue";
+	arr[3] = "Alpha";
+	arr[4] = 0;
+	VAR_INT(index, -1);
+	while (arr[++index])
+		if (!(tmp[index] = cJSON_GetObjectItemCaseSensitive(obj, arr[index])) ||
+			tmp[index]->type != cJSON_Number)
+			return (!0);
+	color->r = tmp[0]->valuedouble;
+	color->g = tmp[1]->valuedouble;
+	color->b = tmp[2]->valuedouble;
+	color->al = tmp[3]->valuedouble;
+	return (0);
+}

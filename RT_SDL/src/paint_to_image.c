@@ -55,6 +55,8 @@ void	paint_image(t_rtv *fr, int x, int y, t_color cl)
 	fr->s_c[y][x].a = (unsigned char)(cl.al * 100);
 }
 
+//change the name
+
 void	put_pixel32(SDL_Surface *surface, int x, int y, Uint32 pixel)
 {
 	Uint32 *pixels;

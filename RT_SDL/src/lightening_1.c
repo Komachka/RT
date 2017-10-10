@@ -18,6 +18,7 @@ t_color			colorizing(t_rtv *rtv, int figure, double t, t_ray *r, int recursive_d
 	t_color			res;
 	t_additional	s;
 
+
 	s.mat = rtv->objects[figure].material;
 	s.point = intersection_point(t, r);
 	s.norm = find_norm(rtv, figure, &s.point, &r->dir);
@@ -26,7 +27,12 @@ t_color			colorizing(t_rtv *rtv, int figure, double t, t_ray *r, int recursive_d
 	s.diff = 0;
 
 	if (rtv->objects[figure].texturing == ON)
-		rtv->objects[figure].texture.creating_texture(&s, rtv);
+	{
+		if (rtv->objects[figure].texture.type == MAPPING)
+			rtv->objects[figure].texture.creating_texture(&s, rtv);
+		else
+			rtv->objects[figure].texture.creating_texture(&s, rtv->objects[figure].texture.tx_struct);
+	}
 	set_zero_color(&res);
 	if (rtv->light_model == LAMBERT)
 		res = lambert_phong_model(rtv, &s, recursive_depth);

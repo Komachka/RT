@@ -35,7 +35,7 @@
 
 # define WIDTH 1400
 # define HEIGHT 1000
-
+# define SCENSES 6
 # define FILTERWIDTH 3 //чи використовується?
 # define FILTERHEIGHT 3
 
@@ -64,7 +64,7 @@ enum {STANDART, FISHEYE};
 /*
 **	textures
 */
-enum {MAPPING, PERLIN};
+enum {PERLIN, MAPPING, PLASMA, CONTOURS, CAUSTIC,  JUPITER};
 
 /*
 ** light types
@@ -74,8 +74,9 @@ enum {DIRECTIONAL_LIGHT, POINT_LIGHT, SPOT_LIGHT};
 /*
 ** figure types
 */
-enum {SPHERE, PLANE, CYLINDER, CONE, TORUS, TRIANGLE, DISC, ELLIPSOID, PARABOLOID, \
-	LIMITED_CYLINDER, LIMITED_CONE, LIMITED_PARABOLOID, LIMITED_SPHERE, PLANE_WITH_HOLE};
+enum {SPHERE, PLANE, CYLINDER, CONE, TORUS, TRIANGLE, DISC, ELLIPSOID, \
+	PARABOLOID, LIMITED_CYLINDER, LIMITED_CONE, LIMITED_PARABOLOID, \
+	LIMITED_SPHERE, PLANE_WITH_HOLE, DISC_WITH_HOLE};
 
 /*
 **  структури, які не використовуєте повидаляти !!!
@@ -100,7 +101,30 @@ typedef struct	s_scene_menu
 	int					menu_hight;
 	SDL_Rect			menu_scene_rect;
 	t_scene_menu_box	*menu_boxes;
-}				t_scene_munu;
+}			t_scene_munu;
+
+
+/*
+** structures for menu
+*/
+
+typedef struct	s_box
+{
+	SDL_Rect	rect;
+	SDL_Texture	*scene;
+}				t_box;
+
+
+
+typedef struct	s_menu
+{
+	SDL_Window		*window;
+	unsigned int	window_id;
+	SDL_Renderer	*renderer;
+	SDL_Event		e;
+	t_box			boxes[SCENSES+1]; // for scene and one for beckground
+	// need to add one more to autor file
+}				t_menu;
 
 /*
 ** basic structures
@@ -139,7 +163,7 @@ typedef	struct	s_camera
 }				t_camera;
 
 typedef	struct	s_material
-{	
+{
 	int 		color;
 	t_color		cl;
 	t_color		ambient;
@@ -149,7 +173,6 @@ typedef	struct	s_material
 	double		reflective;
 	double		transparency;
 	double 		refraction;
-	int 		texture;
 }				t_material;
 
 typedef struct	s_light
@@ -233,12 +256,12 @@ typedef struct	s_triangle
 	t_vect	norm;
 }				t_triangle;
 
-typedef struct	s_disс
+typedef struct	s_disc
 {
 	t_vect	pos;
 	t_vect	norm;
 	double	r;
-}				t_disс;
+}				t_disc;
 
 typedef struct	s_ellipsoid
 {
@@ -255,13 +278,6 @@ typedef struct	s_paraboloid
 	double	k;
 }				t_paraboloid;
 
-typedef struct s_plane_with_hole
-{
-	t_vect		norm;
-	t_vect		point;
-	int 		holes_num;
-	t_disс		*hole;
-}				t_plane_with_hole;
 
 typedef struct	s_limited_cylinder
 {
@@ -310,6 +326,20 @@ typedef struct	s_limited_paraboloid
 	double	k;
 }				t_limited_paraboloid;
 
+typedef struct s_plane_with_hole
+{
+	t_vect		norm;
+	t_vect		point;
+	int 		holes_num;
+	t_disc		*hole;
+}				t_plane_with_hole;
+
+typedef struct s_disc_with_hole
+{
+	t_disc		disc;
+	t_disc 		hole;
+}				t_disc_with_hole;
+
 /*
 ** textures
 */
@@ -327,6 +357,7 @@ typedef struct s_mapping_texture
 	int 		w;
 	int 		h;
 	char 		*img_path;
+	SDL_Surface *srf;
 }				t_mapping_texture;
 
 typedef struct s_perlin_texture
@@ -335,20 +366,53 @@ typedef struct s_perlin_texture
 	double 		amplitude;
 	double 		persistence;
 	double		exponent;
-	t_vect 		frequency;	
+	t_vect 		frequency;
 	t_vect 		frequency_att; // затухання частоти
 }				t_perlin_texture;
 
+typedef struct  s_plasma_texture
+{
+	t_color 	frequency;
+	t_color 	phase;
+}				t_plasma_texture;
+
+typedef struct  s_contours_texture
+{
+	t_color 	contour;
+	t_color 	background;
+	double		t;
+	double 		frequency;
+}				t_contours_texture;
+
+typedef struct s_caustic_texture
+{
+	t_color 	color_1;
+	t_color 	color_2;
+	double 		sharpness;
+	double		coverage;
+}				t_caustic_texture;
+
+typedef struct s_jupiter_texture
+{
+	double 		vortices;
+	double 		bands;
+	double 		perturbations;
+	double 		bands_fade;
+	t_color 	band;
+	t_color 	background;
+}				t_jupiter_texture;
+
 /*
 ** skybox
-*/ 
+*/
 
 typedef	struct s_skybox
 {
 	t_vect 		pos;
 	double		r;
 	t_color 	cl;
-	// add texture
+	int 		texturing;
+	t_texture 	texture;
 }				t_skybox;
 
 /*
@@ -419,9 +483,9 @@ typedef struct	s_rtv
 	t_figure		*objects;
 	t_light			*l;
 	t_color			global_light;
-	int 		sk;
-	t_skybox 	skybox;
-}				t_rtv;
+	int 			sk;
+	t_skybox 		skybox;
+}					t_rtv;
 
 /*
 ** additionl structures
@@ -473,24 +537,7 @@ typedef struct	s_quartic_eq
 	double	root[4];
 }				t_quartic_eq;
 
-/*
-** structures for menu
-*/
 
-typedef struct	s_box
-{
-	SDL_Rect	rect;
-	SDL_Texture	*scene;
-}				t_box;
-
-typedef struct	s_menu
-{
-	SDL_Window		*window;
-	unsigned int	window_id;
-	SDL_Renderer	*renderer;
-	SDL_Event		e;
-	t_box			boxes[6];
-}				t_menu;
 
 
 /*
@@ -510,7 +557,7 @@ t_vect			change_vector_direction(t_vect *v);
 t_vect			create_vector(double x, double y, double z);
 void 			set_zero_vect(t_vect *v);
 t_vect			project_point_on_plane(t_vect *point, t_vect *pl_point, t_vect *pl_norm);
-
+t_vect			mult_vectors_coordinates(t_vect *a, t_vect *b);
 /*
 ** intersection functions for objects
 */
@@ -531,6 +578,7 @@ int 			intersection_plane_with_hole(t_ray *r, void *disc, double *t);
 t_color			intersection(t_rtv *rtv, t_ray *r);
 t_vect			intersection_point(double t, t_ray *r);
 int				complicated_intersection(t_rtv *rtv, t_ray *r, double *point);
+int 			intersection_disc_with_hole(t_ray *r, void *disc, double *t);
 
 /*
 ** calculating norm vectors for objects
@@ -541,7 +589,7 @@ t_vect			cylinder_norm_vector(void *obj, t_vect *point);
 t_vect			cone_norm_vector(void *obj, t_vect *point);
 t_vect			torus_norm_vector(void *obj, t_vect *point);
 t_vect 			triangle_norm_vector(void *obj, t_vect *point);
-t_vect			disс_norm_vector(void *obj, t_vect *point);
+t_vect			disc_norm_vector(void *obj, t_vect *point);
 t_vect			ellipsoid_norm_vector(void *obj, t_vect *point);
 t_vect 			paraboloid_norm_vector(void *obj, t_vect *point);
 t_vect 			limited_cylinder_norm_vector(void *obj, t_vect *point);
@@ -550,6 +598,7 @@ t_vect 			limited_paraboloid_norm_vector(void *obj, t_vect *point);
 t_vect 			limited_sphere_norm_vector(void *obj, t_vect *point);
 t_vect 			plane_with_hole_norm_vector(void *obj, t_vect *point);
 t_vect			find_norm(t_rtv *rtv, int figure, t_vect *point, t_vect *r_dir);
+t_vect			disc_with_hole_norm_vector(void *obj, t_vect *point);
 
 /*
 ** colorizing
@@ -582,10 +631,16 @@ int				shadow(t_rtv *rtv, t_ray *r, double light);
 /*
 ** textures
 */
-//void 			uploading_textures(t_rtv *rtv); - дописати на SDL
+void 			uploading_textures(t_rtv *rtv); //- дописати на SDL
+void 			free_textures(t_rtv *rtv);
 void 			sphere_mapping_texture(t_additional *s, void *t);
 double		 	calculate_perlin_noise(t_vect point);
 void			perlin_noise_texture(t_additional *st, void *texture_st);
+void 			plasma_texture(t_additional *s, void *t);
+void 			contours_texture(t_additional *s, void *t);
+void 			caustic_texture(t_additional *s, void *t);
+void 			jupiter_texture(t_additional *s, void *t);
+t_color 		creating_skybox(t_rtv *rtv, t_ray *r);
 
 /*
 ** filters
@@ -638,6 +693,7 @@ void			put_error(const char *message, const char *second_message);
 void			get_scene(const char *name, t_rtv *rtv);
 char			*validate_rtv(cJSON *obj, t_rtv *rtv);
 char			*validate_camera(cJSON *obj, t_camera *cam);
+char			*validate_skybox(cJSON *obj, t_rtv *rtv);
 char			*validate_light(cJSON *obj, t_rtv *rtv);
 char			*validate_objects(cJSON *obj, t_rtv *rtv);
 char			*validate_object(cJSON *object, t_figure *figure, int id);
@@ -646,19 +702,32 @@ char			*validate_cylinder(cJSON *tmp[], t_figure *figure);
 char			*validate_cone(cJSON *tmp[], t_figure *figure);
 char			*validate_torus(cJSON *tmp[], t_figure *figure);
 char			*validate_plane(cJSON *tmp[], t_figure *figure);
+char			*validate_plane_with_hole(cJSON *tmp[], t_figure *figure);
 char			*validate_triangle(cJSON *tmp[], t_figure *figure);
 char			*validate_disc(cJSON *tmp[], t_figure *figure);
+char			*validate_disc_with_hole(cJSON *tmp[], t_figure *figure);
 char			*validate_ellipsoid(cJSON *tmp[], t_figure *figure);
 char			*validate_paraboloid(cJSON *tmp[], t_figure *figure);
 char			*validate_limited_cylinder(cJSON *tmp[], t_figure *figure);
 char			*validate_limited_cone(cJSON *tmp[], t_figure *figure);
 char			*validate_limited_paraboloid(cJSON *tmp[], t_figure *figure);
 char			*validate_limited_sphere(cJSON *tmp[], t_figure *figure);
+char			*validate_object_texture(cJSON *obj, t_figure *figure);
+char			*validate_texture(cJSON *obj, t_figure *figure);
+char			*validate_perlin(cJSON *obj, t_figure *figure);
+char			*validate_plasma(cJSON *obj, t_figure *figure);
+char			*validate_contours(cJSON *obj, t_figure *figure);
+char			*validate_caustic(cJSON *obj, t_figure *figure);
+char			*validate_jupiter(cJSON *obj, t_figure *figure);
 _Bool			validate_vector(cJSON *obj, t_vect *vect);
 _Bool			validate_color(cJSON *obj, t_color *color);
 void			valid_data(char *arr[], char *type);
+void			valid_data_2(char *arr[], char *type);
 void			valid_id_list(int arr[]);
+void			valid_id_list_2(int arr[]);
 _Bool			valid_hex(char *str);
+_Bool			valid_color(cJSON *obj, t_color *color);
+
 
 /*
 ** loading bar ????
@@ -693,5 +762,7 @@ int				my_key_funct(t_rtv *rtv);
 void			ft_redraw(t_rtv *rtv);
 void			ft_take_picture(t_rtv *rtv);
 void			ft_menu(t_menu *menu, t_rtv *rtv);
+void			ft_which_scene(t_rtv *rtv, int i);
+char			*ft_itoa(int n);
 
 #endif

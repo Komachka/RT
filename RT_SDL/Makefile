@@ -1,5 +1,5 @@
 NAME = RT
-CC = gcc
+CC = gcc -Wall -Wextra -Werror
 CFLAGS = -F./libraries/SDL -O3
 JSON = ./libraries/JSON/cJSON.c
 SDL_FLAGS =  -framework SDL2 -framework SDL2_image -framework SDL2_ttf
@@ -29,25 +29,33 @@ SRC = main.c \
 	  threads.c \
 	  ft_standart_function_1.c \
 	  ft_standart_function_2.c \
+	  ft_standart_function_3.c \
 	  ft_key_hooks_1.c \
 	  ft_key_hooks_2.c \
 	  menu.c \
 	  solving_equations.c \
 	  json_get_scene.c \
-	  json_validate_rtv_and_camera.c \
-	  json_validate_vector_and_color.c \
-	  json_validate_light.c \
-	  json_validate_objects.c \
-	  json_validate_object.c \
-	  json_validate_figures.c \
-	  json_validate_more_figures.c \
-	  json_validate_rest_figures.c \
-	  json_valid_value.c \
 	  json_valid_data.c \
+	  json_valid_data_2.c \
+	  json_valid_value.c \
+	  json_validate_even_more_figures.c \
+	  json_validate_figures.c \
+	  json_validate_light.c \
+	  json_validate_more_figures.c \
+	  json_validate_object.c \
+	  json_validate_objects.c \
+	  json_validate_rest_figures.c \
+	  json_validate_rtv_and_camera.c \
+	  json_validate_textures_and_skybox.c \
+	  json_validate_procedural_textures.c \
+	  json_validate_vector_and_color.c \
 	  filters.c \
 	  animation.c \
 	  mapping_texture.c \
 	  perlin_noise_texture.c \
+	  procedural_textures.c \
+	  create_skybox.c \
+	  textures.c \
 
 OBJ	= $(addprefix $(DSRC)/,$(SRC:.c=.o))
 OBJJSON = $(JSON:.c=.o)
@@ -62,10 +70,10 @@ $(NAME) : $(OBJ) $(OBJJSON)
 
 clean:
 	rm -rf $(OBJ) $(OBJJSON)
-	
+
 fclean: clean
 	rm -rf $(NAME)
-	
+
 re: fclean all
 
 sdl2:

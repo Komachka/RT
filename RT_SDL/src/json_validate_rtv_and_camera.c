@@ -55,11 +55,7 @@ char	*validate_rtv(cJSON *obj, t_rtv *rtv)
 		return ("Invalid \"Samples Grid\" value.");
 	if (!valid_hex(tmp[3]->valuestring))
 		return ("Invalid \"Background Color\" value.");
-	VAR_INT(color, ft_atoi_base(tmp[3]->valuestring, 16));
-	rtv->background_color = (t_color){(unsigned char)(color >> 16) / 255.0,
-									(unsigned char)(color >> 8) / 255.0,
-									(unsigned char)color / 255.0,
-									(unsigned char)(color >> 24) / 100.0};
+	rtv->background_color = create_color(tmp[3]->valuestring);
 	return (validate_rtv_next(tmp, rtv));
 }
 

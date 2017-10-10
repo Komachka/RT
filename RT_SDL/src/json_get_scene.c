@@ -21,7 +21,7 @@ char	*get_json_string(const char *name)
 
 	VAR_INT(file_size, 0);
 	str = join("scenes/", name);
-	if ((fd = open(str, O_RDONLY)) < 0)
+	if ((fd = open(str, O_RDONLY)) < 0 || (read(fd, buff, 0)) < 0)
 		return (0);
 	while ((bytes = read(fd, buff, 1023)))
 		file_size += bytes;
@@ -40,7 +40,7 @@ void	fill_else(t_rtv *rtv)
 	rtv->lightening = ON;
 	rtv->bg_color = OFF;
 	rtv->samples_per_pixel = pow(rtv->samples_grid, 2);
-	rtv->samples = rtv->lightening = ON ? rtv->samples_per_pixel : 1;
+	rtv->samples = rtv->lightening == ON ? rtv->samples_per_pixel : 1;
 	rtv->delta_aliasing = 1.0 / (2.0 * rtv->samples_grid);
 	//rtv->air_coef = 1.00029; - скоріше за все треба видалити
 	rtv->expos = -2.0f;
@@ -57,6 +57,7 @@ void	get_scene(const char *name, t_rtv *rtv)
 {
 	char	*str;
 	cJSON	*obj;
+	cJSON	*tmp[4];
 
 	str = get_json_string(name);
 	if (!(obj = cJSON_Parse(str)))
@@ -64,11 +65,17 @@ void	get_scene(const char *name, t_rtv *rtv)
 	free(str);
 	if ((str = validate_rtv(obj, rtv)))
 		put_error("[Json RT Error]", str);
-	if ((str = validate_camera(cJSON_GetObjectItem(obj, "Camera"), &rtv->cam)))
+	tmp[0] = cJSON_GetObjectItemCaseSensitive(obj, "Camera");
+	tmp[1] = cJSON_GetObjectItemCaseSensitive(obj, "Skybox");
+	tmp[2] = cJSON_GetObjectItemCaseSensitive(obj, "Light");
+	tmp[3] = cJSON_GetObjectItemCaseSensitive(obj, "Objects");
+	if ((str = validate_camera(tmp[0], &rtv->cam)))
 		put_error("[Json Camera Error]", str);
-	if ((str = validate_light(cJSON_GetObjectItem(obj, "Light"), rtv)))
+	if ((str = validate_skybox(tmp[1], rtv)))
+		put_error("[Json Skybox Error]", str);
+	if ((str = validate_light(tmp[2], rtv)))
 		put_error("[Json Light Error]", str);
-	if ((str = validate_objects(cJSON_GetObjectItem(obj, "Objects"), rtv)))
+	if ((str = validate_objects(tmp[3], rtv)))
 		put_error("[Json Objects Error]", str);
 	fill_else(rtv);
 }
