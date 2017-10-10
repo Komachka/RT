@@ -77,7 +77,7 @@ _Bool		cmp(const char *str1, const char *str2)
 	return (0);
 }
 
-char		*join(const char *str1, const char *str2)
+char		*join(char const *str1, char const *str2)
 {
 	char	*str;
 

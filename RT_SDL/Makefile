@@ -29,6 +29,7 @@ SRC = main.c \
 	  threads.c \
 	  ft_standart_function_1.c \
 	  ft_standart_function_2.c \
+	  ft_standart_function_3.c \
 	  ft_key_hooks_1.c \
 	  ft_key_hooks_2.c \
 	  menu.c \
