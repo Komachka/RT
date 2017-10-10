@@ -122,8 +122,9 @@ typedef struct	s_menu
 	unsigned int	window_id;
 	SDL_Renderer	*renderer;
 	SDL_Event		e;
+
 	t_box			boxes[SCENSES+1]; // for scene and one for beckground
-	// need to add one more to autor file
+
 }				t_menu;
 
 /*

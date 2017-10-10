@@ -57,6 +57,7 @@ SRC = main.c \
 	  create_skybox.c \
 	  textures.c \
 
+
 OBJ	= $(addprefix $(DSRC)/,$(SRC:.c=.o))
 OBJJSON = $(JSON:.c=.o)
 

@@ -33,7 +33,8 @@ void ft_init_rects(t_menu *menu)
 	menu->boxes[6].rect.h = 270;
 }
 
-void ft_init_textures(t_menu *menu) // all this texture need to be freed
+
+void ft_init_textures(t_menu *menu)
 {
 	menu->boxes[0].scene = IMG_LoadTexture(menu->renderer, "/image/fone1.png");
 
@@ -56,12 +57,14 @@ void ft_render_copy(t_menu *menu)
 	int i = 6;
 	while (i >= 0)
 	{
+
 		if (SDL_RenderCopy(menu->renderer, menu->boxes[i].scene, NULL,
 					   &menu->boxes[i].rect) < 0)
 		{
 			SDL_Log("%s", SDL_GetError());
 			return ;	
 		}
+
 		i--;
 	}
 }
@@ -81,13 +84,16 @@ void	ft_which_scene(t_rtv *rtv, int i)
 
 
 
+
 void ft_menu(t_menu *menu, t_rtv *rtv)
 {
+
 	int done;
 	int x_mouse;
 	int y_mouse;
 
 	done = 0;
+
 	if ((menu->window = SDL_CreateWindow("RT", SDL_WINDOWPOS_CENTERED,
 									SDL_WINDOWPOS_CENTERED, WIDTH, HEIGHT,
 									SDL_WINDOW_OPENGL)) == NULL)
@@ -114,15 +120,18 @@ void ft_menu(t_menu *menu, t_rtv *rtv)
 		return ;
 	}
 	ft_render_copy(menu);
+
 	SDL_RenderPresent(menu->renderer);
 
 	while (!done)
 	{
 		while (SDL_PollEvent(&menu->e))
 		{
+
 			if (((menu->e.type == SDL_KEYDOWN && menu->e.key.keysym.sym == SDLK_ESCAPE) || menu->e.window.event == SDL_WINDOWEVENT_CLOSE) &&
 				menu->window_id == menu->e.window.windowID)			
 {
+
 				int i = 1;
 				while (i <= SCENSES)
 				{
@@ -146,7 +155,7 @@ void ft_menu(t_menu *menu, t_rtv *rtv)
 				y_mouse = menu->e.motion.y;
 
 				int i = 1;
-				
+
 				while (i <= SCENSES)
 				{
 					if (x_mouse >= menu->boxes[i].rect.x && x_mouse <=
@@ -154,8 +163,8 @@ void ft_menu(t_menu *menu, t_rtv *rtv)
 							y_mouse >= menu->boxes[i].rect.y && y_mouse <=
 							menu->boxes[i].rect.y + menu->boxes[i].rect.h)
 					{
-						SDL_SetTextureColorMod(menu->boxes[i].scene, 150, 150,
-											   174);
+						SDL_SetTextureColorMod(menu->boxes[i].scene, 150, 150, 174);
+
 						SDL_RenderClear(menu->renderer);
 						ft_render_copy(menu);
 						SDL_RenderPresent(menu->renderer);
@@ -177,7 +186,9 @@ void ft_menu(t_menu *menu, t_rtv *rtv)
 				x_mouse = menu->e.button.x;
 				y_mouse = menu->e.button.y;
 				int i = 1;
+
 				while (i <= SCENSES)
+
 				{
 					if (x_mouse >= menu->boxes[i].rect.x && x_mouse <=
 							menu->boxes[i].rect.x + menu->boxes[i].rect.w &&
@@ -185,12 +196,14 @@ void ft_menu(t_menu *menu, t_rtv *rtv)
 							y_mouse <= menu->boxes[i].rect.y +
 									menu->boxes[i].rect.h)
 					{
+
 						SDL_SetTextureColorMod(menu->boxes[i].scene, 250, 100,
 											   100);
 						SDL_RenderClear(menu->renderer);
 						ft_render_copy(menu);
 						SDL_RenderPresent(menu->renderer);
 						ft_which_scene(rtv, i);
+
 						basic_function(rtv);
 					}
 					i++;

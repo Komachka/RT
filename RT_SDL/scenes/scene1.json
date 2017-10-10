@@ -19,6 +19,7 @@
         "Radius" : 10,
         "Color"  : "BB0000",
         "Texture"  : {
+
             "Type"          : "MAPPING",
             "Path"          : "image/test.png",
             "Octaves"       : 3,
