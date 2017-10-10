@@ -24,10 +24,10 @@ int animation(float percent, SDL_Renderer *renderer, t_rtv *rtv)
 	SDL_Rect rect1; // rect 1 from surface
 	rect1.x = 0;
 	rect1.y = 0;
-	rect1.w = 1000;
-	rect1.h = 1000;
-	rect.x = WIDTH / 2 - WIDTH / 4;
-	rect.y = HEIGHT / 2 - HEIGHT / 4;
+	rect1.w = WX;
+	rect1.h = WY;
+	rect.x = WX / 2 - WX / 4;
+	rect.y = WY / 2 - WY / 4;
 	rect.w = 400;
 	rect.h = 400;
 	//n_frame =  floor(percent * ANIMATION_FRAMES);

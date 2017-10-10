@@ -75,6 +75,8 @@ t_vect	fisheye_camera(t_vect *dir, double angle)
 	return(res);
 }
 
+#define ww WX
+#define hh WY
 void	*make_projection(void *k)
 {
 	t_thred	*p;
@@ -91,19 +93,20 @@ void	*make_projection(void *k)
 	tmp.z = p->rtv1->cam.lk_dir;
 	t_color c[p->rtv1->samples]; //прийдеться малочити та фрішити(((
 		i = 0;
+	
 	while (p->y_start < p->y_end)
 	{
 		x = -1;
 		p->ray.origin = p->rtv1->cam.pos;
 		{
-			while (++x < WX)
+			while (++x < ww)
 			{
 				while (++dx < p->rtv1->samples)
 				{
 					while (++dy < p->rtv1->samples){
-						tmp.x = (2 * ((x + p->rtv1->delta_aliasing + (double)dx / (double)p->rtv1->samples) / (double)WX) - 1) * \
+						tmp.x = (2 * ((x + p->rtv1->delta_aliasing + (double)dx / (double)p->rtv1->samples) / (double)ww) - 1) * \
 							p->rtv1->cam.image_aspect_ratio * p->rtv1->cam.scale;
-						tmp.y = (1 - 2 * ((p->y_start + p->rtv1->delta_aliasing + (double)dy / (double)p->rtv1->samples) / (double)WY)) * p->rtv1->cam.scale;
+						tmp.y = (1 - 2 * ((p->y_start + p->rtv1->delta_aliasing + (double)dy / (double)p->rtv1->samples) / (double)hh)) * p->rtv1->cam.scale;
 						p->ray.dir = rotate_cam(tmp, p->rtv1->cam.rotate);
 						if (p->rtv1->cam.type == FISHEYE)
 							p->ray.dir = fisheye_camera(&p->ray.dir, p->rtv1->cam.fisheye_angle);

@@ -16,8 +16,8 @@ void	ft_init_texture_rect(t_rtv *rtv)
 {
 	rtv->rect_rt.x = 0;
 	rtv->rect_rt.y = 0;
-	rtv->rect_rt.w = 1000;
-	rtv->rect_rt.h = 1000;
+	rtv->rect_rt.w = WX;
+	rtv->rect_rt.h = WY;
 }
 
 void	ft_redraw(t_rtv *rtv)
@@ -75,9 +75,35 @@ void	ft_action(t_rtv *rtv)
 	load_texture1(rtv);
 	uploading_textures(rtv); // загрузка текстур з картинки в массив
 	SDL_RenderClear(rtv->renderer);
+	
+
+	SDL_Color **colours;
+	colours = (SDL_Color**)malloc(sizeof(SDL_Color*) * WY);
+	int i = 0;
+	while (i < WY)
+	{
+		colours[i] = (SDL_Color*)malloc(sizeof(SDL_Color) * WX);
+		i++;
+	}
+	rtv->s_c = colours;
+
+	SDL_Color **colours2;
+	colours2 = (SDL_Color**)malloc(sizeof(SDL_Color*) * WY);
+	i = 0;
+	while (i < WY)
+	{
+		colours2[i] = (SDL_Color*)malloc(sizeof(SDL_Color) * WX);
+		i++;
+	}
+	rtv->filter.sdl_col_with_filter = colours2;
+	
+
+
+
+
 	threads(rtv);
 	copy_to_filter(rtv);
-	create_rander_texture(rtv);
+	create_rander_texture(rtv); // поминять назад
 	ft_init_texture_rect(rtv);
 	SDL_RenderCopy(rtv->renderer, rtv->sdl_texture_render, NULL, &rtv->rect_rt);
 	SDL_RenderPresent(rtv->renderer);

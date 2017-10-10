@@ -25,13 +25,13 @@
 # include "SDL2_image/SDL_image.h"
 # include "../libraries/JSON/cJSON.h"
 
-# define WINDOW_WIDTH 1000 //взнати що це?
-# define WINDOW_HEIGHT (WINDOW_WIDTH)
+// # define WINDOW_WIDTH 1000 //взнати що це?
+// # define WINDOW_HEIGHT (WINDOW_WIDTH)
 
 # define COUNT 6
 
-# define WX 1000
-# define WY 1000
+# define WX 1500
+# define WY 1200
 
 # define WIDTH 1400
 # define HEIGHT 1000
@@ -442,7 +442,8 @@ typedef struct	s_filter
 	int			sepia;
 	int			negative;
 	int			romanets;
-	SDL_Color	sdl_col_with_filter[WX][WY];
+	//SDL_Color	sdl_col_with_filter[WX][WY];
+	SDL_Color	**sdl_col_with_filter;
 }				t_filter;
 
 /*
@@ -457,7 +458,8 @@ typedef struct	s_rtv
 	SDL_Renderer	*renderer;
 	SDL_Event		e;
 	int				len; //використовуємо?
-	SDL_Color		s_c[WX][WY];
+	//SDL_Color		s_c[WX][WY];
+	SDL_Color		**s_c;
 	SDL_Surface		*picture;
 	SDL_Surface		*surface_main;
 	SDL_Rect		rect_rt;
