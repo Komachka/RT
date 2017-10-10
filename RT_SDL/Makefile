@@ -53,7 +53,8 @@ SRC = main.c \
 	  mapping_texture.c \
 	  perlin_noise_texture.c \
 	  procedural_textures.c \
-	  create_skybox.c
+	  create_skybox.c \
+	  textures.c \
 
 OBJ	= $(addprefix $(DSRC)/,$(SRC:.c=.o))
 OBJJSON = $(JSON:.c=.o)

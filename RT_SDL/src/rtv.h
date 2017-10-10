@@ -356,6 +356,7 @@ typedef struct s_mapping_texture
 	int 		w;
 	int 		h;
 	char 		*img_path;
+	SDL_Surface *srf;
 }				t_mapping_texture;
 
 typedef struct s_perlin_texture
@@ -629,7 +630,8 @@ int				shadow(t_rtv *rtv, t_ray *r, double light);
 /*
 ** textures
 */
-//void 			uploading_textures(t_rtv *rtv); - дописати на SDL
+void 			uploading_textures(t_rtv *rtv); //- дописати на SDL
+void 			free_textures(t_rtv *rtv);
 void 			sphere_mapping_texture(t_additional *s, void *t);
 double		 	calculate_perlin_noise(t_vect point);
 void			perlin_noise_texture(t_additional *st, void *texture_st);

@@ -38,9 +38,11 @@ double	degrees_to_radians(double x)
 
 void	delstruct(t_rtv *rtv)
 {
+	free_textures(rtv);
+	SDL_FreeSurface(rtv->surface_main); // what is it??
 	SDL_DestroyRenderer(rtv->renderer);
 	SDL_DestroyWindow(rtv->window);
-	SDL_FreeSurface(rtv->surface_main);
+	
 }
 
 void	delstruct1(t_menu *menu)

@@ -73,7 +73,7 @@ void	ft_action(t_rtv *rtv)
 	rtv->renderer = SDL_CreateRenderer(rtv->window,\
 			-1, SDL_RENDERER_ACCELERATED);
 	load_texture1(rtv);
-	//uploading_textures(rtv) загрузка текстур з картинки в массив
+	uploading_textures(rtv);// загрузка текстур з картинки в массив
 	SDL_RenderClear(rtv->renderer);
 	threads(rtv);
 	copy_to_filter(rtv);
