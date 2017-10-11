@@ -6,7 +6,7 @@
 /*   By: pkolomiy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/21 14:26:06 by pkolomiy          #+#    #+#             */
-/*   Updated: 2017/09/25 16:08:39 by pkolomiy         ###   ########.fr       */
+/*   Updated: 2017/10/11 17:41:19 by askochul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	fill_else(t_rtv *rtv)
 	rtv->samples_per_pixel = pow(rtv->samples_grid, 2);
 	rtv->samples = rtv->lightening == ON ? rtv->samples_per_pixel : 1;
 	rtv->delta_aliasing = 1.0 / (2.0 * rtv->samples_grid);
-	//rtv->air_coef = 1.00029; - скоріше за все треба видалити
 	rtv->expos = -2.0f;
 	rtv->filter.black_and_white = 0;
 	rtv->filter.blur = 0;

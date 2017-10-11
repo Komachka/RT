@@ -6,7 +6,7 @@
 /*   By: kzahreba <kzahreba@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/29 19:24:07 by kzahreba          #+#    #+#             */
-/*   Updated: 2017/10/02 16:35:20 by askochul         ###   ########.fr       */
+/*   Updated: 2017/10/11 17:50:48 by askochul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,9 +123,7 @@ void	*make_projection(void *k)
 			}
 		}
 		if (p->index == 0) {
-
-           float persent = p->y_start * 1.0 / p->y_end;
-           animation(persent, p->rtv1->renderer, p->rtv1);
+           animation(p->rtv1->renderer, p->rtv1);
        }
 		p->y_start++;
 	}

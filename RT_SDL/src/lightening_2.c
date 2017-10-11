@@ -6,7 +6,7 @@
 /*   By: kzahreba <kzahreba@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/04 21:16:32 by kzahreba          #+#    #+#             */
-/*   Updated: 2017/10/02 16:30:10 by askochul         ###   ########.fr       */
+/*   Updated: 2017/10/11 17:48:49 by askochul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int			shadow(t_rtv *rtv, t_ray *r, double light)
 	return (k);
 }
 
-void	directional_light_ray(t_light *l, t_additional *st)
+void		directional_light_ray(t_light *l, t_additional *st)
 {
 	st->light_ray.dir = l->direction;
 	st->rev_light_ray.dir = change_vector_direction(&l->direction);
@@ -44,7 +44,7 @@ void	directional_light_ray(t_light *l, t_additional *st)
 	st->spot_coef = 1.0;
 }
 
-void	point_light_ray(t_light *l, t_additional *st)
+void		point_light_ray(t_light *l, t_additional *st)
 {
 	st->light_ray.dir = vector_substract(&st->point, &l->pos);
 	st->len = vector_length(&st->light_ray.dir);
@@ -57,7 +57,7 @@ void	point_light_ray(t_light *l, t_additional *st)
 
 static void	spot_light_ray(t_light *l, t_additional *st)
 {
-	double theta;
+	double	theta;
 
 	st->light_ray.dir = vector_substract(&st->point, &l->pos);
 	st->len = vector_length(&st->light_ray.dir);

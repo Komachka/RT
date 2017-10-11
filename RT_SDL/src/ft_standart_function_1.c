@@ -6,7 +6,7 @@
 /*   By: kzahreba <kzahreba@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 16:27:49 by kzahreba          #+#    #+#             */
-/*   Updated: 2017/09/28 17:22:36 by askochul         ###   ########.fr       */
+/*   Updated: 2017/10/11 16:00:34 by askochul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ char		*join(char const *str1, char const *str2)
 
 	VAR_INT(index1, 0);
 	VAR_INT(index2, 0);
-	str = (char*)malloc(ft_strlen(str1) + ft_strlen(str2) + 1);//малок!!!!!
+	str = (char*)malloc(ft_strlen(str1) + ft_strlen(str2) + 1);
 	while (str1[index1])
 	{
 		str[index1] = str1[index1];

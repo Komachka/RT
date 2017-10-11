@@ -6,7 +6,7 @@
 /*   By: kzahreba <kzahreba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/07 19:02:54 by kzahreba          #+#    #+#             */
-/*   Updated: 2017/10/01 21:16:23 by kzahreba         ###   ########.fr       */
+/*   Updated: 2017/10/11 16:05:41 by askochul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,9 @@ t_color		intersection(t_rtv *rtv, t_ray *r)
 {
 	double		t;
 	t_color		c;
-	int			k;
 	int			figure;
 
 	t = INFINITY;
-	k = -1;
 	figure = complicated_intersection(rtv, r, &t);
 	set_zero_color(&c);
 	if (figure != -1)
@@ -57,8 +55,7 @@ t_color		intersection(t_rtv *rtv, t_ray *r)
 		else
 			c = rtv->skybox.cl;
 	}
-	else
-	if (rtv->bg_color == ON)
+	else if (rtv->bg_color == ON)
 		c = rtv->background_color;
 	return (c);
 }
