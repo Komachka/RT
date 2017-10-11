@@ -60,7 +60,7 @@ char	*validate_light_next(cJSON *obj, cJSON *tmp[], t_light *light)
 char	*validate_light(cJSON *obj, t_rtv *rtv)
 {
 	cJSON		*tmp[9];
-	char		*arr[8];
+	char		*arr[7];
 	char		*str;
 
 	VAR_INT(counter, -1);
@@ -71,7 +71,7 @@ char	*validate_light(cJSON *obj, t_rtv *rtv)
 	while (++counter < rtv->light_num)
 	{
 		VAR_INT(index, -1);
-		while (arr[++index])
+		while (++index < 7)
 			if (!(tmp[index] = cJSON_GetObjectItemCaseSensitive(
 					cJSON_GetArrayItem(obj, counter), arr[index])))
 				return (arr[index]);

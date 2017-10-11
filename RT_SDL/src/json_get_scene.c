@@ -56,19 +56,18 @@ static inline void	fill_else(t_rtv *rtv)
 void				get_scene(const char *name, t_rtv *rtv)
 {
 	char	*str;
-	cJSON	*obj;
 	cJSON	*tmp[4];
 
 	str = get_json_string(name);
-	if (!(obj = cJSON_Parse(str)))
-		put_error("Json Parsing Error At:", cJSON_GetErrorPtr());
+	if (!(rtv->obj = cJSON_Parse(str)))
+		put_error("Json Parsing Error ", 0);
 	free(str);
-	if ((str = validate_rtv(obj, rtv)))
+	if ((str = validate_rtv(rtv->obj, rtv)))
 		put_error("[Json RT Error]", str);
-	tmp[0] = cJSON_GetObjectItemCaseSensitive(obj, "Camera");
-	tmp[1] = cJSON_GetObjectItemCaseSensitive(obj, "Skybox");
-	tmp[2] = cJSON_GetObjectItemCaseSensitive(obj, "Light");
-	tmp[3] = cJSON_GetObjectItemCaseSensitive(obj, "Objects");
+	tmp[0] = cJSON_GetObjectItemCaseSensitive(rtv->obj, "Camera");
+	tmp[1] = cJSON_GetObjectItemCaseSensitive(rtv->obj, "Skybox");
+	tmp[2] = cJSON_GetObjectItemCaseSensitive(rtv->obj, "Light");
+	tmp[3] = cJSON_GetObjectItemCaseSensitive(rtv->obj, "Objects");
 	if ((str = validate_camera(tmp[0], &rtv->cam)))
 		put_error("[Json Camera Error]", str);
 	if ((str = validate_skybox(tmp[1], rtv)))

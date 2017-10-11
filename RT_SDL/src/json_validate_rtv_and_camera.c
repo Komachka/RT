@@ -87,11 +87,11 @@ char	*validate_camera_next(cJSON *pos, cJSON *rotate, t_camera *cam)
 char	*validate_camera(cJSON *obj, t_camera *cam)
 {
 	cJSON		*tmp[5];
-	char		*arr[6];
+	char		*arr[4];
 
 	VAR_INT(index, -1);
 	valid_data(arr, "Camera");
-	while (arr[++index])
+	while (++index < 4)
 		if (!(tmp[index] = cJSON_GetObjectItemCaseSensitive(obj, arr[index])))
 			return (arr[index]);
 	if (!cmp("STANDART", tmp[0]->valuestring) &&

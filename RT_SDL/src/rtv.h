@@ -451,6 +451,7 @@ typedef struct	s_filter
 */
 typedef struct	s_rtv
 {
+	cJSON			*obj;
 	SDL_Window		*window;
 	unsigned int	window_id;
 	SDL_Texture		*sdl_texture_render;

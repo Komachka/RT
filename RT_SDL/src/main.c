@@ -18,6 +18,7 @@ int		main(void)
 	t_rtv		rtv;
 	t_menu		menu;
 
+	rtv.obj = 0;
 	ft_menu(&menu, &rtv);
 
 	return (0);

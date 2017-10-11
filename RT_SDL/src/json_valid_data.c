@@ -71,7 +71,6 @@ static inline void	more_valid_data(char *arr[], char *type)
 		arr[4] = "Constant Attenuation Coefficient";
 		arr[5] = "Linear Attenuation Coefficient";
 		arr[6] = "Quadratic Attenuation Coefficient";
-		arr[7] = 0;
 	}
 	else if (cmp(type, "Material"))
 	{
@@ -108,7 +107,6 @@ void	valid_data(char *arr[], char *type)
 		arr[1] = "Position";
 		arr[2] = "Camera Rotate Angles";
 		arr[3] = "FOV";
-		arr[4] = 0;
 	}
 	else
 		more_valid_data(arr, type);
