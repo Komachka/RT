@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   intersection_objects_1.c                             :+:      :+:    :+:   */
+/*   intersection_objects_1.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kzahreba <kzahreba@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/06 18:10:47 by kzahreba          #+#    #+#             */
-/*   Updated: 2017/10/02 15:41:02 by askochul         ###   ########.fr       */
+/*   Updated: 2017/10/11 17:39:45 by askochul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,66 +25,55 @@ int		check_solving(double *t, double t0)
 	return (i);
 }
 
-int		intersection_torus(t_ray *ray, void *tr, double *t)
+int		intersection_torus(t_ray *ray, void *tr, double *tt)
 {
 	t_torus			*tor;
 	t_vect			tmp2;
-	int				res;
 	t_quartic_eq	n;
 	t_vect			q;
-	double			u;
-	double			v;
-	double			a;
-	double			b;
-	double			c;
-	double			d;
+	t_tor t;
 
 	tor = (t_torus *)tr;
 	q = vector_substract(&ray->origin, &tor->pos);
-	u = vector_dot_product(&tor->dir, &q);
-	v = vector_dot_product(&tor->dir, &ray->dir);
-	a = 1 - v * v;
-	b = 2 * (vector_dot_product(&q, &ray->dir) - u * v);
-	c = vector_dot_product(&q, &q) - u * u;
-	d = vector_dot_product(&q, &q) + tor->maj_r *\
+	t.u = vector_dot_product(&tor->dir, &q);
+	t.v = vector_dot_product(&tor->dir, &ray->dir);
+	t.a = 1.0 - t.v * t.v;
+	t.b = 2.0 * (vector_dot_product(&q, &ray->dir) - t.u * t.v);
+	t.c = vector_dot_product(&q, &q) - t.u * t.u;
+	t.d = vector_dot_product(&q, &q) + tor->maj_r *\
 		tor->maj_r - tor->min_r * tor->min_r;
-	n.a = 1;
-	tmp2 = vector_mult(4, &q);
+	n.a = 1.0;
+	tmp2 = vector_mult(4.0, &q);
 	n.b = vector_dot_product(&tmp2, &ray->dir);
-	n.c = 2 * d + (n.b * n.b) / 4 - 4 * tor->maj_r * tor->maj_r * a;
-	n.d = n.b * d - 4 * tor->maj_r * tor->maj_r * b;
-	n.e = d * d - 4 * tor->maj_r * tor->maj_r * c;
-	if ((res = quartic_equation(&n)))
-		return (check_solving(t, select_value(n.root, res)));
-	return (0);
+	n.c = 2.0 * t.d + (n.b * n.b) / 4.0 - 4.0 * tor->maj_r * tor->maj_r * t.a;
+	n.d = n.b * t.d - 4.0 * tor->maj_r * tor->maj_r * t.b;
+	n.e = t.d * t.d - 4.0 * tor->maj_r * tor->maj_r * t.c;
+	return (check_solving(tt, select_value(n.root, quartic_equation(&n))));
 }
 
 int		intersection_triangle(t_ray *r, void *triangle, double *t)
 {
 	t_triangle	*tr;
+	t_vect tm[3];
+	double u[2];
 	double		det;
-	double		u;
-	double		v;
-	t_vect		tvec;
-	t_vect		qvec;
 	double		t0;
-	t_vect		pvec;
-
+	
 	tr = (t_triangle *)triangle;
-	pvec = vector_cross_product(&r->dir, &tr->v1);
-	det = vector_dot_product(&tr->v0, &pvec);
+	tm[0] = vector_cross_product(&r->dir, &tr->v1);
+	det = vector_dot_product(&tr->v0, &tm[0]);
 	if (fabs(det) > PRECISION)
 	{
 		det = 1.0 / det;
-		tvec = vector_substract(&r->origin, &tr->a);
-		u = vector_dot_product(&tvec, &pvec) * det;
-		if (u < 0.0f || u > 1.0f)
+		tm[1] = vector_substract(&r->origin, &tr->a);
+		u[0] = vector_dot_product(&tm[1], &tm[0]) * det;
+		if (u[0] < 0.0f || u[0] > 1.0f)
 			return (0);
-		qvec = vector_cross_product(&tvec, &tr->v0);
-		v = vector_dot_product(&r->dir, &qvec) * det;
-		if (v < 0.0f || u + v > 1.0f)
+		tm[2] = vector_cross_product(&tm[1], &tr->v0);
+		u[1] = vector_dot_product(&r->dir, &tm[2]) * det;
+		if (u[1] < 0.0f || u[0] + u[1] > 1.0f)
 			return (0);
-		t0 = vector_dot_product(&tr->v1, &qvec) * det;
+		t0 = vector_dot_product(&tr->v1, &tm[2]) * det;
 		return (check_solving(t, t0));
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: kzahreba <kzahreba@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/16 19:58:01 by kzahreba          #+#    #+#             */
-/*   Updated: 2017/09/28 16:13:28 by askochul         ###   ########.fr       */
+/*   Updated: 2017/10/11 21:49:33 by askochul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	delstruct(t_rtv *rtv)
 	free_textures(rtv);
 	del_arrey((void**)rtv->s_c, WX);
 	del_arrey((void**)rtv->filter.sdl_col_with_filter, WX);
-	SDL_FreeSurface(rtv->surface_main); // what is it??
+	SDL_FreeSurface(rtv->surface_main);
 	SDL_DestroyRenderer(rtv->renderer);
 	SDL_DestroyWindow(rtv->window);
 }
@@ -46,9 +46,12 @@ void	delstruct1(t_menu *menu)
 	int i;
 
 	i = 1;
-	while (i < 10)
+	while (i <= SCENSES)
 	{
-		SDL_DestroyTexture(menu->boxes[i].scene);
+		if (menu->boxes[i].scene != NULL)
+			SDL_DestroyTexture(menu->boxes[i].scene);
+		else
+			SDL_Log("%s", SDL_GetError());
 		i++;
 	}
 	SDL_DestroyRenderer(menu->renderer);

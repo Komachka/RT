@@ -6,7 +6,7 @@
 /*   By: kzahreba <kzahreba@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/23 14:27:55 by kzahreba          #+#    #+#             */
-/*   Updated: 2017/09/28 17:23:05 by askochul         ###   ########.fr       */
+/*   Updated: 2017/10/11 16:03:22 by askochul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,7 @@ size_t	ft_strlen(char const *str)
 	return (i);
 }
 
-
-char	*ft_strdup(char const *s1) //переписати на норм функцію
+char	*ft_strdup(char const *s1)
 {
 	char		*str;
 	size_t		i;
