@@ -42,19 +42,19 @@ void	ft_redraw(t_rtv *rtv)
 	SDL_RenderClear(rtv->renderer);
 	threads(rtv);
 	copy_to_filter(rtv);
-	if (rtv->filter->black_and_white > 0)
+	if (rtv->filter.black_and_white > 0)
 		create_b_n_w_filter(rtv);
-	if (rtv->filter->blur > 0)
+	if (rtv->filter.blur > 0)
 		create_blur_filter(rtv, 0.0, 0.0, 0.0);
-	if (rtv->filter->glass > 0)
+	if (rtv->filter.glass > 0)
 		create_glass_filter(rtv);
-	if (rtv->filter->emboss > 0)
+	if (rtv->filter.emboss > 0)
 		create_emboss_filter(rtv, 0.0, 0.0, 0.0);
-	if (rtv->filter->sepia > 0)
+	if (rtv->filter.sepia > 0)
 		create_sepia_filter(rtv, 0, 0, 0);
-	if (rtv->filter->negative > 0)
+	if (rtv->filter.negative > 0)
 		create_negative_filter(rtv);
-	if (rtv->filter->romanets > 0)
+	if (rtv->filter.romanets > 0)
 		create_sromanets(rtv);
 	create_rander_texture(rtv);
 	SDL_RenderClear(rtv->renderer);
@@ -126,7 +126,7 @@ void	ft_action(t_rtv *rtv)
 	// 	for (int j = 0; j < WX; ++j)
 	// 	{
 	// 		//SDL_SetRenderDrawColor(rtv->renderer, rtv->s_c[i][j].r, rtv->s_c[i][j].g, rtv->s_c[i][j].b, rtv->s_c[i][j].a);
-	// 		SDL_SetRenderDrawColor(rtv->renderer, rtv->filter->sdl_col_with_filter[i][j].r, rtv->filter->sdl_col_with_filter[i][j].g, rtv->filter->sdl_col_with_filter[i][j].b, rtv->filter->sdl_col_with_filter[i][j].a);
+	// 		SDL_SetRenderDrawColor(rtv->renderer, rtv->filter.sdl_col_with_filter[i][j].r, rtv->filter.sdl_col_with_filter[i][j].g, rtv->filter.sdl_col_with_filter[i][j].b, rtv->filter.sdl_col_with_filter[i][j].a);
 	// 		SDL_RenderDrawPoint(rtv->renderer, j, i);
                         
 	// 	}
@@ -139,7 +139,7 @@ void	ft_action(t_rtv *rtv)
 void clean(t_rtv *rtv)
 {
 	del_arrey((void**)rtv->s_c, WX);
-	del_arrey((void**)rtv->filter->sdl_col_with_filter, WX);
+	del_arrey((void**)rtv->filter.sdl_col_with_filter, WX);
 
 }
 

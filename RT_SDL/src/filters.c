@@ -26,15 +26,15 @@ void create_filter(t_rtv *rtv)
     int i;
 
 
-    t_filter *filter = (t_filter*)malloc(sizeof(t_filter));
+    t_filter filter;
 
-    filter->romanets = 0;
-    filter->negative = 0;
-    filter->sepia = 0;
-    filter->emboss = 0;
-    filter->glass = 0;
-    filter->blur = 0;
-    filter->black_and_white = 0;
+    filter.romanets = 0;
+    filter.negative = 0;
+    filter.sepia = 0;
+    filter.emboss = 0;
+    filter.glass = 0;
+    filter.blur = 0;
+    filter.black_and_white = 0;
 
 
     SDL_Color **colours2;
@@ -45,7 +45,7 @@ void create_filter(t_rtv *rtv)
         colours2[i] = (SDL_Color*)malloc(sizeof(SDL_Color) * WY);
         i++;
     }
-    filter->sdl_col_with_filter = colours2;
+    filter.sdl_col_with_filter = colours2;
     rtv->filter = filter;
 
 
@@ -63,7 +63,7 @@ void	copy_to_filter(t_rtv *rtv)
 		j = 0;
 		while (j < WX)
 		{
-	       rtv->filter->sdl_col_with_filter[j][i] = rtv->s_c[j][i];
+	       rtv->filter.sdl_col_with_filter[j][i] = rtv->s_c[j][i];
 			j++;
 		}
 		i++;
@@ -81,12 +81,12 @@ void	create_sepia_filter(t_rtv *rtv, int red, int green, int blue)
 		j = 0;
 		while (j < WX)
 		{
-			red = (0.393 * rtv->filter->sdl_col_with_filter[j][i].r + 0.769 * rtv->filter->sdl_col_with_filter[j][i].g + 0.189 * rtv->filter->sdl_col_with_filter[j][i].b);
-			green = (0.349 * rtv->filter->sdl_col_with_filter[j][i].r + 0.686 * rtv->filter->sdl_col_with_filter[j][i].g + 0.168 * rtv->filter->sdl_col_with_filter[j][i].b);
-			blue = (0.272 * rtv->filter->sdl_col_with_filter[j][i].r + 0.534 * rtv->filter->sdl_col_with_filter[j][i].g + 0.131 * rtv->filter->sdl_col_with_filter[j][i].b);
-			rtv->filter->sdl_col_with_filter[j][i].r = MIN(red, 255);
-			rtv->filter->sdl_col_with_filter[j][i].g = MIN(green, 255);
-			rtv->filter->sdl_col_with_filter[j][i].b = MIN(blue, 255);
+			red = (0.393 * rtv->filter.sdl_col_with_filter[j][i].r + 0.769 * rtv->filter.sdl_col_with_filter[j][i].g + 0.189 * rtv->filter.sdl_col_with_filter[j][i].b);
+			green = (0.349 * rtv->filter.sdl_col_with_filter[j][i].r + 0.686 * rtv->filter.sdl_col_with_filter[j][i].g + 0.168 * rtv->filter.sdl_col_with_filter[j][i].b);
+			blue = (0.272 * rtv->filter.sdl_col_with_filter[j][i].r + 0.534 * rtv->filter.sdl_col_with_filter[j][i].g + 0.131 * rtv->filter.sdl_col_with_filter[j][i].b);
+			rtv->filter.sdl_col_with_filter[j][i].r = MIN(red, 255);
+			rtv->filter.sdl_col_with_filter[j][i].g = MIN(green, 255);
+			rtv->filter.sdl_col_with_filter[j][i].b = MIN(blue, 255);
 			j++;
 		}
 		i++;
@@ -107,9 +107,9 @@ void	create_b_n_w_filter(t_rtv *rtv)
 		while (j < WX)
 		{
 			midle = (rtv->s_c[j][i].r + rtv->s_c[j][i].g + rtv->s_c[j][i].b) / 3;
-			rtv->filter->sdl_col_with_filter[j][i].r = midle;
-			rtv->filter->sdl_col_with_filter[j][i].g = midle;
-			rtv->filter->sdl_col_with_filter[j][i].b = midle;
+			rtv->filter.sdl_col_with_filter[j][i].r = midle;
+			rtv->filter.sdl_col_with_filter[j][i].g = midle;
+			rtv->filter.sdl_col_with_filter[j][i].b = midle;
 			j++;
 		}
 		i++;
@@ -127,9 +127,9 @@ void	create_negative_filter(t_rtv *rtv)
 		j = 0;
 		while (j < WX)
 		{
-			rtv->filter->sdl_col_with_filter[j][i].r = 255 - rtv->filter->sdl_col_with_filter[j][i].r;
-			rtv->filter->sdl_col_with_filter[j][i].g = 255 - rtv->filter->sdl_col_with_filter[j][i].g;
-			rtv->filter->sdl_col_with_filter[j][i].b = 255 - rtv->filter->sdl_col_with_filter[j][i].b;
+			rtv->filter.sdl_col_with_filter[j][i].r = 255 - rtv->filter.sdl_col_with_filter[j][i].r;
+			rtv->filter.sdl_col_with_filter[j][i].g = 255 - rtv->filter.sdl_col_with_filter[j][i].g;
+			rtv->filter.sdl_col_with_filter[j][i].b = 255 - rtv->filter.sdl_col_with_filter[j][i].b;
 			j++;
 		}
 		i++;
@@ -176,17 +176,17 @@ void	create_blur_filter(t_rtv *rtv, double red, double green, double blue)
 
                     imageX = (x - fW / 2 + filterX + WX) % WX;
                     imageY = (y - fH / 2 + filterY + WY) % WY;
-                    red += rtv->filter->sdl_col_with_filter[imageX][imageY].r * filter[filterY][filterX];
-                    green += rtv->filter->sdl_col_with_filter[imageX][imageY].g * filter[filterY][filterX];
-                    blue += rtv->filter->sdl_col_with_filter[imageX][imageY].b * filter[filterY][filterX];
+                    red += rtv->filter.sdl_col_with_filter[imageX][imageY].r * filter[filterY][filterX];
+                    green += rtv->filter.sdl_col_with_filter[imageX][imageY].g * filter[filterY][filterX];
+                    blue += rtv->filter.sdl_col_with_filter[imageX][imageY].b * filter[filterY][filterX];
                     filterX++;
                 }
                 filterY++;
             }
 
-            rtv->filter->sdl_col_with_filter[x][y].r = MIN(MAX(factor * red + bias, 0), 255);
-            rtv->filter->sdl_col_with_filter[x][y].g = MIN(MAX(factor * green + bias, 0), 255);
-            rtv->filter->sdl_col_with_filter[x][y].b = MIN(MAX(factor * blue + bias, 0), 255);
+            rtv->filter.sdl_col_with_filter[x][y].r = MIN(MAX(factor * red + bias, 0), 255);
+            rtv->filter.sdl_col_with_filter[x][y].g = MIN(MAX(factor * green + bias, 0), 255);
+            rtv->filter.sdl_col_with_filter[x][y].b = MIN(MAX(factor * blue + bias, 0), 255);
 
 
             y++;
@@ -234,16 +234,16 @@ void create_emboss_filter(t_rtv *rtv, double red, double green, double blue)
                 {
                     imageX = (x - fW / 2 + filterX + WX) % WX;
                     imageY = (y - fH / 2 + filterY + WY) % WY;
-                    red += rtv->filter->sdl_col_with_filter[imageX][imageY].r * filter[filterY][filterX];
-                    green += rtv->filter->sdl_col_with_filter[imageX][imageY].g * filter[filterY][filterX];
-                    blue += rtv->filter->sdl_col_with_filter[imageX][imageY].b * filter[filterY][filterX];
+                    red += rtv->filter.sdl_col_with_filter[imageX][imageY].r * filter[filterY][filterX];
+                    green += rtv->filter.sdl_col_with_filter[imageX][imageY].g * filter[filterY][filterX];
+                    blue += rtv->filter.sdl_col_with_filter[imageX][imageY].b * filter[filterY][filterX];
                     filterX++;
                 }
                 filterY++;
             }
-            rtv->filter->sdl_col_with_filter[x][y].r = MIN(MAX(factor * red + bias, 0), 255);
-            rtv->filter->sdl_col_with_filter[x][y].g = MIN(MAX(factor * green + bias, 0), 255);
-            rtv->filter->sdl_col_with_filter[x][y].b = MIN(MAX(factor * blue + bias, 0), 255);
+            rtv->filter.sdl_col_with_filter[x][y].r = MIN(MAX(factor * red + bias, 0), 255);
+            rtv->filter.sdl_col_with_filter[x][y].g = MIN(MAX(factor * green + bias, 0), 255);
+            rtv->filter.sdl_col_with_filter[x][y].b = MIN(MAX(factor * blue + bias, 0), 255);
             y++;
         }
         x++;
@@ -282,9 +282,9 @@ void create_glass_filter(t_rtv *rtv)
             imageY = rand_interval(y, y + 5);
             if (imageX < WX && imageY < WY)
             {
-                rtv->filter->sdl_col_with_filter[x][y].r = rtv->filter->sdl_col_with_filter[imageX][imageY].r;
-                rtv->filter->sdl_col_with_filter[x][y].g = rtv->filter->sdl_col_with_filter[imageX][imageY].g;
-                rtv->filter->sdl_col_with_filter[x][y].b = rtv->filter->sdl_col_with_filter[imageX][imageY].b;
+                rtv->filter.sdl_col_with_filter[x][y].r = rtv->filter.sdl_col_with_filter[imageX][imageY].r;
+                rtv->filter.sdl_col_with_filter[x][y].g = rtv->filter.sdl_col_with_filter[imageX][imageY].g;
+                rtv->filter.sdl_col_with_filter[x][y].b = rtv->filter.sdl_col_with_filter[imageX][imageY].b;
             }
             y++;
         }
@@ -310,9 +310,9 @@ void create_sromanets(t_rtv *rtv)
                 imageX = randon(x, x + 5);
                 imageY = randon(y, y + 5);
                 if (imageX < WX && imageY < WY) {
-                    rtv->filter->sdl_col_with_filter[x][y].r = rtv->filter->sdl_col_with_filter[imageX][imageY].r;
-                    rtv->filter->sdl_col_with_filter[x][y].g = rtv->filter->sdl_col_with_filter[imageX][imageY].g;
-                    rtv->filter->sdl_col_with_filter[x][y].b = rtv->filter->sdl_col_with_filter[imageX][imageY].b;
+                    rtv->filter.sdl_col_with_filter[x][y].r = rtv->filter.sdl_col_with_filter[imageX][imageY].r;
+                    rtv->filter.sdl_col_with_filter[x][y].g = rtv->filter.sdl_col_with_filter[imageX][imageY].g;
+                    rtv->filter.sdl_col_with_filter[x][y].b = rtv->filter.sdl_col_with_filter[imageX][imageY].b;
                 }
                 y++;
             }

@@ -26,10 +26,10 @@ void	key_funct_4(t_rtv *rtv)
 	}
 	else if (rtv->e.key.keysym.sym == SDLK_m)
 	{
-		if (rtv->filter->black_and_white == 0)
-			rtv->filter->black_and_white = 1;
+		if (rtv->filter.black_and_white == 0)
+			rtv->filter.black_and_white = 1;
 		else
-			rtv->filter->black_and_white = 0;
+			rtv->filter.black_and_white = 0;
 		ft_redraw(rtv);
 	}
 }

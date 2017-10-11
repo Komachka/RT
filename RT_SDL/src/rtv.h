@@ -30,8 +30,8 @@
 
 # define COUNT 6
 
-# define WX 1200
-# define WY 1200
+# define WX 1000
+# define WY 1000
 
 # define WIDTH 1400
 # define HEIGHT 1000
@@ -480,7 +480,7 @@ typedef struct	s_rtv
 	double			delta_aliasing;
 	double			air_coef; // треба буде видалити, якщо не зміню заломлення
 	double			expos;
-	t_filter		*filter;
+	t_filter		filter;
 	t_color			background_color;
 	t_camera		cam;
 	t_figure		*objects;

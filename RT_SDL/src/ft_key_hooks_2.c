@@ -38,26 +38,26 @@ void	key_funct_6(t_rtv *rtv)
 {
 	if (rtv->e.key.keysym.sym == SDLK_j)
 	{
-		if (rtv->filter->sepia == 0)
-			rtv->filter->sepia = 1;
+		if (rtv->filter.sepia == 0)
+			rtv->filter.sepia = 1;
 		else
-			rtv->filter->sepia = 0;
+			rtv->filter.sepia = 0;
 		ft_redraw(rtv);
 	}
 	else if (rtv->e.key.keysym.sym == SDLK_n)
 	{
-		if (rtv->filter->negative == 0)
-			rtv->filter->negative = 1;
+		if (rtv->filter.negative == 0)
+			rtv->filter.negative = 1;
 		else
-			rtv->filter->negative = 0;
+			rtv->filter.negative = 0;
 		ft_redraw(rtv);
 	}
 	else if (rtv->e.key.keysym.sym == SDLK_o)
 	{
-		if (rtv->filter->romanets == 0)
-			rtv->filter->romanets = 1;
+		if (rtv->filter.romanets == 0)
+			rtv->filter.romanets = 1;
 		else
-			rtv->filter->romanets = 0;
+			rtv->filter.romanets = 0;
 		ft_redraw(rtv);
 	}
 	else if (rtv->e.key.keysym.sym == SDLK_3)
@@ -70,26 +70,26 @@ void	key_funct_5(t_rtv *rtv)
 {
 	if (rtv->e.key.keysym.sym == SDLK_u)
 	{
-		if (rtv->filter->blur == 0)
-			rtv->filter->blur = 1;
+		if (rtv->filter.blur == 0)
+			rtv->filter.blur = 1;
 		else
-			rtv->filter->blur = 0;
+			rtv->filter.blur = 0;
 		ft_redraw(rtv);
 	}
 	else if (rtv->e.key.keysym.sym == SDLK_g)
 	{
-		if (rtv->filter->glass == 0)
-			rtv->filter->glass = 1;
+		if (rtv->filter.glass == 0)
+			rtv->filter.glass = 1;
 		else
-			rtv->filter->glass = 0;
+			rtv->filter.glass = 0;
 		ft_redraw(rtv);
 	}
 	else if (rtv->e.key.keysym.sym == SDLK_h)
 	{
-		if (rtv->filter->emboss == 0)
-			rtv->filter->emboss = 1;
+		if (rtv->filter.emboss == 0)
+			rtv->filter.emboss = 1;
 		else
-			rtv->filter->emboss = 0;
+			rtv->filter.emboss = 0;
 		ft_redraw(rtv);
 	}
 }
