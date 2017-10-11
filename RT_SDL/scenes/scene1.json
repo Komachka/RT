@@ -16,7 +16,7 @@
         "FOV"                  : 45
     },
     "Skybox"                  : {
-        "Radius" : 10,
+        "Radius" : 600,
         "Color"  : "BB0000",
         "Texture"  : {
             "Type"          : "MAPPING",
