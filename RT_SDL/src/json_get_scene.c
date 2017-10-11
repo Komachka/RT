@@ -12,7 +12,7 @@
 
 #include "rtv.h"
 
-char	*get_json_string(const char *name)
+static inline char	*get_json_string(const char *name)
 {
 	int		fd;
 	int		bytes;
@@ -35,7 +35,7 @@ char	*get_json_string(const char *name)
 	return (str);
 }
 
-void	fill_else(t_rtv *rtv)
+static inline void	fill_else(t_rtv *rtv)
 {
 	rtv->lightening = ON;
 	rtv->bg_color = OFF;
@@ -53,12 +53,13 @@ void	fill_else(t_rtv *rtv)
 	rtv->filter.romanets = 0;
 }
 
-void	get_scene(const char *name, t_rtv *rtv)
+void				get_scene(const char *name, t_rtv *rtv)
 {
 	char	*str;
 	cJSON	*obj;
 	cJSON	*tmp[4];
 
+	printf("my\n");
 	str = get_json_string(name);
 	if (!(obj = cJSON_Parse(str)))
 		put_error("Json Parsing Error At:", cJSON_GetErrorPtr());
@@ -78,4 +79,6 @@ void	get_scene(const char *name, t_rtv *rtv)
 	if ((str = validate_objects(tmp[3], rtv)))
 		put_error("[Json Objects Error]", str);
 	fill_else(rtv);
+//	json_free(tmp, 4);
+//	cJSON_Delete(obj);
 }

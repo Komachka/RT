@@ -12,7 +12,7 @@
 
 #include "rtv.h"
 
-char	*validate_rtv_next(cJSON *tmp[], t_rtv *rtv)
+static inline char	*validate_rtv_next(cJSON *tmp[], t_rtv *rtv)
 {
 	cJSON	*obj;
 	int		index;
@@ -26,23 +26,27 @@ char	*validate_rtv_next(cJSON *tmp[], t_rtv *rtv)
 			!(arr_size = cJSON_GetArraySize(tmp[counter])))
 			return (tmp[counter]->string);
 		while (++index < arr_size)
+		{
 			if (!(obj = cJSON_GetArrayItem(tmp[counter], index)) ||
 				obj->type != cJSON_Object)
 				return (tmp[counter]->string);
+//			cJSON_Delete(obj);
+		}
 	}
 	if (validate_color(tmp[4], &rtv->global_light))
 		return ("Invalid \"Ambient Light Intensity\" value.");
+//	json_free(tmp, 8);
 	return (0);
 }
 
 char	*validate_rtv(cJSON *obj, t_rtv *rtv)
 {
 	cJSON		*tmp[8];
-	char		*arr[9];
+	char		*arr[8];
 
 	VAR_INT(index, -1);
 	valid_data(arr, "Rtv");
-	while (arr[++index])
+	while (++index < 8)
 		if (!(tmp[index] = cJSON_GetObjectItemCaseSensitive(obj, arr[index])))
 			return (arr[index]);
 	if (!cmp("LAMBERT", tmp[0]->valuestring) &&

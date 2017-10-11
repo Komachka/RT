@@ -730,7 +730,7 @@ void			valid_id_list(int arr[]);
 void			valid_id_list_2(int arr[]);
 _Bool			valid_hex(char *str);
 _Bool			valid_color(cJSON *obj, t_color *color);
-
+void			json_free(cJSON *tmp[], int size);
 
 /*
 ** loading bar ????

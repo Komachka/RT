@@ -31,7 +31,7 @@ void	valid_id_list(int arr[])
 	arr[14] = DISC_WITH_HOLE;
 }
 
-void	even_more_valid_data(char *arr[], char *type)
+static inline void	even_more_valid_data(char *arr[], char *type)
 {
 	if (cmp(type, "Id"))
 	{
@@ -60,7 +60,7 @@ void	even_more_valid_data(char *arr[], char *type)
 	}
 }
 
-void	more_valid_data(char *arr[], char *type)
+static inline void	more_valid_data(char *arr[], char *type)
 {
 	if (cmp(type, "Light"))
 	{
@@ -101,7 +101,6 @@ void	valid_data(char *arr[], char *type)
 		arr[5] = "Camera";
 		arr[6] = "Light";
 		arr[7] = "Objects";
-		arr[8] = 0;
 	}
 	else if (cmp(type, "Camera"))
 	{

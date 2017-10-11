@@ -64,7 +64,7 @@ void ft_render_copy(t_menu *menu)
 					   &menu->boxes[i].rect) < 0)
 		{
 			SDL_Log("%s", SDL_GetError());
-			return ;	
+			return ;
 		}
 
 		i--;
@@ -73,15 +73,19 @@ void ft_render_copy(t_menu *menu)
 
 void	ft_which_scene(t_rtv *rtv, int i)
 {
-	char *scene_name;
-	char *end;
-	char *name;
+	char	*scene_name;
+	char	*end;
+	char	*name;
+	char	*nbr;
 
-	scene_name = "scene";
+	nbr = ft_itoa(i);
+	name = join("scene", nbr);
+	free(nbr);
 	end = ".json";
-	name = join(scene_name, ft_itoa(i));
-	name = join(name, end);
-	get_scene(name, rtv);
+	scene_name = join(name, end);
+	free(name);
+	get_scene(scene_name, rtv);
+	free(scene_name);
 }
 
 
@@ -130,7 +134,7 @@ void ft_menu(t_menu *menu, t_rtv *rtv)
 	ft_render_copy(menu);
 
 	SDL_RenderPresent(menu->renderer);
-	
+
 
 	while (!done)
 	{
@@ -138,7 +142,7 @@ void ft_menu(t_menu *menu, t_rtv *rtv)
 		{
 
 			if (((menu->e.type == SDL_KEYDOWN && menu->e.key.keysym.sym == SDLK_ESCAPE) || menu->e.window.event == SDL_WINDOWEVENT_CLOSE) &&
-				menu->window_id == menu->e.window.windowID)			
+				menu->window_id == menu->e.window.windowID)
 {
 
 				int i = 1;
