@@ -14,19 +14,12 @@
 
 int		main(void)
 {
-<<<<<<< HEAD
-	t_rtv		rtv;
-	t_menu		menu;
-
-	rtv.obj = 0;
-	ft_menu(&menu, &rtv);
-=======
 	t_rtv		*rtv;
 	t_menu		*menu;
->>>>>>> 995a741a1dc087d3eb58275444604b4689cad7df
 
 	rtv = (t_rtv*)malloc(sizeof(t_rtv));
 	menu = (t_menu*)malloc(sizeof(t_menu));
+	rtv->obj = 0;
 	ft_menu(menu, rtv);
 	return (0);
 }
