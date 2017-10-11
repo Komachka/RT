@@ -20,18 +20,34 @@ int	randon(int low, int hight)
 	return (int)(low + (hight - low + 1) * scaled + low);
 }
 
+
+void create_filter(t_rtv *rtv)
+{
+    t_filter filter;
+
+    filter.romanets = 0;
+    filter.negative = 0;
+    filter.sepia = 0;
+    filter.emboss = 0;
+    filter.glass = 0;
+    filter.blur = 0;
+    filter.black_and_white = 0;
+    rtv->filter = filter;
+}
+
+
 void	copy_to_filter(t_rtv *rtv)
 {
 	int i;
-	int j;
-
-	i = 0;
+    int j;
+	
+    i = 0;
 	while (i < WY)
 	{
 		j = 0;
 		while (j < WX)
 		{
-			rtv->filter.sdl_col_with_filter[j][i] = rtv->s_c[j][i];
+	       rtv->filter.sdl_col_with_filter[j][i] = rtv->s_c[j][i];
 			j++;
 		}
 		i++;
@@ -49,9 +65,12 @@ void	create_sepia_filter(t_rtv *rtv, int red, int green, int blue)
 		j = 0;
 		while (j < WX)
 		{
-			red = (0.393 * rtv->filter.sdl_col_with_filter[j][i].r + 0.769 * rtv->filter.sdl_col_with_filter[j][i].g + 0.189 * rtv->filter.sdl_col_with_filter[j][i].b);
-			green = (0.349 * rtv->filter.sdl_col_with_filter[j][i].r + 0.686 * rtv->filter.sdl_col_with_filter[j][i].g + 0.168 * rtv->filter.sdl_col_with_filter[j][i].b);
-			blue = (0.272 * rtv->filter.sdl_col_with_filter[j][i].r + 0.534 * rtv->filter.sdl_col_with_filter[j][i].g + 0.131 * rtv->filter.sdl_col_with_filter[j][i].b);
+			red = (0.393 * rtv->filter.sdl_col_with_filter[j][i].r + 0.769
+* rtv->filter.sdl_col_with_filter[j][i].g + 0.189 * rtv->filter.sdl_col_with_filter[j][i].b);
+			green = (0.349 * rtv->filter.sdl_col_with_filter[j][i].r + 0.686
+* rtv->filter.sdl_col_with_filter[j][i].g + 0.168 * rtv->filter.sdl_col_with_filter[j][i].b);
+			blue = (0.272 * rtv->filter.sdl_col_with_filter[j][i].r + 0.534
+* rtv->filter.sdl_col_with_filter[j][i].g + 0.131 * rtv->filter.sdl_col_with_filter[j][i].b);
 			rtv->filter.sdl_col_with_filter[j][i].r = MIN(red, 255);
 			rtv->filter.sdl_col_with_filter[j][i].g = MIN(green, 255);
 			rtv->filter.sdl_col_with_filter[j][i].b = MIN(blue, 255);
@@ -104,19 +123,93 @@ void	create_negative_filter(t_rtv *rtv)
 	}
 }
 
-void	create_blur_filter(t_rtv *rtv, double red, double green, double blue)
+
+typedef struct s_tmp
 {
 
-    int const fW = 5;
-    int const fH = 5;
-    double filter[fH][fW] =
+    int x;
+    int y;
+    int filterX;
+    int filterY;
+    t_rtv *rtv;
+}t_tmp;
+
+
+void foo(double *red, double *green, double *blue, t_tmp tmp)
+{
+    t_rtv *rtv;
+    int imageX;
+    int imageY;
+    static double filter[fH][fW] =
             {
-                   { 0, 0, 1, 0, 0},
-                   { 0, 1, 1, 1, 0},
+                    {0, 0, 1, 0, 0},
+                    {0, 1, 1, 1, 0},
                     {1, 1, 1, 1, 1},
                     {0, 1, 1, 1, 0},
                     {0, 0, 1, 0, 0}
             };
+
+
+
+    rtv = tmp.rtv;
+
+    tmp.filterY = 0;
+    while (tmp.filterY < fH)
+    {
+        tmp.filterX = 0;
+        while (tmp.filterX < fW)
+        {
+            imageX = (tmp.x - fW / 2 + tmp.filterX + WX) % WX;
+            imageY = (tmp.y - fH / 2 + tmp.filterY + WY) % WY;
+            *red += rtv->filter.sdl_col_with_filter[imageX][imageY].r * filter[tmp.filterY][tmp.filterX];
+            *green += rtv->filter.sdl_col_with_filter[imageX][imageY].g * filter[tmp.filterY][tmp.filterX];
+            *blue += rtv->filter.sdl_col_with_filter[imageX][imageY].b * filter[tmp.filterY][tmp.filterX];
+            tmp.filterX++;
+        }
+        tmp.filterY++;
+    }
+
+}
+
+void	create_blur_filter(t_rtv *rtv, double red, double green, double blue)
+{
+
+   
+    
+
+    
+     // t_tmp tmp;
+     // tmp.x = 0;
+     // tmp.filterY = 0;
+     // tmp.filterX = 0;
+     // tmp.rtv = rtv;     
+
+     // double factor = 1.0 / 13.0;
+     // double bias = 0.0;
+    
+
+     // while (tmp.x < WX)
+     // {
+     //    tmp.y = 0;
+     //    while (tmp.y < WY)
+     //    {   red = 0.0, blue = 0.0, green = 0.0;
+     //        foo(&red, &green, &blue, tmp);
+            
+
+
+
+     //        rtv->filter.sdl_col_with_filter[tmp.x][tmp.y].r = MIN(MAX(factor * red + bias, 0), 255);
+     //        rtv->filter.sdl_col_with_filter[tmp.x][tmp.y].g = MIN(MAX(factor * green + bias, 0), 255);
+     //        rtv->filter.sdl_col_with_filter[tmp.x][tmp.y].b = MIN(MAX(factor * blue + bias, 0), 255);
+     //        tmp.y++;
+     //    }
+
+
+
+
+
+     //    tmp.x++;
+     // }
 
     double factor = 1.0 / 13.0;
     double bias = 0.0;
@@ -126,6 +219,14 @@ void	create_blur_filter(t_rtv *rtv, double red, double green, double blue)
     int filterY = 0;
     int imageX;
     int imageY;
+    static double filter[fH][fW] =
+            {
+                    {0, 0, 1, 0, 0},
+                    {0, 1, 1, 1, 0},
+                    {1, 1, 1, 1, 1},
+                    {0, 1, 1, 1, 0},
+                    {0, 0, 1, 0, 0}
+            };
 
     while (x < WX)
     {
@@ -139,9 +240,8 @@ void	create_blur_filter(t_rtv *rtv, double red, double green, double blue)
             {
                 filterX = 0;
                 while (filterX < fW)
-
                 {
-
+                
                     imageX = (x - fW / 2 + filterX + WX) % WX;
                     imageY = (y - fH / 2 + filterY + WY) % WY;
                     red += rtv->filter.sdl_col_with_filter[imageX][imageY].r * filter[filterY][filterX];
@@ -151,26 +251,22 @@ void	create_blur_filter(t_rtv *rtv, double red, double green, double blue)
                 }
                 filterY++;
             }
-
             rtv->filter.sdl_col_with_filter[x][y].r = MIN(MAX(factor * red + bias, 0), 255);
             rtv->filter.sdl_col_with_filter[x][y].g = MIN(MAX(factor * green + bias, 0), 255);
             rtv->filter.sdl_col_with_filter[x][y].b = MIN(MAX(factor * blue + bias, 0), 255);
-
-
             y++;
         }
         x++;
     }
 }
 
-#define fW 5
-#define fH 5
+
 
 void create_emboss_filter(t_rtv *rtv, double red, double green, double blue)
 {
-    double filter[fH][fW] =
+    static double filter[fH][fW] =
             {
-                {-1,  0,  0,  0,  0},
+                {-1,  0, 0, 0, 0},
                 {0, -2,  0,  0,  0},
                 {0,  0,  6,  0,  0},
                 {0,  0,  0, -2,  0},

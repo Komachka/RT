@@ -30,12 +30,15 @@
 
 # define COUNT 6
 
-# define WX 1200
-# define WY 1200
+# define WX 1000
+# define WY 1000
 
 # define WIDTH 1400
 # define HEIGHT 1000
 # define SCENSES 6
+#define fW 5
+#define fH 5
+
 # define FILTERWIDTH 3 //чи використовується?
 # define FILTERHEIGHT 3
 

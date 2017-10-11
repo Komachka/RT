@@ -132,8 +132,6 @@ void	basic_function(t_rtv *rtv)
                                        rtv->window_id == rtv->e.window.windowID)
                        {
                                 done = 1;
-                                
-                               //SDL_Log(" keysym %u", rtv->e.key.keysym.sym);
                        }
             else if (rtv->e.type == SDL_KEYUP)
 				my_key_funct(rtv);
