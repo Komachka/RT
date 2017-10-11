@@ -39,6 +39,8 @@ double	degrees_to_radians(double x)
 void	delstruct(t_rtv *rtv)
 {
 	free_textures(rtv);
+	del_arrey((void**)rtv->s_c, WX);
+	del_arrey((void**)rtv->filter.sdl_col_with_filter, WX);
 	SDL_FreeSurface(rtv->surface_main); // what is it??
 	SDL_DestroyRenderer(rtv->renderer);
 	SDL_DestroyWindow(rtv->window);
@@ -60,4 +62,20 @@ void	delstruct1(t_menu *menu)
 	IMG_Quit();
 	SDL_Quit();
 	exit(0);
+}
+
+
+void    del_arrey(void **arrey, int size)
+{
+        int i;
+
+        i = 0;
+        while (i < size)
+        {
+                if (arrey[i] != NULL)
+                        free(arrey[i]);
+                i++;
+        }
+        if (arrey != NULL)
+                free(arrey);
 }

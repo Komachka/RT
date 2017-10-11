@@ -64,6 +64,18 @@ void	key_funct_6(t_rtv *rtv)
 	{
 		ft_take_picture(rtv);
 	}
+	else if(rtv->e.key.keysym.sym == SDLK_BACKSPACE)
+	{
+		rtv->filter.romanets = 0;
+		rtv->filter.black_and_white = 0;
+		rtv->filter.blur = 0;
+		rtv->filter.glass = 0;
+		rtv->filter.emboss = 0;
+		rtv->filter.sepia = 0;
+		rtv->filter.negative = 0;
+		ft_redraw(rtv);
+
+	}
 }
 
 void	key_funct_5(t_rtv *rtv)

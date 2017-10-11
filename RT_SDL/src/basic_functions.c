@@ -12,6 +12,37 @@
 
 #include "rtv.h"
 
+
+
+
+
+
+
+void malloc_sdl_colour(t_rtv *rtv)
+{
+	SDL_Color **colours;
+	colours = (SDL_Color**)malloc(sizeof(SDL_Color*) * WX);
+	int i = 0;
+	while (i < WX)
+	{
+		colours[i] = (SDL_Color*)malloc(sizeof(SDL_Color) * WY);
+		i++;
+	}
+	rtv->s_c = colours;
+
+	
+
+	SDL_Color **colours2;
+	colours2 = (SDL_Color**)malloc(sizeof(SDL_Color*) * WX);
+	i = 0;
+	while (i < WX)
+	{
+		colours2[i] = (SDL_Color*)malloc(sizeof(SDL_Color) * WY);
+		i++;
+	}
+	rtv->filter.sdl_col_with_filter = colours2;
+}
+
 void	ft_init_texture_rect(t_rtv *rtv)
 {
 	rtv->rect_rt.x = 0;
@@ -75,51 +106,12 @@ void	ft_action(t_rtv *rtv)
 	load_texture1(rtv);
 	uploading_textures(rtv); // загрузка текстур з картинки в массив
 	SDL_RenderClear(rtv->renderer);
-	
-
-	SDL_Color **colours;
-	colours = (SDL_Color**)malloc(sizeof(SDL_Color*) * WX);
-	int i = 0;
-	while (i < WX)
-	{
-		colours[i] = (SDL_Color*)malloc(sizeof(SDL_Color) * WY);
-		i++;
-	}
-	rtv->s_c = colours;
-
-	
-
-	SDL_Color **colours2;
-	colours2 = (SDL_Color**)malloc(sizeof(SDL_Color*) * WX);
-	i = 0;
-	while (i < WX)
-	{
-		colours2[i] = (SDL_Color*)malloc(sizeof(SDL_Color) * WY);
-		i++;
-	}
-	rtv->filter.sdl_col_with_filter = colours2;
-	
-
-
-
-
+	malloc_sdl_colour(rtv);
 	threads(rtv);
-	//copy_to_filter(rtv);
-	//create_rander_texture(rtv); // поминять назад
+	copy_to_filter(rtv);
+	create_rander_texture(rtv); // поминять назад
 	ft_init_texture_rect(rtv);
-	//SDL_RenderCopy(rtv->renderer, rtv->sdl_texture_render, NULL, &rtv->rect_rt);
-	
-	for (int i = 0; i < WY; ++i)
-	{
-		for (int j = 0; j < WX; ++j)
-		{
-			SDL_SetRenderDrawColor(rtv->renderer, rtv->s_c[i][j].r, rtv->s_c[i][j].g, rtv->s_c[i][j].b, rtv->s_c[i][j].a);
-			SDL_RenderDrawPoint(rtv->renderer, j, i);
-                        
-		}
-	}
-
-
+	SDL_RenderCopy(rtv->renderer, rtv->sdl_texture_render, NULL, &rtv->rect_rt);
 	SDL_RenderPresent(rtv->renderer);
 }
 
@@ -140,6 +132,7 @@ void	basic_function(t_rtv *rtv)
                                        rtv->window_id == rtv->e.window.windowID)
                        {
                                 done = 1;
+                                
                                //SDL_Log(" keysym %u", rtv->e.key.keysym.sym);
                        }
             else if (rtv->e.type == SDL_KEYUP)
