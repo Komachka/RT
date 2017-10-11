@@ -90,12 +90,7 @@ t_color  reflection_component(t_additional *st, t_rtv *rtv, int recursive_depth,
 		res = calculate_color(coef, &res);
 	}
 	else 
-	{	
-		if (rtv->bg_color == ON)
-			res = calculate_color(coef, &rtv->background_color);
-		else
-			set_zero_color(&res);
-	}
+		res = create_background_color(rtv, &r);
 	return (res);
 }
 
@@ -142,18 +137,11 @@ t_color refractive_component(t_additional *st, t_rtv *rtv, int recursive_depth)
 	if ((k = complicated_intersection(rtv, &r, &t)) != -1)
 	{
 		res = colorizing(rtv, k, t, &r, recursive_depth + 1);
-		//coef = fresnel_reflect_amount(rtv->air_coef, refraction, &st->norm, &st->primary_ray.dir);
-	//	st->mat.reflective = coef;
-		//res = calculate_color(st->mat.transparency * (1.0 - coef), &res);
+		//coef = fresnel_reflect_amount(1, st->mat.refraction, &st->norm, &st->primary_ray.dir);
+		//res = calculate_color((1.0 - coef), &res);
 	}
-	
 	else 
-	{	
-		if (rtv->bg_color == ON)
-			res = calculate_color(st->mat.transparency, &rtv->background_color);
-		else
-			set_zero_color(&res);
-	}
+		res = create_background_color(rtv, &r);
 	return (res);
 }
 

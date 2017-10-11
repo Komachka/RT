@@ -40,3 +40,22 @@ t_color			colorizing(t_rtv *rtv, int figure, double t, t_ray *r, int recursive_d
 		res = toon_shading_model(rtv, &s);
 	return (res);
 }
+
+t_color		create_background_color(t_rtv *rtv, t_ray *r)
+{
+	t_color color;
+
+	set_zero_color(&color);
+	if (rtv->sk == ON)
+	{
+		if (rtv->lightening == ON)
+			color = creating_skybox(rtv, r);
+		else
+			color = rtv->skybox.cl;
+	}
+	else
+		if (rtv->bg_color == ON)
+			color = rtv->background_color;
+	return (color);	
+}
+

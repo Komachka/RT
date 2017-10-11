@@ -50,16 +50,8 @@ t_color		intersection(t_rtv *rtv, t_ray *r)
 		else
 			c = rtv->objects[figure].material.cl;
 	}
-	else if (rtv->sk == ON)
-	{
-		if (rtv->lightening == ON)
-			c = creating_skybox(rtv, r);
-		else
-			c = rtv->skybox.cl;
-	}
 	else
-	if (rtv->bg_color == ON)
-		c = rtv->background_color;
+		c = create_background_color(rtv, r);
 	return (c);
 }
 
