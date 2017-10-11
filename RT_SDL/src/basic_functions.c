@@ -21,11 +21,11 @@
 void malloc_sdl_colour(t_rtv *rtv)
 {
 	SDL_Color **colours;
-	colours = (SDL_Color**)malloc(sizeof(SDL_Color*) * WY);
+	colours = (SDL_Color**)malloc(sizeof(SDL_Color*) * WY + 1);
 	int i = 0;
-	while (i <= WY)
+	while (i <= WY + 1)
 	{
-		colours[i] = (SDL_Color*)malloc(sizeof(SDL_Color) * WX);
+		colours[i] = (SDL_Color*)malloc(sizeof(SDL_Color) * WX + 1);
 		i++;
 	}
 	rtv->s_c = colours;
@@ -33,11 +33,11 @@ void malloc_sdl_colour(t_rtv *rtv)
 	
 
 	SDL_Color **colours2;
-	colours2 = (SDL_Color**)malloc(sizeof(SDL_Color*) * WY);
+	colours2 = (SDL_Color**)malloc(sizeof(SDL_Color*) * WY + 1);
 	i = 0;
-	while (i <= WY)
+	while (i <= WY + 1)
 	{
-		colours2[i] = (SDL_Color*)malloc(sizeof(SDL_Color) * WX);
+		colours2[i] = (SDL_Color*)malloc(sizeof(SDL_Color) * WX + 1);
 		i++;
 	}
 	rtv->filter.sdl_col_with_filter = colours2;
