@@ -104,22 +104,10 @@ void	ft_action(t_rtv *rtv)
 
 
 	threads(rtv);
-	//copy_to_filter(rtv);
-	//create_rander_texture(rtv); // поминять назад
+	copy_to_filter(rtv);
+	create_rander_texture(rtv); // поминять назад
 	ft_init_texture_rect(rtv);
-	//SDL_RenderCopy(rtv->renderer, rtv->sdl_texture_render, NULL, &rtv->rect_rt);
-	
-	for (int i = 0; i < WY; ++i)
-	{
-		for (int j = 0; j < WX; ++j)
-		{
-			SDL_SetRenderDrawColor(rtv->renderer, rtv->s_c[i][j].r, rtv->s_c[i][j].g, rtv->s_c[i][j].b, rtv->s_c[i][j].a);
-			SDL_RenderDrawPoint(rtv->renderer, j, i);
-                        
-		}
-	}
-
-
+	SDL_RenderCopy(rtv->renderer, rtv->sdl_texture_render, NULL, &rtv->rect_rt);
 	SDL_RenderPresent(rtv->renderer);
 }
 
