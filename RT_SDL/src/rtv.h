@@ -675,6 +675,11 @@ double			select_value(double *array, int len);
 double			degrees_to_radians(double x);
 t_vect			adding_bias(t_vect *point, t_vect *dir);
 void			delstruct(t_rtv *rtv);
+void    del_arrey(void **arrey, int size);
+void malloc_sdl_colour(t_rtv *rtv);
+
+
+
 int				ft_atoi_base(const char *str, int base);
 size_t			ft_strlen(char const *str);
 void			ft_putendl(char const *s);
