@@ -30,8 +30,8 @@
 
 # define COUNT 6
 
-# define WX 1200
-# define WY 1200
+# define WX 1000
+# define WY 1000
 
 # define WIDTH 1400
 # define HEIGHT 1000
@@ -540,6 +540,16 @@ typedef struct	s_quartic_eq
 	double	root[4];
 }				t_quartic_eq;
 
+typedef struct s_tor
+{
+	double			u;
+	double			v;
+	double			a;
+	double			b;
+	double			c;
+	double			d;
+}				t_tor;
+
 
 
 
@@ -739,7 +749,7 @@ void			json_free(cJSON **tmp, int size);
 /*
 ** loading bar ????
 */
-int 			animation(float percent, SDL_Renderer *renderer, t_rtv *rtv);
+int 			animation(SDL_Renderer *renderer, t_rtv *rtv);
 void 			load_texture1(t_rtv *rtv);
 void 			load_texture2(t_rtv *rtv);
 void 			load_texture3(t_rtv *rtv);
@@ -755,6 +765,7 @@ unsigned int rand_interval(unsigned int min, unsigned int max);
 /*
 ** key hooks
 */
+void			key_funct_7(t_rtv *rtv);
 void			key_funct_6(t_rtv *rtv);
 void			key_funct_5(t_rtv *rtv);
 void			key_funct_4(t_rtv *rtv);
@@ -771,5 +782,7 @@ void			ft_take_picture(t_rtv *rtv);
 void			ft_menu(t_menu *menu, t_rtv *rtv);
 void			ft_which_scene(t_rtv *rtv, int i);
 char			*ft_itoa(int n);
+double	check_sphere_limits(double t, t_ray *r, t_limited_sphere *c);
+void	delstruct1(t_menu *menu);
 
 #endif
