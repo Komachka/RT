@@ -78,21 +78,23 @@ void	ft_action(t_rtv *rtv)
 	
 
 	SDL_Color **colours;
-	colours = (SDL_Color**)malloc(sizeof(SDL_Color*) * WY);
+	colours = (SDL_Color**)malloc(sizeof(SDL_Color*) * WX);
 	int i = 0;
-	while (i < WY)
+	while (i < WX)
 	{
-		colours[i] = (SDL_Color*)malloc(sizeof(SDL_Color) * WX);
+		colours[i] = (SDL_Color*)malloc(sizeof(SDL_Color) * WY);
 		i++;
 	}
 	rtv->s_c = colours;
 
+	
+
 	SDL_Color **colours2;
-	colours2 = (SDL_Color**)malloc(sizeof(SDL_Color*) * WY);
+	colours2 = (SDL_Color**)malloc(sizeof(SDL_Color*) * WX);
 	i = 0;
-	while (i < WY)
+	while (i < WX)
 	{
-		colours2[i] = (SDL_Color*)malloc(sizeof(SDL_Color) * WX);
+		colours2[i] = (SDL_Color*)malloc(sizeof(SDL_Color) * WY);
 		i++;
 	}
 	rtv->filter.sdl_col_with_filter = colours2;
@@ -102,10 +104,22 @@ void	ft_action(t_rtv *rtv)
 
 
 	threads(rtv);
-	copy_to_filter(rtv);
-	create_rander_texture(rtv); // поминять назад
+	//copy_to_filter(rtv);
+	//create_rander_texture(rtv); // поминять назад
 	ft_init_texture_rect(rtv);
-	SDL_RenderCopy(rtv->renderer, rtv->sdl_texture_render, NULL, &rtv->rect_rt);
+	//SDL_RenderCopy(rtv->renderer, rtv->sdl_texture_render, NULL, &rtv->rect_rt);
+	
+	for (int i = 0; i < WY; ++i)
+	{
+		for (int j = 0; j < WX; ++j)
+		{
+			SDL_SetRenderDrawColor(rtv->renderer, rtv->s_c[i][j].r, rtv->s_c[i][j].g, rtv->s_c[i][j].b, rtv->s_c[i][j].a);
+			SDL_RenderDrawPoint(rtv->renderer, j, i);
+                        
+		}
+	}
+
+
 	SDL_RenderPresent(rtv->renderer);
 }
 

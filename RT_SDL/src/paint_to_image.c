@@ -70,7 +70,7 @@ void	create_rander_texture(t_rtv *rtv)
 	rtv->surface_main = SDL_CreateRGBSurface(0, WX, WY, 32, 0, 0, 0, 0);
 	for (int y = 0; y < WY; ++y)
 	{
-		for (int x = 0; x <WX ; ++x)
+		for (int x = 0; x < WX ; ++x)
 		{
 			put_pixel32(rtv->surface_main, x, y, SDL_MapRGBA(rtv->surface_main->format, rtv->filter.sdl_col_with_filter[y][x].r, rtv->filter.sdl_col_with_filter[y][x].g, rtv->filter.sdl_col_with_filter[y][x].b, rtv->filter.sdl_col_with_filter[y][x].a));
 			//put_pixel32(rtv->surface_main, x, y, SDL_MapRGBA(rtv->surface_main->format, rtv->s_c[y][x].r, rtv->s_c[y][x].g, rtv->s_c[y][x].b, rtv->s_c[y][x].a));

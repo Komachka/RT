@@ -31,12 +31,14 @@ void ft_init_rects(t_menu *menu)
 	menu->boxes[6].rect.y = 400;
 	menu->boxes[6].rect.w = 350;
 	menu->boxes[6].rect.h = 270;
+
+
 }
 
 
 void ft_init_textures(t_menu *menu)
 {
-	menu->boxes[0].scene = IMG_LoadTexture(menu->renderer, "/image/fone1.png");
+	menu->boxes[0].scene = IMG_LoadTexture(menu->renderer, "/image/fone21.png");
 
 	menu->boxes[1].scene = IMG_LoadTexture(menu->renderer,
 										   "/image/scene_2.BMP");
@@ -83,6 +85,12 @@ void	ft_which_scene(t_rtv *rtv, int i)
 }
 
 
+int open_author_file(void)
+{
+	system("open -a TextEdit author"); // немного костыль но не сегфолтит
+	return 0;
+}
+
 
 
 void ft_menu(t_menu *menu, t_rtv *rtv)
@@ -122,6 +130,7 @@ void ft_menu(t_menu *menu, t_rtv *rtv)
 	ft_render_copy(menu);
 
 	SDL_RenderPresent(menu->renderer);
+	
 
 	while (!done)
 	{
@@ -153,6 +162,7 @@ void ft_menu(t_menu *menu, t_rtv *rtv)
 			{
 				x_mouse = menu->e.motion.x;
 				y_mouse = menu->e.motion.y;
+
 
 				int i = 1;
 
@@ -205,6 +215,10 @@ void ft_menu(t_menu *menu, t_rtv *rtv)
 						ft_which_scene(rtv, i);
 
 						basic_function(rtv);
+					}
+					if (x_mouse > 675 && x_mouse < 928 && y_mouse > 891 && y_mouse < 987)
+					{
+						open_author_file();
 					}
 					i++;
 				}

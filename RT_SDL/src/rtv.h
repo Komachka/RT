@@ -30,7 +30,7 @@
 
 # define COUNT 6
 
-# define WX 1500
+# define WX 1200
 # define WY 1200
 
 # define WIDTH 1400
