@@ -21,13 +21,12 @@ _Bool	validate_color(cJSON *obj, t_color *color)
 	arr[1] = "Green";
 	arr[2] = "Blue";
 	arr[3] = "Alpha";
-	arr[4] = 0;
 	VAR_INT(index, -1);
-	while (arr[++index])
+	while (++index < 4)
 		if (!(tmp[index] = cJSON_GetObjectItemCaseSensitive(obj, arr[index])) ||
 			tmp[index]->type != cJSON_Number || tmp[index]->valuedouble < 0 ||
 			tmp[index]->valuedouble > 1)
-			return (!0);
+			return (1);
 	color->r = tmp[0]->valuedouble;
 	color->g = tmp[1]->valuedouble;
 	color->b = tmp[2]->valuedouble;
@@ -43,12 +42,11 @@ _Bool	validate_vector(cJSON *obj, t_vect *vect)
 	arr[0] = "x";
 	arr[1] = "y";
 	arr[2] = "z";
-	arr[3] = 0;
 	VAR_INT(index, -1);
-	while (arr[++index])
+	while (++index < 3)
 		if (!(tmp[index] = cJSON_GetObjectItemCaseSensitive(obj, arr[index])) ||
 			tmp[index]->type != cJSON_Number)
-			return (!0);
+			return (1);
 	vect->x = tmp[0]->valuedouble;
 	vect->y = tmp[1]->valuedouble;
 	vect->z = tmp[2]->valuedouble;

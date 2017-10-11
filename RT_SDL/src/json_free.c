@@ -15,5 +15,5 @@
 void	json_free(cJSON **tmp, int size)
 {
 	while (--size != -1)
-		cJSON_Delete(tmp[size]);
+		free(tmp[size]);
 }

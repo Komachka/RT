@@ -14,7 +14,7 @@
 
 static inline char	*validate_rtv_next(cJSON *tmp[], t_rtv *rtv)
 {
-	cJSON	*obj;
+	cJSON	**obj;
 	int		index;
 
 	VAR_INT(arr_size, 0);
@@ -25,17 +25,18 @@ static inline char	*validate_rtv_next(cJSON *tmp[], t_rtv *rtv)
 		if (tmp[counter]->type != cJSON_Array ||
 			!(arr_size = cJSON_GetArraySize(tmp[counter])))
 			return (tmp[counter]->string);
+		obj = arr_size ? (cJSON**)malloc(sizeof(cJSON*) * arr_size) : 0;
 		while (++index < arr_size)
 		{
-			if (!(obj = cJSON_GetArrayItem(tmp[counter], index)) ||
-				obj->type != cJSON_Object)
+			if (!(obj[index] = cJSON_GetArrayItem(tmp[counter], index)) ||
+				obj[index]->type != cJSON_Object)
 				return (tmp[counter]->string);
-//			cJSON_Delete(obj);
 		}
+		if (obj)
+			free(obj);
 	}
 	if (validate_color(tmp[4], &rtv->global_light))
 		return ("Invalid \"Ambient Light Intensity\" value.");
-//	json_free(tmp, 8);
 	return (0);
 }
 
