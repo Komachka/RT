@@ -1,24 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   json_free.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kzahreba <kzahreba@student.unit.ua>        +#+  +:+       +#+        */
+/*   By: pkolomiy <pkolomiy@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/21 18:11:38 by kzahreba          #+#    #+#             */
-/*   Updated: 2017/10/02 16:32:21 by askochul         ###   ########.fr       */
+/*   Created: 2017/10/11 15:46:00 by pkolomiy          #+#    #+#             */
+/*   Updated: 2017/10/11 15:46:00 by pkolomiy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv.h"
 
-
-int		main(void)
+void	json_free(cJSON **tmp, int size)
 {
-	t_rtv		rtv;
-	t_menu		menu;
-
-	ft_menu(&menu, &rtv);
-
-	return (0);
+	while (--size != -1)
+		cJSON_Delete(tmp[size]);
 }

@@ -59,7 +59,7 @@ t_vect	fisheye_camera(t_vect *dir, double angle)
 	double	phi;
 	double	theta;
 	t_vect	res;
-	
+
 	phi = 0;
 	r = sqrt(dir->x * dir->x + dir->y * dir->y);
 	if (r == 0.00f)
@@ -68,7 +68,7 @@ t_vect	fisheye_camera(t_vect *dir, double angle)
 		phi = M_PI - asin(dir->y / r);
 	else if (dir->x >= 0.00f)
 		phi = asin(dir->y / r);
-	theta = r * degrees_to_radians(angle);
+	theta = r * TO_RAD(angle);
 	res.x = sin(theta) * cos(phi);
 	res.y = sin(theta) * sin(phi);
 	res.z = cos(theta);
@@ -86,14 +86,14 @@ void	*make_projection(void *k)
 	int		dx;
 	int		dy;
 	t_color average;
-	
+
 	dx = -1;
 	dy = -1;
 	p = (t_thred *)k;
 	tmp.z = p->rtv1->cam.lk_dir;
 	t_color c[p->rtv1->samples]; //прийдеться малочити та фрішити(((
 		i = 0;
-	
+
 	while (p->y_start < p->y_end)
 	{
 		x = -1;

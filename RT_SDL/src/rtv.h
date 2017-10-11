@@ -46,7 +46,7 @@
 # define MIN(a,b) (((a)<(b))?(a):(b))
 # define MAX(a,b) (((a)>(b))?(a):(b))
 # define VAR_INT(x, y) int x = y
-# define TO_RAD(x) ((M_PI * x) / 180.0)
+# define TO_RAD(x) ((M_PI * (x)) / 180.0)
 
 enum {X, Y, Z};
 enum {OFF, ON};
@@ -672,7 +672,6 @@ int				check_solving(double *t, double t0);
 int				quadratic_equation(t_equation *n);
 int 			quartic_equation(t_quartic_eq *n);
 double			select_value(double *array, int len);
-double			degrees_to_radians(double x);
 t_vect			adding_bias(t_vect *point, t_vect *dir);
 void			delstruct(t_rtv *rtv);
 void    del_arrey(void **arrey, int size);
@@ -683,7 +682,6 @@ void malloc_sdl_colour(t_rtv *rtv);
 int				ft_atoi_base(const char *str, int base);
 size_t			ft_strlen(char const *str);
 void			ft_putendl(char const *s);
-char			*ft_strdup(char const *s); // видалити, коли будуть дописані текстури
 char			*join(const char *str1, const char *str2);
 _Bool			cmp(const char *str1, const char *str2);
 
@@ -735,7 +733,7 @@ void			valid_id_list(int arr[]);
 void			valid_id_list_2(int arr[]);
 _Bool			valid_hex(char *str);
 _Bool			valid_color(cJSON *obj, t_color *color);
-void			json_free(cJSON *tmp[], int size);
+void			json_free(cJSON **tmp, int size);
 
 /*
 ** loading bar ????

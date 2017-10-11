@@ -31,11 +31,6 @@ t_vect	adding_bias(t_vect *point, t_vect *dir)
 	return (vector_add(point, &b));
 }
 
-double	degrees_to_radians(double x)
-{
-	return (M_PI * x / (double)180);
-}
-
 void	delstruct(t_rtv *rtv)
 {
 	free_textures(rtv);
@@ -44,7 +39,6 @@ void	delstruct(t_rtv *rtv)
 	SDL_FreeSurface(rtv->surface_main); // what is it??
 	SDL_DestroyRenderer(rtv->renderer);
 	SDL_DestroyWindow(rtv->window);
-	
 }
 
 void	delstruct1(t_menu *menu)
