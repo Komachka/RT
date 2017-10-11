@@ -617,6 +617,7 @@ void 			set_zero_color(t_color *cl);
 t_color			create_color(char *hex);
 t_color 		parse_color(int color);
 void 			correct_exposure(t_rtv *rtv, t_color *color);
+t_color		create_background_color(t_rtv *rtv, t_ray *r);
 
 /*
 ** lightening models
