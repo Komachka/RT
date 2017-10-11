@@ -72,7 +72,7 @@ void	create_rander_texture(t_rtv *rtv)
 	{
 		for (int x = 0; x < WX ; ++x)
 		{
-			put_pixel32(rtv->surface_main, x, y, SDL_MapRGBA(rtv->surface_main->format, rtv->filter.sdl_col_with_filter[y][x].r, rtv->filter.sdl_col_with_filter[y][x].g, rtv->filter.sdl_col_with_filter[y][x].b, rtv->filter.sdl_col_with_filter[y][x].a));
+			put_pixel32(rtv->surface_main, x, y, SDL_MapRGBA(rtv->surface_main->format, rtv->filter->sdl_col_with_filter[y][x].r, rtv->filter->sdl_col_with_filter[y][x].g, rtv->filter->sdl_col_with_filter[y][x].b, rtv->filter->sdl_col_with_filter[y][x].a));
 			//put_pixel32(rtv->surface_main, x, y, SDL_MapRGBA(rtv->surface_main->format, rtv->s_c[y][x].r, rtv->s_c[y][x].g, rtv->s_c[y][x].b, rtv->s_c[y][x].a));
 		}
 	}

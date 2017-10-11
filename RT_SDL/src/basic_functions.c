@@ -12,6 +12,23 @@
 
 #include "rtv.h"
 
+void    del_arrey(void **arrey, int size)
+{
+        int i;
+
+        i = 0;
+        while (i < size)
+        {
+                if (arrey[i] != NULL)
+                        free(arrey[i]);
+                i++;
+        }
+        if (arrey != NULL)
+                free(arrey);
+}
+
+
+
 void	ft_init_texture_rect(t_rtv *rtv)
 {
 	rtv->rect_rt.x = 0;
@@ -25,19 +42,19 @@ void	ft_redraw(t_rtv *rtv)
 	SDL_RenderClear(rtv->renderer);
 	threads(rtv);
 	copy_to_filter(rtv);
-	if (rtv->filter.black_and_white > 0)
+	if (rtv->filter->black_and_white > 0)
 		create_b_n_w_filter(rtv);
-	if (rtv->filter.blur > 0)
+	if (rtv->filter->blur > 0)
 		create_blur_filter(rtv, 0.0, 0.0, 0.0);
-	if (rtv->filter.glass > 0)
+	if (rtv->filter->glass > 0)
 		create_glass_filter(rtv);
-	if (rtv->filter.emboss > 0)
+	if (rtv->filter->emboss > 0)
 		create_emboss_filter(rtv, 0.0, 0.0, 0.0);
-	if (rtv->filter.sepia > 0)
+	if (rtv->filter->sepia > 0)
 		create_sepia_filter(rtv, 0, 0, 0);
-	if (rtv->filter.negative > 0)
+	if (rtv->filter->negative > 0)
 		create_negative_filter(rtv);
-	if (rtv->filter.romanets > 0)
+	if (rtv->filter->romanets > 0)
 		create_sromanets(rtv);
 	create_rander_texture(rtv);
 	SDL_RenderClear(rtv->renderer);
@@ -89,38 +106,41 @@ void	ft_action(t_rtv *rtv)
 
 	
 
-	SDL_Color **colours2;
-	colours2 = (SDL_Color**)malloc(sizeof(SDL_Color*) * WX);
-	i = 0;
-	while (i < WX)
-	{
-		colours2[i] = (SDL_Color*)malloc(sizeof(SDL_Color) * WY);
-		i++;
-	}
-	rtv->filter.sdl_col_with_filter = colours2;
+	//need to malloc filters
+
 	
+
 
 
 
 
 	threads(rtv);
-	//copy_to_filter(rtv);
-	//create_rander_texture(rtv); // поминять назад
+	create_filter(rtv);
+	copy_to_filter(rtv);
+	create_rander_texture(rtv); // поминять назад
 	ft_init_texture_rect(rtv);
-	//SDL_RenderCopy(rtv->renderer, rtv->sdl_texture_render, NULL, &rtv->rect_rt);
+	SDL_RenderCopy(rtv->renderer, rtv->sdl_texture_render, NULL, &rtv->rect_rt);
 	
-	for (int i = 0; i < WY; ++i)
-	{
-		for (int j = 0; j < WX; ++j)
-		{
-			SDL_SetRenderDrawColor(rtv->renderer, rtv->s_c[i][j].r, rtv->s_c[i][j].g, rtv->s_c[i][j].b, rtv->s_c[i][j].a);
-			SDL_RenderDrawPoint(rtv->renderer, j, i);
+	// for (int i = 0; i < WY; ++i)
+	// {
+	// 	for (int j = 0; j < WX; ++j)
+	// 	{
+	// 		//SDL_SetRenderDrawColor(rtv->renderer, rtv->s_c[i][j].r, rtv->s_c[i][j].g, rtv->s_c[i][j].b, rtv->s_c[i][j].a);
+	// 		SDL_SetRenderDrawColor(rtv->renderer, rtv->filter->sdl_col_with_filter[i][j].r, rtv->filter->sdl_col_with_filter[i][j].g, rtv->filter->sdl_col_with_filter[i][j].b, rtv->filter->sdl_col_with_filter[i][j].a);
+	// 		SDL_RenderDrawPoint(rtv->renderer, j, i);
                         
-		}
-	}
+	// 	}
+	// }
 
 
 	SDL_RenderPresent(rtv->renderer);
+}
+
+void clean(t_rtv *rtv)
+{
+	del_arrey((void**)rtv->s_c, WX);
+	del_arrey((void**)rtv->filter->sdl_col_with_filter, WX);
+
 }
 
 void	basic_function(t_rtv *rtv)
@@ -140,6 +160,7 @@ void	basic_function(t_rtv *rtv)
                                        rtv->window_id == rtv->e.window.windowID)
                        {
                                 done = 1;
+                               	clean(rtv);
                                //SDL_Log(" keysym %u", rtv->e.key.keysym.sym);
                        }
             else if (rtv->e.type == SDL_KEYUP)
@@ -148,3 +169,6 @@ void	basic_function(t_rtv *rtv)
 	}
 	delstruct(rtv);
 }
+
+
+

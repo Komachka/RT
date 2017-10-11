@@ -480,7 +480,7 @@ typedef struct	s_rtv
 	double			delta_aliasing;
 	double			air_coef; // треба буде видалити, якщо не зміню заломлення
 	double			expos;
-	t_filter		filter;
+	t_filter		*filter;
 	t_color			background_color;
 	t_camera		cam;
 	t_figure		*objects;
@@ -648,6 +648,7 @@ t_color 		creating_skybox(t_rtv *rtv, t_ray *r);
 /*
 ** filters
 */
+void 			create_filter(t_rtv *rtv);
 void 			copy_to_filter(t_rtv *rtv);
 void 			create_b_n_w_filter(t_rtv *rtv);
 void 			create_blur_filter(t_rtv *rtv, double red, double green, double blue);
