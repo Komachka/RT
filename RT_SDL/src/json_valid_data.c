@@ -12,7 +12,7 @@
 
 #include "rtv.h"
 
-void	valid_id_list(int arr[])
+void				valid_id_list(int arr[])
 {
 	arr[0] = SPHERE;
 	arr[1] = PLANE;
@@ -56,7 +56,6 @@ static inline void	even_more_valid_data(char *arr[], char *type)
 		arr[0] = "Id";
 		arr[1] = "Object";
 		arr[2] = "Material";
-		arr[3] = 0;
 	}
 }
 
@@ -82,13 +81,12 @@ static inline void	more_valid_data(char *arr[], char *type)
 		arr[5] = "Reflective";
 		arr[6] = "Transparency";
 		arr[7] = "Refraction";
-		arr[8] = 0;
 	}
 	else
 		even_more_valid_data(arr, type);
 }
 
-void	valid_data(char *arr[], char *type)
+void				valid_data(char *arr[], char *type)
 {
 	if (cmp(type, "Rtv"))
 	{

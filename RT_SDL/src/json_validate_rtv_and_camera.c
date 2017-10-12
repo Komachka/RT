@@ -40,7 +40,7 @@ static inline char	*validate_rtv_next(cJSON *tmp[], t_rtv *rtv)
 	return (0);
 }
 
-char	*validate_rtv(cJSON *obj, t_rtv *rtv)
+char				*validate_rtv(cJSON *obj, t_rtv *rtv)
 {
 	cJSON		*tmp[8];
 	char		*arr[8];
@@ -64,7 +64,7 @@ char	*validate_rtv(cJSON *obj, t_rtv *rtv)
 	return (validate_rtv_next(tmp, rtv));
 }
 
-char	*validate_camera_next(cJSON *pos, cJSON *rotate, t_camera *cam)
+static inline char	*validate_camera_2(cJSON *pos, cJSON *rotate, t_camera *cam)
 {
 	cJSON	*tmp[3];
 
@@ -84,7 +84,7 @@ char	*validate_camera_next(cJSON *pos, cJSON *rotate, t_camera *cam)
 	return (0);
 }
 
-char	*validate_camera(cJSON *obj, t_camera *cam)
+char				*validate_camera(cJSON *obj, t_camera *cam)
 {
 	cJSON		*tmp[5];
 	char		*arr[4];
@@ -110,5 +110,5 @@ char	*validate_camera(cJSON *obj, t_camera *cam)
 	cam->scale = tan(TO_RAD(tmp[3]->valuedouble) / 2);
 	if (tmp[2]->type != cJSON_Array || cJSON_GetArraySize(tmp[2]) != 3)
 		return ("Invalid \"Camera Rotate Angles\" value.");
-	return (validate_camera_next(tmp[1], tmp[2], cam));
+	return (validate_camera_2(tmp[1], tmp[2], cam));
 }

@@ -12,7 +12,7 @@
 
 #include "rtv.h"
 
-char	*validate_light_next_2(cJSON *tmp[], t_light *light)
+static inline char	*validate_light_3(cJSON *tmp[], t_light *light)
 {
 	if (validate_vector(tmp[1], &light->pos) ||
 		validate_vector(tmp[2], &light->direction))
@@ -33,7 +33,7 @@ char	*validate_light_next_2(cJSON *tmp[], t_light *light)
 	return (0);
 }
 
-char	*validate_light_next(cJSON *obj, cJSON *tmp[], t_light *light)
+static inline char	*validate_light_2(cJSON *obj, cJSON *tmp[], t_light *light)
 {
 	if (cmp("POINT_LIGHT", tmp[0]->valuestring))
 		light->type = POINT_LIGHT;
@@ -54,10 +54,10 @@ char	*validate_light_next(cJSON *obj, cJSON *tmp[], t_light *light)
 		cos(TO_RAD(tmp[7]->valuedouble) / 2.0) : 0;
 	light->outer_cone = (light->type == SPOT_LIGHT) ?
 		cos(TO_RAD(((tmp[7]->valuedouble / 2.0) + tmp[8]->valuedouble))) : 0;
-	return (validate_light_next_2(tmp, light));
+	return (validate_light_3(tmp, light));
 }
 
-char	*validate_light(cJSON *obj, t_rtv *rtv)
+char				*validate_light(cJSON *obj, t_rtv *rtv)
 {
 	cJSON		*tmp[9];
 	char		*arr[7];
@@ -79,7 +79,7 @@ char	*validate_light(cJSON *obj, t_rtv *rtv)
 			!cmp("SPOT_LIGHT", tmp[0]->valuestring) &&
 			!cmp("DIRECTIONAL_LIGHT", tmp[0]->valuestring))
 			return ("Invalid \"Type\" value.");
-		if ((str = validate_light_next(cJSON_GetArrayItem(obj, counter),
+		if ((str = validate_light_2(cJSON_GetArrayItem(obj, counter),
 										tmp, &rtv->l[counter])))
 			return (str);
 	}
