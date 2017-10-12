@@ -36,7 +36,6 @@ SRC = main.c \
 	  ft_key_hooks_2.c \
 	  menu.c \
 	  solving_equations.c \
-	  json_free.c \
 	  json_get_scene.c \
 	  json_valid_data.c \
 	  json_valid_data_2.c \
@@ -67,7 +66,7 @@ OBJJSON = $(JSON:.c=.o)
 all : $(NAME)
 
 $(NAME) : $(OBJ) $(OBJJSON)
-	@$(CC) $(CFLAGS) $(SDL_FLAGS) $(OBJJSON) $(OBJ)  -o $(NAME)
+	@$(CC) $(CFLAGS) $(SDL_FLAGS) $(OBJJSON) $(OBJ) -o $(NAME)
 
 %.o: %.c
 	@$(CC) $(CFLAGS) -c -o $@ $<
