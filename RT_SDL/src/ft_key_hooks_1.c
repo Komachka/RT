@@ -34,7 +34,7 @@ static inline void	key_funct_4(t_rtv *rtv)
 	}
 	else if (rtv->e.key.keysym.sym == SDLK_p)
 	{
-		set_zero_vect(&rtv->cam.pos);
+		rtv->cam.pos = rtv->def_cam_pos;
 		ft_redraw(rtv);
 	}
 	key_funct_5(rtv);
@@ -130,11 +130,11 @@ int					my_key_funct(t_rtv *rtv)
 		rtv->cam.rotate[X] -= 0.1;
 		ft_redraw(rtv);
 	}
-	else if (rtv->e.key.keysym.sym == SDLK_r)
+	else if (rtv->e.key.keysym.sym == SDLK_q)
 	{
-		rtv->cam.rotate[X] = 0;
-		rtv->cam.rotate[Y] = 0;
-		rtv->cam.rotate[Z] = 0;
+		rtv->cam.rotate[X] = rtv->def_cam_dir[X];
+		rtv->cam.rotate[Y] = rtv->def_cam_dir[Y];
+		rtv->cam.rotate[Z] = rtv->def_cam_dir[Z];
 		ft_redraw(rtv);
 	}
 	key_funct_1(rtv);

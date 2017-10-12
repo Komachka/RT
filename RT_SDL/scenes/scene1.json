@@ -12,7 +12,7 @@
     "Camera"                  : {
         "Type"                 : "STANDART",
         "Position"             : {"x" : 0, "y" : 0, "z" : -50},
-        "Camera Rotate Angles" : [0, 5, 0],
+        "Camera Rotate Angles" : [0, 0, 0],
         "FOV"                  : 45
     },
     "Skybox"                  : {

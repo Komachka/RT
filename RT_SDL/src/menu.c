@@ -108,6 +108,12 @@ int		open_author_file(void)
 	return (0);
 }
 
+int open_instruction_file(void)
+{
+	system("open -a Preview instruction");
+	return (0);
+}
+
 void	ft_create_menu_window(t_menu *menu)
 {
 	if ((menu->window = SDL_CreateWindow("RT", SDL_WINDOWPOS_CENTERED,
@@ -212,6 +218,9 @@ void	ft_menu(t_menu *menu, t_rtv *rtv)
 					if (x_mouse > 675 && x_mouse < 928 && y_mouse > 891 &&
 							y_mouse < 987)
 						open_author_file();
+					if (x_mouse > 275 && x_mouse < 428 && y_mouse > 891 &&
+							y_mouse < 987)
+						open_instruction_file();
 					i++;
 				}
 			}

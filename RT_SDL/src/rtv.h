@@ -483,6 +483,9 @@ typedef struct			s_rtv
 	t_color				global_light;
 	int					sk;
 	t_skybox			skybox;
+	t_vect def_cam_pos;
+	double def_cam_dir[3];
+	int delphin;
 }						t_rtv;
 
 /*

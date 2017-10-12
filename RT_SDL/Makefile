@@ -66,15 +66,18 @@ OBJJSON = $(JSON:.c=.o)
 all : $(NAME)
 
 $(NAME) : $(OBJ) $(OBJJSON)
+	@echo "Compiling.."
 	@$(CC) $(CFLAGS) $(SDL_FLAGS) $(OBJJSON) $(OBJ) -o $(NAME)
 
 %.o: %.c
 	@$(CC) $(CFLAGS) -c -o $@ $<
 
 clean:
+	@echo "Cleaning.."
 	@rm -rf $(OBJ) $(OBJJSON)
 
 fclean: clean
+	@echo "Cleaning.."
 	@rm -rf $(NAME)
 
 re: fclean all

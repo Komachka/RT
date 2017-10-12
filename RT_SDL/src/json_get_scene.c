@@ -50,6 +50,11 @@ static inline void	fill_else(t_rtv *rtv)
 	rtv->filter.sepia = 0;
 	rtv->filter.negative = 0;
 	rtv->filter.romanets = 0;
+	rtv->def_cam_pos = rtv->cam.pos;
+	rtv->def_cam_dir[0] = rtv->cam.rotate[0];
+	rtv->def_cam_dir[1] = rtv->cam.rotate[1];
+	rtv->def_cam_dir[2] = rtv->cam.rotate[2];
+	rtv->delphin = ON;
 }
 
 void				get_scene(const char *name, t_rtv *rtv)

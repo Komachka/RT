@@ -38,6 +38,11 @@ static inline void	key_funct_8(t_rtv *rtv)
 	{
 		ft_take_picture(rtv);
 	}
+	else if (rtv->e.key.keysym.sym == SDLK_l)
+	{
+		rtv->delphin = rtv->delphin == 0 ? 1 : 0;
+		ft_redraw(rtv);
+	}
 }
 
 static inline void	key_funct_7(t_rtv *rtv)
