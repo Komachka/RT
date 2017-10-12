@@ -58,7 +58,7 @@ void				delstruct(t_rtv *rtv)
 	{
 		free(rtv->objects[rtv->figure_num].object);
 		if (rtv->objects[rtv->figure_num].texturing == ON)
-		free(rtv->objects[rtv->figure_num].texture.tx_struct);
+			free(rtv->objects[rtv->figure_num].texture.tx_struct);
 	}
 	free(rtv->objects);
 	free(rtv->l);
