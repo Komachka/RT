@@ -12,7 +12,7 @@
 
 #include "rtv.h"
 
-double	min(double i, double j)
+double				min(double i, double j)
 {
 	double a;
 
@@ -31,7 +31,22 @@ t_vect	adding_bias(t_vect *point, t_vect *dir)
 	return (vector_add(point, &b));
 }
 
-void	delstruct(t_rtv *rtv)
+static inline void	del_arrey(void **arrey, int size)
+{
+	int i;
+
+	i = 0;
+	while (i < size)
+	{
+		if (arrey[i] != NULL)
+			free(arrey[i]);
+		i++;
+	}
+	if (arrey != NULL)
+		free(arrey);
+}
+
+void				delstruct(t_rtv *rtv)
 {
 	free_textures(rtv);
 	del_arrey((void**)rtv->s_c, WX);
@@ -39,9 +54,17 @@ void	delstruct(t_rtv *rtv)
 	SDL_FreeSurface(rtv->surface_main);
 	SDL_DestroyRenderer(rtv->renderer);
 	SDL_DestroyWindow(rtv->window);
+	while (--rtv->figure_num != -1)
+	{
+		free(rtv->objects[rtv->figure_num].object);
+		if (rtv->objects[rtv->figure_num].texturing == ON)
+		free(rtv->objects[rtv->figure_num].texture.tx_struct);
+	}
+	free(rtv->objects);
+	free(rtv->l);
 }
 
-void	delstruct1(t_menu *menu)
+void				delstruct1(t_menu *menu)
 {
 	int i;
 
@@ -61,18 +84,3 @@ void	delstruct1(t_menu *menu)
 	exit(0);
 }
 
-
-void    del_arrey(void **arrey, int size)
-{
-        int i;
-
-        i = 0;
-        while (i < size)
-        {
-                if (arrey[i] != NULL)
-                        free(arrey[i]);
-                i++;
-        }
-        if (arrey != NULL)
-                free(arrey);
-}

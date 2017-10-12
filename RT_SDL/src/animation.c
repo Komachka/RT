@@ -12,7 +12,7 @@
 
 #include "rtv.h"
 
-int		animation(SDL_Renderer *renderer, t_rtv *rtv)
+int					animation(SDL_Renderer *renderer, t_rtv *rtv)
 {
 	SDL_Rect	rect;
 	static int	n_frame2 = 0;
@@ -37,7 +37,7 @@ int		animation(SDL_Renderer *renderer, t_rtv *rtv)
 	return (0);
 }
 
-void	load_texture3(t_rtv *rtv)
+static inline void	load_texture3(t_rtv *rtv)
 {
 	rtv->sdl_texture_loading[46] = IMG_LoadTexture(rtv->renderer, "gif/46.png");
 	rtv->sdl_texture_loading[47] = IMG_LoadTexture(rtv->renderer, "gif/47.png");
@@ -49,7 +49,7 @@ void	load_texture3(t_rtv *rtv)
 	rtv->sdl_texture_loading[53] = IMG_LoadTexture(rtv->renderer, "gif/53.png");
 }
 
-void	load_texture2(t_rtv *rtv)
+static inline void	load_texture2(t_rtv *rtv)
 {
 	rtv->sdl_texture_loading[22] = IMG_LoadTexture(rtv->renderer, "gif/22.png");
 	rtv->sdl_texture_loading[23] = IMG_LoadTexture(rtv->renderer, "gif/23.png");
@@ -77,7 +77,7 @@ void	load_texture2(t_rtv *rtv)
 	rtv->sdl_texture_loading[45] = IMG_LoadTexture(rtv->renderer, "gif/45.png");
 }
 
-void	load_texture1(t_rtv *rtv)
+void				load_texture(t_rtv *rtv)
 {
 	load_texture2(rtv);
 	load_texture3(rtv);

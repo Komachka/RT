@@ -12,7 +12,7 @@
 
 #include "rtv.h"
 
-static int	ft_count(int nb)
+static inline int	ft_count(int nb)
 {
 	int		c;
 
@@ -27,7 +27,7 @@ static int	ft_count(int nb)
 	return (c);
 }
 
-static char	*ft_action(char *res, int nb)
+static inline char	*ft_action(char *res, int nb)
 {
 	int		i;
 	long	nbr;
@@ -49,7 +49,7 @@ static char	*ft_action(char *res, int nb)
 	return (res);
 }
 
-char		*ft_itoa(int n)
+char				*ft_itoa(int n)
 {
 	char	*res;
 

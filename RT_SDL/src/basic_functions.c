@@ -12,13 +12,7 @@
 
 #include "rtv.h"
 
-
-
-
-
-
-
-void malloc_sdl_colour(t_rtv *rtv)
+static inline void	malloc_sdl_colour(t_rtv *rtv)
 {
 	SDL_Color **colours;
 	colours = (SDL_Color**)malloc(sizeof(SDL_Color*) * WX);
@@ -29,9 +23,6 @@ void malloc_sdl_colour(t_rtv *rtv)
 		i++;
 	}
 	rtv->s_c = colours;
-
-	
-
 	SDL_Color **colours2;
 	colours2 = (SDL_Color**)malloc(sizeof(SDL_Color*) * WX);
 	i = 0;
@@ -43,7 +34,7 @@ void malloc_sdl_colour(t_rtv *rtv)
 	rtv->filter.sdl_col_with_filter = colours2;
 }
 
-void	ft_init_texture_rect(t_rtv *rtv)
+static inline void	ft_init_texture_rect(t_rtv *rtv)
 {
 	rtv->rect_rt.x = 0;
 	rtv->rect_rt.y = 0;
@@ -51,7 +42,7 @@ void	ft_init_texture_rect(t_rtv *rtv)
 	rtv->rect_rt.h = WY;
 }
 
-void	ft_redraw(t_rtv *rtv)
+void				ft_redraw(t_rtv *rtv)
 {
 	SDL_RenderClear(rtv->renderer);
 	threads(rtv);
@@ -76,7 +67,7 @@ void	ft_redraw(t_rtv *rtv)
 	SDL_RenderPresent(rtv->renderer);
 }
 
-void	ft_draw(t_rtv *rtv)
+void				ft_draw(t_rtv *rtv) // Function ft_draw is never used
 {
 	int j;
 	int x;
@@ -96,20 +87,20 @@ void	ft_draw(t_rtv *rtv)
 	}
 }
 
-void	ft_action(t_rtv *rtv)
+static inline void	ft_action(t_rtv *rtv)
 {
 	rtv->window = SDL_CreateWindow("RT", SDL_WINDOWPOS_CENTERED,\
 			SDL_WINDOWPOS_CENTERED, WX, WY, SDL_WINDOW_OPENGL);
 	rtv->window_id = SDL_GetWindowID(rtv->window);
 	rtv->renderer = SDL_CreateRenderer(rtv->window,\
 			-1, SDL_RENDERER_ACCELERATED);
-	load_texture1(rtv);
+	load_texture(rtv);
 	uploading_textures(rtv); // загрузка текстур з картинки в массив
 	SDL_RenderClear(rtv->renderer);
 	malloc_sdl_colour(rtv);
 	threads(rtv);
 	copy_to_filter(rtv);
-	create_rander_texture(rtv); // поминять назад
+	create_rander_texture(rtv); // поменять назад
 	ft_init_texture_rect(rtv);
 	SDL_RenderCopy(rtv->renderer, rtv->sdl_texture_render, NULL, &rtv->rect_rt);
 	SDL_RenderPresent(rtv->renderer);
@@ -128,14 +119,15 @@ void	basic_function(t_rtv *rtv)
 	{
 		while (SDL_PollEvent(&rtv->e))
 		{
-			if (((rtv->e.type == SDL_KEYDOWN && rtv->e.key.keysym.sym == SDLK_ESCAPE) || rtv->e.window.event == SDL_WINDOWEVENT_CLOSE) &&
-                                       rtv->window_id == rtv->e.window.windowID)
-                       {
-                                done = 1;
-                                
-                               //SDL_Log(" keysym %u", rtv->e.key.keysym.sym);
-                       }
-            else if (rtv->e.type == SDL_KEYUP)
+			if (((rtv->e.type == SDL_KEYDOWN &&
+					rtv->e.key.keysym.sym == SDLK_ESCAPE) ||
+					rtv->e.window.event == SDL_WINDOWEVENT_CLOSE) &&
+					rtv->window_id == rtv->e.window.windowID)
+			{
+				done = 1;
+				//SDL_Log(" keysym %u", rtv->e.key.keysym.sym);
+			}
+			else if (rtv->e.type == SDL_KEYUP)
 				my_key_funct(rtv);
 		}
 	}

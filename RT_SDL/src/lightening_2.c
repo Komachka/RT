@@ -12,7 +12,7 @@
 
 #include "rtv.h"
 
-int			shadow(t_rtv *rtv, t_ray *r, double light)
+int					shadow(t_rtv *rtv, t_ray *r, double light)
 {
 	int		i;
 	int		k;
@@ -34,7 +34,7 @@ int			shadow(t_rtv *rtv, t_ray *r, double light)
 	return (k);
 }
 
-void		directional_light_ray(t_light *l, t_additional *st)
+static inline void	directional_light_ray(t_light *l, t_additional *st)
 {
 	st->light_ray.dir = l->direction;
 	st->rev_light_ray.dir = change_vector_direction(&l->direction);
@@ -44,7 +44,7 @@ void		directional_light_ray(t_light *l, t_additional *st)
 	st->spot_coef = 1.0;
 }
 
-void		point_light_ray(t_light *l, t_additional *st)
+static inline void	point_light_ray(t_light *l, t_additional *st)
 {
 	st->light_ray.dir = vector_substract(&st->point, &l->pos);
 	st->len = vector_length(&st->light_ray.dir);
@@ -55,7 +55,7 @@ void		point_light_ray(t_light *l, t_additional *st)
 	st->spot_coef = 1.0;
 }
 
-static void	spot_light_ray(t_light *l, t_additional *st)
+static inline void	spot_light_ray(t_light *l, t_additional *st)
 {
 	double	theta;
 
@@ -73,7 +73,7 @@ static void	spot_light_ray(t_light *l, t_additional *st)
 		st->spot_coef = 1;
 }
 
-void		create_light_ray(t_light *l, t_additional *st)
+void				create_light_ray(t_light *l, t_additional *st)
 {
 	if (l->type == DIRECTIONAL_LIGHT)
 		directional_light_ray(l, st);

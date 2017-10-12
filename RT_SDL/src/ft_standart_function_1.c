@@ -12,7 +12,7 @@
 
 #include "rtv.h"
 
-static int	check(char c, int base)
+static inline int	check(char c, int base)
 {
 	if (c >= '0' && c <= '9')
 	{
@@ -32,7 +32,7 @@ static int	check(char c, int base)
 	return (0);
 }
 
-int			ft_atoi_base(const char *str, int base)
+int					ft_atoi_base(const char *str, int base)
 {
 	int				sign;
 	unsigned int	value;
@@ -61,7 +61,7 @@ int			ft_atoi_base(const char *str, int base)
 	return ((int)(value * sign));
 }
 
-_Bool		cmp(const char *str1, const char *str2)
+_Bool				cmp(const char *str1, const char *str2)
 {
 	VAR_INT(index, 0);
 	if (str1 && str2 && ft_strlen(str1) == ft_strlen(str2))
@@ -72,12 +72,12 @@ _Bool		cmp(const char *str1, const char *str2)
 				return (0);
 			index++;
 		}
-		return (!0);
+		return (1);
 	}
 	return (0);
 }
 
-char		*join(char const *str1, char const *str2)
+char				*join(char const *str1, char const *str2)
 {
 	char	*str;
 

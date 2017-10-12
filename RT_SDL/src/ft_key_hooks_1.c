@@ -12,7 +12,7 @@
 
 #include "rtv.h"
 
-void	key_funct_4(t_rtv *rtv)
+static inline void	key_funct_4(t_rtv *rtv)
 {
 	if (rtv->e.key.keysym.sym == SDLK_e)
 	{
@@ -37,9 +37,10 @@ void	key_funct_4(t_rtv *rtv)
 		set_zero_vect(&rtv->cam.pos);
 		ft_redraw(rtv);
 	}
+	key_funct_5(rtv);
 }
 
-void	key_funct_3(t_rtv *rtv)
+static inline void	key_funct_3(t_rtv *rtv)
 {
 	if (rtv->e.key.keysym.sym == SDLK_KP_PLUS && rtv->light_model == LAMBERT)
 	{
@@ -63,9 +64,10 @@ void	key_funct_3(t_rtv *rtv)
 		rtv->light_model = CARTOON;
 		ft_redraw(rtv);
 	}
+	key_funct_4(rtv);
 }
 
-void	key_funct_2(t_rtv *rtv)
+static inline void	key_funct_2(t_rtv *rtv)
 {
 	if (rtv->e.key.keysym.sym == SDLK_SPACE)
 	{
@@ -88,9 +90,10 @@ void	key_funct_2(t_rtv *rtv)
 		rtv->cam.pos.z -= 5;
 		ft_redraw(rtv);
 	}
+	key_funct_3(rtv);
 }
 
-void	key_funct_1(t_rtv *rtv)
+static inline void	key_funct_1(t_rtv *rtv)
 {
 	if (rtv->e.key.keysym.sym == SDLK_RIGHT)
 	{
@@ -112,9 +115,10 @@ void	key_funct_1(t_rtv *rtv)
 		rtv->cam.rotate[Z] -= 0.1;
 		ft_redraw(rtv);
 	}
+	key_funct_2(rtv);
 }
 
-int		my_key_funct(t_rtv *rtv)
+int					my_key_funct(t_rtv *rtv)
 {
 	if (rtv->e.key.keysym.sym == SDLK_DOWN)
 	{
@@ -134,10 +138,5 @@ int		my_key_funct(t_rtv *rtv)
 		ft_redraw(rtv);
 	}
 	key_funct_1(rtv);
-	key_funct_2(rtv);
-	key_funct_3(rtv);
-	key_funct_4(rtv);
-	key_funct_5(rtv);
-	key_funct_6(rtv);
 	return (0);
 }

@@ -12,7 +12,7 @@
 
 #include "rtv.h"
 
-t_vect	rotate_x(t_vect *dir, double rx)
+static inline t_vect	rotate_x(t_vect *dir, double rx)
 {
 	t_vect	res;
 
@@ -22,7 +22,7 @@ t_vect	rotate_x(t_vect *dir, double rx)
 	return (res);
 }
 
-t_vect	rotate_y(t_vect *dir, double ry)
+static inline t_vect	rotate_y(t_vect *dir, double ry)
 {
 	t_vect	res;
 
@@ -32,7 +32,7 @@ t_vect	rotate_y(t_vect *dir, double ry)
 	return (res);
 }
 
-t_vect	rotate_z(t_vect *dir, double rz)
+static inline t_vect	rotate_z(t_vect *dir, double rz)
 {
 	t_vect	res;
 
@@ -42,7 +42,7 @@ t_vect	rotate_z(t_vect *dir, double rz)
 	return (res);
 }
 
-t_vect	rotate_cam(t_vect dir, double *angles)
+static inline t_vect	rotate_cam(t_vect dir, double *angles)
 {
 	t_vect	res;
 	t_vect	tmp;
@@ -53,7 +53,7 @@ t_vect	rotate_cam(t_vect dir, double *angles)
 	return (res);
 }
 
-t_vect	fisheye_camera(t_vect *dir, double angle)
+static inline t_vect	fisheye_camera(t_vect *dir, double angle)
 {
 	double	r;
 	double	phi;
@@ -123,8 +123,8 @@ void	*make_projection(void *k)
 			}
 		}
 		if (p->index == 0) {
-           animation(p->rtv1->renderer, p->rtv1);
-       }
+			animation(p->rtv1->renderer, p->rtv1);
+		}
 		p->y_start++;
 	}
 	return (0);

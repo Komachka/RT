@@ -12,7 +12,7 @@
 
 #include "rtv.h"
 
-char	*ft_strcat(char *s1, const char *s2)
+static inline char	*ft_strcat(char *s1, const char *s2)
 {
 	char		*dest;
 	const char	*str2;
@@ -35,7 +35,7 @@ char	*ft_strcat(char *s1, const char *s2)
 	return (s1);
 }
 
-void	ft_take_picture(t_rtv *rtv)
+void				ft_take_picture(t_rtv *rtv)
 {
 	time_t	times;
 	char	str[1000];
@@ -47,7 +47,7 @@ void	ft_take_picture(t_rtv *rtv)
 	SDL_SaveBMP(rtv->surface_main, ft_strcat(str, ".BMP"));
 }
 
-void	paint_image(t_rtv *fr, int x, int y, t_color cl)
+void				paint_image(t_rtv *fr, int x, int y, t_color cl)
 {
 	fr->s_c[y][x].r = (unsigned char)(cl.r * 255);
 	fr->s_c[y][x].g = (unsigned char)(cl.g * 255);
@@ -57,7 +57,7 @@ void	paint_image(t_rtv *fr, int x, int y, t_color cl)
 
 //change the name
 
-void	put_pixel32(SDL_Surface *surface, int x, int y, Uint32 pixel)
+static inline void	put_pixel32(SDL_Surface *surface, int x, int y, Uint32 pixel)
 {
 	Uint32 *pixels;
 
@@ -65,14 +65,19 @@ void	put_pixel32(SDL_Surface *surface, int x, int y, Uint32 pixel)
 	pixels[(y * surface->w) + x] = pixel;
 }
 
-void	create_rander_texture(t_rtv *rtv)
+void				create_rander_texture(t_rtv *rtv)
 {
 	rtv->surface_main = SDL_CreateRGBSurface(0, WX, WY, 32, 0, 0, 0, 0);
 	for (int y = 0; y < WY; ++y)
 	{
 		for (int x = 0; x < WX ; ++x)
 		{
-			put_pixel32(rtv->surface_main, x, y, SDL_MapRGBA(rtv->surface_main->format, rtv->filter.sdl_col_with_filter[y][x].r, rtv->filter.sdl_col_with_filter[y][x].g, rtv->filter.sdl_col_with_filter[y][x].b, rtv->filter.sdl_col_with_filter[y][x].a));
+			put_pixel32(rtv->surface_main, x, y,
+						SDL_MapRGBA(rtv->surface_main->format,
+						rtv->filter.sdl_col_with_filter[y][x].r,
+						rtv->filter.sdl_col_with_filter[y][x].g,
+						rtv->filter.sdl_col_with_filter[y][x].b,
+						rtv->filter.sdl_col_with_filter[y][x].a));
 			//put_pixel32(rtv->surface_main, x, y, SDL_MapRGBA(rtv->surface_main->format, rtv->s_c[y][x].r, rtv->s_c[y][x].g, rtv->s_c[y][x].b, rtv->s_c[y][x].a));
 		}
 	}
