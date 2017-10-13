@@ -16,7 +16,7 @@ static double  check_cylinder_limits(double t, t_ray *r, t_limited_cylinder *c)
 {
 	t_vect tmp[2];
 	t_vect  point;
-	
+
 	if (t > PRECISION)
 	{	point = intersection_point(t, r);
 		tmp[0] = vector_substract(&point, &c->p1);
@@ -36,7 +36,7 @@ int		intersection_limited_cylinder(t_ray *r, void *cyl, double *t, double *z)
 	t_equation	n;
 	int res;
 	double cap[4];
-	t_disс ttm[2];
+	t_disc ttm[2];
 
 	z = 0;
 	cap[0] = -1;
@@ -77,7 +77,7 @@ static double  check_cone_limits(double t, t_ray *r, t_limited_cone *c)
 {
 	t_vect tmp[2];
 	t_vect  point;
-	
+
 	if (t > PRECISION)
 	{	point = intersection_point(t, r);
 		tmp[0] = vector_substract(&point, &c->p1);
@@ -105,7 +105,7 @@ int 			intersection_limited_cone(t_ray *r, void *cone, double *t, double *z)
 	double 		t0;
 	t_equation	n;
 	double cap[4];
-	t_disс ttm[2];
+	t_disc ttm[2];
 
 	z = 0;
 	cap[0] = -1;

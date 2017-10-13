@@ -51,10 +51,6 @@
 # define VAR_INT(x, y) int x = y
 # define TO_RAD(x) ((M_PI * (x)) / 180.0)
 
-
-# define POLYGON 16
-
-
 enum {X, Y, Z};
 enum {OFF, ON};
 
@@ -83,7 +79,7 @@ enum {DIRECTIONAL_LIGHT, POINT_LIGHT, SPOT_LIGHT};
 */
 enum {SPHERE, PLANE, CYLINDER, CONE, TORUS, TRIANGLE, DISC, ELLIPSOID, \
 	PARABOLOID, LIMITED_CYLINDER, LIMITED_CONE, LIMITED_PARABOLOID, \
-	LIMITED_SPHERE, PLANE_WITH_HOLE, DISC_WITH_HOLE};
+	LIMITED_SPHERE, PLANE_WITH_HOLE, DISC_WITH_HOLE, POLYGON};
 
 /*
 **  структури, які не використовуєте повидаляти !!!
@@ -322,17 +318,17 @@ typedef struct			s_limited_paraboloid
 	double				k;
 }						t_limited_paraboloid;
 
-typedef struct s_disс
+typedef struct s_disc
 {
 	t_vect 		pos;
 	t_vect 		norm;
 	double		r;
-} 				t_disс;
+} 				t_disc;
 
 typedef struct s_disc_with_hole
 {
-	t_disс		disc;
-	t_disс 		hole;
+	t_disc		disc;
+	t_disc 		hole;
 }				t_disc_with_hole;
 
 typedef struct s_plane_with_hole
@@ -340,7 +336,7 @@ typedef struct s_plane_with_hole
 	t_vect		norm;
 	t_vect		point;
 	int 		holes_num;
-	t_disс		*hole;
+	t_disc		*hole;
 }				t_plane_with_hole;
 
 /*
@@ -624,7 +620,7 @@ t_vect					cylinder_norm_vector(void *obj, t_vect *point, double a);
 t_vect					cone_norm_vector(void *obj, t_vect *point, double a);
 t_vect					torus_norm_vector(void *obj, t_vect *point, double a);
 t_vect					triangle_norm_vector(void *obj, t_vect *point, double a);
-t_vect			disс_norm_vector(void *obj, t_vect *point, double a);
+t_vect			disc_norm_vector(void *obj, t_vect *point, double a);
 t_vect					ellipsoid_norm_vector(void *obj, t_vect *point, double a);
 t_vect					paraboloid_norm_vector(void *obj, t_vect *point, double a);
 t_vect					limited_cylinder_norm_vector(void *obj, t_vect *point, double a);

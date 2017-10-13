@@ -12,13 +12,13 @@
 
 #include "rtv.h"
 
-t_vect		disс_norm_vector(void *obj, t_vect *point, double a)
+t_vect		disc_norm_vector(void *obj, t_vect *point, double a)
 {
 	t_vect	norm;
-	t_disс	*d;
+	t_disc	*d;
 
 	a = 0;
-	d = (t_disс *)obj;
+	d = (t_disc *)obj;
 	if (vector_dot_product(&d->norm, point) > PRECISION)
 		norm = change_vector_direction(&d->norm);
 	else
@@ -92,11 +92,11 @@ t_vect 		limited_cylinder_norm_vector(void *obj, t_vect *point, double a)
 	t_limited_cylinder	*c;
 	t_vect 	tmp;
 	t_cylinder cl;
-	
+
 	a = 0;
 	c = (t_limited_cylinder *)obj;
 	if (c->caps == ON)
-	{	
+	{
 		tmp = vector_substract(point, &c->p1);
 		if (vector_length(&tmp) <= c->r)
 			return(c->p1_norm);

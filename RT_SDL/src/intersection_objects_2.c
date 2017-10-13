@@ -14,12 +14,12 @@
 
 int		intersection_disc(t_ray *r, void *disc, double *t, double *z)
 {
-	t_disс *d;
+	t_disc *d;
 	double	t0;
 	t_vect	point;
 	t_vect tmp;
 
-	d = (t_disс *)disc;
+	d = (t_disc *)disc;
 	z = 0;
 	if (vector_dot_product(&d->norm, &r->dir) != 0)
 	{

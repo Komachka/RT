@@ -16,7 +16,7 @@ static double  check_paraboloid_limits(double t, t_ray *r, t_limited_paraboloid 
 {
 	t_vect tmp[2];
 	t_vect  point;
-	
+
 	if (t > PRECISION)
 	{	point = intersection_point(t, r);
 		tmp[0] = vector_substract(&point, &c->extremum);
@@ -60,7 +60,7 @@ int		intersection_limited_sphere(t_ray *r, void *sphere, double *t, double *z)
 	t_equation	n;
 	t_limited_sphere	*s;
 	double cap[4];
-	t_disс ttm;
+	t_disc ttm;
 
 	z = 0;
 	cap[0] = -1;
