@@ -379,9 +379,9 @@ void create_sromanets(t_rtv *rtv)
                 imageX = randon(x, x + 5);
                 imageY = randon(y, y + 5);
                 if (imageX < WX && imageY < WY) {
-                    rtv->filter.sdl_col_with_filter[x][y].r = rtv->filter.sdl_col_with_filter[imageX][imageY].r;
-                    rtv->filter.sdl_col_with_filter[x][y].g = rtv->filter.sdl_col_with_filter[imageX][imageY].g;
-                    rtv->filter.sdl_col_with_filter[x][y].b = rtv->filter.sdl_col_with_filter[imageX][imageY].b;
+                    rtv->filter.sdl_col_with_filter[y][x].r = rtv->filter.sdl_col_with_filter[imageY][imageX].r;
+                    rtv->filter.sdl_col_with_filter[y][x].g = rtv->filter.sdl_col_with_filter[imageY][imageX].g;
+                    rtv->filter.sdl_col_with_filter[y][x].b = rtv->filter.sdl_col_with_filter[imageY][imageX].b;
                 }
                 y++;
             }
