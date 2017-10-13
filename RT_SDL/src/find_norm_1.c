@@ -12,11 +12,12 @@
 
 #include "rtv.h"
 
-t_vect		triangle_norm_vector(void *obj, t_vect *point)
+t_vect 		triangle_norm_vector(void *obj, t_vect *point, double a)
 {
-	t_vect		norm;
+	t_vect	norm;
 	t_triangle	*tr;
 
+	a = 0;
 	tr = (t_triangle *)obj;
 	if (vector_dot_product(&tr->norm, point) > PRECISION)
 		norm = change_vector_direction(&tr->norm);
@@ -25,28 +26,45 @@ t_vect		triangle_norm_vector(void *obj, t_vect *point)
 	return (norm);
 }
 
-t_vect		torus_norm_vector(void *obj, t_vect *point)
+t_vect 		polygon_norm_vector(void *obj, t_vect *point, double a)
 {
-	t_vect		norm;
-	t_torus		*t;
-	t_vect		tmp[3];
-	double		y;
+	t_vect 	norm;
+	t_polygon *p;
+	int 		tr;
 
+	tr = (int)a;
+	p = (t_polygon *)obj;
+	if (vector_dot_product(&p->norm[tr], point) > PRECISION)
+		norm = change_vector_direction(&p->norm[tr]);
+	else
+		norm = p->norm[tr];
+	return (norm);
+}
+
+t_vect		torus_norm_vector(void *obj, t_vect *point, double a)
+{
+	t_vect 		norm;
+	t_torus		*t;
+	t_vect 		tmp[3];
+	double 		y;
+
+	a = 0;
 	t = (t_torus *)obj;
 	tmp[0] = vector_substract(point, &t->pos);
 	y = vector_dot_product(&tmp[0], &t->dir);
 	tmp[1] = vector_mult(y, &t->dir);
 	tmp[2] = vector_substract(&tmp[0], &tmp[1]);
-	tmp[1] = vector_mult(t->maj_r / vector_length(&tmp[2]), &tmp[2]);
+	tmp[1] = vector_mult(t->maj_r /vector_length(&tmp[2]), &tmp[2]);
 	norm = vector_substract(&tmp[0], &tmp[1]);
 	return (norm);
 }
 
-t_vect		ellipsoid_norm_vector(void *obj, t_vect *point)
+t_vect		ellipsoid_norm_vector(void *obj, t_vect *point, double a)
 {
 	t_vect		norm;
 	t_ellipsoid	*l;
 
+	a = 0;
 	l = (t_ellipsoid *)obj;
 	norm = vector_substract(point, &l->pos);
 	norm.x = 2.0 * norm.x / (l->size_x * l->size_x);
@@ -56,25 +74,27 @@ t_vect		ellipsoid_norm_vector(void *obj, t_vect *point)
 	return (norm);
 }
 
-t_vect		sphere_norm_vector(void *obj, t_vect *point)
+t_vect		sphere_norm_vector(void *obj, t_vect *point, double a)
 {
 	t_vect		norm;
 	t_sphere	*s;
 
+	a = 0;
 	s = (t_sphere *)obj;
 	norm = vector_substract(point, &s->pos);
 	norm = normalize_vector(&norm);
 	return (norm);
 }
 
-t_vect		paraboloid_norm_vector(void *obj, t_vect *point)
+t_vect		paraboloid_norm_vector(void *obj, t_vect *point, double a)
 {
 	t_vect			norm;
 	t_paraboloid	*p;
-	t_vect			tmp1;
-	t_vect			tmp2;
+	t_vect 			tmp1;
+	t_vect 			tmp2;
 	double			m;
 
+	a = 0;
 	p = (t_paraboloid *)obj;
 	tmp2 = vector_substract(point, &p->extremum);
 	m = vector_dot_product(&p->dir, &tmp2);

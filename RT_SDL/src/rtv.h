@@ -51,6 +51,10 @@
 # define VAR_INT(x, y) int x = y
 # define TO_RAD(x) ((M_PI * (x)) / 180.0)
 
+
+# define POLYGON 16
+
+
 enum {X, Y, Z};
 enum {OFF, ON};
 
@@ -190,6 +194,7 @@ typedef struct			s_light
 
 typedef struct			s_additional
 {
+	int 		subfigure;
 	int					figure;
 	t_vect				point;
 	t_vect				norm;
@@ -255,13 +260,6 @@ typedef struct			s_triangle
 	t_vect				norm;
 }						t_triangle;
 
-typedef struct			s_disc
-{
-	t_vect				pos;
-	t_vect				norm;
-	double				r;
-}						t_disc;
-
 typedef struct			s_ellipsoid
 {
 	t_vect				pos;
@@ -324,19 +322,26 @@ typedef struct			s_limited_paraboloid
 	double				k;
 }						t_limited_paraboloid;
 
-typedef struct			s_plane_with_hole
+typedef struct s_disс
 {
-	t_vect				norm;
-	t_vect				point;
-	int					holes_num;
-	t_disc				*hole;
-}						t_plane_with_hole;
+	t_vect 		pos;
+	t_vect 		norm;
+	double		r;
+} 				t_disс;
 
-typedef struct			s_disc_with_hole
+typedef struct s_disc_with_hole
 {
-	t_disc				disc;
-	t_disc				hole;
-}						t_disc_with_hole;
+	t_disс		disc;
+	t_disс 		hole;
+}				t_disc_with_hole;
+
+typedef struct s_plane_with_hole
+{
+	t_vect		norm;
+	t_vect		point;
+	int 		holes_num;
+	t_disс		*hole;
+}				t_plane_with_hole;
 
 /*
 ** textures
@@ -423,9 +428,18 @@ typedef struct			s_figure
 	void				*object;
 	t_material			material;
 	t_texture			texture;
-	int					(*intersection_object)(t_ray *, void *, double *);
-	t_vect				(*norm_vector)(void *, t_vect *);
+	int					(*intersection_object)(t_ray *, void *, double *, double *);
+	t_vect				(*norm_vector)(void *, t_vect *, double);
 }						t_figure;
+
+typedef struct s_polygon
+{
+	int 		faces;
+	t_vect 		*vx;
+	int 		*index;
+	t_vect 		*norm;
+	t_color 	*col;
+}				t_polygon;
 
 /*
 ** filters
@@ -581,52 +595,53 @@ t_vect					mult_vectors_coordinates(t_vect *a, t_vect *b);
 /*
 ** intersection functions for objects
 */
-int						intersection_sphere(t_ray *r, void *sphere, double *t);
-int						intersection_cone(t_ray *r, void *cone, double *t);
-int						intersection_plane(t_ray *r, void *plane, double *t);
-int						intersection_cylinder(t_ray *r, void *cylinder, double *t);
-int						intersection_torus(t_ray *r, void *torus, double *t);
-int						intersection_triangle(t_ray *r, void *triangle, double *t);
-int						intersection_disc(t_ray *r, void *disc, double *t);
-int						intersection_ellipsoid(t_ray *r, void *ellipsoid, double *t);
-int						intersection_paraboloid(t_ray *r, void *paraboloid, double *t);
-int						intersection_limited_cylinder(t_ray *r, void *disc, double *t);
-int						intersection_limited_cone(t_ray *r, void *disc, double *t);
-int						intersection_limited_paraboloid(t_ray *r, void *disc, double *t);
-int						intersection_limited_sphere(t_ray *r, void *disc, double *t);
-int						intersection_plane_with_hole(t_ray *r, void *disc, double *t);
+int						intersection_sphere(t_ray *r, void *sphere, double *t, double *z);
+int						intersection_cone(t_ray *r, void *cone, double *t, double *z);
+int						intersection_plane(t_ray *r, void *plane, double *t, double *z);
+int						intersection_cylinder(t_ray *r, void *cylinder, double *t, double *z);
+int						intersection_torus(t_ray *r, void *torus, double *t, double *z);
+int						intersection_triangle(t_ray *r, void *triangle, double *t, double *z);
+int						intersection_disc(t_ray *r, void *disc, double *t, double *z);
+int						intersection_ellipsoid(t_ray *r, void *ellipsoid, double *t, double *z);
+int						intersection_paraboloid(t_ray *r, void *paraboloid, double *t, double *z);
+int						intersection_limited_cylinder(t_ray *r, void *disc, double *t, double *z);
+int						intersection_limited_cone(t_ray *r, void *disc, double *t, double *z);
+int						intersection_limited_paraboloid(t_ray *r, void *disc, double *t, double *z);
+int						intersection_limited_sphere(t_ray *r, void *disc, double *t, double *z);
+int						intersection_plane_with_hole(t_ray *r, void *disc, double *t, double *z);
 t_color					intersection(t_rtv *rtv, t_ray *r);
 t_vect					intersection_point(double t, t_ray *r);
-int						complicated_intersection(t_rtv *rtv, t_ray *r, double *point);
-int						intersection_disc_with_hole(t_ray *r, void *disc, double *t);
+int						complicated_intersection(t_rtv *rtv, t_ray *r, t_vect *point);
+int						intersection_disc_with_hole(t_ray *r, void *disc, double *t, double *z);
+int 	intersection_polygon(t_ray *ray, void *obj, double *t, double *z);
 
 /*
 ** calculating norm vectors for objects
 */
-t_vect					sphere_norm_vector(void *obj, t_vect *point);
-t_vect					plane_norm_vector(void *obj, t_vect *point);
-t_vect					cylinder_norm_vector(void *obj, t_vect *point);
-t_vect					cone_norm_vector(void *obj, t_vect *point);
-t_vect					torus_norm_vector(void *obj, t_vect *point);
-t_vect					triangle_norm_vector(void *obj, t_vect *point);
-t_vect					disc_norm_vector(void *obj, t_vect *point);
-t_vect					ellipsoid_norm_vector(void *obj, t_vect *point);
-t_vect					paraboloid_norm_vector(void *obj, t_vect *point);
-t_vect					limited_cylinder_norm_vector(void *obj, t_vect *point);
-t_vect					limited_cone_norm_vector(void *obj, t_vect *point);
-t_vect					limited_paraboloid_norm_vector(void *obj, t_vect *point);
-t_vect					limited_sphere_norm_vector(void *obj, t_vect *point);
-t_vect					plane_with_hole_norm_vector(void *obj, t_vect *point);
-t_vect					find_norm(t_rtv *rtv, int figure, t_vect *point, t_vect *r_dir);
-t_vect					disc_with_hole_norm_vector(void *obj, t_vect *point);
-
+t_vect					sphere_norm_vector(void *obj, t_vect *point, double a);
+t_vect					plane_norm_vector(void *obj, t_vect *point, double a);
+t_vect					cylinder_norm_vector(void *obj, t_vect *point, double a);
+t_vect					cone_norm_vector(void *obj, t_vect *point, double a);
+t_vect					torus_norm_vector(void *obj, t_vect *point, double a);
+t_vect					triangle_norm_vector(void *obj, t_vect *point, double a);
+t_vect			disс_norm_vector(void *obj, t_vect *point, double a);
+t_vect					ellipsoid_norm_vector(void *obj, t_vect *point, double a);
+t_vect					paraboloid_norm_vector(void *obj, t_vect *point, double a);
+t_vect					limited_cylinder_norm_vector(void *obj, t_vect *point, double a);
+t_vect					limited_cone_norm_vector(void *obj, t_vect *point, double a);
+t_vect					limited_paraboloid_norm_vector(void *obj, t_vect *point, double a);
+t_vect					limited_sphere_norm_vector(void *obj, t_vect *point, double a);
+t_vect					plane_with_hole_norm_vector(void *obj, t_vect *point, double a);
+t_vect		find_norm(t_rtv *rtv, t_vect fg, t_vect *point, t_vect *r_dir);
+t_vect					disc_with_hole_norm_vector(void *obj, t_vect *point, double a);
+t_vect 		polygon_norm_vector(void *obj, t_vect *point, double a);
 /*
 ** colorizing
 */
 t_color					calculate_color(double i, t_color *c);
 t_color					average_color(t_color *lights, int light_num);
 void					paint_image(t_rtv *r, int x, int y, t_color cl);
-t_color					colorizing(t_rtv *rtv, int figure, double t, t_ray *r, int recursive_depth);
+t_color			colorizing(t_rtv *rtv, t_vect tm, t_ray *r, int recursive_depth);
 t_color					create_color_struct(double r, double g, double b, double a);// вже не потрібна
 t_color					mult_color_coefs(t_color a, t_color b);
 t_color					proportional_color_distribution(t_color *cl1, t_color *cl2, double p1);
