@@ -68,7 +68,7 @@ SRC = main.c \
 OBJ	= $(addprefix $(DSRC)/,$(SRC:.c=.o))
 OBJJSON = $(JSON:.c=.o)
 
-all : $(NAME) print
+all : $(NAME)
 
 $(NAME) : $(OBJ) $(OBJJSON)
 	@$(CC) $(CFLAGS) $(SDL_FLAGS) $(OBJJSON) $(OBJ) -o $(NAME)
