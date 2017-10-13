@@ -1,0 +1,70 @@
+void     creating_polygon_normals(t_polygon *p)
+{
+    int i;
+    t_triangle tr;
+    t_vect     v[2];
+
+    i = -1;
+    while (++i < p->faces)
+    {
+        tr.a = p->vx[p->index[i * 3]];
+        tr.b = p->vx[p->index[i * 3 + 1]];
+        tr.c = p->vx[p->index[i * 3 + 2]];
+        v[0] = vector_substract(&tr.b, &tr.a);
+        v[1] = vector_substract(&tr.c, &tr.a);
+        p->norm[i] = vector_cross_product(&v[0], &v[1]);
+        p->norm[i] = normalize_vector(&p->norm[i]);
+    }
+}
+
+void     fill_polygon(t_figure *f)
+{
+    t_polygon *p;
+
+    f->id = POLYGON;
+
+    if (!(f->object = (t_polygon *)malloc(sizeof(t_polygon))))
+        malloc_error();
+    p = (t_polygon *)f->object;
+    p->faces = 2; // мінімум 1
+
+    // 4 - кількість вертексів, які формують полігональну фігуру, повинно бути мінімум 3
+    if (!(p->vx = (t_vect *)malloc(sizeof(t_vect) * 4)))
+        malloc_error();
+    // заповнюємо точки з json файлу
+    p->vx[0] = create_vector(-15, 20, 220);
+    p->vx[1] = create_vector(20, 20, 220);
+    p->vx[2] = create_vector(3, 40, 220);
+    p->vx[3] = create_vector(20, -15, 220);
+    // зв*язки між вертексами, берем з файлу, мають бути кратні 3 і в кожній трійці не повторюватись
+    if (!(p->index = (int *)malloc(sizeof(int) * p->faces * 3)))
+        malloc_error();
+    p->index[0] = 0;
+    p->index[1] = 1;
+    p->index[2] = 2;
+    p->index[3] = 3;
+    p->index[4] = 0;
+    p->index[5] = 1;
+    if (!(p->norm = (t_vect *)malloc(sizeof(t_vect) * p->faces)))
+        malloc_error();
+    creating_polygon_normals(p);
+    if (!(p->col = (t_color *)malloc(sizeof(t_color) * p->faces)))
+        malloc_error();
+    p->col[0] = create_color("ff0000");
+    p->col[1] = create_color("ffffff");
+    f->intersection_object = &intersection_polygon;
+    f->norm_vector = &polygon_norm_vector;
+}
+
+
+typedef struct s_polygon
+{
+    int         faces; // json > 1 | "Faces"
+    t_vect      *vx; // json valid ^ "Vertex"
+    int         *index; // json (int) >= 0 "Index"
+                           кожен елемент масива має бути <= індексу "Vertex" масиву
+                           кількість "Faces" * 3
+                           кожні три числа повінні бути різними
+    t_vect      *norm; // обраховується
+    t_color     *col; // json кількість елементів масиву має == "Faces" | "Color"
+}                t_polygon;

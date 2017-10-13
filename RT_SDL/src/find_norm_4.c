@@ -12,11 +12,12 @@
 
 #include "rtv.h"
 
-t_vect		disc_with_hole_norm_vector(void *obj, t_vect *point)
+t_vect		disc_with_hole_norm_vector(void *obj, t_vect *point, double a)
 {
-	t_vect				norm;
+	t_vect	norm;
 	t_disc_with_hole	*p;
 
+	a = 0;
 	p = (t_disc_with_hole *)obj;
 	if (vector_dot_product(&p->disc.norm, point) > PRECISION)
 		norm = change_vector_direction(&p->disc.norm);

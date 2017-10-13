@@ -24,8 +24,8 @@ int					animation(SDL_Renderer *renderer, t_rtv *rtv)
 	rect1.h = WY;
 	rect.w = 200;
 	rect.h = 200;
-	rect.x = WX / 2 - WX / 4 + rect.w;
-	rect.y = WY / 2 - WY / 4 + rect.h;
+	rect.x = WX / 2 - rect.w / 2;
+	rect.y = WY / 2 - rect.h / 2;
 	SDL_RenderClear(renderer);
 	SDL_RenderCopy(renderer, rtv->sdl_texture_render, NULL, &rect1);
 	SDL_RenderCopy(renderer, rtv->sdl_texture_loading[n_frame2 / 8],
