@@ -6,7 +6,7 @@
 /*   By: askochul <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/11 17:56:28 by askochul          #+#    #+#             */
-/*   Updated: 2017/10/11 18:23:03 by askochul         ###   ########.fr       */
+/*   Updated: 2017/10/13 18:49:01 by askochul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ int		open_author_file(void)
 
 int open_instruction_file(void)
 {
-	system("open -a Preview instruction");
+	system("open -a Preview instruction.jpg");
 	return (0);
 }
 
@@ -177,16 +177,14 @@ void	ft_menu(t_menu *menu, t_rtv *rtv)
 							y_mouse >= menu->boxes[i].rect.y && y_mouse <=
 							menu->boxes[i].rect.y + menu->boxes[i].rect.h)
 					{
-						SDL_SetTextureColorMod(menu->boxes[i].scene, 150, 150,
-								174);
+						SDL_SetTextureColorMod(menu->boxes[i].scene, 150, 150, 174);
 						SDL_RenderClear(menu->renderer);
 						ft_render_copy(menu);
 						SDL_RenderPresent(menu->renderer);
 					}
 					else
 					{
-						SDL_SetTextureColorMod(menu->boxes[i].scene, 255, 255,
-								255);
+						SDL_SetTextureColorMod(menu->boxes[i].scene, 255, 255, 255);
 						SDL_RenderClear(menu->renderer);
 						ft_render_copy(menu);
 						SDL_RenderPresent(menu->renderer);
@@ -207,19 +205,16 @@ void	ft_menu(t_menu *menu, t_rtv *rtv)
 							y_mouse <= menu->boxes[i].rect.y +
 							menu->boxes[i].rect.h)
 					{
-						SDL_SetTextureColorMod(menu->boxes[i].scene, 250, 100,
-								100);
+						SDL_SetTextureColorMod(menu->boxes[i].scene, 250, 100, 100);
 						SDL_RenderClear(menu->renderer);
 						ft_render_copy(menu);
 						SDL_RenderPresent(menu->renderer);
 						ft_which_scene(rtv, i);
 						basic_function(rtv);
 					}
-					if (x_mouse > 675 && x_mouse < 928 && y_mouse > 891 &&
-							y_mouse < 987)
+					if (x_mouse > 675 && x_mouse < 928 && y_mouse > 891 && y_mouse < 987)
 						open_author_file();
-					if (x_mouse > 275 && x_mouse < 428 && y_mouse > 891 &&
-							y_mouse < 987)
+					if (x_mouse > 375 && x_mouse < 600 && y_mouse > 891 && y_mouse < 987)
 						open_instruction_file();
 					i++;
 				}

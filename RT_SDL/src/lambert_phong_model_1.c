@@ -71,29 +71,30 @@ static inline void		lignt_attenuation(t_additional *st, t_light *l)
 		st->attenuation = min(1.00 / (l->k_const + l->k_linear * st->len + l->k_quadratic * pow(st->len, 2)), 1);
 }
 
-static inline t_color	reflection_component(t_additional *st, t_rtv *rtv, int recursive_depth, double coef)
+static inline t_color  reflection_component(t_additional *st, t_rtv *rtv, int recursive_depth, double coef)
 {
 	int k;
-	double t;
+	t_vect t;
 	t_vect tmp;
 	t_color res;
 
-
+	
 	t_ray r;
 	tmp = st->primary_ray.dir;
 	r.dir = reflected_vector(&tmp, &st->norm);
 	r.origin = adding_bias(&st->point, &r.dir);
-	t = INFINITY;
+	t.z = INFINITY;
+	set_zero_color(&res);
 	if ((k = complicated_intersection(rtv, &r, &t)) != -1)
 	{
-		res = colorizing(rtv, k, t, &r, recursive_depth + 1);
+		res = colorizing(rtv, t, &r, recursive_depth + 1);
 		res = calculate_color(coef, &res);
 	}
-	else
+	else 
 		res = create_background_color(rtv, &r);
+	
 	return (res);
 }
-
 // double fresnel_reflect_amount(double n, t_vect *norm, t_vect *incident)
 // {
 // 	double r0;
@@ -120,9 +121,9 @@ static inline t_color	reflection_component(t_additional *st, t_rtv *rtv, int rec
 // }
 
 static inline t_color refractive_component(t_additional *st, t_rtv *rtv, int recursive_depth)
-{
+{	
 	int k;
-	double t;
+	t_vect	t;
 	t_color res;
 //	double coef;
 
@@ -132,15 +133,15 @@ static inline t_color refractive_component(t_additional *st, t_rtv *rtv, int rec
 	r.dir = refracted_vector(&st->norm, &st->primary_ray.dir, st->mat.refraction);
 	r.origin = st->point;
 	r.origin = adding_bias(&st->point, &r.dir);
-	t = INFINITY;
+	t.z = INFINITY;
 	set_zero_color(&res);
 	if ((k = complicated_intersection(rtv, &r, &t)) != -1)
 	{
-		res = colorizing(rtv, k, t, &r, recursive_depth + 1);
+		res = colorizing(rtv, t, &r, recursive_depth + 1);
 		//coef = fresnel_reflect_amount(1, st->mat.refraction, &st->norm, &st->primary_ray.dir);
 		//res = calculate_color((1.0 - coef), &res);
 	}
-	else
+	else 
 		res = create_background_color(rtv, &r);
 	return (res);
 }
