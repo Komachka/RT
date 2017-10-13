@@ -49,8 +49,8 @@ static inline void	del_arrey(void **arrey, int size)
 void				delstruct(t_rtv *rtv)
 {
 	free_textures(rtv);
-	del_arrey((void**)rtv->s_c, WX);
-	del_arrey((void**)rtv->filter.sdl_col_with_filter, WX);
+	del_arrey((void**)rtv->s_c, WY);
+	del_arrey((void**)rtv->filter.sdl_col_with_filter, WY);
 	SDL_FreeSurface(rtv->surface_main);
 	SDL_DestroyRenderer(rtv->renderer);
 	SDL_DestroyWindow(rtv->window);
