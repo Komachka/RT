@@ -30,14 +30,8 @@
 
 # define COUNT 6
 
-<<<<<<< HEAD
-
 # define WX 1400
 # define WY 1000
-=======
-# define WX 200
-# define WY 300
->>>>>>> 82a32280d00545e9e409126e338b99513daaa9a1
 
 # define WIDTH 1400
 # define HEIGHT 1000
