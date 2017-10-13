@@ -54,23 +54,21 @@ void				paint_image(t_rtv *fr, int x, int y, t_color cl)
 
 	x1 = MAX(x, x1);
 	y1 = MAX(y, y1);
-	//printf("WX %d WY %d \n", WX, WY );
+
 	if (x >= WX || y >= WY)
-		{
-			//printf("x = %d, y = %d\n", x, y);
-			return ;
-		}
+		return ;
+
 	fr->s_c[y][x].r = (unsigned char)(cl.r * 255);
 	fr->s_c[y][x].g = (unsigned char)(cl.g * 255);
 	fr->s_c[y][x].b = (unsigned char)(cl.b * 255);
 	fr->s_c[y][x].a = (unsigned char)(cl.al * 100);
-	//printf("x = %d, y = %d max x = %d, y = %d\n", x, y, x1, y1);
+
 	
 }
 
-//change the name
 
-static inline void	put_pixel32(SDL_Surface *surface, int x, int y, Uint32 pixel)
+
+static inline void	put_pixel(SDL_Surface *surface, int x, int y, Uint32 pixel)
 {
 	Uint32 *pixels;
 
@@ -85,13 +83,12 @@ void				create_rander_texture(t_rtv *rtv)
 	{
 		for (int x = 0; x < WX ; ++x)
 		{
-			put_pixel32(rtv->surface_main, x, y,
+			put_pixel(rtv->surface_main, x, y,
 						SDL_MapRGBA(rtv->surface_main->format,
 						rtv->filter.sdl_col_with_filter[y][x].r,
 						rtv->filter.sdl_col_with_filter[y][x].g,
 						rtv->filter.sdl_col_with_filter[y][x].b,
 						rtv->filter.sdl_col_with_filter[y][x].a));
-			//put_pixel32(rtv->surface_main, x, y, SDL_MapRGBA(rtv->surface_main->format, rtv->s_c[y][x].r, rtv->s_c[y][x].g, rtv->s_c[y][x].b, rtv->s_c[y][x].a));
 		}
 	}
 	if (rtv->sdl_texture_render != NULL)

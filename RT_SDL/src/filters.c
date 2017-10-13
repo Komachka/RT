@@ -47,7 +47,7 @@ void	copy_to_filter(t_rtv *rtv)
 		j = 0;
 		while (j <= WX)
 		{
-	      //printf("y = %d x = %d\n", i, j);
+	    
           rtv->filter.sdl_col_with_filter[i][j] = rtv->s_c[i][j];
 		  j++;
 		}
@@ -125,29 +125,15 @@ void	create_negative_filter(t_rtv *rtv)
 }
 
 
-typedef struct s_tmp
-{
-    int x;
-    int y;
-    int filterX;
-    int filterY;
-    t_rtv *rtv;
-}t_tmp;
 
 
-void foo(double *red, double *green, double *blue, t_tmp tmp)
+
+void foo_b(double *red, double *green, double *blue, t_tmp tmp)
 {
     t_rtv *rtv;
     int imageX;
     int imageY;
-    static double filter[fH][fW] =
-            {
-                    {0, 0, 1, 0, 0},
-                    {0, 1, 1, 1, 0},
-                    {1, 1, 1, 1, 1},
-                    {0, 1, 1, 1, 0},
-                    {0, 0, 1, 0, 0}
-            };
+    static double filter[fH][fW] ={{0, 0, 1, 0, 0},{0, 1, 1, 1, 0},{1, 1, 1, 1, 1},{0, 1, 1, 1, 0},{0, 0, 1, 0, 0}};
 
 
 
@@ -161,9 +147,9 @@ void foo(double *red, double *green, double *blue, t_tmp tmp)
         {
             imageX = (tmp.x - fW / 2 + tmp.filterX + WX) % WX;
             imageY = (tmp.y - fH / 2 + tmp.filterY + WY) % WY;
-            *red += rtv->filter.sdl_col_with_filter[imageX][imageY].r * filter[tmp.filterY][tmp.filterX];
-            *green += rtv->filter.sdl_col_with_filter[imageX][imageY].g * filter[tmp.filterY][tmp.filterX];
-            *blue += rtv->filter.sdl_col_with_filter[imageX][imageY].b * filter[tmp.filterY][tmp.filterX];
+            *red += rtv->filter.sdl_col_with_filter[imageY][imageX].r * filter[tmp.filterY][tmp.filterX];
+            *green += rtv->filter.sdl_col_with_filter[imageY][imageX].g * filter[tmp.filterY][tmp.filterX];
+            *blue += rtv->filter.sdl_col_with_filter[imageY][imageX].b * filter[tmp.filterY][tmp.filterX];
             tmp.filterX++;
         }
         tmp.filterY++;
@@ -174,90 +160,69 @@ void foo(double *red, double *green, double *blue, t_tmp tmp)
 void	create_blur_filter(t_rtv *rtv, double red, double green, double blue)
 {
 
-   
+   t_tmp tmp;
+     tmp.x = 0;
+     tmp.filterY = 0;
+     tmp.filterX = 0;
+     tmp.rtv = rtv;     
+
+     
+    
     
 
-    
-     // t_tmp tmp;
-     // tmp.x = 0;
-     // tmp.filterY = 0;
-     // tmp.filterX = 0;
-     // tmp.rtv = rtv;     
-
-     // double factor = 1.0 / 13.0;
-     // double bias = 0.0;
-    
-
-     // while (tmp.x < WX)
-     // {
-     //    tmp.y = 0;
-     //    while (tmp.y < WY)
-     //    {   red = 0.0, blue = 0.0, green = 0.0;
-     //        foo(&red, &green, &blue, tmp);
+     while (tmp.x < WX)
+     {
+        tmp.y = 0;
+        while (tmp.y < WY)
+        {   red = 0.0, blue = 0.0, green = 0.0;
+            foo_b(&red, &green, &blue, tmp);
             
 
 
 
-     //        rtv->filter.sdl_col_with_filter[tmp.x][tmp.y].r = MIN(MAX(factor * red + bias, 0), 255);
-     //        rtv->filter.sdl_col_with_filter[tmp.x][tmp.y].g = MIN(MAX(factor * green + bias, 0), 255);
-     //        rtv->filter.sdl_col_with_filter[tmp.x][tmp.y].b = MIN(MAX(factor * blue + bias, 0), 255);
-     //        tmp.y++;
-     //    }
+            rtv->filter.sdl_col_with_filter[tmp.y][tmp.x].r = MIN(MAX((double)(1.0 / 13.0) * red, 0), 255);
+            rtv->filter.sdl_col_with_filter[tmp.y][tmp.x].g = MIN(MAX((double)(1.0 / 13.0) * green, 0), 255);
+            rtv->filter.sdl_col_with_filter[tmp.y][tmp.x].b = MIN(MAX((double)(1.0 / 13.0) * blue, 0), 255);
+            tmp.y++;
+        }
 
 
 
 
 
-     //    tmp.x++;
-     // }
+        tmp.x++;
+     }
 
-    double factor = 1.0 / 13.0;
-    double bias = 0.0;
-    int x = 0;
-    int y = 0;
-    int filterX = 0;
-    int filterY = 0;
+
+
+}
+
+
+void foo_e(double *red, double *green, double *blue, t_tmp tmp)
+{
+    t_rtv *rtv;
     int imageX;
     int imageY;
-    static double filter[fH][fW] =
-            {
-                    {0, 0, 1, 0, 0},
-                    {0, 1, 1, 1, 0},
-                    {1, 1, 1, 1, 1},
-                    {0, 1, 1, 1, 0},
-                    {0, 0, 1, 0, 0}
-            };
+     static double filter[fH][fW] ={{-1,  0, 0, 0, 0},{0, -2,  0,  0,  0},{0,  0,  6,  0,  0},{0,  0,  0, -2,  0},
+{0,  0,  0,  0, -1}};
 
-    while (y <= WY)
+
+    rtv = tmp.rtv;
+
+    tmp.filterY = 0;
+    while (tmp.filterY < fH)
     {
-        x = 0;
-        while (x <= WX)
+        tmp.filterX = 0;
+        while (tmp.filterX < fW)
         {
-
-            red = 0.0, blue = 0.0, green = 0.0;
-            filterY = 0;
-            while (filterY < fH)
-            {
-                filterX = 0;
-                while (filterX < fW)
-                {
-                
-                    //printf("imageX = %d, imageY = %d \n", imageX, imageY);
-                    imageX = (x - fW / 2 + filterX + WX) % WX;
-                    imageY = (y - fH / 2 + filterY + WY) % WY;
-                    red += rtv->filter.sdl_col_with_filter[imageY][imageX].r * filter[filterY][filterX];
-                    green += rtv->filter.sdl_col_with_filter[imageY][imageX].g * filter[filterY][filterX];
-                    blue += rtv->filter.sdl_col_with_filter[imageY][imageX].b * filter[filterY][filterX];
-                    filterX++;
-                }
-                filterY++;
-            }
-            rtv->filter.sdl_col_with_filter[y][x].r = MIN(MAX(factor * red + bias, 0), 255);
-            rtv->filter.sdl_col_with_filter[y][x].g = MIN(MAX(factor * green + bias, 0), 255);
-            rtv->filter.sdl_col_with_filter[y][x].b = MIN(MAX(factor * blue + bias, 0), 255);
-            x++;
+            imageX = (tmp.x - fW / 2 + tmp.filterX + WX) % WX;
+            imageY = (tmp.y - fH / 2 + tmp.filterY + WY) % WY;
+            *red += rtv->filter.sdl_col_with_filter[imageY][imageX].r * filter[tmp.filterY][tmp.filterX];
+            *green += rtv->filter.sdl_col_with_filter[imageY][imageX].g * filter[tmp.filterY][tmp.filterX];
+            *blue += rtv->filter.sdl_col_with_filter[imageY][imageX].b * filter[tmp.filterY][tmp.filterX];
+            tmp.filterX++;
         }
-        y++;
+        tmp.filterY++;
     }
 
 }
@@ -267,66 +232,43 @@ void	create_blur_filter(t_rtv *rtv, double red, double green, double blue)
 void create_emboss_filter(t_rtv *rtv, double red, double green, double blue)
 {
 
-    static double filter[fH][fW] =
-            {
-                {-1,  0, 0, 0, 0},
-                {0, -2,  0,  0,  0},
-                {0,  0,  6,  0,  0},
-                {0,  0,  0, -2,  0},
-                {0,  0,  0,  0, -1}
-            };
+   t_tmp tmp;
+     tmp.x = 0;
+     tmp.filterY = 0;
+     tmp.filterX = 0;
+     tmp.rtv = rtv;  
 
-    double factor = 1.0;
-    double bias = 0.0;
+while (tmp.x < WX)
+     {
+        tmp.y = 0;
+        while (tmp.y < WY)
+        {   red = 0.0, blue = 0.0, green = 0.0;
+            foo_e(&red, &green, &blue, tmp);
+            
 
 
-    int x = 0;
-    int y = 0;
-    int filterX = 0;
-    int filterY = 0;
-    int imageX;
-    int imageY;
 
-    while (y <= WY)
-    {
-        x = 0;
-        while (x <= WX)
-        {
-
-            red = 0.0, blue = 0.0, green = 0.0;
-            filterY = 0;
-            while (filterY < fH)
-            {
-                filterX = 0;
-                while (filterX < fW)
-                {
-                
-                    //printf("imageX = %d, imageY = %d \n", imageX, imageY);
-                    imageX = (x - fW / 2 + filterX + WX) % WX;
-                    imageY = (y - fH / 2 + filterY + WY) % WY;
-                    red += rtv->filter.sdl_col_with_filter[imageY][imageX].r * filter[filterY][filterX];
-                    green += rtv->filter.sdl_col_with_filter[imageY][imageX].g * filter[filterY][filterX];
-                    blue += rtv->filter.sdl_col_with_filter[imageY][imageX].b * filter[filterY][filterX];
-                    filterX++;
-                }
-                filterY++;
-            }
-            rtv->filter.sdl_col_with_filter[y][x].r = MIN(MAX(factor * red + bias, 0), 255);
-            rtv->filter.sdl_col_with_filter[y][x].g = MIN(MAX(factor * green + bias, 0), 255);
-            rtv->filter.sdl_col_with_filter[y][x].b = MIN(MAX(factor * blue + bias, 0), 255);
-            x++;
+            rtv->filter.sdl_col_with_filter[tmp.y][tmp.x].r = MIN(MAX(red, 0), 255);
+            rtv->filter.sdl_col_with_filter[tmp.y][tmp.x].g = MIN(MAX(green, 0), 255);
+            rtv->filter.sdl_col_with_filter[tmp.y][tmp.x].b = MIN(MAX(blue, 0), 255);
+            tmp.y++;
         }
-        y++;
-    }
+
+
+
+
+
+        tmp.x++;
+     }
 
 }
 
 unsigned int	rand_interval(unsigned int min, unsigned int max)
 {
 	int r;
-	const unsigned int range = 1 + max - min;
-	const unsigned int buckets = RAND_MAX / range;
-	const unsigned int limit = buckets * range;
+	unsigned int range = 1 + max - min;
+	unsigned int buckets = RAND_MAX / range;
+	unsigned int limit = buckets * range;
 
 	r = rand();
 	while (r >= (int)limit)

@@ -30,9 +30,8 @@
 
 # define COUNT 6
 
-
-# define WX 1500
-# define WY 800
+# define WX 200
+# define WY 300
 
 # define WIDTH 1400
 # define HEIGHT 1000
@@ -551,6 +550,15 @@ typedef struct			s_tor
 	double				c;
 	double				d;
 }						t_tor;
+
+typedef struct s_tmp
+{
+	int x;
+	int y;
+	int filterX;
+	int filterY;
+	t_rtv *rtv;
+}t_tmp;
 
 /*
 ** actions with vectors
