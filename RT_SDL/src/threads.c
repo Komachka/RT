@@ -25,9 +25,15 @@ void		threads(t_rtv *rtv)
 	{
 		p[i].rtv1 = rtv;
 		p[i].y_start = i * part;
+// <<<<<<< HEAD
 		p[i].y_end = p[i].y_start + part;
 		if (i == (NUM_THREADS - 1))
 			p[i].y_end = WY;
+// =======
+//  		p[i].y_end = p[i].y_start + part;
+//  		if (i == (NUM_THREADS - 1))
+//  			p[i].y_end = WY;
+// >>>>>>> tmp2
 		p[i].index = i;
 		pthread_create(&trd[i], NULL, make_projection, (void *)&p[i]);
 	}

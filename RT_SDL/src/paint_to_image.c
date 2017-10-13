@@ -49,10 +49,23 @@ void				ft_take_picture(t_rtv *rtv)
 
 void				paint_image(t_rtv *fr, int x, int y, t_color cl)
 {
+	static int x1 = 0;
+	static int y1 = 0;
+
+	x1 = MAX(x, x1);
+	y1 = MAX(y, y1);
+	//printf("WX %d WY %d \n", WX, WY );
+	if (x >= WX || y >= WY)
+		{
+			//printf("x = %d, y = %d\n", x, y);
+			return ;
+		}
 	fr->s_c[y][x].r = (unsigned char)(cl.r * 255);
 	fr->s_c[y][x].g = (unsigned char)(cl.g * 255);
 	fr->s_c[y][x].b = (unsigned char)(cl.b * 255);
 	fr->s_c[y][x].a = (unsigned char)(cl.al * 100);
+	//printf("x = %d, y = %d max x = %d, y = %d\n", x, y, x1, y1);
+	
 }
 
 //change the name

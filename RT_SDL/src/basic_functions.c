@@ -15,20 +15,20 @@
 static inline void	malloc_sdl_colour(t_rtv *rtv)
 {
 	SDL_Color **colours;
-	colours = (SDL_Color**)malloc(sizeof(SDL_Color*) * WX);
+	colours = (SDL_Color**)malloc(sizeof(SDL_Color*) * WY + 1);
 	int i = 0;
-	while (i < WX)
+	while (i <= WY + 1)
 	{
-		colours[i] = (SDL_Color*)malloc(sizeof(SDL_Color) * WY);
+		colours[i] = (SDL_Color*)malloc(sizeof(SDL_Color) * WX + 1);
 		i++;
 	}
 	rtv->s_c = colours;
 	SDL_Color **colours2;
-	colours2 = (SDL_Color**)malloc(sizeof(SDL_Color*) * WX);
+	colours2 = (SDL_Color**)malloc(sizeof(SDL_Color*) * WY + 1);
 	i = 0;
-	while (i < WX)
+	while (i <= WY + 1)
 	{
-		colours2[i] = (SDL_Color*)malloc(sizeof(SDL_Color) * WY);
+		colours2[i] = (SDL_Color*)malloc(sizeof(SDL_Color) * WX + 1);
 		i++;
 	}
 	rtv->filter.sdl_col_with_filter = colours2;
@@ -119,6 +119,7 @@ void	basic_function(t_rtv *rtv)
 	{
 		while (SDL_PollEvent(&rtv->e))
 		{
+
 			if (((rtv->e.type == SDL_KEYDOWN &&
 					rtv->e.key.keysym.sym == SDLK_ESCAPE) ||
 					rtv->e.window.event == SDL_WINDOWEVENT_CLOSE) &&
