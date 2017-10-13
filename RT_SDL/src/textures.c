@@ -44,7 +44,13 @@ void	uploading_textures(t_rtv *rtv)
 			tx = (t_mapping_texture *)rtv->objects[i].texture.tx_struct;
 			str = join("image/", tx->img_path);
 			if (!(tx->srf = IMG_Load(str)))
-				put_error("Invalid path", str);
+			{
+				put_error("Invalid path", str); // при неправильном пути нужно 
+				//добавить очистку и выход в меню
+				//так как сейчас программа просто аварийно завершается
+				// и это плохо
+
+			}
 			tx->h = tx->srf->h;
 			tx->w = tx->srf->w;
 			tx->arr = (int*)tx->srf->pixels;
