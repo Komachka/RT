@@ -1,3 +1,8 @@
+define generate_file
+    @echo "Compiling.."
+    @echo '$(1)'
+endef
+
 NAME = RT
 CC = gcc -Wall -Wextra -Werror
 CFLAGS = -F./libraries/SDL -O3
@@ -63,14 +68,15 @@ SRC = main.c \
 OBJ	= $(addprefix $(DSRC)/,$(SRC:.c=.o))
 OBJJSON = $(JSON:.c=.o)
 
-all : $(NAME)
+all : $(NAME) print
 
 $(NAME) : $(OBJ) $(OBJJSON)
-	@echo "Compiling.."
 	@$(CC) $(CFLAGS) $(SDL_FLAGS) $(OBJJSON) $(OBJ) -o $(NAME)
 
 %.o: %.c
 	@$(CC) $(CFLAGS) -c -o $@ $<
+	@echo "Compiling.."  $<
+
 
 clean:
 	@echo "Cleaning.."

@@ -31,8 +31,8 @@
 # define COUNT 6
 
 
-# define WX 1573
-# define WY 1103
+# define WX 1500
+# define WY 800
 
 # define WIDTH 1400
 # define HEIGHT 1000
