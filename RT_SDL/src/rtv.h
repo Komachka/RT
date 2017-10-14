@@ -30,8 +30,11 @@
 
 # define COUNT 6
 
+
 # define WX 500
 # define WY 550
+
+
 
 # define WIDTH 1400
 # define HEIGHT 1000
@@ -678,6 +681,7 @@ t_color					creating_skybox(t_rtv *rtv, t_ray *r);
 /*
 ** filters
 */
+
 void					copy_to_filter(t_rtv *rtv);
 void					create_b_n_w_filter(t_rtv *rtv);
 void					create_blur_filter(t_rtv *rtv, double red, double green, double blue);
@@ -686,6 +690,7 @@ void					create_glass_filter(t_rtv *rtv);
 void					create_sepia_filter(t_rtv *rtv, int red, int green, int blue);
 void					create_negative_filter(t_rtv *rtv);
 void					create_sromanets(t_rtv *rtv);
+
 
 /*
 ** basic functions

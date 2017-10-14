@@ -23,6 +23,8 @@ int	randon(int low, int hight)
 
 void create_filter(t_rtv *rtv)
 {
+
+
     t_filter filter;
 
     filter.romanets = 0;
@@ -32,7 +34,9 @@ void create_filter(t_rtv *rtv)
     filter.glass = 0;
     filter.blur = 0;
     filter.black_and_white = 0;
+
     rtv->filter = filter;
+
 }
 
 
@@ -42,14 +46,18 @@ void	copy_to_filter(t_rtv *rtv)
     int j;
 	
     i = 0;
+
 	while (i <= WY)
+
 	{
 		j = 0;
 		while (j <= WX)
 		{
+
 	    
           rtv->filter.sdl_col_with_filter[i][j] = rtv->s_c[i][j];
 		  j++;
+
 		}
 		i++;
 	}

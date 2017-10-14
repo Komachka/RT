@@ -12,6 +12,23 @@
 
 #include "rtv.h"
 
+
+void    del_arrey(void **arrey, int size)
+{
+        int i;
+
+        i = 0;
+        while (i < size)
+        {
+                if (arrey[i] != NULL)
+                        free(arrey[i]);
+                i++;
+        }
+        if (arrey != NULL)
+                free(arrey);
+}
+
+
 static inline void	malloc_sdl_colour(t_rtv *rtv)
 {
 	SDL_Color **colours;
@@ -96,6 +113,7 @@ static inline void	ft_action(t_rtv *rtv)
 	load_texture(rtv);
 	uploading_textures(rtv); // загрузка текстур з картинки в массив
 	SDL_RenderClear(rtv->renderer);
+
 	malloc_sdl_colour(rtv);
 	threads(rtv); // 10 leaks
 	copy_to_filter(rtv);
@@ -103,7 +121,15 @@ static inline void	ft_action(t_rtv *rtv)
 	create_rander_texture(rtv); // поменять назад
 	ft_init_texture_rect(rtv);
 	SDL_RenderCopy(rtv->renderer, rtv->sdl_texture_render, NULL, &rtv->rect_rt);
+
 	SDL_RenderPresent(rtv->renderer);
+}
+
+void clean(t_rtv *rtv)
+{
+	del_arrey((void**)rtv->s_c, WX);
+	del_arrey((void**)rtv->filter.sdl_col_with_filter, WX);
+
 }
 
 void	basic_function(t_rtv *rtv)
@@ -120,17 +146,22 @@ void	basic_function(t_rtv *rtv)
 		while (SDL_PollEvent(&rtv->e))
 		{
 
+
 			if (((rtv->e.type == SDL_KEYDOWN &&
 					rtv->e.key.keysym.sym == SDLK_ESCAPE) ||
 					rtv->e.window.event == SDL_WINDOWEVENT_CLOSE) &&
 					rtv->window_id == rtv->e.window.windowID)
 			{
 				done = 1;
-				//SDL_Log(" keysym %u", rtv->e.key.keysym.sym);
+				
 			}
 			else if (rtv->e.type == SDL_KEYUP)
+
 				my_key_funct(rtv);
 		}
 	}
 	delstruct(rtv);
 }
+
+
+
