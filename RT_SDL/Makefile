@@ -22,6 +22,7 @@ SRC = main.c \
 	  paint_to_image.c \
 	  basic_functions.c \
 	  auxiliary_functions.c \
+	  free_rtv.c \
 	  colors_1.c \
 	  colors_2.c \
 	  find_norm_1.c \
@@ -51,6 +52,7 @@ SRC = main.c \
 	  json_validate_more_figures.c \
 	  json_validate_object.c \
 	  json_validate_objects.c \
+	  json_validate_polygon.c \
 	  json_validate_rest_figures.c \
 	  json_validate_rtv_and_camera.c \
 	  json_validate_textures_and_skybox.c \
