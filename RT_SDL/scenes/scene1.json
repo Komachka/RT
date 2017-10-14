@@ -16,11 +16,11 @@
         "FOV"                  : 45
     },
     "Skybox"                  : {
-        "Radius" : 10,
-        "Color"  : "BB0000",
-        "Texture"  : {
-            "Type"          : "MAPPING",
-            "Path"          : "test.png"
+        "Radius"  : 10,
+        "Color"   : "BB0000",
+        "Texture" : {
+            "Type" : "MAPPING",
+            "Path" : "test.png"
         }
     },
     "Light"                   : [
@@ -77,6 +77,47 @@
     ],
     "Objects"                 : [
         {
+            "Id"       : "POLYGON",
+            "Object"   : {
+                "Faces"  : 2,
+                "Vertex" : [
+                    {"x" : -15, "y" : 20, "z" : 200},
+                    {"x" : 20, "y" : 20, "z" : 200},
+                    {"x" : 3, "y" : 40, "z" : 200},
+                    {"x" : 20, "y" : -15, "z" : 200}
+                ],
+                "Index"  : [0, 1, 2, 3, 0, 1],
+                "Color"  : [
+                    "ff0000", "ffffff"
+                ]
+            },
+            "Material" : {
+                "Color"        : "0000FF",
+                "Ambient"      : {
+                    "Red"   : 0.8,
+                    "Green" : 0.8,
+                    "Blue"  : 0.8,
+                    "Alpha" : 0
+                },
+                "Diffuse"      : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Specular"     : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Shininess"    : 8,
+                "Reflective"   : 0,
+                "Transparency" : 0,
+                "Refraction"   : 1.015
+            }
+        },
+        {
             "Id"       : "SPHERE",
             "Object"   : {
                 "Position" : {"x" : -15, "y" : 10, "z" : 120},
@@ -108,8 +149,8 @@
                 "Refraction"   : 1.015
             },
             "Texture"  : {
-                "Type"          : "MAPPING",
-                "Path"          : "hexagon.png"
+                "Type" : "MAPPING",
+                "Path" : "hexagon.png"
             }
         },
         {
