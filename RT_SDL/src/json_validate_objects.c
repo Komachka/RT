@@ -14,13 +14,13 @@
 
 static inline char	*validate_3(cJSON *tmp[], cJSON *material[], t_figure *fig)
 {
-	char	*arr[15];
-	int		num[15];
+	char	*arr[16];
+	int		num[16];
 
 	VAR_INT(index, -1);
 	valid_data(arr, "Id");
 	valid_id_list(num);
-	while (++index < 15)
+	while (++index < 16)
 		if (cmp(arr[index], tmp[0]->valuestring))
 			fig->id = num[index];
 	if (fig->id < 0)

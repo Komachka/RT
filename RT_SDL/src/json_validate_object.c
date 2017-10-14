@@ -28,6 +28,12 @@ static inline char	*validate_object_3(cJSON *object, t_figure *figure, int id)
 		if ((tmp[2] = cJSON_GetObjectItemCaseSensitive(object, "Holes")))
 			return (validate_plane_with_hole(tmp, figure));
 	}
+	if (id == POLYGON &&
+		(tmp[0] = cJSON_GetObjectItemCaseSensitive(object, "Faces")) &&
+		(tmp[1] = cJSON_GetObjectItemCaseSensitive(object, "Vertex")) &&
+		(tmp[2] = cJSON_GetObjectItemCaseSensitive(object, "Index")) &&
+		(tmp[3] = cJSON_GetObjectItemCaseSensitive(object, "Color")))
+		return (validate_polygon(tmp, figure));
 	return ("Some Object Error");
 }
 
@@ -35,7 +41,8 @@ static inline char	*validate_object_2(cJSON *object, t_figure *figure, int id)
 {
 	cJSON *tmp[4];
 
-	if (id == PLANE || id == PLANE_WITH_HOLE || id == DISC_WITH_HOLE)
+	if (id == PLANE || id == PLANE_WITH_HOLE || id == DISC_WITH_HOLE ||
+		id == POLYGON)
 		return (validate_object_3(object, figure, id));
 	if (id == TRIANGLE &&
 		(tmp[0] = cJSON_GetObjectItemCaseSensitive(object, "Vertex A")) &&

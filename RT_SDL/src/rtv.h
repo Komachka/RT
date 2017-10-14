@@ -77,8 +77,8 @@ enum {DIRECTIONAL_LIGHT, POINT_LIGHT, SPOT_LIGHT};
 /*
 ** figure types
 */
-enum {SPHERE, PLANE, CYLINDER, CONE, TORUS, TRIANGLE, DISC, ELLIPSOID, \
-	PARABOLOID, LIMITED_CYLINDER, LIMITED_CONE, LIMITED_PARABOLOID, \
+enum {SPHERE, PLANE, CYLINDER, CONE, TORUS, TRIANGLE, DISC, ELLIPSOID,
+	PARABOLOID, LIMITED_CYLINDER, LIMITED_CONE, LIMITED_PARABOLOID,
 	LIMITED_SPHERE, PLANE_WITH_HOLE, DISC_WITH_HOLE, POLYGON};
 
 /*
@@ -190,7 +190,7 @@ typedef struct			s_light
 
 typedef struct			s_additional
 {
-	int 		subfigure;
+	int					subfigure;
 	int					figure;
 	t_vect				point;
 	t_vect				norm;
@@ -318,26 +318,35 @@ typedef struct			s_limited_paraboloid
 	double				k;
 }						t_limited_paraboloid;
 
-typedef struct s_disc
+typedef struct			s_disc
 {
-	t_vect 		pos;
-	t_vect 		norm;
-	double		r;
-} 				t_disc;
+	t_vect				pos;
+	t_vect				norm;
+	double				r;
+} 						t_disc;
 
-typedef struct s_disc_with_hole
+typedef struct			s_disc_with_hole
 {
-	t_disc		disc;
-	t_disc 		hole;
-}				t_disc_with_hole;
+	t_disc				disc;
+	t_disc				hole;
+}						t_disc_with_hole;
 
-typedef struct s_plane_with_hole
+typedef struct			s_plane_with_hole
 {
-	t_vect		norm;
-	t_vect		point;
-	int 		holes_num;
-	t_disc		*hole;
-}				t_plane_with_hole;
+	t_vect				norm;
+	t_vect				point;
+	int					holes_num;
+	t_disc				*hole;
+}						t_plane_with_hole;
+
+typedef struct			s_polygon
+{
+	int					faces;
+	t_vect		 		*vx;
+	int					*index;
+	t_vect				*norm;
+	t_color				*col;
+}						t_polygon;
 
 /*
 ** textures
@@ -428,14 +437,6 @@ typedef struct			s_figure
 	t_vect				(*norm_vector)(void *, t_vect *, double);
 }						t_figure;
 
-typedef struct s_polygon
-{
-	int 		faces;
-	t_vect 		*vx;
-	int 		*index;
-	t_vect 		*norm;
-	t_color 	*col;
-}				t_polygon;
 
 /*
 ** filters
@@ -496,9 +497,9 @@ typedef struct			s_rtv
 	t_color				global_light;
 	int					sk;
 	t_skybox			skybox;
-	t_vect def_cam_pos;
-	double def_cam_dir[3];
-	int delphin;
+	t_vect				def_cam_pos;
+	double				def_cam_dir[3];
+	int					delphin;
 }						t_rtv;
 
 /*
@@ -561,14 +562,14 @@ typedef struct			s_tor
 	double				d;
 }						t_tor;
 
-typedef struct s_tmp
+typedef struct			s_tmp
 {
-	int x;
-	int y;
-	int filterX;
-	int filterY;
-	t_rtv *rtv;
-}t_tmp;
+	int					x;
+	int					y;
+	int					filterX;
+	int					filterY;
+	t_rtv				*rtv;
+}						t_tmp;
 
 /*
 ** actions with vectors
@@ -609,7 +610,7 @@ t_color					intersection(t_rtv *rtv, t_ray *r);
 t_vect					intersection_point(double t, t_ray *r);
 int						complicated_intersection(t_rtv *rtv, t_ray *r, t_vect *point);
 int						intersection_disc_with_hole(t_ray *r, void *disc, double *t, double *z);
-int 	intersection_polygon(t_ray *ray, void *obj, double *t, double *z);
+int						intersection_polygon(t_ray *ray, void *obj, double *t, double *z);
 
 /*
 ** calculating norm vectors for objects
@@ -620,7 +621,7 @@ t_vect					cylinder_norm_vector(void *obj, t_vect *point, double a);
 t_vect					cone_norm_vector(void *obj, t_vect *point, double a);
 t_vect					torus_norm_vector(void *obj, t_vect *point, double a);
 t_vect					triangle_norm_vector(void *obj, t_vect *point, double a);
-t_vect			disc_norm_vector(void *obj, t_vect *point, double a);
+t_vect					disc_norm_vector(void *obj, t_vect *point, double a);
 t_vect					ellipsoid_norm_vector(void *obj, t_vect *point, double a);
 t_vect					paraboloid_norm_vector(void *obj, t_vect *point, double a);
 t_vect					limited_cylinder_norm_vector(void *obj, t_vect *point, double a);
@@ -628,16 +629,16 @@ t_vect					limited_cone_norm_vector(void *obj, t_vect *point, double a);
 t_vect					limited_paraboloid_norm_vector(void *obj, t_vect *point, double a);
 t_vect					limited_sphere_norm_vector(void *obj, t_vect *point, double a);
 t_vect					plane_with_hole_norm_vector(void *obj, t_vect *point, double a);
-t_vect		find_norm(t_rtv *rtv, t_vect fg, t_vect *point, t_vect *r_dir);
+t_vect					find_norm(t_rtv *rtv, t_vect fg, t_vect *point, t_vect *r_dir);
 t_vect					disc_with_hole_norm_vector(void *obj, t_vect *point, double a);
-t_vect 		polygon_norm_vector(void *obj, t_vect *point, double a);
+t_vect					polygon_norm_vector(void *obj, t_vect *point, double a);
 /*
 ** colorizing
 */
 t_color					calculate_color(double i, t_color *c);
 t_color					average_color(t_color *lights, int light_num);
 void					paint_image(t_rtv *r, int x, int y, t_color cl);
-t_color			colorizing(t_rtv *rtv, t_vect tm, t_ray *r, int recursive_depth);
+t_color					colorizing(t_rtv *rtv, t_vect tm, t_ray *r, int recursive_depth);
 t_color					create_color_struct(double r, double g, double b, double a);// вже не потрібна
 t_color					mult_color_coefs(t_color a, t_color b);
 t_color					proportional_color_distribution(t_color *cl1, t_color *cl2, double p1);
@@ -702,6 +703,7 @@ int						quartic_equation(t_quartic_eq *n);
 double					select_value(double *array, int len);
 t_vect					adding_bias(t_vect *point, t_vect *dir);
 void					delstruct(t_rtv *rtv);
+void					free_rtv(t_rtv *rtv);
 
 int						ft_atoi_base(const char *str, int base);
 size_t					ft_strlen(char const *str);
@@ -741,6 +743,7 @@ char					*validate_limited_cylinder(cJSON *tmp[], t_figure *figure);
 char					*validate_limited_cone(cJSON *tmp[], t_figure *figure);
 char					*validate_limited_paraboloid(cJSON *tmp[], t_figure *figure);
 char					*validate_limited_sphere(cJSON *tmp[], t_figure *figure);
+char					*validate_polygon(cJSON *tmp[], t_figure *figure);
 char					*validate_object_texture(cJSON *obj, t_figure *figure);
 char					*validate_texture(cJSON *obj, t_figure *figure);
 char					*validate_perlin(cJSON *obj, t_figure *figure);
