@@ -4,7 +4,7 @@ define generate_file
 endef
 
 NAME = RT
-CC = gcc 
+CC = gcc
 CFLAGS = -F./libraries/SDL -O3
 JSON = ./libraries/JSON/cJSON.c
 SDL_FLAGS =  -framework SDL2 -framework SDL2_image -framework SDL2_ttf
@@ -91,6 +91,6 @@ fclean: clean
 re: fclean all
 
 sdl2:
-	cp -r SDL2_image.framework ~/Library/Frameworks/
-	cp -r SDL2.framework ~/Library/Frameworks/
-	cp -r SDL2_ttf.framework ~/Library/Frameworks/
+	cp -r libraries/SDL/SDL2_image.framework ~/Library/Frameworks/
+	cp -r libraries/SDL/SDL2.framework ~/Library/Frameworks/
+	cp -r libraries/SDL/SDL2_ttf.framework ~/Library/Frameworks/
