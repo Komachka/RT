@@ -12,7 +12,7 @@
 
 #include "rtv.h"
 
-void	validate_limited_cone_2(t_figure *figure, t_limited_cone *lco)
+static inline void	validate_limited_cone_2(t_figure *fig, t_limited_cone *lco)
 {
 	lco->p1 = vector_mult(lco->h1, &lco->dir);
 	lco->r1 = vector_length(&lco->p1) * tan(lco->rad);
@@ -22,12 +22,12 @@ void	validate_limited_cone_2(t_figure *figure, t_limited_cone *lco)
 	lco->r2 = vector_length(&lco->p2) * tan(lco->rad);
 	lco->p2 = vector_add(&lco->pos, &lco->p2);
 	lco->p2_norm = lco->h2 > 0 ? change_vector_direction(&lco->dir) : lco->dir;
-	figure->intersection_object = &intersection_limited_cone;
-	figure->norm_vector = &limited_cone_norm_vector;
-	figure->object = (void*)lco;
+	fig->intersection_object = &intersection_limited_cone;
+	fig->norm_vector = &limited_cone_norm_vector;
+	fig->object = (void*)lco;
 }
 
-char	*validate_limited_cone(cJSON *tmp[], t_figure *figure)
+char				*validate_limited_cone(cJSON *tmp[], t_figure *figure)
 {
 	t_limited_cone *lco;
 
@@ -53,7 +53,7 @@ char	*validate_limited_cone(cJSON *tmp[], t_figure *figure)
 	return (0);
 }
 
-char	*validate_limited_paraboloid(cJSON *tmp[], t_figure *figure)
+char				*validate_limited_paraboloid(cJSON *tmp[], t_figure *figure)
 {
 	t_limited_paraboloid *lp;
 
@@ -88,7 +88,7 @@ static inline void	valid_ls(double cut, t_figure *figure, t_limited_sphere *ls)
 	figure->object = (void*)ls;
 }
 
-char	*validate_limited_sphere(cJSON *tmp[], t_figure *figure)
+char				*validate_limited_sphere(cJSON *tmp[], t_figure *figure)
 {
 	t_limited_sphere *ls;
 
