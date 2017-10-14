@@ -54,14 +54,7 @@ void				delstruct(t_rtv *rtv)
 	SDL_FreeSurface(rtv->surface_main);
 	SDL_DestroyRenderer(rtv->renderer);
 	SDL_DestroyWindow(rtv->window);
-	while (--rtv->figure_num != -1)
-	{
-		free(rtv->objects[rtv->figure_num].object);
-		if (rtv->objects[rtv->figure_num].texturing == ON)
-			free(rtv->objects[rtv->figure_num].texture.tx_struct);
-	}
-	free(rtv->objects);
-	free(rtv->l);
+	free_rtv(rtv);
 }
 
 void				delstruct1(t_menu *menu)
