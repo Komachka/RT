@@ -104,3 +104,15 @@ void				load_texture(t_rtv *rtv)
 	rtv->sdl_texture_loading[20] = IMG_LoadTexture(rtv->renderer, "gif/20.png");
 	rtv->sdl_texture_loading[21] = IMG_LoadTexture(rtv->renderer, "gif/21.png");
 }
+
+void		free_animation_texture(t_rtv *rtv)
+{
+	int i;
+
+	i = 0;
+	while (i < 54)
+	{
+		SDL_DestroyTexture(rtv->sdl_texture_loading[i]);
+		i++;
+	}
+}

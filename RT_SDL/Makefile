@@ -4,7 +4,7 @@ define generate_file
 endef
 
 NAME = RT
-CC = gcc -Wall -Wextra -Werror
+CC = gcc 
 CFLAGS = -F./libraries/SDL -O3
 JSON = ./libraries/JSON/cJSON.c
 SDL_FLAGS =  -framework SDL2 -framework SDL2_image -framework SDL2_ttf

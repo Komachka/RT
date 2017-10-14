@@ -15,20 +15,20 @@
 static inline void	malloc_sdl_colour(t_rtv *rtv)
 {
 	SDL_Color **colours;
-	colours = (SDL_Color**)malloc(sizeof(SDL_Color*) * WY + 1);
+	colours = (SDL_Color**)malloc(sizeof(SDL_Color*) * WY);
 	int i = 0;
 	while (i <= WY + 1)
 	{
-		colours[i] = (SDL_Color*)malloc(sizeof(SDL_Color) * WX + 1);
+		colours[i] = (SDL_Color*)malloc(sizeof(SDL_Color) * WX);
 		i++;
 	}
 	rtv->s_c = colours;
 	SDL_Color **colours2;
-	colours2 = (SDL_Color**)malloc(sizeof(SDL_Color*) * WY + 1);
+	colours2 = (SDL_Color**)malloc(sizeof(SDL_Color*) * WY);
 	i = 0;
 	while (i <= WY + 1)
 	{
-		colours2[i] = (SDL_Color*)malloc(sizeof(SDL_Color) * WX + 1);
+		colours2[i] = (SDL_Color*)malloc(sizeof(SDL_Color) * WX);
 		i++;
 	}
 	rtv->filter.sdl_col_with_filter = colours2;
