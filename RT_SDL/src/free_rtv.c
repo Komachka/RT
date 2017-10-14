@@ -16,6 +16,7 @@ void	free_rtv(t_rtv *rtv)
 {
 	t_plane_with_hole	*pl;
 	t_polygon			*p;
+	t_mapping_texture	*mt;
 
 	while (--rtv->figure_num != -1)
 	{
@@ -34,8 +35,16 @@ void	free_rtv(t_rtv *rtv)
 		}
 		free(rtv->objects[rtv->figure_num].object);
 		if (rtv->objects[rtv->figure_num].texturing == ON)
-			free(rtv->objects[rtv->figure_num].texture.tx_struct);
+		{
+			if (rtv->objects[rtv->figure_num].texture.type == MAPPING)
+			{
+				mt = (t_mapping_texture*)rtv->objects[rtv->figure_num].texture.tx_struct;
+				free(mt->img_path);
+			}
+			free(rtv->objects[rtv->figure_num].texture.tx_struct); 
+		}
 	}
 	free(rtv->objects);
 	free(rtv->l);
+
 }

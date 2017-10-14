@@ -45,10 +45,7 @@ void	uploading_textures(t_rtv *rtv)
 			str = join("image/", tx->img_path);
 			if (!(tx->srf = IMG_Load(str)))
 			{
-				put_error("Invalid path", str); // при неправильном пути нужно 
-				//добавить очистку и выход в меню
-				//так как сейчас программа просто аварийно завершается
-				// и это плохо
+				put_error("Invalid path", str);
 
 			}
 			tx->h = tx->srf->h;
@@ -66,6 +63,7 @@ void	free_textures(t_rtv *rtv)
 
 	i = -1;
 	while (++i < rtv->figure_num)
+		
 		if (rtv->objects[i].texturing == ON &&
 				rtv->objects[i].texture.type == MAPPING)
 		{
@@ -77,5 +75,18 @@ void	free_textures(t_rtv *rtv)
 	{
 		tx = (t_mapping_texture *)rtv->skybox.texture.tx_struct;
 		SDL_FreeSurface(tx->srf);
+	}
+
+}
+
+void		free_animation_texture(t_rtv *rtv)
+{
+	int i;
+
+	i = 0;
+	while (i < 54)
+	{
+		SDL_DestroyTexture(rtv->sdl_texture_loading[i]);
+		i++;
 	}
 }

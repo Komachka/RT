@@ -12,12 +12,15 @@
 
 #include "rtv.h"
 
-int					animation(SDL_Renderer *renderer, t_rtv *rtv)
+
+static int sdl_thread(void *ptr)
 {
-	SDL_Rect	rect;
+    
+    SDL_Rect	rect;
 	static int	n_frame2 = 0;
 	SDL_Rect	rect1;
 
+	t_rtv *rtv = (t_rtv*)ptr;
 	rect1.x = 0;
 	rect1.y = 0;
 	rect1.w = WX;
@@ -26,15 +29,38 @@ int					animation(SDL_Renderer *renderer, t_rtv *rtv)
 	rect.h = 200;
 	rect.x = WX / 2 - rect.w / 2;
 	rect.y = WY / 2 - rect.h / 2;
-	SDL_RenderClear(renderer);
-	SDL_RenderCopy(renderer, rtv->sdl_texture_render, NULL, &rect1);
-	SDL_RenderCopy(renderer, rtv->sdl_texture_loading[n_frame2 / 8],
+	SDL_RenderClear(rtv->renderer);
+	SDL_RenderCopy(rtv->renderer, rtv->sdl_texture_render, NULL, &rect1);
+	SDL_RenderCopy(rtv->renderer, rtv->sdl_texture_loading[n_frame2 / 8],
 			NULL, &rect);
 	n_frame2++;
 	if (n_frame2 / 8 >= 54)
 		n_frame2 = 0;
-	SDL_RenderPresent(renderer);
+	SDL_RenderPresent(rtv->renderer);
 	return (0);
+}
+
+
+
+int					animation(SDL_Renderer *renderer, t_rtv *rtv)
+{
+	SDL_Thread *thread;
+    int         threadReturnValue;
+
+
+    thread = SDL_CreateThread(sdl_thread, "sdl_thread", (void*)rtv);
+	if (NULL == thread) 
+    {
+        SDL_Log("\nSDL_CreateThread failed: %s\n", SDL_GetError());
+
+   	} 
+    else 
+    {
+        SDL_WaitThread(thread, &threadReturnValue);
+    }
+
+    return (0);
+	
 }
 
 static inline void	load_texture3(t_rtv *rtv)
@@ -105,14 +131,3 @@ void				load_texture(t_rtv *rtv)
 	rtv->sdl_texture_loading[21] = IMG_LoadTexture(rtv->renderer, "gif/21.png");
 }
 
-void		free_animation_texture(t_rtv *rtv)
-{
-	int i;
-
-	i = 0;
-	while (i < 54)
-	{
-		SDL_DestroyTexture(rtv->sdl_texture_loading[i]);
-		i++;
-	}
-}

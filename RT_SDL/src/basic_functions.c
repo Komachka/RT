@@ -17,7 +17,7 @@ static inline void	malloc_sdl_colour(t_rtv *rtv)
 	SDL_Color **colours;
 	colours = (SDL_Color**)malloc(sizeof(SDL_Color*) * WY);
 	int i = 0;
-	while (i <= WY + 1)
+	while (i <= WY)
 	{
 		colours[i] = (SDL_Color*)malloc(sizeof(SDL_Color) * WX);
 		i++;
@@ -26,7 +26,7 @@ static inline void	malloc_sdl_colour(t_rtv *rtv)
 	SDL_Color **colours2;
 	colours2 = (SDL_Color**)malloc(sizeof(SDL_Color*) * WY);
 	i = 0;
-	while (i <= WY + 1)
+	while (i <= WY)
 	{
 		colours2[i] = (SDL_Color*)malloc(sizeof(SDL_Color) * WX);
 		i++;
@@ -44,7 +44,6 @@ static inline void	ft_init_texture_rect(t_rtv *rtv)
 
 void				ft_redraw(t_rtv *rtv)
 {
-	SDL_RenderClear(rtv->renderer);
 	threads(rtv);
 	copy_to_filter(rtv);
 	if (rtv->filter.black_and_white > 0)
@@ -98,8 +97,9 @@ static inline void	ft_action(t_rtv *rtv)
 	uploading_textures(rtv); // загрузка текстур з картинки в массив
 	SDL_RenderClear(rtv->renderer);
 	malloc_sdl_colour(rtv);
-	threads(rtv);
+	threads(rtv); // 10 leaks
 	copy_to_filter(rtv);
+	rtv->surface_main = SDL_CreateRGBSurface(0, WX, WY, 32, 0, 0, 0, 0);
 	create_rander_texture(rtv); // поменять назад
 	ft_init_texture_rect(rtv);
 	SDL_RenderCopy(rtv->renderer, rtv->sdl_texture_render, NULL, &rtv->rect_rt);

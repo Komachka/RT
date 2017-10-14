@@ -164,6 +164,7 @@ void	ft_menu(t_menu *menu, t_rtv *rtv)
 					&& menu->window_id == menu->e.window.windowID)
 			{
 				delstruct1(menu);
+				return ;
 			}
 			if (menu->e.type == SDL_MOUSEMOTION)
 			{

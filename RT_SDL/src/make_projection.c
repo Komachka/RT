@@ -91,9 +91,7 @@ void	*make_projection(void *k)
 	p = (t_thred *)k;
 	tmp.z = p->rtv1->cam.lk_dir;
 	c = (t_color*)malloc(sizeof(t_color) * p->rtv1->samples);
-
-		i = 0;
-
+	i = 0;
 	while (p->y_start < p->y_end)
 	{
 		x = -1;
@@ -116,17 +114,17 @@ void	*make_projection(void *k)
 					dy = -1;
 				}
 				dx = -1;
-				average = average_color(c, p->rtv1->samples);
+				average = average_color(c, p->rtv1->samples); 
 				correct_exposure(p->rtv1, &average);
 				paint_image(p->rtv1, x, p->y_start, average);
 				i = 0;
 			}
 		}
 		if (p->index == 0 && p->rtv1->delphin == ON) {
-			animation(p->rtv1->renderer, p->rtv1);
+			animation(p->rtv1->renderer, p->rtv1); 
 		}
 		p->y_start++;
 	}
-	free(&c);
+	free(c);
 	return (0);
 }

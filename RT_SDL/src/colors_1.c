@@ -54,7 +54,7 @@ t_color	average_color(t_color *rt, int light_num)
 	int		i;
 
 	i = -1;
-	set_zero_color(&color);
+	//set_zero_color(&color);
 	if (rt)
 	{
 		while (++i < light_num)
@@ -64,8 +64,8 @@ t_color	average_color(t_color *rt, int light_num)
 			color.b += rt[i].b;
 			color.al += rt[i].al;
 		}
-		if (light_num)
-			color = calculate_color(1.00 / (double)light_num, &color);
+		 if (light_num)
+		 	color = calculate_color(1.00 / (double)light_num, &color);
 	}
 	return (color);
 }

@@ -36,7 +36,7 @@ static inline void	del_arrey(void **arrey, int size)
 	int i;
 
 	i = 0;
-	while (i < size)
+	while (i <= size)
 	{
 		if (arrey[i] != NULL)
 			free(arrey[i]);
@@ -53,9 +53,17 @@ void				delstruct(t_rtv *rtv)
 	del_arrey((void**)rtv->s_c, WY);
 	del_arrey((void**)rtv->filter.sdl_col_with_filter, WY);
 	SDL_FreeSurface(rtv->surface_main);
+	SDL_FreeSurface(rtv->picture); // ???
+	SDL_FreeSurface(rtv->surface); // ??
+	
+	SDL_DestroyTexture(rtv->sdl_texture_render);
+	SDL_DestroyTexture(rtv->surface_texture);
+	SDL_DestroyTexture(rtv->hooks);
+	SDL_RenderClear(rtv->renderer);
 	SDL_DestroyRenderer(rtv->renderer);
 	SDL_DestroyWindow(rtv->window);
 	free_rtv(rtv);
+
 }
 
 void				delstruct1(t_menu *menu)
@@ -73,8 +81,11 @@ void				delstruct1(t_menu *menu)
 	}
 	SDL_DestroyRenderer(menu->renderer);
 	SDL_DestroyWindow(menu->window);
+	
+	free(menu);
 	IMG_Quit();
 	SDL_Quit();
-	exit(0);
+	
+	
 }
 

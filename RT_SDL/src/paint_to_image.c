@@ -78,7 +78,6 @@ static inline void	put_pixel(SDL_Surface *surface, int x, int y, Uint32 pixel)
 
 void				create_rander_texture(t_rtv *rtv)
 {
-	rtv->surface_main = SDL_CreateRGBSurface(0, WX, WY, 32, 0, 0, 0, 0);
 	for (int y = 0; y < WY; ++y)
 	{
 		for (int x = 0; x < WX ; ++x)
@@ -94,4 +93,5 @@ void				create_rander_texture(t_rtv *rtv)
 	if (rtv->sdl_texture_render != NULL)
 		SDL_DestroyTexture(rtv->sdl_texture_render);
 	rtv->sdl_texture_render = SDL_CreateTextureFromSurface(rtv->renderer, rtv->surface_main);
+
 }

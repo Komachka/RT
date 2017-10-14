@@ -21,5 +21,7 @@ int		main(void)
 	rtv = (t_rtv*)malloc(sizeof(t_rtv));
 	rtv->obj = 0;
 	ft_menu(menu, rtv);
+	free(rtv);
+	exit(0);
 	return (0);
 }
