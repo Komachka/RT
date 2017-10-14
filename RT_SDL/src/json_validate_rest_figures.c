@@ -12,11 +12,11 @@
 
 #include "rtv.h"
 
-char	*validate_holes(cJSON *object, t_plane_with_hole *pl)
+static inline char	*validate_holes(cJSON *object, t_plane_with_hole *pl)
 {
 	cJSON *tmp[3];
 
-	if (!(pl->hole = (t_disc*)malloc(sizeof(t_disc) * pl->holes_num)))
+	if (!(pl->hole = (t_disс*)malloc(sizeof(t_disс) * pl->holes_num)))
 		malloc_error();
 	VAR_INT(i, 0);
 	while (i < pl->holes_num)
@@ -36,7 +36,7 @@ char	*validate_holes(cJSON *object, t_plane_with_hole *pl)
 	return (0);
 }
 
-char	*validate_plane_with_hole(cJSON *tmp[], t_figure *figure)
+char				*validate_plane_with_hole(cJSON *tmp[], t_figure *figure)
 {
 	t_plane_with_hole	*pl;
 	char				*str;
@@ -59,7 +59,7 @@ char	*validate_plane_with_hole(cJSON *tmp[], t_figure *figure)
 	return (0);
 }
 
-char	*validate_disc_with_hole(cJSON *obj[], t_figure *figure)
+char				*validate_disc_with_hole(cJSON *obj[], t_figure *figure)
 {
 	t_disc_with_hole	*dh;
 	cJSON				*tmp[3];

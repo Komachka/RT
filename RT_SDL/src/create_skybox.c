@@ -1,4 +1,3 @@
-
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -7,13 +6,13 @@
 /*   By: kzahreba <kzahreba@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/09 21:53:41 by kzahreba          #+#    #+#             */
-/*   Updated: 2017/10/09 21:53:48 by kzahreba         ###   ########.fr       */
+/*   Updated: 2017/10/11 15:39:09 by askochul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv.h"
 
-void	skybox_mapping_texture(t_skybox *skybox, t_vect *point, t_color *col)
+static inline void	skybox(t_skybox *skybox, t_vect *point, t_color *col)
 {
 	t_vect				temp;
 	t_mapping_texture	*tx;
@@ -30,7 +29,7 @@ void	skybox_mapping_texture(t_skybox *skybox, t_vect *point, t_color *col)
 	*col = parse_color(tx->arr[x[0] + tx->w * x[1]]);
 }
 
-t_color	creating_skybox(t_rtv *rtv, t_ray *rd)
+t_color				creating_skybox(t_rtv *rtv, t_ray *rd)
 {
 	t_equation		n;
 	t_vect			dist;
@@ -49,7 +48,7 @@ t_color	creating_skybox(t_rtv *rtv, t_ray *rd)
 	if (rtv->skybox.texturing == ON)
 	{
 		if (rtv->skybox.texture.type == MAPPING)
-			skybox_mapping_texture(&rtv->skybox, &s.point, &s.mat.cl);
+			skybox(&rtv->skybox, &s.point, &s.mat.cl);
 		else
 			rtv->skybox.texture.creating_texture(&s, \
 				rtv->skybox.texture.tx_struct);

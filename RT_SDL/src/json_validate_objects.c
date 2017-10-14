@@ -12,7 +12,7 @@
 
 #include "rtv.h"
 
-char	*validate_objects_next_2(cJSON *tmp[], cJSON *material[], t_figure *fig)
+static inline char	*validate_3(cJSON *tmp[], cJSON *material[], t_figure *fig)
 {
 	char	*arr[15];
 	int		num[15];
@@ -41,14 +41,14 @@ char	*validate_objects_next_2(cJSON *tmp[], cJSON *material[], t_figure *fig)
 	return (validate_object(tmp[1], fig, fig->id));
 }
 
-char	*validate_objects_next(cJSON *tmp[], t_figure *figure)
+static inline char	*validate_objects_2(cJSON *tmp[], t_figure *figure)
 {
 	cJSON	*material[8];
-	char	*arr[9];
+	char	*arr[8];
 
 	VAR_INT(i, -1);
 	valid_data(arr, "Material");
-	while (arr[++i])
+	while (++i < 8)
 		if (!(material[i] = cJSON_GetObjectItemCaseSensitive(tmp[2], arr[i])))
 			return (arr[i]);
 	if (!valid_hex(material[0]->valuestring))
@@ -60,10 +60,10 @@ char	*validate_objects_next(cJSON *tmp[], t_figure *figure)
 		return ("Invalid \"Diffuse\" value.");
 	if (validate_color(material[3], &figure->material.specular))
 		return ("Invalid \"Specular\" value.");
-	return (validate_objects_next_2(tmp, material, figure));
+	return (validate_3(tmp, material, figure));
 }
 
-char	*get_texture_type(char *type, t_figure *figure)
+static inline char	*get_texture_type(char *type, t_figure *figure)
 {
 	int		num[6];
 	char	*arr[6];
@@ -83,7 +83,7 @@ char	*get_texture_type(char *type, t_figure *figure)
 	return (0);
 }
 
-char	*validate_object_texture(cJSON *obj, t_figure *figure)
+char				*validate_object_texture(cJSON *obj, t_figure *figure)
 {
 	cJSON	*tmp[2];
 	char	*str;
@@ -101,10 +101,10 @@ char	*validate_object_texture(cJSON *obj, t_figure *figure)
 	return (0);
 }
 
-char	*validate_objects(cJSON *obj, t_rtv *rtv)
+char				*validate_objects(cJSON *obj, t_rtv *rtv)
 {
 	cJSON	*tmp[3];
-	char	*arr[4];
+	char	*arr[3];
 	char	*str;
 
 	if (!obj || obj->type != cJSON_Array)
@@ -117,12 +117,12 @@ char	*validate_objects(cJSON *obj, t_rtv *rtv)
 	while (++counter < rtv->figure_num)
 	{
 		VAR_INT(index, -1);
-		while (arr[++index])
+		while (++index < 3)
 			if (!(tmp[index] = cJSON_GetObjectItemCaseSensitive(
 					cJSON_GetArrayItem(obj, counter), arr[index])))
 				return (arr[index]);
 		rtv->objects[counter].id = -1;
-		if ((str = validate_objects_next(tmp, &rtv->objects[counter])) ||
+		if ((str = validate_objects_2(tmp, &rtv->objects[counter])) ||
 			(str = validate_object_texture(cJSON_GetArrayItem(obj, counter),
 									&rtv->objects[counter])))
 			return (str);

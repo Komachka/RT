@@ -12,9 +12,9 @@
 
 #include "rtv.h"
 
-char	*validate_rtv_next(cJSON *tmp[], t_rtv *rtv)
+static inline char	*validate_rtv_next(cJSON *tmp[], t_rtv *rtv)
 {
-	cJSON	*obj;
+	cJSON	**obj;
 	int		index;
 
 	VAR_INT(arr_size, 0);
@@ -25,24 +25,29 @@ char	*validate_rtv_next(cJSON *tmp[], t_rtv *rtv)
 		if (tmp[counter]->type != cJSON_Array ||
 			!(arr_size = cJSON_GetArraySize(tmp[counter])))
 			return (tmp[counter]->string);
+		obj = arr_size ? (cJSON**)malloc(sizeof(cJSON*) * arr_size) : 0;
 		while (++index < arr_size)
-			if (!(obj = cJSON_GetArrayItem(tmp[counter], index)) ||
-				obj->type != cJSON_Object)
+		{
+			if (!(obj[index] = cJSON_GetArrayItem(tmp[counter], index)) ||
+				obj[index]->type != cJSON_Object)
 				return (tmp[counter]->string);
+		}
+		if (obj)
+			free(obj);
 	}
 	if (validate_color(tmp[4], &rtv->global_light))
 		return ("Invalid \"Ambient Light Intensity\" value.");
 	return (0);
 }
 
-char	*validate_rtv(cJSON *obj, t_rtv *rtv)
+char				*validate_rtv(cJSON *obj, t_rtv *rtv)
 {
 	cJSON		*tmp[8];
-	char		*arr[9];
+	char		*arr[8];
 
 	VAR_INT(index, -1);
 	valid_data(arr, "Rtv");
-	while (arr[++index])
+	while (++index < 8)
 		if (!(tmp[index] = cJSON_GetObjectItemCaseSensitive(obj, arr[index])))
 			return (arr[index]);
 	if (!cmp("LAMBERT", tmp[0]->valuestring) &&
@@ -59,7 +64,7 @@ char	*validate_rtv(cJSON *obj, t_rtv *rtv)
 	return (validate_rtv_next(tmp, rtv));
 }
 
-char	*validate_camera_next(cJSON *pos, cJSON *rotate, t_camera *cam)
+static inline char	*validate_camera_2(cJSON *pos, cJSON *rotate, t_camera *cam)
 {
 	cJSON	*tmp[3];
 
@@ -79,14 +84,14 @@ char	*validate_camera_next(cJSON *pos, cJSON *rotate, t_camera *cam)
 	return (0);
 }
 
-char	*validate_camera(cJSON *obj, t_camera *cam)
+char				*validate_camera(cJSON *obj, t_camera *cam)
 {
 	cJSON		*tmp[5];
-	char		*arr[6];
+	char		*arr[4];
 
 	VAR_INT(index, -1);
 	valid_data(arr, "Camera");
-	while (arr[++index])
+	while (++index < 4)
 		if (!(tmp[index] = cJSON_GetObjectItemCaseSensitive(obj, arr[index])))
 			return (arr[index]);
 	if (!cmp("STANDART", tmp[0]->valuestring) &&
@@ -105,5 +110,5 @@ char	*validate_camera(cJSON *obj, t_camera *cam)
 	cam->scale = tan(TO_RAD(tmp[3]->valuedouble) / 2);
 	if (tmp[2]->type != cJSON_Array || cJSON_GetArraySize(tmp[2]) != 3)
 		return ("Invalid \"Camera Rotate Angles\" value.");
-	return (validate_camera_next(tmp[1], tmp[2], cam));
+	return (validate_camera_2(tmp[1], tmp[2], cam));
 }

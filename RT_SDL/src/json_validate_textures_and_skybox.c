@@ -15,7 +15,7 @@
 char	*validate_skybox(cJSON *obj, t_rtv *rtv)
 {
 	t_figure	temp;
-	cJSON		*tmp;
+	cJSON		*tmp[2];
 	char		*str;
 
 	rtv->sk = OFF;
@@ -23,12 +23,13 @@ char	*validate_skybox(cJSON *obj, t_rtv *rtv)
 	{
 		rtv->sk = ON;
 		rtv->skybox.pos = rtv->cam.pos;
-		if (!(tmp = cJSON_GetObjectItemCaseSensitive(obj, "Radius")) ||
-		tmp->type != cJSON_Number || (rtv->skybox.r = tmp->valuedouble) <= 0 ||
-			!(tmp = cJSON_GetObjectItemCaseSensitive(obj, "Color")) ||
-			tmp->type != cJSON_String || !(valid_hex(tmp->valuestring)))
+		if (!(tmp[0] = cJSON_GetObjectItemCaseSensitive(obj, "Radius")) ||
+		tmp[0]->type != cJSON_Number ||
+				(rtv->skybox.r = tmp[0]->valuedouble) <= 0 ||
+			!(tmp[1] = cJSON_GetObjectItemCaseSensitive(obj, "Color")) ||
+			tmp[1]->type != cJSON_String || !(valid_hex(tmp[1]->valuestring)))
 			return ("Invalid Skybox.");
-		rtv->skybox.cl = create_color(tmp->valuestring);
+		rtv->skybox.cl = create_color(tmp[1]->valuestring);
 		temp.id = SPHERE;
 		if ((str = validate_object_texture(obj, &temp)))
 			return (str);

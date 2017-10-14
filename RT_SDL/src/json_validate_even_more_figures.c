@@ -76,7 +76,7 @@ char	*validate_limited_paraboloid(cJSON *tmp[], t_figure *figure)
 	return (0);
 }
 
-void	validate_ls(double cut, t_figure *figure, t_limited_sphere *ls)
+static inline void	valid_ls(double cut, t_figure *figure, t_limited_sphere *ls)
 {
 	ls->cut_r = sqrt((ls->r * ls->r) - (cut * cut));
 	ls->p1 = vector_mult(cut, &ls->cut_dir);
@@ -107,6 +107,6 @@ char	*validate_limited_sphere(cJSON *tmp[], t_figure *figure)
 	if (!cmp("ON", tmp[4]->valuestring) && !cmp("OFF", tmp[4]->valuestring))
 		return ("Invalid Limited Sphere \"Caps\" value.");
 	ls->caps = cmp("ON", tmp[4]->valuestring) ? ON : OFF;
-	validate_ls(tmp[3]->valuedouble, figure, ls);
+	valid_ls(tmp[3]->valuedouble, figure, ls);
 	return (0);
 }

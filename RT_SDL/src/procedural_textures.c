@@ -13,7 +13,6 @@
 
 #include "rtv.h"
 
-
 void	perlin_noise_texture(t_additional *s, void *t)
 {
 	int					i;

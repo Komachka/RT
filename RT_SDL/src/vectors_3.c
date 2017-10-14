@@ -6,13 +6,13 @@
 /*   By: kzahreba <kzahreba@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/18 17:06:25 by kzahreba          #+#    #+#             */
-/*   Updated: 2017/10/04 16:15:38 by askochul         ###   ########.fr       */
+/*   Updated: 2017/10/11 22:19:24 by askochul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv.h"
 
-t_vect		change_vector_direction(t_vect *v)
+t_vect	change_vector_direction(t_vect *v)
 {
 	t_vect new;
 
@@ -22,7 +22,7 @@ t_vect		change_vector_direction(t_vect *v)
 	return (new);
 }
 
-t_vect		create_vector(double x, double y, double z)
+t_vect	create_vector(double x, double y, double z)
 {
 	t_vect v;
 
@@ -32,12 +32,12 @@ t_vect		create_vector(double x, double y, double z)
 	return (v);
 }
 
-double		vector_length(t_vect *v)
+double	vector_length(t_vect *v)
 {
 	return (sqrt(v->x * v->x + v->y * v->y + v->z * v->z));
 }
 
-t_vect		project_point_on_plane(t_vect *point, t_vect *pl_point, t_vect *pl_norm)
+t_vect	project_point_on_plane(t_vect *point, t_vect *pl_point, t_vect *pl_norm)
 {
 	t_vect v;
 
@@ -46,7 +46,7 @@ t_vect		project_point_on_plane(t_vect *point, t_vect *pl_point, t_vect *pl_norm)
 	return (vector_add(point, &v));
 }
 
-t_vect		mult_vectors_coordinates(t_vect *v1, t_vect *v2)
+t_vect	mult_vectors_coordinates(t_vect *v1, t_vect *v2)
 {
-	return(create_vector(v1->x * v2->x, v1->y * v2->y, v1->z * v2->z));
+	return (create_vector(v1->x * v2->x, v1->y * v2->y, v1->z * v2->z));
 }

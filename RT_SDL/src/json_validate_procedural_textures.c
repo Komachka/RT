@@ -15,22 +15,22 @@
 char	*validate_perlin(cJSON *obj, t_figure *figure)
 {
 	t_perlin_texture	*pr;
-	cJSON				*tmp;
+	cJSON				*tmp[6];
 
 	if (!(pr = (t_perlin_texture*)malloc(sizeof(t_perlin_texture))))
 		malloc_error();
-	if (!(tmp = cJSON_GetObjectItemCaseSensitive(obj, "Octaves")) ||
-		(pr->octaves = tmp->valuedouble) <= 1 ||
-		!(tmp = cJSON_GetObjectItemCaseSensitive(obj, "Amplitude")) ||
-		(pr->amplitude = tmp->valuedouble) <= 0 ||
-		!(tmp = cJSON_GetObjectItemCaseSensitive(obj, "Persistence")) ||
-		(pr->persistence = tmp->valuedouble) <= 0 ||
-		!(tmp = cJSON_GetObjectItemCaseSensitive(obj, "Exponent")) ||
-		(pr->exponent = tmp->valuedouble) <= 0 ||
-		!(tmp = cJSON_GetObjectItemCaseSensitive(obj, "Frequency")) ||
-		validate_vector(tmp, &pr->frequency) ||
-		!(tmp = cJSON_GetObjectItemCaseSensitive(obj, "Frequency Att")) ||
-		validate_vector(tmp, &pr->frequency_att))
+	if (!(tmp[0] = cJSON_GetObjectItemCaseSensitive(obj, "Octaves")) ||
+		(pr->octaves = tmp[0]->valuedouble) <= 1 ||
+		!(tmp[1] = cJSON_GetObjectItemCaseSensitive(obj, "Amplitude")) ||
+		(pr->amplitude = tmp[1]->valuedouble) <= 0 ||
+		!(tmp[2] = cJSON_GetObjectItemCaseSensitive(obj, "Persistence")) ||
+		(pr->persistence = tmp[2]->valuedouble) <= 0 ||
+		!(tmp[3] = cJSON_GetObjectItemCaseSensitive(obj, "Exponent")) ||
+		(pr->exponent = tmp[3]->valuedouble) <= 0 ||
+		!(tmp[4] = cJSON_GetObjectItemCaseSensitive(obj, "Frequency")) ||
+		validate_vector(tmp[4], &pr->frequency) ||
+		!(tmp[5] = cJSON_GetObjectItemCaseSensitive(obj, "Frequency Att")) ||
+		validate_vector(tmp[5], &pr->frequency_att))
 		return ("Invalid Perlin Texture.");
 	figure->texture.creating_texture = &perlin_noise_texture;
 	figure->texture.tx_struct = (void*)pr;
@@ -40,14 +40,14 @@ char	*validate_perlin(cJSON *obj, t_figure *figure)
 char	*validate_plasma(cJSON *obj, t_figure *figure)
 {
 	t_plasma_texture	*pl;
-	cJSON				*tmp;
+	cJSON				*tmp[2];
 
 	if (!(pl = (t_plasma_texture*)malloc(sizeof(t_plasma_texture))))
 		malloc_error();
-	if (!(tmp = cJSON_GetObjectItemCaseSensitive(obj, "Frequency")) ||
-			valid_color(tmp, &pl->frequency) ||
-			!(tmp = cJSON_GetObjectItemCaseSensitive(obj, "Phase")) ||
-			valid_color(tmp, &pl->phase))
+	if (!(tmp[0] = cJSON_GetObjectItemCaseSensitive(obj, "Frequency")) ||
+			valid_color(tmp[0], &pl->frequency) ||
+			!(tmp[1] = cJSON_GetObjectItemCaseSensitive(obj, "Phase")) ||
+			valid_color(tmp[1], &pl->phase))
 		return ("Invalid Plasma Texture.");
 	figure->texture.tx_struct = (void*)pl;
 	figure->texture.creating_texture = &plasma_texture;

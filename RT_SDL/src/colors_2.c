@@ -6,7 +6,7 @@
 /*   By: askochul <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/28 16:14:52 by askochul          #+#    #+#             */
-/*   Updated: 2017/09/28 16:14:59 by askochul         ###   ########.fr       */
+/*   Updated: 2017/10/11 15:38:08 by askochul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	set_zero_color(t_color *cl)
 	}
 }
 
-t_color parse_color(int color)
+t_color	parse_color(int color)
 {
 	t_color cl;
 

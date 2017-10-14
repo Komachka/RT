@@ -36,9 +36,9 @@ char	*validate_triangle(cJSON *tmp[], t_figure *figure)
 
 char	*validate_disc(cJSON *tmp[], t_figure *figure)
 {
-	t_disc *disc;
+	t_disс *disc;
 
-	if (!(disc = (t_disc*)malloc(sizeof(t_disc))))
+	if (!(disc = (t_disс*)malloc(sizeof(t_disс))))
 		malloc_error();
 	if (validate_vector(tmp[0], &disc->pos))
 		return ("Invalid Disc \"Position\" value.");
@@ -49,7 +49,7 @@ char	*validate_disc(cJSON *tmp[], t_figure *figure)
 		(disc->r = tmp[2]->valuedouble) <= 0)
 		return ("Invalid Disc \"Radius\" value.");
 	figure->intersection_object = &intersection_disc;
-	figure->norm_vector = &disc_norm_vector;
+	figure->norm_vector = &disс_norm_vector;
 	figure->object = (void*)disc;
 	return (0);
 }

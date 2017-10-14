@@ -6,43 +6,38 @@
 /*   By: kstorozh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/02 19:09:41 by kstorozh          #+#    #+#             */
-/*   Updated: 2017/10/02 19:09:59 by kstorozh         ###   ########.fr       */
+/*   Updated: 2017/10/11 15:33:24 by askochul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-
 #include "rtv.h"
 
-
-int animation(float percent, SDL_Renderer *renderer, t_rtv *rtv)
+int					animation(SDL_Renderer *renderer, t_rtv *rtv)
 {
-	(void)percent;
-	SDL_Rect rect;
-	static int n_frame2 = 0;
+	SDL_Rect	rect;
+	static int	n_frame2 = 0;
+	SDL_Rect	rect1;
 
-	SDL_Rect rect1; // rect 1 from surface
 	rect1.x = 0;
 	rect1.y = 0;
 	rect1.w = WX;
 	rect1.h = WY;
-	rect.x = WX / 2 - WX / 4;
-	rect.y = WY / 2 - WY / 4;
-	rect.w = 400;
-	rect.h = 400;
-	//n_frame =  floor(percent * ANIMATION_FRAMES);
+	rect.w = 200;
+	rect.h = 200;
+	rect.x = WX / 2 - rect.w / 2;
+	rect.y = WY / 2 - rect.h / 2;
 	SDL_RenderClear(renderer);
 	SDL_RenderCopy(renderer, rtv->sdl_texture_render, NULL, &rect1);
-	SDL_RenderCopy(renderer, rtv->sdl_texture_loading[n_frame2 / 8], NULL,
-				   &rect);
+	SDL_RenderCopy(renderer, rtv->sdl_texture_loading[n_frame2 / 8],
+			NULL, &rect);
 	n_frame2++;
 	if (n_frame2 / 8 >= 54)
 		n_frame2 = 0;
 	SDL_RenderPresent(renderer);
-	return 0;
+	return (0);
 }
 
-void load_texture3(t_rtv *rtv)
+static inline void	load_texture3(t_rtv *rtv)
 {
 	rtv->sdl_texture_loading[46] = IMG_LoadTexture(rtv->renderer, "gif/46.png");
 	rtv->sdl_texture_loading[47] = IMG_LoadTexture(rtv->renderer, "gif/47.png");
@@ -54,7 +49,7 @@ void load_texture3(t_rtv *rtv)
 	rtv->sdl_texture_loading[53] = IMG_LoadTexture(rtv->renderer, "gif/53.png");
 }
 
-void load_texture2(t_rtv *rtv)
+static inline void	load_texture2(t_rtv *rtv)
 {
 	rtv->sdl_texture_loading[22] = IMG_LoadTexture(rtv->renderer, "gif/22.png");
 	rtv->sdl_texture_loading[23] = IMG_LoadTexture(rtv->renderer, "gif/23.png");
@@ -80,10 +75,9 @@ void load_texture2(t_rtv *rtv)
 	rtv->sdl_texture_loading[43] = IMG_LoadTexture(rtv->renderer, "gif/43.png");
 	rtv->sdl_texture_loading[44] = IMG_LoadTexture(rtv->renderer, "gif/44.png");
 	rtv->sdl_texture_loading[45] = IMG_LoadTexture(rtv->renderer, "gif/45.png");
-
 }
 
-void load_texture1(t_rtv *rtv)
+void				load_texture(t_rtv *rtv)
 {
 	load_texture2(rtv);
 	load_texture3(rtv);

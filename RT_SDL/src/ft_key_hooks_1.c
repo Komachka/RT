@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_key_hooks_1.c                                     :+:      :+:    :+:   */
+/*   ft_key_hooks_1.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: askochul <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/28 16:38:38 by askochul          #+#    #+#             */
-/*   Updated: 2017/09/28 17:19:37 by askochul         ###   ########.fr       */
+/*   Updated: 2017/10/11 22:02:18 by askochul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv.h"
 
-void	key_funct_4(t_rtv *rtv)
+static inline void	key_funct_4(t_rtv *rtv)
 {
 	if (rtv->e.key.keysym.sym == SDLK_e)
 	{
@@ -32,14 +32,19 @@ void	key_funct_4(t_rtv *rtv)
 			rtv->filter.black_and_white = 0;
 		ft_redraw(rtv);
 	}
+	else if (rtv->e.key.keysym.sym == SDLK_p)
+	{
+		rtv->cam.pos = rtv->def_cam_pos;
+		ft_redraw(rtv);
+	}
+	key_funct_5(rtv);
 }
 
-void	key_funct_3(t_rtv *rtv)
+static inline void	key_funct_3(t_rtv *rtv)
 {
 	if (rtv->e.key.keysym.sym == SDLK_KP_PLUS && rtv->light_model == LAMBERT)
 	{
-		rtv->global_light = calculate_color(1.2, \
-			&rtv->global_light);
+		rtv->global_light = calculate_color(1.2, &rtv->global_light);
 		ft_redraw(rtv);
 	}
 	else if (rtv->e.key.keysym.sym == SDLK_KP_MINUS\
@@ -59,9 +64,10 @@ void	key_funct_3(t_rtv *rtv)
 		rtv->light_model = CARTOON;
 		ft_redraw(rtv);
 	}
+	key_funct_4(rtv);
 }
 
-void	key_funct_2(t_rtv *rtv)
+static inline void	key_funct_2(t_rtv *rtv)
 {
 	if (rtv->e.key.keysym.sym == SDLK_SPACE)
 	{
@@ -84,14 +90,10 @@ void	key_funct_2(t_rtv *rtv)
 		rtv->cam.pos.z -= 5;
 		ft_redraw(rtv);
 	}
-	else if (rtv->e.key.keysym.sym == SDLK_p)
-	{
-		set_zero_vect(&rtv->cam.pos);
-		ft_redraw(rtv);
-	}
+	key_funct_3(rtv);
 }
 
-void	key_funct_1(t_rtv *rtv)
+static inline void	key_funct_1(t_rtv *rtv)
 {
 	if (rtv->e.key.keysym.sym == SDLK_RIGHT)
 	{
@@ -113,9 +115,10 @@ void	key_funct_1(t_rtv *rtv)
 		rtv->cam.rotate[Z] -= 0.1;
 		ft_redraw(rtv);
 	}
+	key_funct_2(rtv);
 }
 
-int		my_key_funct(t_rtv *rtv)
+int					my_key_funct(t_rtv *rtv)
 {
 	if (rtv->e.key.keysym.sym == SDLK_DOWN)
 	{
@@ -127,18 +130,13 @@ int		my_key_funct(t_rtv *rtv)
 		rtv->cam.rotate[X] -= 0.1;
 		ft_redraw(rtv);
 	}
-	else if (rtv->e.key.keysym.sym == SDLK_r)
+	else if (rtv->e.key.keysym.sym == SDLK_q)
 	{
-		rtv->cam.rotate[X] = 0;
-		rtv->cam.rotate[Y] = 0;
-		rtv->cam.rotate[Z] = 0;
+		rtv->cam.rotate[X] = rtv->def_cam_dir[X];
+		rtv->cam.rotate[Y] = rtv->def_cam_dir[Y];
+		rtv->cam.rotate[Z] = rtv->def_cam_dir[Z];
 		ft_redraw(rtv);
 	}
 	key_funct_1(rtv);
-	key_funct_2(rtv);
-	key_funct_3(rtv);
-	key_funct_4(rtv);
-	key_funct_5(rtv);
-	key_funct_6(rtv);
 	return (0);
 }

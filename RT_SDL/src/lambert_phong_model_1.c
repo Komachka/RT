@@ -6,13 +6,13 @@
 /*   By: kzahreba <kzahreba@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/23 20:25:50 by kzahreba          #+#    #+#             */
-/*   Updated: 2017/10/02 16:15:18 by askochul         ###   ########.fr       */
+/*   Updated: 2017/10/11 17:45:38 by askochul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv.h"
 
-static void	ambient_component(t_additional *st, t_rtv *rtv)
+static inline void	ambient_component(t_additional *st, t_rtv *rtv)
 {
 	if (st->mat.transparency > PRECISION)
 		set_zero_color(&st->a);
@@ -23,7 +23,7 @@ static void	ambient_component(t_additional *st, t_rtv *rtv)
 		}
 }
 
-static void	diffuse_component(t_light *l, t_additional *st, t_final_color *c)
+static inline void	diffuse_component(t_light *l, t_additional *st, t_final_color *c)
 {
 	double diff;
 
@@ -42,7 +42,7 @@ static void	diffuse_component(t_light *l, t_additional *st, t_final_color *c)
 	}
 }
 
-static void		specular_component(t_light *l, t_additional *st, t_vect *cam, t_final_color *c)
+static inline void		specular_component(t_light *l, t_additional *st, t_vect *cam, t_final_color *c)
 {
 	double spec;
 	t_vect refl;
@@ -63,7 +63,7 @@ static void		specular_component(t_light *l, t_additional *st, t_vect *cam, t_fin
 	c->s = mult_color_coefs(c->s, l->intensity);
 }
 
-static void		lignt_attenuation(t_additional *st, t_light *l)
+static inline void		lignt_attenuation(t_additional *st, t_light *l)
 {
 	if (l->k_const == 0 && l->k_linear == 0 && l->k_quadratic == 0)
 		st->attenuation = 1;
@@ -71,10 +71,10 @@ static void		lignt_attenuation(t_additional *st, t_light *l)
 		st->attenuation = min(1.00 / (l->k_const + l->k_linear * st->len + l->k_quadratic * pow(st->len, 2)), 1);
 }
 
-t_color  reflection_component(t_additional *st, t_rtv *rtv, int recursive_depth, double coef)
+static inline t_color  reflection_component(t_additional *st, t_rtv *rtv, int recursive_depth, double coef)
 {
 	int k;
-	double t;
+	t_vect t;
 	t_vect tmp;
 	t_color res;
 
@@ -83,22 +83,18 @@ t_color  reflection_component(t_additional *st, t_rtv *rtv, int recursive_depth,
 	tmp = st->primary_ray.dir;
 	r.dir = reflected_vector(&tmp, &st->norm);
 	r.origin = adding_bias(&st->point, &r.dir);
-	t = INFINITY;
+	t.z = INFINITY;
+	set_zero_color(&res);
 	if ((k = complicated_intersection(rtv, &r, &t)) != -1)
 	{
-		res = colorizing(rtv, k, t, &r, recursive_depth + 1);
+		res = colorizing(rtv, t, &r, recursive_depth + 1);
 		res = calculate_color(coef, &res);
 	}
 	else 
-	{	
-		if (rtv->bg_color == ON)
-			res = calculate_color(coef, &rtv->background_color);
-		else
-			set_zero_color(&res);
-	}
+		res = create_background_color(rtv, &r);
+	
 	return (res);
 }
-
 // double fresnel_reflect_amount(double n, t_vect *norm, t_vect *incident)
 // {
 // 	double r0;
@@ -124,10 +120,10 @@ t_color  reflection_component(t_additional *st, t_rtv *rtv, int recursive_depth,
 // 	return (ret);
 // }
 
-t_color refractive_component(t_additional *st, t_rtv *rtv, int recursive_depth)
+static inline t_color refractive_component(t_additional *st, t_rtv *rtv, int recursive_depth)
 {	
 	int k;
-	double t;
+	t_vect	t;
 	t_color res;
 //	double coef;
 
@@ -137,27 +133,20 @@ t_color refractive_component(t_additional *st, t_rtv *rtv, int recursive_depth)
 	r.dir = refracted_vector(&st->norm, &st->primary_ray.dir, st->mat.refraction);
 	r.origin = st->point;
 	r.origin = adding_bias(&st->point, &r.dir);
-	t = INFINITY;
+	t.z = INFINITY;
 	set_zero_color(&res);
 	if ((k = complicated_intersection(rtv, &r, &t)) != -1)
 	{
-		res = colorizing(rtv, k, t, &r, recursive_depth + 1);
-		//coef = fresnel_reflect_amount(rtv->air_coef, refraction, &st->norm, &st->primary_ray.dir);
-	//	st->mat.reflective = coef;
-		//res = calculate_color(st->mat.transparency * (1.0 - coef), &res);
+		res = colorizing(rtv, t, &r, recursive_depth + 1);
+		//coef = fresnel_reflect_amount(1, st->mat.refraction, &st->norm, &st->primary_ray.dir);
+		//res = calculate_color((1.0 - coef), &res);
 	}
-	
 	else 
-	{	
-		if (rtv->bg_color == ON)
-			res = calculate_color(st->mat.transparency, &rtv->background_color);
-		else
-			set_zero_color(&res);
-	}
+		res = create_background_color(rtv, &r);
 	return (res);
 }
 
-t_color  final_color(t_final_color *lights, t_rtv *rtv, t_additional *s)
+static inline t_color	final_color(t_final_color *lights, t_rtv *rtv, t_additional *s)
 {
 	t_color res;
 	t_color total_diff;
@@ -190,7 +179,7 @@ t_color  final_color(t_final_color *lights, t_rtv *rtv, t_additional *s)
 	return (res);
 }
 
-t_color lambert_phong_model(t_rtv *rtv, t_additional *s, int recursive_depth)
+t_color	lambert_phong_model(t_rtv *rtv, t_additional *s, int recursive_depth)
 {
 
 	int				k;
@@ -206,12 +195,12 @@ t_color lambert_phong_model(t_rtv *rtv, t_additional *s, int recursive_depth)
 		create_light_ray(&rtv->l[k], s);
 		lignt_attenuation(s, &rtv->l[k]);
 		if (!shadow(rtv, &s->rev_light_ray, s->len))
-		{	
+		{
 			diffuse_component(&rtv->l[k], s, &lights[k]);
 			specular_component(&rtv->l[k], s, &rtv->cam.pos, &lights[k]);
 		}
 		else
-		{ 	
+		{
 			set_zero_color(&lights[k].d);
 			set_zero_color(&lights[k].s);
 		}
@@ -226,7 +215,7 @@ t_color lambert_phong_model(t_rtv *rtv, t_additional *s, int recursive_depth)
 			//s->r = calculate_color(coef, &s->r);
 		}
 		if (s->mat.transparency > PRECISION)
-		{	
+		{
 			s->refr = refractive_component(s, rtv,recursive_depth);
 			//s->refr = calculate_color(1.0 - coef, &s->refr);
 		}

@@ -12,7 +12,7 @@
 
 #include "rtv.h"
 
-void	valid_id_list(int arr[])
+void				valid_id_list(int arr[])
 {
 	arr[0] = SPHERE;
 	arr[1] = PLANE;
@@ -31,7 +31,7 @@ void	valid_id_list(int arr[])
 	arr[14] = DISC_WITH_HOLE;
 }
 
-void	even_more_valid_data(char *arr[], char *type)
+static inline void	even_more_valid_data(char *arr[], char *type)
 {
 	if (cmp(type, "Id"))
 	{
@@ -56,11 +56,10 @@ void	even_more_valid_data(char *arr[], char *type)
 		arr[0] = "Id";
 		arr[1] = "Object";
 		arr[2] = "Material";
-		arr[3] = 0;
 	}
 }
 
-void	more_valid_data(char *arr[], char *type)
+static inline void	more_valid_data(char *arr[], char *type)
 {
 	if (cmp(type, "Light"))
 	{
@@ -71,7 +70,6 @@ void	more_valid_data(char *arr[], char *type)
 		arr[4] = "Constant Attenuation Coefficient";
 		arr[5] = "Linear Attenuation Coefficient";
 		arr[6] = "Quadratic Attenuation Coefficient";
-		arr[7] = 0;
 	}
 	else if (cmp(type, "Material"))
 	{
@@ -83,13 +81,12 @@ void	more_valid_data(char *arr[], char *type)
 		arr[5] = "Reflective";
 		arr[6] = "Transparency";
 		arr[7] = "Refraction";
-		arr[8] = 0;
 	}
 	else
 		even_more_valid_data(arr, type);
 }
 
-void	valid_data(char *arr[], char *type)
+void				valid_data(char *arr[], char *type)
 {
 	if (cmp(type, "Rtv"))
 	{
@@ -101,7 +98,6 @@ void	valid_data(char *arr[], char *type)
 		arr[5] = "Camera";
 		arr[6] = "Light";
 		arr[7] = "Objects";
-		arr[8] = 0;
 	}
 	else if (cmp(type, "Camera"))
 	{
@@ -109,7 +105,6 @@ void	valid_data(char *arr[], char *type)
 		arr[1] = "Position";
 		arr[2] = "Camera Rotate Angles";
 		arr[3] = "FOV";
-		arr[4] = 0;
 	}
 	else
 		more_valid_data(arr, type);

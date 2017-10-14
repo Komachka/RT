@@ -6,13 +6,13 @@
 /*   By: kzahreba <kzahreba@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/29 19:24:07 by kzahreba          #+#    #+#             */
-/*   Updated: 2017/10/02 16:35:20 by askochul         ###   ########.fr       */
+/*   Updated: 2017/10/11 17:50:48 by askochul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv.h"
 
-t_vect	rotate_x(t_vect *dir, double rx)
+static inline t_vect	rotate_x(t_vect *dir, double rx)
 {
 	t_vect	res;
 
@@ -22,7 +22,7 @@ t_vect	rotate_x(t_vect *dir, double rx)
 	return (res);
 }
 
-t_vect	rotate_y(t_vect *dir, double ry)
+static inline t_vect	rotate_y(t_vect *dir, double ry)
 {
 	t_vect	res;
 
@@ -32,7 +32,7 @@ t_vect	rotate_y(t_vect *dir, double ry)
 	return (res);
 }
 
-t_vect	rotate_z(t_vect *dir, double rz)
+static inline t_vect	rotate_z(t_vect *dir, double rz)
 {
 	t_vect	res;
 
@@ -42,7 +42,7 @@ t_vect	rotate_z(t_vect *dir, double rz)
 	return (res);
 }
 
-t_vect	rotate_cam(t_vect dir, double *angles)
+static inline t_vect	rotate_cam(t_vect dir, double *angles)
 {
 	t_vect	res;
 	t_vect	tmp;
@@ -53,13 +53,13 @@ t_vect	rotate_cam(t_vect dir, double *angles)
 	return (res);
 }
 
-t_vect	fisheye_camera(t_vect *dir, double angle)
+static inline t_vect	fisheye_camera(t_vect *dir, double angle)
 {
 	double	r;
 	double	phi;
 	double	theta;
 	t_vect	res;
-	
+
 	phi = 0;
 	r = sqrt(dir->x * dir->x + dir->y * dir->y);
 	if (r == 0.00f)
@@ -68,45 +68,45 @@ t_vect	fisheye_camera(t_vect *dir, double angle)
 		phi = M_PI - asin(dir->y / r);
 	else if (dir->x >= 0.00f)
 		phi = asin(dir->y / r);
-	theta = r * degrees_to_radians(angle);
+	theta = r * TO_RAD(angle);
 	res.x = sin(theta) * cos(phi);
 	res.y = sin(theta) * sin(phi);
 	res.z = cos(theta);
 	return(res);
 }
 
-#define ww WX
-#define hh WY
 void	*make_projection(void *k)
 {
 	t_thred	*p;
+	t_color *c;
 	int		i;
 	int		x;
 	t_vect	tmp;
 	int		dx;
 	int		dy;
 	t_color average;
-	
+
 	dx = -1;
 	dy = -1;
 	p = (t_thred *)k;
 	tmp.z = p->rtv1->cam.lk_dir;
-	t_color c[p->rtv1->samples]; //прийдеться малочити та фрішити(((
+	c = (t_color*)malloc(sizeof(t_color) * p->rtv1->samples);
+
 		i = 0;
-	
+
 	while (p->y_start < p->y_end)
 	{
 		x = -1;
 		p->ray.origin = p->rtv1->cam.pos;
 		{
-			while (++x < ww)
+			while (++x < WX)
 			{
 				while (++dx < p->rtv1->samples)
 				{
 					while (++dy < p->rtv1->samples){
-						tmp.x = (2 * ((x + p->rtv1->delta_aliasing + (double)dx / (double)p->rtv1->samples) / (double)ww) - 1) * \
+						tmp.x = (2 * ((x + p->rtv1->delta_aliasing + (double)dx / (double)p->rtv1->samples) / (double)WX) - 1) * \
 							p->rtv1->cam.image_aspect_ratio * p->rtv1->cam.scale;
-						tmp.y = (1 - 2 * ((p->y_start + p->rtv1->delta_aliasing + (double)dy / (double)p->rtv1->samples) / (double)hh)) * p->rtv1->cam.scale;
+						tmp.y = (1 - 2 * ((p->y_start + p->rtv1->delta_aliasing + (double)dy / (double)p->rtv1->samples) / (double)WY)) * p->rtv1->cam.scale;
 						p->ray.dir = rotate_cam(tmp, p->rtv1->cam.rotate);
 						if (p->rtv1->cam.type == FISHEYE)
 							p->ray.dir = fisheye_camera(&p->ray.dir, p->rtv1->cam.fisheye_angle);
@@ -122,12 +122,11 @@ void	*make_projection(void *k)
 				i = 0;
 			}
 		}
-		if (p->index == 0) {
-
-           float persent = p->y_start * 1.0 / p->y_end;
-           animation(persent, p->rtv1->renderer, p->rtv1);
-       }
+		if (p->index == 0 && p->rtv1->delphin == ON) {
+			animation(p->rtv1->renderer, p->rtv1);
+		}
 		p->y_start++;
 	}
+	free(&c);
 	return (0);
 }

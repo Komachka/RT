@@ -12,7 +12,7 @@
 
 #include "rtv.h"
 
-char	*validate_object_next_2(cJSON *object, t_figure *figure, int id)
+static inline char	*validate_object_3(cJSON *object, t_figure *figure, int id)
 {
 	cJSON *tmp[4];
 
@@ -31,12 +31,12 @@ char	*validate_object_next_2(cJSON *object, t_figure *figure, int id)
 	return ("Some Object Error");
 }
 
-char	*validate_object_next(cJSON *object, t_figure *figure, int id)
+static inline char	*validate_object_2(cJSON *object, t_figure *figure, int id)
 {
 	cJSON *tmp[4];
 
 	if (id == PLANE || id == PLANE_WITH_HOLE || id == DISC_WITH_HOLE)
-		return (validate_object_next_2(object, figure, id));
+		return (validate_object_3(object, figure, id));
 	if (id == TRIANGLE &&
 		(tmp[0] = cJSON_GetObjectItemCaseSensitive(object, "Vertex A")) &&
 		(tmp[1] = cJSON_GetObjectItemCaseSensitive(object, "Vertex B")) &&
@@ -55,7 +55,7 @@ char	*validate_object_next(cJSON *object, t_figure *figure, int id)
 	return ("Some Object Error");
 }
 
-char	*validate_object_2(cJSON *tmp[], cJSON *obj, t_figure *figure, int id)
+static inline char	*valid_2(cJSON *tmp[], cJSON *obj, t_figure *figure, int id)
 {
 	if (id == CYLINDER && (tmp[2] = cJSON_GetObjectItem(obj, "Radius")))
 		return (validate_cylinder(tmp, figure));
@@ -81,7 +81,7 @@ char	*validate_object_2(cJSON *tmp[], cJSON *obj, t_figure *figure, int id)
 	return ("Some Object Error");
 }
 
-char	*validate_object(cJSON *object, t_figure *figure, int id)
+char				*validate_object(cJSON *object, t_figure *figure, int id)
 {
 	cJSON *tmp[6];
 
@@ -95,7 +95,7 @@ char	*validate_object(cJSON *object, t_figure *figure, int id)
 		if ((id == CYLINDER || id == LIMITED_CYLINDER || id == CONE ||
 			id == LIMITED_CONE || id == LIMITED_SPHERE || id == TORUS) &&
 			(tmp[1] = cJSON_GetObjectItemCaseSensitive(object, "Direction")))
-			return (validate_object_2(tmp, object, figure, id));
+			return (valid_2(tmp, object, figure, id));
 		if (id == DISC &&
 	(tmp[1] = cJSON_GetObjectItemCaseSensitive(object, "Normal Vector")) &&
 			(tmp[2] = cJSON_GetObjectItemCaseSensitive(object, "Radius")))
@@ -106,5 +106,5 @@ char	*validate_object(cJSON *object, t_figure *figure, int id)
 			(tmp[3] = cJSON_GetObjectItemCaseSensitive(object, "Size z")))
 			return (validate_ellipsoid(tmp, figure));
 	}
-	return (validate_object_next(object, figure, id));
+	return (validate_object_2(object, figure, id));
 }

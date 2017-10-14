@@ -1,3 +1,8 @@
+define generate_file
+    @echo "Compiling.."
+    @echo '$(1)'
+endef
+
 NAME = RT
 CC = gcc -Wall -Wextra -Werror
 CFLAGS = -F./libraries/SDL -O3
@@ -13,6 +18,7 @@ SRC = main.c \
 	  intersection_objects_2.c \
 	  intersection_objects_3.c \
 	  intersection_objects_4.c \
+	  intersection_objects_5.c \
 	  paint_to_image.c \
 	  basic_functions.c \
 	  auxiliary_functions.c \
@@ -21,6 +27,7 @@ SRC = main.c \
 	  find_norm_1.c \
 	  find_norm_2.c \
 	  find_norm_3.c \
+	  find_norm_4.c \
 	  lightening_1.c \
 	  lightening_2.c \
 	  lambert_phong_model_1.c \
@@ -64,16 +71,20 @@ OBJJSON = $(JSON:.c=.o)
 all : $(NAME)
 
 $(NAME) : $(OBJ) $(OBJJSON)
-	$(CC) $(CFLAGS) $(SDL_FLAGS) $(OBJJSON) $(OBJ)  -o $(NAME)
+	@$(CC) $(CFLAGS) $(SDL_FLAGS) $(OBJJSON) $(OBJ) -o $(NAME)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c -o $@ $<
+	@$(CC) $(CFLAGS) -c -o $@ $<
+	@echo "Compiling.."  $<
+
 
 clean:
-	rm -rf $(OBJ) $(OBJJSON)
+	@echo "Cleaning.."
+	@rm -rf $(OBJ) $(OBJJSON)
 
 fclean: clean
-	rm -rf $(NAME)
+	@echo "Cleaning.."
+	@rm -rf $(NAME)
 
 re: fclean all
 
