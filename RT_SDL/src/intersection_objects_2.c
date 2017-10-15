@@ -20,7 +20,7 @@ int	intersection_disc(t_ray *r, void *disc, double *t, double *z)
 	t_vect	tmp;
 
 	d = (t_disc *)disc;
-	z = 0;
+	*z = -1;
 	if (vector_dot_product(&d->norm, &r->dir) != 0)
 	{
 		point = vector_substract(&d->pos, &r->origin);

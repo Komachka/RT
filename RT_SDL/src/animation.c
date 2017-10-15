@@ -13,13 +13,8 @@
 #include "rtv.h"
 
 static int sdl_thread(void *ptr)
-{
-<<<<<<< HEAD
-    
+{   
     SDL_Rect	rect;
-=======
-	SDL_Rect	rect;
->>>>>>> 9a911a8592a9d8c1a71bcf453ae1973616f8b5a7
 	static int	n_frame2 = 0;
 	SDL_Rect	rect1;
 	t_rtv *rtv;

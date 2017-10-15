@@ -86,7 +86,7 @@ int		intersection_limited_sphere(t_ray *r, void *sphere,
 		ttm.pos = s->p1;
 		ttm.norm = s->cut_dir;
 		ttm.r = s->cut_r;
-		intersection_disc(r, &ttm, &cap[2], 0);
+		intersection_disc(r, &ttm, &cap[2], z);
 	}
 	return (check_solving(t, select_value(cap, 3)));
 }
@@ -104,7 +104,7 @@ int		intersection_plane_with_hole(t_ray *r, void *obj, double *t, double *z)
 	if (vector_dot_product(&p->norm, &r->dir) != 0)
 	{
 		while (++i < p->holes_num)
-			if (intersection_disc(r, &p->hole[i], &t0, 0))
+			if (intersection_disc(r, &p->hole[i], &t0, z))
 				return (0);
 		point = vector_substract(&p->point, &r->origin);
 		t0 = vector_dot_product(&p->norm, &point) / \
@@ -123,8 +123,8 @@ int		intersection_disc_with_hole(t_ray *r, void *obj, double *t, double *z)
 	*z = -1;
 	i = -1;
 	p = (t_disc_with_hole *)obj;
-	if (intersection_disc(r, &p->disc, &t0, 0))
-		if (intersection_disc(r, &p->hole, &t0, 0))
+	if (intersection_disc(r, &p->disc, &t0, z))
+		if (intersection_disc(r, &p->hole, &t0, z))
 			return (0);
 	return (check_solving(t, t0));
 	return (0);
