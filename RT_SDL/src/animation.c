@@ -6,7 +6,7 @@
 /*   By: kstorozh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/02 19:09:41 by kstorozh          #+#    #+#             */
-/*   Updated: 2017/10/11 15:33:24 by askochul         ###   ########.fr       */
+/*   Updated: 2017/10/14 17:54:43 by askochul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void				load_texture(t_rtv *rtv)
 	rtv->sdl_texture_loading[21] = IMG_LoadTexture(rtv->renderer, "gif/21.png");
 }
 
-void		free_animation_texture(t_rtv *rtv)
+void				free_animation_texture(t_rtv *rtv)
 {
 	int i;
 

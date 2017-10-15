@@ -6,7 +6,7 @@
 /*   By: askochul <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/28 16:38:38 by askochul          #+#    #+#             */
-/*   Updated: 2017/10/11 22:04:14 by askochul         ###   ########.fr       */
+/*   Updated: 2017/10/14 19:30:13 by askochul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,6 @@ static inline void	key_funct_8(t_rtv *rtv)
 	{
 		ft_take_picture(rtv);
 	}
-	else if (rtv->e.key.keysym.sym == SDLK_l)
-	{
-		rtv->delphin = rtv->delphin == 0 ? 1 : 0;
-		ft_redraw(rtv);
-	}
 }
 
 static inline void	key_funct_7(t_rtv *rtv)
@@ -60,6 +55,11 @@ static inline void	key_funct_7(t_rtv *rtv)
 		rtv->filter.emboss = 0;
 		rtv->filter.sepia = 0;
 		rtv->filter.negative = 0;
+		ft_redraw(rtv);
+	}
+	else if (rtv->e.key.keysym.sym == SDLK_l)
+	{
+		rtv->delphin = rtv->delphin == 0 ? 1 : 0;
 		ft_redraw(rtv);
 	}
 	key_funct_8(rtv);

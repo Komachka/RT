@@ -6,7 +6,7 @@
 /*   By: kzahreba <kzahreba@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/04 21:16:32 by kzahreba          #+#    #+#             */
-/*   Updated: 2017/10/11 17:48:49 by askochul         ###   ########.fr       */
+/*   Updated: 2017/10/14 20:00:39 by askochul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ int					shadow(t_rtv *rtv, t_ray *r, double light)
 	i = -1;
 	k = 0;
 	while (++i < rtv->figure_num)
-		if (rtv->objects[i].intersection_object(r, rtv->objects[i].object, &t, 0))
+		if (rtv->objects[i].intersection_object(r,
+					rtv->objects[i].object, &t, 0))
 		{
 			if (t > light)
 				continue;

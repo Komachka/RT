@@ -6,7 +6,7 @@
 /*   By: kzahreba <kzahreba@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/16 19:58:01 by kzahreba          #+#    #+#             */
-/*   Updated: 2017/10/11 21:49:33 by askochul         ###   ########.fr       */
+/*   Updated: 2017/10/14 17:55:14 by askochul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ double				min(double i, double j)
 	return (a);
 }
 
-t_vect	adding_bias(t_vect *point, t_vect *dir)
+t_vect				adding_bias(t_vect *point, t_vect *dir)
 {
 	t_vect b;
 
@@ -77,4 +77,3 @@ void				delstruct1(t_menu *menu)
 	SDL_Quit();
 	exit(0);
 }
-

@@ -6,7 +6,7 @@
 /*   By: kzahreba <kzahreba@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/04 20:36:45 by kzahreba          #+#    #+#             */
-/*   Updated: 2017/10/04 19:40:46 by askochul         ###   ########.fr       */
+/*   Updated: 2017/10/14 22:29:15 by askochul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,33 +19,24 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdio.h> //для чого це?
-# include <time.h> //для чого це?
+# include <time.h>
 # include "SDL2_ttf/SDL_ttf.h"
 # include "SDL2/SDL.h"
 # include "SDL2_image/SDL_image.h"
 # include "../libraries/JSON/cJSON.h"
-
-// # define WINDOW_WIDTH 1000 //взнати що це?
-// # define WINDOW_HEIGHT (WINDOW_WIDTH)
-
 # define COUNT 6
-
 # define WX 1400
 # define WY 1000
-
 # define WIDTH 1400
 # define HEIGHT 1000
 # define SCENSES 6
-#define fW 5
-#define fH 5
-
+# define fW 5
+# define fH 5
 # define FILTERWIDTH 3 //чи використовується?
 # define FILTERHEIGHT 3
-
 # define NUM_THREADS 8
 # define BIAS 0.001
 # define PRECISION 0.000001f
-
 # define MIN(a,b) (((a)<(b))?(a):(b))
 # define MAX(a,b) (((a)>(b))?(a):(b))
 # define VAR_INT(x, y) int x = y
@@ -53,38 +44,31 @@
 
 enum {X, Y, Z};
 enum {OFF, ON};
-
 /*
 ** lightening models
 */
 enum {LAMBERT, CARTOON};
-
 /*
 ** camera  types
 */
 enum {STANDART, FISHEYE};
-
 /*
 **	textures
 */
 enum {PERLIN, MAPPING, PLASMA, CONTOURS, CAUSTIC, JUPITER};
-
 /*
 ** light types
 */
 enum {DIRECTIONAL_LIGHT, POINT_LIGHT, SPOT_LIGHT};
-
 /*
 ** figure types
 */
 enum {SPHERE, PLANE, CYLINDER, CONE, TORUS, TRIANGLE, DISC, ELLIPSOID,
 	PARABOLOID, LIMITED_CYLINDER, LIMITED_CONE, LIMITED_PARABOLOID,
 	LIMITED_SPHERE, PLANE_WITH_HOLE, DISC_WITH_HOLE, POLYGON};
-
 /*
 **  структури, які не використовуєте повидаляти !!!
 */
-
 typedef struct			s_scene //вияснити що це?
 {
 	int					number;
@@ -95,8 +79,8 @@ typedef struct			s_scene_menu_box
 	int					number;
 	SDL_Rect			menu_box_rect;
 	SDL_Texture			*menu_box_image;
-}						t_scene_menu_box;
-
+}
+t_scene_menu_box;
 typedef struct			s_scene_menu
 {
 	int					menu_size; // need to del
@@ -105,7 +89,6 @@ typedef struct			s_scene_menu
 	SDL_Rect			menu_scene_rect;
 	t_scene_menu_box	*menu_boxes;
 }						t_scene_munu;
-
 /*
 ** structures for menu
 */
@@ -791,5 +774,11 @@ void					ft_which_scene(t_rtv *rtv, int i);
 char					*ft_itoa(int n);
 double					check_sphere_limits(double t, t_ray *r, t_limited_sphere *c);
 void					delstruct1(t_menu *menu);
+void					ft_render_copy(t_menu *menu);
+void					ft_init_textures(t_menu *menu);
+void					ft_init_rects(t_menu *menu);
+void					ft_create_menu_window(t_menu *menu);
+void					ft_left_button(t_menu *menu, t_rtv *rtv, int x_mouse, int y_mouse);
+void					ft_mouse_motion(t_menu *menu, t_rtv *rtv, int x_mouse, int y_mouse);
 
 #endif

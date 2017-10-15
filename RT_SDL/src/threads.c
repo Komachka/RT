@@ -6,7 +6,7 @@
 /*   By: kzahreba <kzahreba@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 18:47:31 by kzahreba          #+#    #+#             */
-/*   Updated: 2017/03/15 16:39:42 by kzahreba         ###   ########.fr       */
+/*   Updated: 2017/10/14 20:02:41 by askochul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void		threads(t_rtv *rtv)
 {
 	int			i;
-	int 		part;
+	int			part;
 	pthread_t	trd[NUM_THREADS];
 	t_thred		p[NUM_THREADS];
 

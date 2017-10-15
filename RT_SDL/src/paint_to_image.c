@@ -6,7 +6,7 @@
 /*   By: kzahreba <kzahreba@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/21 18:43:23 by kzahreba          #+#    #+#             */
-/*   Updated: 2017/10/04 18:01:33 by askochul         ###   ########.fr       */
+/*   Updated: 2017/10/14 21:01:04 by askochul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,24 +49,20 @@ void				ft_take_picture(t_rtv *rtv)
 
 void				paint_image(t_rtv *fr, int x, int y, t_color cl)
 {
-	static int x1 = 0;
-	static int y1 = 0;
+	static int x1;
+	static int y1;
 
+	x1 = 0;
+	y1 = 0;
 	x1 = MAX(x, x1);
 	y1 = MAX(y, y1);
-
 	if (x >= WX || y >= WY)
 		return ;
-
 	fr->s_c[y][x].r = (unsigned char)(cl.r * 255);
 	fr->s_c[y][x].g = (unsigned char)(cl.g * 255);
 	fr->s_c[y][x].b = (unsigned char)(cl.b * 255);
 	fr->s_c[y][x].a = (unsigned char)(cl.al * 100);
-
-	
 }
-
-
 
 static inline void	put_pixel(SDL_Surface *surface, int x, int y, Uint32 pixel)
 {
@@ -78,10 +74,15 @@ static inline void	put_pixel(SDL_Surface *surface, int x, int y, Uint32 pixel)
 
 void				create_rander_texture(t_rtv *rtv)
 {
+	int x;
+	int y;
+
 	rtv->surface_main = SDL_CreateRGBSurface(0, WX, WY, 32, 0, 0, 0, 0);
-	for (int y = 0; y < WY; ++y)
+	y = 0;
+	while (y < WY)
 	{
-		for (int x = 0; x < WX ; ++x)
+		x = 0;
+		while (x < WX)
 		{
 			put_pixel(rtv->surface_main, x, y,
 						SDL_MapRGBA(rtv->surface_main->format,
@@ -89,9 +90,12 @@ void				create_rander_texture(t_rtv *rtv)
 						rtv->filter.sdl_col_with_filter[y][x].g,
 						rtv->filter.sdl_col_with_filter[y][x].b,
 						rtv->filter.sdl_col_with_filter[y][x].a));
+			++x;
 		}
+		++y;
 	}
 	if (rtv->sdl_texture_render != NULL)
 		SDL_DestroyTexture(rtv->sdl_texture_render);
-	rtv->sdl_texture_render = SDL_CreateTextureFromSurface(rtv->renderer, rtv->surface_main);
+	rtv->sdl_texture_render =
+		SDL_CreateTextureFromSurface(rtv->renderer, rtv->surface_main);
 }
