@@ -71,41 +71,7 @@
     "Objects"                 : [
 
 
-
         {
-            "Id"       : "CYLINDER",
-            "Object"   : {
-                "Position"  : {"x" : -30, "y" : 30, "z" : 180},
-                "Direction" : {"x" : 1, "y" : 4, "z" : 14},
-                "Radius"    : 8
-            },
-            "Material" : {
-                "Color"        : "0050EF",
-                "Ambient"      : {
-                    "Red"   : 1,
-                    "Green" : 1,
-                    "Blue"  : 1,
-                    "Alpha" : 0
-                },
-                "Diffuse"      : {
-                    "Red"   : 1,
-                    "Green" : 1,
-                    "Blue"  : 1,
-                    "Alpha" : 0
-                },
-                "Specular"     : {
-                    "Red"   : 0,
-                    "Green" : 0,
-                    "Blue"  : 0,
-                    "Alpha" : 0
-                },
-                "Shininess"    : 7,
-                "Reflective"   : 0,
-                "Transparency" : 0,
-                "Refraction"   : 1
-            }
-        },
-                        {
             "Id"       : "POLYGON",
             "Object"   : {
                 "Faces"  : 2,
@@ -147,6 +113,39 @@
             }
         },
         {
+            "Id"       : "CYLINDER",
+            "Object"   : {
+                "Position"  : {"x" : -30, "y" : 30, "z" : 180},
+                "Direction" : {"x" : 1, "y" : 4, "z" : 14},
+                "Radius"    : 8
+            },
+            "Material" : {
+                "Color"        : "0050EF",
+                "Ambient"      : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Diffuse"      : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Specular"     : {
+                    "Red"   : 0,
+                    "Green" : 0,
+                    "Blue"  : 0,
+                    "Alpha" : 0
+                },
+                "Shininess"    : 7,
+                "Reflective"   : 0,
+                "Transparency" : 0,
+                "Refraction"   : 1
+            }
+        },
+        {
             "Id"       : "PLANE",
             "Object"   : {
                 "Point On The Plane" : {"x" : 10, "y" : -50, "z" : 30},
@@ -185,6 +184,5 @@
                 "Frequency"  : 2
             }
         }
-
     ]
 }

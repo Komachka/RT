@@ -52,6 +52,7 @@ void				delstruct(t_rtv *rtv)
 	free_animation_texture(rtv);
 	del_arrey((void**)rtv->s_c, WY);
 	del_arrey((void**)rtv->filter.sdl_col_with_filter, WY);
+	
 	SDL_FreeSurface(rtv->surface_main);
 	SDL_FreeSurface(rtv->picture); // ???
 	SDL_FreeSurface(rtv->surface); // ??
@@ -82,7 +83,7 @@ void				delstruct1(t_menu *menu)
 	SDL_DestroyRenderer(menu->renderer);
 	SDL_DestroyWindow(menu->window);
 	
-	free(menu);
+	
 	IMG_Quit();
 	SDL_Quit();
 	

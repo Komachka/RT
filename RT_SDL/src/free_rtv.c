@@ -44,7 +44,15 @@ void	free_rtv(t_rtv *rtv)
 			free(rtv->objects[rtv->figure_num].texture.tx_struct); 
 		}
 	}
-	free(rtv->objects);
-	free(rtv->l);
-
+	if (rtv->sk == ON && rtv->skybox.texturing == ON)
+			{
+			if (rtv->skybox.texture.type == MAPPING)
+			{
+				mt = (t_mapping_texture*)rtv->skybox.texture.tx_struct;
+				free(mt->img_path);
+			}
+			free(rtv->skybox.texture.tx_struct);
+		}
+		free(rtv->objects);
+		free(rtv->l);
 }
