@@ -6,7 +6,7 @@
 /*   By: kzahreba <kzahreba@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/04 20:36:45 by kzahreba          #+#    #+#             */
-/*   Updated: 2017/10/15 13:29:39 by askochul         ###   ########.fr       */
+/*   Updated: 2017/10/15 12:33:33 by pkolomiy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 # include "SDL2_image/SDL_image.h"
 # include "../libraries/JSON/cJSON.h"
 # define COUNT 6
-# define WX 500
-# define WY 550
+# define WX 1200
+# define WY 1000
 # define WIDTH 1400
 # define HEIGHT 1000
 # define SCENSES 6
@@ -650,6 +650,7 @@ void					uploading_textures(t_rtv *rtv); //- дописати на SDL
 void					free_textures(t_rtv *rtv);
 void 					free_animation_texture(t_rtv *rtv);
 void					sphere_mapping_texture(t_additional *s, void *t);
+void					plane_mapping_texture(t_additional *s, void *t);
 double					calculate_perlin_noise(t_vect point);
 void					perlin_noise_texture(t_additional *st, void *texture_st);
 void					plasma_texture(t_additional *s, void *t);

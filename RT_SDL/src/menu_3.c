@@ -20,7 +20,7 @@ int		open_author_file(void)
 
 int		open_instruction_file(void)
 {
-	system("open -a Preview instruction.jpg");
+	system("open -a Preview instruction-v1.png");
 	return (0);
 }
 

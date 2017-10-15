@@ -15,20 +15,6 @@
         "Camera Rotate Angles" : [0, 5, 0],
         "FOV"                  : 45
     },
-    "Skybox"                  : {
-        "Radius" : 10,
-        "Color"  : "BB0000",
-        "Texture"  : {
-            "Type"          : "MAPPING",
-            "Path"          : "test.png",
-            "Octaves"       : 3,
-            "Amplitude"     : 1,
-            "Persistence"   : 0.5,
-            "Exponent"      : 5.56,
-            "Frequency"     : {"x" : 0.9, "y" : 0.9, "z" : 0.9},
-            "Frequency Att" : {"x" : 2, "y" : 2, "z" : 2}
-        }
-    },
     "Light"                   : [
         {
             "Type"                              : "POINT_LIGHT",
@@ -83,19 +69,13 @@
     ],
     "Objects"                 : [
         {
-            "Id"       : "PLANE_WITH_HOLE",
+            "Id"       : "SPHERE",
             "Object"   : {
-                "Normal Vector"      : {"x" : 0, "y" : 0, "z" : 1},
-                "Point On The Plane" : {"x" : 0, "y" : 0, "z" : 1500},
-                "Holes"              : [
-                    {
-                        "Position" : {"x" : 200, "y" : 400, "z" : 180},
-                        "Radius"   : 500
-                    }
-                ]
+                "Position" : {"x" : -15, "y" : -10, "z" : 120},
+                "Radius"   : 20
             },
             "Material" : {
-                "Color"        : "F0A30A",
+                "Color"        : "BB0000",
                 "Ambient"      : {
                     "Red"   : 0.8,
                     "Green" : 0.8,
@@ -109,59 +89,55 @@
                     "Alpha" : 0
                 },
                 "Specular"     : {
-                    "Red"   : 0,
-                    "Green" : 0,
-                    "Blue"  : 0,
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
                     "Alpha" : 0
                 },
-                "Shininess"    : 0,
+                "Shininess"    : 20,
+                "Reflective"   : 0,
+                "Transparency" : 0,
+                "Refraction"   : 1.015
+            },
+            "Texture"  : {
+                "Type"          : "MAPPING",
+                "Path"          : "ball.jpg"
+            }
+        },
+
+        {
+            "Id"       : "TORUS",
+            "Object"   : {
+                "Position"     : {"x" : 55, "y" : 10, "z" : 200},
+                "Direction"    : {"x" : 10, "y" : -50, "z" : 30},
+                "Minor Radius" : 4,
+                "Major Radius" : 15
+            },
+            "Material" : {
+                "Color"        : "330000",
+                "Ambient"      : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Diffuse"      : {
+                    "Red"   : 0.8,
+                    "Green" : 0.8,
+                    "Blue"  : 0.8,
+                    "Alpha" : 0
+                },
+                "Specular"     : {
+                    "Red"   : 0.4,
+                    "Green" : 0.4,
+                    "Blue"  : 0.4,
+                    "Alpha" : 0
+                },
+                "Shininess"    : 7,
                 "Reflective"   : 0,
                 "Transparency" : 0,
                 "Refraction"   : 1
             }
-        },
-        {
-            "Id"       : "PLANE",
-            "Object"   : {
-                "Point On The Plane" : {"x" : 10, "y" : -50, "z" : 30},
-                "Normal Vector"      : {"x" : 0, "y" : 40, "z" : 1}
-            },
-            "Material" : {
-                "Color"        : "F0A30A",
-                "Ambient"      : {
-                    "Red"   : 0.8,
-                    "Green" : 0.8,
-                    "Blue"  : 0.8,
-                    "Alpha" : 0
-                },
-                "Diffuse"      : {
-                    "Red"   : 1,
-                    "Green" : 1,
-                    "Blue"  : 1,
-                    "Alpha" : 0
-                },
-                "Specular"     : {
-                    "Red"   : 0,
-                    "Green" : 0,
-                    "Blue"  : 0,
-                    "Alpha" : 0
-                },
-                "Shininess"    : 9,
-                "Reflective"   : 0.2,
-                "Transparency" : 0,
-                "Refraction"   : 1
-            },
-            "Texture"  : {
-                "Type"          : "MAPPING",
-                "Path"          : "test.png",
-                "Octaves"       : 3,
-                "Amplitude"     : 1,
-                "Persistence"   : 0.5,
-                "Exponent"      : 5.56,
-                "Frequency"     : {"x" : 0.9, "y" : 0.9, "z" : 0.9},
-                "Frequency Att" : {"x" : 2, "y" : 2, "z" : 2}
-            }
         }
-      
     ]
 }

@@ -83,6 +83,8 @@ char		*validate_texture(cJSON *obj, t_figure *figure)
 	mt->img_path = ft_strdup(tmp->valuestring);
 	if (figure->id == SPHERE)
 		figure->texture.creating_texture = &sphere_mapping_texture;
+	// if (figure->id == PLANE)
+	// 	figure->texture.creating_texture = &plane_mapping_texture;
 	figure->texture.tx_struct = (void*)mt;
 	return (0);
 }
