@@ -82,7 +82,6 @@ char	*validate_texture(cJSON *obj, t_figure *figure)
 			!(tmp->valuestring))
 		return ("Invalid Mapping \"Texture\"->\"Name\" value.");
 	mt->img_path = ft_strdup(tmp->valuestring);
-	printf("tmp->valuestring = %s\n", tmp->valuestring);
 	if (figure->id == SPHERE)
 		figure->texture.creating_texture = &sphere_mapping_texture;
 	figure->texture.tx_struct = (void*)mt;
