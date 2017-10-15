@@ -6,7 +6,7 @@
 /*   By: kzahreba <kzahreba@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/04 20:36:45 by kzahreba          #+#    #+#             */
-/*   Updated: 2017/10/14 22:29:15 by askochul         ###   ########.fr       */
+/*   Updated: 2017/10/15 12:33:33 by pkolomiy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 # include "SDL2_image/SDL_image.h"
 # include "../libraries/JSON/cJSON.h"
 # define COUNT 6
-# define WX 500
-# define WY 550
+# define WX 1200
+# define WY 1000
 # define WIDTH 1400
 # define HEIGHT 1000
 # define SCENSES 6
