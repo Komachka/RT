@@ -43,7 +43,7 @@ int	intersection_cone(t_ray *r, void *cone, double *t, double *z)
 	t_equation	n;
 	int			res;
 
-	z = 0;
+	*z = -1;
 	cn = (t_cone *)cone;
 	tm1 = vector_mult(vector_dot_product(&r->dir, &cn->dir), &cn->dir);
 	tm1 = vector_substract(&r->dir, &tm1);
@@ -69,7 +69,7 @@ int	intersection_sphere(t_ray *r, void *sphere, double *t, double *z)
 	t_sphere	*s;
 	int			res;
 
-	z = 0;
+	*z = -1;
 	s = (t_sphere *)sphere;
 	n.a = vector_dot_product(&r->dir, &r->dir);
 	dist = vector_substract(&r->origin, &s->pos);
@@ -86,7 +86,7 @@ int	intersection_ellipsoid(t_ray *r, void *ellipsoid, double *t, double *z)
 	t_equation	n;
 	int			res;
 
-	z = 0;
+	*z = -1;
 	e = (t_ellipsoid *)ellipsoid;
 	n.a = ((r->dir.x * r->dir.x) / (e->size_x * e->size_x)) + ((r->dir.y
 				* r->dir.y) / (e->size_y * e->size_y)) + ((r->dir.z
@@ -110,7 +110,7 @@ int	intersection_paraboloid(t_ray *r, void *paraboloid, double *t, double *z)
 	t_vect			x;
 	int				res;
 
-	z = 0;
+	*z = -1;
 	p = (t_paraboloid *)paraboloid;
 	x = vector_substract(&r->origin, &p->extremum);
 	n.a = vector_dot_product(&r->dir, &r->dir) -

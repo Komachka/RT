@@ -38,7 +38,7 @@ int		intersection_limited_paraboloid(t_ray *r, void *paraboloid,
 	double					cap[2];
 	double					t0;
 
-	z = 0;
+	*z = -1;
 	cap[0] = -1;
 	cap[1] = -1;
 	p = (t_limited_paraboloid *)paraboloid;
@@ -67,7 +67,7 @@ int		intersection_limited_sphere(t_ray *r, void *sphere,
 	double				cap[4];
 	t_disc				ttm;
 
-	z = 0;
+	*z = -1;
 	cap[0] = -1;
 	cap[1] = -1;
 	cap[2] = -1;
@@ -98,7 +98,7 @@ int		intersection_plane_with_hole(t_ray *r, void *obj, double *t, double *z)
 	t_vect				point;
 	int					i;
 
-	z = 0;
+	*z = -1;
 	i = -1;
 	p = (t_plane_with_hole *)obj;
 	if (vector_dot_product(&p->norm, &r->dir) != 0)
@@ -120,7 +120,7 @@ int		intersection_disc_with_hole(t_ray *r, void *obj, double *t, double *z)
 	double				t0;
 	int					i;
 
-	z = 0;
+	*z = -1;
 	i = -1;
 	p = (t_disc_with_hole *)obj;
 	if (intersection_disc(r, &p->disc, &t0, 0))

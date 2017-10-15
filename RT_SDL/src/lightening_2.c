@@ -17,12 +17,13 @@ int					shadow(t_rtv *rtv, t_ray *r, double light)
 	int		i;
 	int		k;
 	double	t;
+	double z;
 
 	i = -1;
 	k = 0;
 	while (++i < rtv->figure_num)
 		if (rtv->objects[i].intersection_object(r,
-					rtv->objects[i].object, &t, 0))
+					rtv->objects[i].object, &t, &z))
 		{
 			if (t > light)
 				continue;
