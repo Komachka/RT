@@ -16,11 +16,11 @@
         "FOV"                  : 45
     },
     "Skybox"                  : {
-        "Radius" : 10,
+        "Radius" : 1,
         "Color"  : "BB0000",
         "Texture"  : {
             "Type"          : "MAPPING",
-            "Path"          : "image/test.png",
+            "Path"          : "uranus.jpg",
             "Octaves"       : 3,
             "Amplitude"     : 1,
             "Persistence"   : 0.5,
@@ -115,7 +115,7 @@
             },
             "Texture"  : {
                 "Type"          : "MAPPING",
-                "Path"          : "image/hexagon.png",
+                "Path"          : "hexagon.png",
                 "Octaves"       : 3,
                 "Amplitude"     : 1,
                 "Persistence"   : 0.5,
