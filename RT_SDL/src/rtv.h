@@ -650,6 +650,7 @@ void					uploading_textures(t_rtv *rtv); //- дописати на SDL
 void					free_textures(t_rtv *rtv);
 void 					free_animation_texture(t_rtv *rtv);
 void					sphere_mapping_texture(t_additional *s, void *t);
+void					plane_mapping_texture(t_additional *s, void *t);
 double					calculate_perlin_noise(t_vect point);
 void					perlin_noise_texture(t_additional *st, void *texture_st);
 void					plasma_texture(t_additional *s, void *t);

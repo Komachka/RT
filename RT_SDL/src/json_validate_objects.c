@@ -63,7 +63,7 @@ static inline char	*validate_objects_2(cJSON *tmp[], t_figure *figure)
 	return (validate_3(tmp, material, figure));
 }
 
-static inline char	*get_texture_type(char *type, t_figure *figure)
+static inline char	*get_texture_type(char *type, t_figure *figure) ///
 {
 	int		num[6];
 	char	*arr[6];
