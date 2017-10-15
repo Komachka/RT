@@ -6,7 +6,7 @@
 /*   By: pkolomiy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/21 01:28:35 by pkolomiy          #+#    #+#             */
-/*   Updated: 2017/10/15 13:24:23 by askochul         ###   ########.fr       */
+/*   Updated: 2017/10/15 14:10:07 by askochul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,6 @@ char		*validate_texture(cJSON *obj, t_figure *figure)
 	mt->img_path = ft_strdup(tmp->valuestring);
 	if (figure->id == SPHERE)
 		figure->texture.creating_texture = &sphere_mapping_texture;
-	// if (figure->id == PLANE)
-	// 	figure->texture.creating_texture = &plane_mapping_texture;
 	figure->texture.tx_struct = (void*)mt;
 	return (0);
 }

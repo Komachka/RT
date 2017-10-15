@@ -6,7 +6,7 @@
 /*   By: kzahreba <kzahreba@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/04 20:36:45 by kzahreba          #+#    #+#             */
-/*   Updated: 2017/10/15 12:33:33 by pkolomiy         ###   ########.fr       */
+/*   Updated: 2017/10/15 14:12:42 by askochul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <pthread.h>
 # include <unistd.h>
 # include <fcntl.h>
-# include <stdio.h> //для чого це?
+# include <stdio.h>
 # include <time.h>
 # include "SDL2_ttf/SDL_ttf.h"
 # include "SDL2/SDL.h"
