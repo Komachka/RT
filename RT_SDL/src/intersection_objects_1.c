@@ -73,7 +73,7 @@ int		intersection_torus(t_ray *ray, void *tr, double *t, double *z)
 	double			c;
 	double			d;
 
-	z = 0;
+	*z = -1;
 	tor = (t_torus *)tr;
 	q = vector_substract(&ray->origin, &tor->pos);
 	u = vector_dot_product(&tor->dir, &q);
@@ -105,7 +105,7 @@ int		intersection_triangle(t_ray *r, void *triangle, double *t, double *z)
 	t_vect		pvec;
 	double		t0;
 
-	z = 0;
+	*z = -1;
 	tr = (t_triangle *)triangle;
 	pvec = vector_cross_product(&r->dir, &tr->v1);
 	det = vector_dot_product(&tr->v0, &pvec);
@@ -134,7 +134,7 @@ int		intersection_cylinder(t_ray *r, void *c, double *t, double *z)
 	t_equation	n;
 	int			res;
 
-	z = 0;
+	*z = -1;
 	cyl = (t_cylinder *)c;
 	tmp[0] = vector_mult(vector_dot_product(&r->dir, &cyl->dir), &cyl->dir);
 	tmp[0] = vector_substract(&r->dir, &tmp[0]);
@@ -155,7 +155,7 @@ int		intersection_plane(t_ray *r, void *plane, double *t, double *z)
 	double	t0;
 	t_vect	point;
 
-	z = 0;
+	*z = -1;
 	p = (t_plane *)plane;
 	if (vector_dot_product(&p->norm, &r->dir) != 0)
 	{

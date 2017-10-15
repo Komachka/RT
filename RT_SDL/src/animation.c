@@ -12,15 +12,15 @@
 
 #include "rtv.h"
 
-static int			sdl_thread(void *ptr)
+static int sdl_thread(void *ptr)
 {
-	SDL_Rect	rect;
-	static int	n_frame2;
+    
+    SDL_Rect	rect;
+	static int	n_frame2 = 0;
 	SDL_Rect	rect1;
-	t_rtv		*rtv;
-
+	t_rtv *rtv;
+	
 	rtv = (t_rtv*)ptr;
-	n_frame2 = 0;
 	rect1.x = 0;
 	rect1.y = 0;
 	rect1.w = WX;
@@ -40,17 +40,27 @@ static int			sdl_thread(void *ptr)
 	return (0);
 }
 
+
+
 int					animation(SDL_Renderer *renderer, t_rtv *rtv)
 {
-	SDL_Thread	*thread;
-	int			thread_return_value;
+	SDL_Thread *thread;
+    int         threadReturnValue;
 
-	thread = SDL_CreateThread(sdl_thread, "sdl_thread", (void*)rtv);
-	if (NULL == thread)
-		SDL_Log("\nSDL_CreateThread failed: %s\n", SDL_GetError());
-	else
-		SDL_WaitThread(thread, &thread_return_value);
-	return (0);
+
+    thread = SDL_CreateThread(sdl_thread, "sdl_thread", (void*)rtv);
+	if (NULL == thread) 
+    {
+        SDL_Log("\nSDL_CreateThread failed: %s\n", SDL_GetError());
+
+   	} 
+    else 
+    {
+        SDL_WaitThread(thread, &threadReturnValue);
+    }
+
+    return (0);
+	
 }
 
 static inline void	load_texture3(t_rtv *rtv)
