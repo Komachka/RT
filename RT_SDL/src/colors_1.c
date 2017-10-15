@@ -54,7 +54,7 @@ t_color	average_color(t_color *rt, int light_num)
 	int		i;
 
 	i = -1;
-	//set_zero_color(&color);
+	set_zero_color(&color);
 	if (rt)
 	{
 		while (++i < light_num)
