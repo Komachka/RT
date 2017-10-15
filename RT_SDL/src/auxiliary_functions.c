@@ -6,7 +6,7 @@
 /*   By: kzahreba <kzahreba@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/16 19:58:01 by kzahreba          #+#    #+#             */
-/*   Updated: 2017/10/14 17:55:14 by askochul         ###   ########.fr       */
+/*   Updated: 2017/10/15 12:48:42 by askochul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ void				delstruct(t_rtv *rtv)
 	SDL_DestroyRenderer(rtv->renderer);
 	SDL_DestroyWindow(rtv->window);
 	free_rtv(rtv);
-
 }
 
 void				delstruct1(t_menu *menu)
@@ -82,6 +81,4 @@ void				delstruct1(t_menu *menu)
 	SDL_DestroyWindow(menu->window);
 	IMG_Quit();
 	SDL_Quit();
-	
-	
 }

@@ -6,7 +6,7 @@
 /*   By: pkolomiy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/21 14:26:06 by pkolomiy          #+#    #+#             */
-/*   Updated: 2017/10/11 17:41:19 by askochul         ###   ########.fr       */
+/*   Updated: 2017/10/15 13:19:23 by askochul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,6 @@ static inline void	fill_else(t_rtv *rtv)
 	rtv->def_cam_dir[2] = rtv->cam.rotate[2];
 	rtv->delphin = ON;
 }
-
-
 
 void				get_scene(const char *name, t_rtv *rtv)
 {

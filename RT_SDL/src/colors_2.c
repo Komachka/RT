@@ -6,7 +6,7 @@
 /*   By: askochul <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/28 16:14:52 by askochul          #+#    #+#             */
-/*   Updated: 2017/10/11 15:38:08 by askochul         ###   ########.fr       */
+/*   Updated: 2017/10/15 12:54:03 by askochul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,19 @@ t_color	parse_color(int color)
 	cl.r = ((color >> 16) & 255) / 255.0;
 	cl.al = ((color >> 24) & 255) / 100.0;
 	return (cl);
+}
+
+void	del_arrey(void **arrey, int size)
+{
+	int	i;
+
+	i = 0;
+	while (i < size)
+	{
+		if (arrey[i] != NULL)
+			free(arrey[i]);
+		i++;
+	}
+	if (arrey != NULL)
+		free(arrey);
 }

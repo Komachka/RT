@@ -6,28 +6,11 @@
 /*   By: kzahreba <kzahreba@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/22 17:19:53 by kzahreba          #+#    #+#             */
-/*   Updated: 2017/10/14 17:57:46 by askochul         ###   ########.fr       */
+/*   Updated: 2017/10/15 12:50:56 by askochul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv.h"
-
-
-void    del_arrey(void **arrey, int size)
-{
-        int i;
-
-        i = 0;
-        while (i < size)
-        {
-                if (arrey[i] != NULL)
-                        free(arrey[i]);
-                i++;
-        }
-        if (arrey != NULL)
-                free(arrey);
-}
-
 
 static inline void	malloc_sdl_colour(t_rtv *rtv)
 {
@@ -95,7 +78,6 @@ static inline void	ft_action(t_rtv *rtv)
 	load_texture(rtv);
 	uploading_textures(rtv);
 	SDL_RenderClear(rtv->renderer);
-
 	malloc_sdl_colour(rtv);
 	threads(rtv);
 	copy_to_filter(rtv);
@@ -103,7 +85,6 @@ static inline void	ft_action(t_rtv *rtv)
 	create_rander_texture(rtv);
 	ft_init_texture_rect(rtv);
 	SDL_RenderCopy(rtv->renderer, rtv->sdl_texture_render, NULL, &rtv->rect_rt);
-
 	SDL_RenderPresent(rtv->renderer);
 }
 
@@ -133,6 +114,3 @@ void				basic_function(t_rtv *rtv)
 	}
 	delstruct(rtv);
 }
-
-
-

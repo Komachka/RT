@@ -6,7 +6,7 @@
 /*   By: askochul <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/11 22:21:55 by askochul          #+#    #+#             */
-/*   Updated: 2017/10/14 20:03:46 by askochul         ###   ########.fr       */
+/*   Updated: 2017/10/15 13:43:00 by askochul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ void				free_textures(t_rtv *rtv)
 
 	i = -1;
 	while (++i < rtv->figure_num)
-		
 		if (rtv->objects[i].texturing == ON &&
 				rtv->objects[i].texture.type == MAPPING)
 		{
@@ -73,10 +72,9 @@ void				free_textures(t_rtv *rtv)
 		tx = (t_mapping_texture *)rtv->skybox.texture.tx_struct;
 		SDL_FreeSurface(tx->srf);
 	}
-
 }
 
-void		free_animation_texture(t_rtv *rtv)
+void				free_animation_texture(t_rtv *rtv)
 {
 	int i;
 

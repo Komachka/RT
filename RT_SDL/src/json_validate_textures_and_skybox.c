@@ -6,34 +6,33 @@
 /*   By: pkolomiy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/21 01:28:35 by pkolomiy          #+#    #+#             */
-/*   Updated: 2017/09/23 19:37:48 by pkolomiy         ###   ########.fr       */
+/*   Updated: 2017/10/15 13:24:23 by askochul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv.h"
 
-static char    *ft_strdup(const char *s1)
+static char	*ft_strdup(const char *s1)
 {
-        char    *s2;
-        size_t  i;
+	char	*s2;
+	size_t	i;
 
-        i = 0;
-        while (s1[i] != '\0')
-                i++;
-        if ((s2 = (char*)malloc(sizeof(char) * (i + 1))) == NULL)
-                return (NULL);
-        i = 0;
-        while (s1[i] != '\0')
-        {
-                s2[i] = s1[i];
-                i++;
-        }
-        s2[i] = '\0';
-        return (s2);
+	i = 0;
+	while (s1[i] != '\0')
+		i++;
+	if ((s2 = (char*)malloc(sizeof(char) * (i + 1))) == NULL)
+		return (NULL);
+	i = 0;
+	while (s1[i] != '\0')
+	{
+		s2[i] = s1[i];
+		i++;
+	}
+	s2[i] = '\0';
+	return (s2);
 }
 
-
-char	*validate_skybox(cJSON *obj, t_rtv *rtv)
+char		*validate_skybox(cJSON *obj, t_rtv *rtv)
 {
 	t_figure	temp;
 	cJSON		*tmp[2];
@@ -61,7 +60,7 @@ char	*validate_skybox(cJSON *obj, t_rtv *rtv)
 	return (0);
 }
 
-char	*validate_texture(cJSON *obj, t_figure *figure)
+char		*validate_texture(cJSON *obj, t_figure *figure)
 {
 	t_mapping_texture	*mt;
 	cJSON				*tmp;

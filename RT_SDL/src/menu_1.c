@@ -6,7 +6,7 @@
 /*   By: askochul <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/11 17:56:28 by askochul          #+#    #+#             */
-/*   Updated: 2017/10/14 21:19:51 by askochul         ###   ########.fr       */
+/*   Updated: 2017/10/15 13:40:44 by askochul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,13 @@ void	ft_menu(t_menu *menu, t_rtv *rtv)
 	{
 		while (SDL_PollEvent(&menu->e))
 		{
-			if (((menu->e.type == SDL_KEYDOWN &&
-							menu->e.key.keysym.sym == SDLK_ESCAPE)
-						|| menu->e.window.event == SDL_WINDOWEVENT_CLOSE)
+			if (((menu->e.type == SDL_KEYDOWN && menu->e.key.keysym.sym ==
+			SDLK_ESCAPE) || menu->e.window.event == SDL_WINDOWEVENT_CLOSE)
 					&& menu->window_id == menu->e.window.windowID)
-				{
-					delstruct1(menu);
-					return ;
-				}
-
+			{
+				delstruct1(menu);
+				return ;
+			}
 			if (menu->e.type == SDL_MOUSEMOTION)
 				ft_mouse_motion(menu, rtv, x_mouse, y_mouse);
 			if (menu->e.button.button == SDL_BUTTON_LEFT)

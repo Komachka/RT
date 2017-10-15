@@ -6,7 +6,7 @@
 /*   By: askochul <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/28 16:14:16 by askochul          #+#    #+#             */
-/*   Updated: 2017/09/28 16:14:27 by askochul         ###   ########.fr       */
+/*   Updated: 2017/10/15 12:53:27 by askochul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ t_color	average_color(t_color *rt, int light_num)
 			color.b += rt[i].b;
 			color.al += rt[i].al;
 		}
-		 if (light_num)
-		 	color = calculate_color(1.00 / (double)light_num, &color);
+		if (light_num)
+			color = calculate_color(1.00 / (double)light_num, &color);
 	}
 	return (color);
 }
