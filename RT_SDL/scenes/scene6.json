@@ -117,7 +117,7 @@
                 "Radius"   : 1.5
             },
             "Material" : {
-                "Color"        : "BBBB00",
+                "Color"        : "ffff99",
                 "Ambient"      : {
                     "Red"   : 0.8,
                     "Green" : 0.8,
@@ -216,7 +216,7 @@
                 "Radius"   : 2
             },
             "Material" : {
-                "Color"        : "BBBB00",
+                "Color"        : "ffe259",
                 "Ambient"      : {
                     "Red"   : 0.8,
                     "Green" : 0.8,
@@ -346,6 +346,111 @@
                 "Refraction"   : 1
             }
         },
+                  {
+            "Id"       : "DISC_WITH_HOLE",
+            "Object"   : {
+                "Disc" : {
+                    "Position"      : {"x" : 30, "y" : -4, "z" : 21.1},
+                    "Normal Vector" : {"x" : 0, "y" : 0, "z" : 10},
+                    "Radius"        : 0.7
+                },
+                "Hole" : {
+                    "Position" : {"x" : 30, "y" : -4, "z" : 21},
+                    "Radius"   : 0.5
+                }
+            },
+            "Material" : {
+                "Color"        : "ff2400",
+                "Ambient"      : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Diffuse"      : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Specular"     : {
+                    "Red"   : 0,
+                    "Green" : 0,
+                    "Blue"  : 0,
+                    "Alpha" : 0
+                },
+                "Shininess"    : 1,
+                "Reflective"   : 0,
+                "Transparency" : 0,
+                "Refraction"   : 1
+            }
+        },
+                  {
+            "Id"       : "SPHERE",
+            "Object"   : {
+                "Position" : {"x" : 29, "y" : -3, "z" : 21.1},
+                "Radius"   : 0.5
+            },
+            "Material" : {
+                "Color"        : "000000",
+                "Ambient"      : {
+                    "Red"   : 0.8,
+                    "Green" : 0.8,
+                    "Blue"  : 0.8,
+                    "Alpha" : 0
+                },
+                "Diffuse"      : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Specular"     : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Shininess"    : 20,
+                "Reflective"   : 0,
+                "Transparency" : 0,
+                "Refraction"   : 1.015
+            }
+            
+        },
+        {
+            "Id"       : "SPHERE",
+            "Object"   : {
+                "Position" : {"x" : 31, "y" : -3, "z" : 21.1},
+                "Radius"   : 0.5
+            },
+            "Material" : {
+                "Color"        : "000000",
+                "Ambient"      : {
+                    "Red"   : 0.8,
+                    "Green" : 0.8,
+                    "Blue"  : 0.8,
+                    "Alpha" : 0
+                },
+                "Diffuse"      : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Specular"     : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Shininess"    : 20,
+                "Reflective"   : 0,
+                "Transparency" : 0,
+                "Refraction"   : 1.015
+            }
+            
+        },
         {
             "Id"       : "LIMITED_PARABOLOID",
             "Object"   : {
@@ -380,7 +485,113 @@
                 "Refraction"   : 1
             }
         },
-                {
+             
+          {
+            "Id"       : "DISC_WITH_HOLE",
+            "Object"   : {
+                "Disc" : {
+                    "Position"      : {"x" : 20, "y" : -4, "z" : 21.1},
+                    "Normal Vector" : {"x" : 0, "y" : 0, "z" : 10},
+                    "Radius"        : 1
+                },
+                "Hole" : {
+                    "Position" : {"x" : 20, "y" : -3.5, "z" : 21},
+                    "Radius"   : 1
+                }
+            },
+            "Material" : {
+                "Color"        : "ff2400",
+                "Ambient"      : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Diffuse"      : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Specular"     : {
+                    "Red"   : 0,
+                    "Green" : 0,
+                    "Blue"  : 0,
+                    "Alpha" : 0
+                },
+                "Shininess"    : 1,
+                "Reflective"   : 0,
+                "Transparency" : 0,
+                "Refraction"   : 1
+            }
+        },
+                  {
+            "Id"       : "SPHERE",
+            "Object"   : {
+                "Position" : {"x" : 19, "y" : -3, "z" : 21.1},
+                "Radius"   : 0.5
+            },
+            "Material" : {
+                "Color"        : "000000",
+                "Ambient"      : {
+                    "Red"   : 0.8,
+                    "Green" : 0.8,
+                    "Blue"  : 0.8,
+                    "Alpha" : 0
+                },
+                "Diffuse"      : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Specular"     : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Shininess"    : 20,
+                "Reflective"   : 0,
+                "Transparency" : 0,
+                "Refraction"   : 1.015
+            }
+            
+        },
+        {
+            "Id"       : "SPHERE",
+            "Object"   : {
+                "Position" : {"x" : 21, "y" : -3, "z" : 21.1},
+                "Radius"   : 0.5
+            },
+            "Material" : {
+                "Color"        : "000000",
+                "Ambient"      : {
+                    "Red"   : 0.8,
+                    "Green" : 0.8,
+                    "Blue"  : 0.8,
+                    "Alpha" : 0
+                },
+                "Diffuse"      : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Specular"     : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Shininess"    : 20,
+                "Reflective"   : 0,
+                "Transparency" : 0,
+                "Refraction"   : 1.015
+            }
+            
+        },
+          {
             "Id"       : "DISC",
             "Object"   : {
                 "Position"      : {"x" : -20, "y" :  0, "z" : -50},
@@ -409,45 +620,6 @@
                 },
                 "Shininess"    : 0,
                 "Reflective"   : 0.15,
-                "Transparency" : 0,
-                "Refraction"   : 1
-            }
-        },
-          {
-            "Id"       : "DISC_WITH_HOLE",
-            "Object"   : {
-                "Disc" : {
-                    "Position"      : {"x" : -20, "y" : 0, "z" : -50},
-                    "Normal Vector" : {"x" : 0, "y" : 60, "z" : 10},
-                    "Radius"        : 15
-                },
-                "Hole" : {
-                    "Position" : {"x" : -10, "y" : 0, "z" : -50},
-                    "Radius"   : 10
-                }
-            },
-            "Material" : {
-                "Color"        : "0000EF",
-                "Ambient"      : {
-                    "Red"   : 1,
-                    "Green" : 1,
-                    "Blue"  : 1,
-                    "Alpha" : 0
-                },
-                "Diffuse"      : {
-                    "Red"   : 1,
-                    "Green" : 1,
-                    "Blue"  : 1,
-                    "Alpha" : 0
-                },
-                "Specular"     : {
-                    "Red"   : 0,
-                    "Green" : 0,
-                    "Blue"  : 0,
-                    "Alpha" : 0
-                },
-                "Shininess"    : 0,
-                "Reflective"   : 0,
                 "Transparency" : 0,
                 "Refraction"   : 1
             }
