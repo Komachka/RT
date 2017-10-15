@@ -57,6 +57,8 @@ static inline void	fill_else(t_rtv *rtv)
 	rtv->delphin = ON;
 }
 
+
+
 void				get_scene(const char *name, t_rtv *rtv)
 {
 	char	*str;

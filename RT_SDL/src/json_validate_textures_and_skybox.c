@@ -12,6 +12,27 @@
 
 #include "rtv.h"
 
+static char    *ft_strdup(const char *s1)
+{
+        char    *s2;
+        size_t  i;
+
+        i = 0;
+        while (s1[i] != '\0')
+                i++;
+        if ((s2 = (char*)malloc(sizeof(char) * (i + 1))) == NULL)
+                return (NULL);
+        i = 0;
+        while (s1[i] != '\0')
+        {
+                s2[i] = s1[i];
+                i++;
+        }
+        s2[i] = '\0';
+        return (s2);
+}
+
+
 char	*validate_skybox(cJSON *obj, t_rtv *rtv)
 {
 	t_figure	temp;
@@ -58,8 +79,10 @@ char	*validate_texture(cJSON *obj, t_figure *figure)
 	if (!(mt = (t_mapping_texture*)malloc(sizeof(t_mapping_texture))))
 		malloc_error();
 	if (!(tmp = cJSON_GetObjectItemCaseSensitive(obj, "Path")) ||
-			!(mt->img_path = tmp->valuestring))
+			!(tmp->valuestring))
 		return ("Invalid Mapping \"Texture\"->\"Name\" value.");
+	mt->img_path = ft_strdup(tmp->valuestring);
+	printf("tmp->valuestring = %s\n", tmp->valuestring);
 	if (figure->id == SPHERE)
 		figure->texture.creating_texture = &sphere_mapping_texture;
 	figure->texture.tx_struct = (void*)mt;

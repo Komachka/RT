@@ -97,8 +97,8 @@ void	ft_which_scene(t_rtv *rtv, int i)
 	end = ".json";
 	scene_name = join(name, end);
 	free(name);
-	cJSON_Delete(rtv->obj);
 	get_scene(scene_name, rtv);
+	cJSON_Delete(rtv->obj);
 	free(scene_name);
 }
 

@@ -22,6 +22,7 @@ int		main(void)
 	rtv->obj = 0;
 	ft_menu(menu, rtv);
 	free(rtv);
+	free(menu);
 	exit(0);
 	return (0);
 }
