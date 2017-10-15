@@ -64,11 +64,11 @@ int		intersection_limited_cylinder(t_ray *r, void *cyl, double *t, double *z)
 		ttm[0].pos = c->p1;
 		ttm[0].norm = c->p1_norm;
 		ttm[0].r = c->r;
-		intersection_disc(r, &ttm[0], &cap[2], 0);
+		intersection_disc(r, &ttm[0], &cap[2], z);
 		ttm[1].pos = c->p2;
 		ttm[1].norm = c->p2_norm;
 		ttm[1].r = c->r;
-		intersection_disc(r, &ttm[1], &cap[3], 0);
+		intersection_disc(r, &ttm[1], &cap[3], z);
 	}
 	t0 = select_value(cap, 4);
 	return (check_solving(t, t0));
@@ -138,11 +138,11 @@ int		intersection_limited_cone(t_ray *r, void *cone, double *t, double *z)
 		ttm[0].pos = cn->p1;
 		ttm[0].norm = cn->p1_norm;
 		ttm[0].r = cn->r1;
-		intersection_disc(r, &ttm[0], &cap[2], 0);
+		intersection_disc(r, &ttm[0], &cap[2], z);
 		ttm[1].pos = cn->p2;
 		ttm[1].norm = cn->p2_norm;
 		ttm[1].r = cn->r2;
-		intersection_disc(r, &ttm[1], &cap[3], 0);
+		intersection_disc(r, &ttm[1], &cap[3], z);
 	}
 	t0 = select_value(cap, 4);
 	return (check_solving(t, t0));

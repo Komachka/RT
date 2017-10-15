@@ -17,9 +17,9 @@ int					shadow(t_rtv *rtv, t_ray *r, double light)
 	int		i;
 	int		k;
 	double	t;
-	double z;
+	double	z;
 
-	i = -1;
+	i = 0;
 	k = 0;
 	while (++i < rtv->figure_num)
 		if (rtv->objects[i].intersection_object(r,
