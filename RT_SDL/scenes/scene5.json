@@ -20,7 +20,7 @@
         "Color"  : "BB0000",
         "Texture"  : {
             "Type"          : "MAPPING",
-            "Path"          : "test.png",
+            "Path"          : "jupiter.jpg",
             "Octaves"       : 3,
             "Amplitude"     : 1,
             "Persistence"   : 0.5,
@@ -191,8 +191,8 @@
                 },
                 "Shininess"    : 0,
                 "Reflective"   : 0,
-                "Transparency" : 0,
-                "Refraction"   : 1
+                "Transparency" : 1,
+                "Refraction"   : 1.6
             }
         },
         {
