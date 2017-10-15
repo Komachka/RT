@@ -6,7 +6,7 @@
 /*   By: askochul <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/11 22:21:55 by askochul          #+#    #+#             */
-/*   Updated: 2017/10/11 22:27:23 by askochul         ###   ########.fr       */
+/*   Updated: 2017/10/14 20:03:46 by askochul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static inline void	uploading_textures_2(t_rtv *rtv, t_mapping_texture *tx)
 	}
 }
 
-void	uploading_textures(t_rtv *rtv)
+void				uploading_textures(t_rtv *rtv)
 {
 	int					i;
 	t_mapping_texture	*tx;
@@ -44,10 +44,7 @@ void	uploading_textures(t_rtv *rtv)
 			tx = (t_mapping_texture *)rtv->objects[i].texture.tx_struct;
 			str = join("image/", tx->img_path);
 			if (!(tx->srf = IMG_Load(str)))
-			{
 				put_error("Invalid path", str);
-
-			}
 			tx->h = tx->srf->h;
 			tx->w = tx->srf->w;
 			tx->arr = (int*)tx->srf->pixels;
@@ -56,7 +53,7 @@ void	uploading_textures(t_rtv *rtv)
 	uploading_textures_2(rtv, tx);
 }
 
-void	free_textures(t_rtv *rtv)
+void				free_textures(t_rtv *rtv)
 {
 	int					i;
 	t_mapping_texture	*tx;

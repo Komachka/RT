@@ -40,7 +40,9 @@ SRC = main.c \
 	  ft_standart_function_3.c \
 	  ft_key_hooks_1.c \
 	  ft_key_hooks_2.c \
-	  menu.c \
+	  menu_1.c \
+	  menu_2.c \
+	  menu_3.c \
 	  solving_equations.c \
 	  json_get_scene.c \
 	  json_valid_data.c \
@@ -58,7 +60,10 @@ SRC = main.c \
 	  json_validate_textures_and_skybox.c \
 	  json_validate_procedural_textures.c \
 	  json_validate_vector_and_color.c \
-	  filters.c \
+	  filters_1.c \
+	  filters_2.c \
+	  filters_3.c \
+	  filters_4.c \
 	  animation.c \
 	  mapping_texture.c \
 	  perlin_noise_texture.c \

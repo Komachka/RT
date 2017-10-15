@@ -6,7 +6,7 @@
 /*   By: kzahreba <kzahreba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/21 21:13:39 by kzahreba          #+#    #+#             */
-/*   Updated: 2017/10/11 22:54:11 by askochul         ###   ########.fr       */
+/*   Updated: 2017/10/14 20:19:28 by askochul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,4 +155,3 @@ int			quartic_equation(t_quartic_eq *n)
 	}
 	return (calculating_roots(n, &c, d));
 }
-

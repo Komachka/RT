@@ -6,7 +6,7 @@
 /*   By: kzahreba <kzahreba@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/29 19:24:07 by kzahreba          #+#    #+#             */
-/*   Updated: 2017/10/11 17:50:48 by askochul         ###   ########.fr       */
+/*   Updated: 2017/10/14 22:25:29 by askochul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,19 +72,19 @@ static inline t_vect	fisheye_camera(t_vect *dir, double angle)
 	res.x = sin(theta) * cos(phi);
 	res.y = sin(theta) * sin(phi);
 	res.z = cos(theta);
-	return(res);
+	return (res);
 }
 
-void	*make_projection(void *k)
+void					*make_projection(void *k)
 {
 	t_thred	*p;
-	t_color *c;
+	t_color	*c;
 	int		i;
 	int		x;
 	t_vect	tmp;
 	int		dx;
 	int		dy;
-	t_color average;
+	t_color	average;
 
 	dx = -1;
 	dy = -1;
@@ -101,8 +101,10 @@ void	*make_projection(void *k)
 			{
 				while (++dx < p->rtv1->samples)
 				{
-					while (++dy < p->rtv1->samples){
-						tmp.x = (2 * ((x + p->rtv1->delta_aliasing + (double)dx / (double)p->rtv1->samples) / (double)WX) - 1) * \
+					while (++dy < p->rtv1->samples)
+					{
+						tmp.x = (2 * ((x + p->rtv1->delta_aliasing + (double)dx /
+										(double)p->rtv1->samples) / (double)WX) - 1) *
 							p->rtv1->cam.image_aspect_ratio * p->rtv1->cam.scale;
 						tmp.y = (1 - 2 * ((p->y_start + p->rtv1->delta_aliasing + (double)dy / (double)p->rtv1->samples) / (double)WY)) * p->rtv1->cam.scale;
 						p->ray.dir = rotate_cam(tmp, p->rtv1->cam.rotate);
@@ -120,9 +122,8 @@ void	*make_projection(void *k)
 				i = 0;
 			}
 		}
-		if (p->index == 0 && p->rtv1->delphin == ON) {
-			animation(p->rtv1->renderer, p->rtv1); 
-		}
+		if (p->index == 0 && p->rtv1->delphin == ON)
+			animation(p->rtv1->renderer, p->rtv1);
 		p->y_start++;
 	}
 	free(c);

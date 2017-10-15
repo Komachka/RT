@@ -6,7 +6,7 @@
 /*   By: kzahreba <kzahreba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/07 19:02:54 by kzahreba          #+#    #+#             */
-/*   Updated: 2017/10/11 16:05:41 by askochul         ###   ########.fr       */
+/*   Updated: 2017/10/14 19:32:02 by askochul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,14 @@ int			complicated_intersection(t_rtv *rtv, t_ray *r, t_vect *point)
 	int		i;
 	int		k;
 	double	t;
-	double 	z;
+	double	z;
 
 	i = -1;
 	k = -1;
 	t = INFINITY;
 	while (++i < rtv->figure_num)
-		if (rtv->objects[i].intersection_object(r, rtv->objects[i].object, &t, &z))
+		if (rtv->objects[i].intersection_object(r,
+					rtv->objects[i].object, &t, &z))
 		{
 			if (t < point->z)
 			{
@@ -38,7 +39,7 @@ int			complicated_intersection(t_rtv *rtv, t_ray *r, t_vect *point)
 
 t_color		intersection(t_rtv *rtv, t_ray *r)
 {
-	t_vect 		tm;
+	t_vect		tm;
 	t_color		c;
 	int			k;
 	int			figure;

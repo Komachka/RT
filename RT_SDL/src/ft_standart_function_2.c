@@ -6,7 +6,7 @@
 /*   By: kzahreba <kzahreba@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/23 14:27:55 by kzahreba          #+#    #+#             */
-/*   Updated: 2017/10/11 16:03:22 by askochul         ###   ########.fr       */
+/*   Updated: 2017/10/14 19:30:49 by askochul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	malloc_error(void)
 {
-	write(1,"Can't allocate memory\n", 22);
+	write(1, "Can't allocate memory\n", 22);
 	exit(1);
 }
 

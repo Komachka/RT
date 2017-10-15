@@ -6,7 +6,7 @@
 /*   By: askochul <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/28 16:35:30 by askochul          #+#    #+#             */
-/*   Updated: 2017/09/28 16:35:54 by askochul         ###   ########.fr       */
+/*   Updated: 2017/10/14 19:25:52 by askochul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_vect		plane_norm_vector(void *obj, t_vect *point, double a)
 
 t_vect		plane_with_hole_norm_vector(void *obj, t_vect *point, double a)
 {
-	t_vect	norm;
+	t_vect				norm;
 	t_plane_with_hole	*p;
 
 	a = 0;
@@ -70,10 +70,10 @@ t_vect		cylinder_norm_vector(void *obj, t_vect *point, double a)
 	return (norm);
 }
 
-t_vect 		limited_paraboloid_norm_vector(void *obj, t_vect *point, double a)
+t_vect		limited_paraboloid_norm_vector(void *obj, t_vect *point, double a)
 {
-	t_vect			norm;
-	t_paraboloid 	t;
+	t_vect					norm;
+	t_paraboloid			t;
 	t_limited_paraboloid	*p;
 
 	a = 0;
@@ -82,31 +82,5 @@ t_vect 		limited_paraboloid_norm_vector(void *obj, t_vect *point, double a)
 	t.dir = p->dir;
 	t.k = p->k;
 	norm = paraboloid_norm_vector(&t, point, a);
-	return (norm);
-
-}
-
-t_vect 		limited_cylinder_norm_vector(void *obj, t_vect *point, double a)
-{
-	t_vect		norm;
-	t_limited_cylinder	*c;
-	t_vect 	tmp;
-	t_cylinder cl;
-
-	a = 0;
-	c = (t_limited_cylinder *)obj;
-	if (c->caps == ON)
-	{
-		tmp = vector_substract(point, &c->p1);
-		if (vector_length(&tmp) <= c->r)
-			return(c->p1_norm);
-		tmp = vector_substract(point, &c->p2);
-		if (vector_length(&tmp) <= c->r)
-			return(c->p2_norm);
-	}
-	cl.pos = c->p1;
-	cl.dir = c->dir;
-	cl.r = c->r;
-	norm = cylinder_norm_vector(&cl, point, a);
 	return (norm);
 }

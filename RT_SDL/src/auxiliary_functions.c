@@ -6,7 +6,7 @@
 /*   By: kzahreba <kzahreba@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/16 19:58:01 by kzahreba          #+#    #+#             */
-/*   Updated: 2017/10/11 21:49:33 by askochul         ###   ########.fr       */
+/*   Updated: 2017/10/14 17:55:14 by askochul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ double				min(double i, double j)
 	return (a);
 }
 
-t_vect	adding_bias(t_vect *point, t_vect *dir)
+t_vect				adding_bias(t_vect *point, t_vect *dir)
 {
 	t_vect b;
 
@@ -52,11 +52,9 @@ void				delstruct(t_rtv *rtv)
 	free_animation_texture(rtv);
 	del_arrey((void**)rtv->s_c, WY);
 	del_arrey((void**)rtv->filter.sdl_col_with_filter, WY);
-	
 	SDL_FreeSurface(rtv->surface_main);
-	SDL_FreeSurface(rtv->picture); // ???
-	SDL_FreeSurface(rtv->surface); // ??
-	
+	SDL_FreeSurface(rtv->picture);
+	SDL_FreeSurface(rtv->surface);
 	SDL_DestroyTexture(rtv->sdl_texture_render);
 	SDL_DestroyTexture(rtv->surface_texture);
 	SDL_DestroyTexture(rtv->hooks);
@@ -82,11 +80,8 @@ void				delstruct1(t_menu *menu)
 	}
 	SDL_DestroyRenderer(menu->renderer);
 	SDL_DestroyWindow(menu->window);
-	
-	
 	IMG_Quit();
 	SDL_Quit();
 	
 	
 }
-
