@@ -124,8 +124,10 @@ int		intersection_disc_with_hole(t_ray *r, void *obj, double *t, double *z)
 	i = -1;
 	p = (t_disc_with_hole *)obj;
 	if (intersection_disc(r, &p->disc, &t0, z))
+	{
 		if (intersection_disc(r, &p->hole, &t0, z))
 			return (0);
-	return (check_solving(t, t0));
+		return (check_solving(t, t0));
+	}
 	return (0);
 }

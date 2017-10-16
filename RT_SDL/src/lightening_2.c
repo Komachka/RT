@@ -15,25 +15,19 @@
 int					shadow(t_rtv *rtv, t_ray *r, double light)
 {
 	int		i;
-	int		k;
 	double	t;
 	double	z;
 
-	i = 0;
-	k = 0;
+	i = -1;
+	t = INFINITY;
 	while (++i < rtv->figure_num)
 		if (rtv->objects[i].intersection_object(r,
 					rtv->objects[i].object, &t, &z))
 		{
-			if (t > light)
-				continue;
-			else
-			{
-				k = 1;
-				break ;
-			}
+			if (t < light)
+				return (1);
 		}
-	return (k);
+	return (0);
 }
 
 static inline void	directional_light_ray(t_light *l, t_additional *st)
