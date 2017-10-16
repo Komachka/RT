@@ -1,0 +1,389 @@
+{
+    "Light Model"             : "LAMBERT",
+    "Recursive Depth"         : 3,
+    "Samples Grid"            : 1,
+    "Background Color"        : "FFEFD5",
+    "Ambient Light Intensity" : {
+        "Red"   : 0.15,
+        "Green" : 0.15,
+        "Blue"  : 0.15,
+        "Alpha" : 0
+    },
+    "Camera"                  : {
+        "Type"                 : "STANDART",
+        "Position"             : {"x" : -110, "y" : -80, "z" : -150},
+        "Camera Rotate Angles" : [25, 10, 15],
+        "FOV"                  : 45
+    },
+    "Skybox"                  : {
+        "Radius"  : 50,
+        "Color"   : "00",
+        "Texture" : {
+            "Type" : "MAPPING",
+            "Path" : "fractal.png"
+        }
+    },
+    "Light"                   : [
+        {
+            "Type"                              : "DIRECTIONAL_LIGHT",
+            "Position"                          : {"x" : 0, "y" : 0, "z" : 0},
+            "Direction"                         : {
+                "x" : 10, "y" : 1, "z" : 0
+            },
+            "Intensity"                         : {
+                "Red"   : 0.2,
+                "Green" : 0.9,
+                "Blue"  : 0.2,
+                "Alpha" : 0
+            },
+            "Constant Attenuation Coefficient"  : 0,
+            "Linear Attenuation Coefficient"    : 0,
+            "Quadratic Attenuation Coefficient" : 0
+        },
+
+        {
+            "Type"                              : "DIRECTIONAL_LIGHT",
+            "Position"                          : {"x" : 0, "y" : 0, "z" : 0},
+            "Direction"                         : {
+                "x" : 10, "y" : 2, "z" : 0
+            },
+            "Intensity"                         : {
+                "Red"   : 0.9,
+                "Green" : 0.2,
+                "Blue"  : 0.9,
+                "Alpha" : 0
+            },
+            "Constant Attenuation Coefficient"  : 0,
+            "Linear Attenuation Coefficient"    : 0,
+            "Quadratic Attenuation Coefficient" : 0
+        },
+        {
+            "Type"                              : "DIRECTIONAL_LIGHT",
+            "Position"                          : {"x" : 0, "y" : 0, "z" : 0},
+            "Direction"                         : {
+                "x" : 10, "y" : 3, "z" : 0
+            },
+            "Intensity"                         : {
+                "Red"   : 0.2,
+                "Green" : 0.2,
+                "Blue"  : 0.2,
+                "Alpha" : 0
+            },
+            "Constant Attenuation Coefficient"  : 0,
+            "Linear Attenuation Coefficient"    : 0,
+            "Quadratic Attenuation Coefficient" : 0
+        },
+
+        {
+            "Type"                              : "SPOT_LIGHT",
+            "Position"                          : {
+                "x" : 0, "y" : -100, "z" : 0
+            },
+            "Direction"                         : {
+                "x" : 0, "y" : 1, "z" : 0
+            },
+            "Intensity"                         : {
+                "Red"   : 0.9,
+                "Green" : 0.9,
+                "Blue"  : 0.9,
+                "Alpha" : 0
+            },
+            "Constant Attenuation Coefficient"  : 1,
+            "Linear Attenuation Coefficient"    : 0,
+            "Quadratic Attenuation Coefficient" : 0,
+            "Inner Cone"                        : 10,
+            "Outer Cone"                        : 5
+        },
+        {
+            "Type"                              : "SPOT_LIGHT",
+            "Position"                          : {
+                "x" : 0, "y" : 0, "z" : -100
+            },
+            "Direction"                         : {
+                "x" : 0, "y" : 0, "z" : 1
+            },
+            "Intensity"                         : {
+                "Red"   : 0.0,
+                "Green" : 0.9,
+                "Blue"  : 0.9,
+                "Alpha" : 0
+            },
+            "Constant Attenuation Coefficient"  : 1,
+            "Linear Attenuation Coefficient"    : 0,
+            "Quadratic Attenuation Coefficient" : 0,
+            "Inner Cone"                        : 10,
+            "Outer Cone"                        : 5
+        },
+        {
+            "Type"                              : "SPOT_LIGHT",
+            "Position"                          : {
+                "x" : 100, "y" : 0, "z" : 0
+            },
+            "Direction"                         : {
+                "x" : -1, "y" : 0, "z" : 0
+            },
+            "Intensity"                         : {
+                "Red"   : 0.9,
+                "Green" : 0.0,
+                "Blue"  : 0.0,
+                "Alpha" : 0
+            },
+            "Constant Attenuation Coefficient"  : 1,
+            "Linear Attenuation Coefficient"    : 0,
+            "Quadratic Attenuation Coefficient" : 0,
+            "Inner Cone"                        : 10,
+            "Outer Cone"                        : 5
+        }
+    ],
+    "Objects"                 : [
+        {
+            "Id"       : "LIMITED_CONE",
+            "Object"   : {
+                "Position"  : {"x" : -100, "y" : -20, "z" : 15},
+                "Direction" : {"x" : 0, "y" : -1, "z" : 2},
+                "Angle"     : 20,
+                "Cut 1"     : -40,
+                "Cut 2"     : 40,
+                "Caps"      : "ON"
+            },
+            "Material" : {
+                "Color"        : "0000FF",
+                "Ambient"      : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Diffuse"      : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Specular"     : {
+                    "Red"   : 0.2,
+                    "Green" : 0.2,
+                    "Blue"  : 0.8,
+                    "Alpha" : 0
+                },
+                "Shininess"    : 5,
+                "Reflective"   : 0,
+                "Transparency" : 1,
+                "Refraction"   : 1.025
+            }
+        },
+        {
+            "Id"       : "LIMITED_CONE",
+            "Object"   : {
+                "Position"  : {"x" : -100, "y" : -20, "z" : 15},
+                "Direction" : {"x" : 0, "y" : -1, "z" : 2},
+                "Angle"     : 18,
+                "Cut 1"     : 0,
+                "Cut 2"     : -17,
+                "Caps"      : "ON"
+            },
+            "Material" : {
+                "Color"        : "D3B980",
+                "Ambient"      : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Diffuse"      : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Specular"     : {
+                    "Red"   : 0.3,
+                    "Green" : 0.3,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Shininess"    : 5,
+                "Reflective"   : 0,
+                "Transparency" : 0,
+                "Refraction"   : 1
+            },
+            "Texture"  : {
+                "Type"          : "JUPITER",
+                "Band"          : "DAA63C",
+                "Background"    : "D6C599",
+                "Vortices"      : 0,
+                "Bands"         : 0.4,
+                "Perturbations" : 0.9,
+                "Bands Fade"    : 0.9
+            }
+        },
+        {
+            "Id"       : "LIMITED_CONE",
+            "Object"   : {
+                "Position"  : {"x" : -100, "y" : -20, "z" : 15},
+                "Direction" : {"x" : 0, "y" : -1, "z" : 2},
+                "Angle"     : 18,
+                "Cut 1"     : 40,
+                "Cut 2"     : 25,
+                "Caps"      : "ON"
+            },
+            "Material" : {
+                "Color"        : "D3B980",
+                "Ambient"      : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Diffuse"      : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Specular"     : {
+                    "Red"   : 0.3,
+                    "Green" : 0.3,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Shininess"    : 5,
+                "Reflective"   : 0,
+                "Transparency" : 0,
+                "Refraction"   : 1
+            },
+            "Texture"  : {
+                "Type"          : "JUPITER",
+                "Band"          : "DAA63C",
+                "Background"    : "D6C599",
+                "Vortices"      : 0,
+                "Bands"         : 0.4,
+                "Perturbations" : 0.9,
+                "Bands Fade"    : 0.9
+            }
+        },
+        {
+            "Id"       : "LIMITED_CYLINDER",
+            "Object"   : {
+                "Position"  : {"x" : -100, "y" : -37, "z" : 50},
+                "Direction" : {"x" : 0, "y" : -1, "z" : 2},
+                "Radius"    : 15,
+                "Cut"       : 2,
+                "Caps"      : "ON"
+            },
+            "Material" : {
+                "Color"        : "FF0000",
+                "Ambient"      : {
+                    "Red"   : 0.9,
+                    "Green" : 0.9,
+                    "Blue"  : 0.9,
+                    "Alpha" : 0
+                },
+                "Diffuse"      : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Specular"     : {
+                    "Red"   : 0.2,
+                    "Green" : 0.2,
+                    "Blue"  : 0.2,
+                    "Alpha" : 0
+                },
+                "Shininess"    : 1,
+                "Reflective"   : 0,
+                "Transparency" : 0,
+                "Refraction"   : 1
+            }
+        },
+        {
+            "Id"       : "LIMITED_CYLINDER",
+            "Object"   : {
+                "Position"  : {"x" : -100, "y" : -1, "z" : -22},
+                "Direction" : {"x" : 0, "y" : -1, "z" : 2},
+                "Radius"    : 15,
+                "Cut"       : 2,
+                "Caps"      : "ON"
+            },
+            "Material" : {
+                "Color"        : "FF0000",
+                "Ambient"      : {
+                    "Red"   : 0.9,
+                    "Green" : 0.9,
+                    "Blue"  : 0.9,
+                    "Alpha" : 0
+                },
+                "Diffuse"      : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Specular"     : {
+                    "Red"   : 0.2,
+                    "Green" : 0.2,
+                    "Blue"  : 0.2,
+                    "Alpha" : 0
+                },
+                "Shininess"    : 1,
+                "Reflective"   : 0,
+                "Transparency" : 0,
+                "Refraction"   : 1
+            }
+        },
+        {
+            "Id"       : "POLYGON",
+            "Object"   : {
+                "Faces"  : 12,
+                "Vertex" : [
+                    {"x"    :   -15.0,   "y" :   -15.0,   "z" :   -15.0},
+                    {"x"    :   -15.0,   "y" :   -15.0,   "z" :   15.0},
+                    {"x"    :   -15.0,   "y" :   15.0,    "z" :   15.0},
+                    {"x"    :   15.0,    "y" :   15.0,    "z" :   -15.0},
+                    {"x"    :   -15.0,   "y" :   15.0,    "z" :   -15.0},
+                    {"x"    :   15.0,    "y" :   -15.0,   "z" :   15.0},
+                    {"x"    :   15.0,    "y" :   -15.0,   "z" :   -15.0},
+                    {"x"    :   15.0,    "y" :   15.0,    "z" :   15.0},
+                    {"x"    :   15.0,    "y" :   -15.0,   "z" :   15.0}
+                ],
+                "Index" : [
+                    0, 1, 2, 3, 0, 4, 5, 0, 6, 3, 6, 0,
+                    0, 2, 4, 5, 1, 0, 2, 1, 5, 7, 6, 3,
+                    6, 7, 5, 7, 3, 4, 7, 4, 2, 7, 2, 8
+                ],
+                "Color"  : [
+                    "FF00FF",  "9999FF",  "0000FF",
+                    "9999FF",  "FF00FF",  "0000FF",
+                    "0000FF",  "0000FF",  "0000FF",
+                    "0000FF",  "0000FF",  "0000FF"
+                ]
+            },
+            "Material" : {
+                "Color"        : "faad8d",
+                "Ambient"      : {
+                    "Red"   : 0.8,
+                    "Green" : 0.8,
+                    "Blue"  : 0.8,
+                    "Alpha" : 0
+                },
+                "Diffuse"      : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Specular"     : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Shininess"    : 0,
+                "Reflective"   : 0.0,
+                "Transparency" : 0,
+                "Refraction"   : 1
+            }
+        }
+    ]
+}

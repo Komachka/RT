@@ -1,0 +1,629 @@
+{
+    "Light Model"             : "LAMBERT",
+    "Recursive Depth"         : 3,
+    "Samples Grid"            : 1,
+    "Background Color"        : "FFEFD5",
+    "Ambient Light Intensity" : {
+        "Red"   : 0.15,
+        "Green" : 0.15,
+        "Blue"  : 0.15,
+        "Alpha" : 0
+    },
+    "Camera"                  : {
+        "Type"                 : "STANDART",
+        "Fisheye Angle"        : "30",
+        "Position"             : {"x" : 50, "y" : 0, "z" : 60},
+        "Camera Rotate Angles" : [0, 220, 0],
+        "FOV"                  : 45
+    },
+    "Skybox"                  : {
+        "Radius" : 100,
+        "Color"  : "FF00FF",
+        "Texture"  : {
+            "Type"       : "CONTOURS",
+            "Contour"    : "0000AA",
+            "Background" : "0000FF",
+            "Thickness"  : 0.1,
+            "Frequency"  : 2
+        }
+    },
+    "Light"                   : [
+        {
+            "Type"                              : "POINT_LIGHT",
+            "Position"                          : {"x" : 0, "y" : 10, "z" : 60},
+            "Direction"                         : {"x" : -20, "y" : 0, "z" : 20},
+            "Intensity"                         : {
+                "Red"   : 0.9,
+                "Green" : 0.5,
+                "Blue"  : 0.5,
+                "Alpha" : 0
+            },
+            "Constant Attenuation Coefficient"  : 1,
+            "Linear Attenuation Coefficient"    : 0.0014,
+            "Quadratic Attenuation Coefficient" : 0.000007
+        },
+
+        {
+            "Type"                              : "DIRECTIONAL_LIGHT",
+            "Position"                          : {"x" : 0, "y" : 0, "z" : 0},
+            "Direction"                         : {
+                "x" : 0, "y" : -220, "z" : 10
+            },
+            "Intensity"                         : {
+                "Red"   : 0.1,
+                "Green" : 0.1,
+                "Blue"  : 0.1,
+                "Alpha" : 0
+            },
+            "Constant Attenuation Coefficient"  : 0,
+            "Linear Attenuation Coefficient"    : 0,
+            "Quadratic Attenuation Coefficient" : 0
+        },
+        {
+            "Type"                              : "DIRECTIONAL_LIGHT",
+            "Position"                          : {"x" : 0, "y" : 0, "z" : 0},
+            "Direction"                         : {
+                "x" : 0, "y" : -220, "z" : 10
+            },
+            "Intensity"                         : {
+                "Red"   : 0.1,
+                "Green" : 0.1,
+                "Blue"  : 0.1,
+                "Alpha" : 0
+            },
+            "Constant Attenuation Coefficient"  : 0,
+            "Linear Attenuation Coefficient"    : 0,
+            "Quadratic Attenuation Coefficient" : 0
+        }
+    ],
+    "Objects"                 : [
+        {
+            "Id"       : "SPHERE",
+            "Object"   : {
+                "Position" : {"x" : 0, "y" : 0, "z" : 20},
+                "Radius"   : 1
+            },
+            "Material" : {
+                "Color"        : "BBBB00",
+                "Ambient"      : {
+                    "Red"   : 0.8,
+                    "Green" : 0.8,
+                    "Blue"  : 0.8,
+                    "Alpha" : 0
+                },
+                "Diffuse"      : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Specular"     : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Shininess"    : 20,
+                "Reflective"   : 0,
+                "Transparency" : 0,
+                "Refraction"   : 1.015
+            }
+
+        },
+        {
+            "Id"       : "SPHERE",
+            "Object"   : {
+                "Position" : {"x" : 5, "y" : 0, "z" : 20},
+                "Radius"   : 1.5
+            },
+            "Material" : {
+                "Color"        : "ffff99",
+                "Ambient"      : {
+                    "Red"   : 0.8,
+                    "Green" : 0.8,
+                    "Blue"  : 0.8,
+                    "Alpha" : 0
+                },
+                "Diffuse"      : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Specular"     : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Shininess"    : 20,
+                "Reflective"   : 0,
+                "Transparency" : 0,
+                "Refraction"   : 1.015
+            }
+
+        },
+        {
+            "Id"       : "SPHERE",
+            "Object"   : {
+                "Position" : {"x" : -20, "y" : 3, "z" : 16},
+                "Radius"   : 0.5
+            },
+            "Material" : {
+                "Color"        : "000000",
+                "Ambient"      : {
+                    "Red"   : 0.8,
+                    "Green" : 0.8,
+                    "Blue"  : 0.8,
+                    "Alpha" : 0
+                },
+                "Diffuse"      : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Specular"     : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Shininess"    : 20,
+                "Reflective"   : 0,
+                "Transparency" : 0,
+                "Refraction"   : 1.015
+            }
+
+        },
+        {
+            "Id"       : "SPHERE",
+            "Object"   : {
+                "Position" : {"x" : -20, "y" : 3, "z" : 24},
+                "Radius"   : 0.5
+            },
+            "Material" : {
+                "Color"        : "000000",
+                "Ambient"      : {
+                    "Red"   : 0.8,
+                    "Green" : 0.8,
+                    "Blue"  : 0.8,
+                    "Alpha" : 0
+                },
+                "Diffuse"      : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Specular"     : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Shininess"    : 20,
+                "Reflective"   : 0,
+                "Transparency" : 0,
+                "Refraction"   : 1.015
+            }
+
+        },
+        {
+            "Id"       : "SPHERE",
+            "Object"   : {
+                "Position" : {"x" : 11, "y" : 0, "z" : 20},
+                "Radius"   : 2
+            },
+            "Material" : {
+                "Color"        : "ffe259",
+                "Ambient"      : {
+                    "Red"   : 0.8,
+                    "Green" : 0.8,
+                    "Blue"  : 0.8,
+                    "Alpha" : 0
+                },
+                "Diffuse"      : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Specular"     : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Shininess"    : 20,
+                "Reflective"   : 0,
+                "Transparency" : 0,
+                "Refraction"   : 1.015
+            }
+
+        },
+        {
+            "Id"       : "LIMITED_SPHERE",
+            "Object"   : {
+                "Position"  : {"x" : -20, "y" : 0, "z" : 20},
+                "Direction" : {"x" : 15, "y" : -20, "z" : -5.5},
+                "Radius"    : 5,
+                "Cut"       : -0.5,
+                "Caps"      : "ON"
+            },
+            "Material" : {
+                "Color"        : "FFFF00",
+                "Ambient"      : {
+                    "Red"   : 0.8,
+                    "Green" : 0.8,
+                    "Blue"  : 0.8,
+                    "Alpha" : 0
+                },
+                "Diffuse"      : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Specular"     : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Shininess"    : 8,
+                "Reflective"   : 0,
+                "Transparency" : 0,
+                "Refraction"   : 1.015
+            }
+        },
+        {
+            "Id"       : "LIMITED_SPHERE",
+            "Object"   : {
+                "Position"  : {"x" : -20, "y" : 0, "z" : 20},
+                "Direction" : {"x" : 15, "y" : 20, "z" : -5.5},
+                "Radius"    : 5,
+                "Cut"       : -0.5,
+                "Caps"      : "ON"
+            },
+            "Material" : {
+                "Color"        : "FFFF00",
+                "Ambient"      : {
+                    "Red"   : 0.8,
+                    "Green" : 0.8,
+                    "Blue"  : 0.8,
+                    "Alpha" : 0
+                },
+                "Diffuse"      : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Specular"     : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Shininess"    : 8,
+                "Reflective"   : 0,
+                "Transparency" : 0,
+                "Refraction"   : 1.015
+            }
+        },
+        {
+            "Id"       : "LIMITED_PARABOLOID",
+            "Object"   : {
+                "Extremum"  : {"x" : 30, "y" : 0, "z" : 20},
+                "Direction" : {"x" : 0, "y" : -0.7, "z" : -0.3},
+                "Distance"  : 0.5,
+                "Cut"       : 10
+            },
+            "Material" : {
+                "Color"        : "FF0000",
+                "Ambient"      : {
+                    "Red"   : 0.3,
+                    "Green" : 0.3,
+                    "Blue"  : 0.3,
+                    "Alpha" : 0
+                },
+                "Diffuse"      : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Specular"     : {
+                    "Red"   : 0.2,
+                    "Green" : 0.2,
+                    "Blue"  : 0.2,
+                    "Alpha" : 0
+                },
+                "Shininess"    : 7,
+                "Reflective"   : 0,
+                "Transparency" : 0,
+                "Refraction"   : 1
+            }
+        },
+        {
+            "Id"       : "DISC_WITH_HOLE",
+            "Object"   : {
+                "Disc" : {
+                    "Position"      : {"x" : 30, "y" : -4, "z" : 21.1},
+                    "Normal Vector" : {"x" : 0, "y" : 0, "z" : 10},
+                    "Radius"        : 0.7
+                },
+                "Hole" : {
+                    "Position" : {"x" : 30, "y" : -4, "z" : 21},
+                    "Radius"   : 0.5
+                }
+            },
+            "Material" : {
+                "Color"        : "ff2400",
+                "Ambient"      : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Diffuse"      : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Specular"     : {
+                    "Red"   : 0,
+                    "Green" : 0,
+                    "Blue"  : 0,
+                    "Alpha" : 0
+                },
+                "Shininess"    : 1,
+                "Reflective"   : 0,
+                "Transparency" : 0,
+                "Refraction"   : 1
+            }
+        },
+        {
+            "Id"       : "SPHERE",
+            "Object"   : {
+                "Position" : {"x" : 29, "y" : -3, "z" : 21.1},
+                "Radius"   : 0.5
+            },
+            "Material" : {
+                "Color"        : "000000",
+                "Ambient"      : {
+                    "Red"   : 0.8,
+                    "Green" : 0.8,
+                    "Blue"  : 0.8,
+                    "Alpha" : 0
+                },
+                "Diffuse"      : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Specular"     : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Shininess"    : 20,
+                "Reflective"   : 0,
+                "Transparency" : 0,
+                "Refraction"   : 1.015
+            }
+
+        },
+        {
+            "Id"       : "SPHERE",
+            "Object"   : {
+                "Position" : {"x" : 31, "y" : -3, "z" : 21.1},
+                "Radius"   : 0.5
+            },
+            "Material" : {
+                "Color"        : "000000",
+                "Ambient"      : {
+                    "Red"   : 0.8,
+                    "Green" : 0.8,
+                    "Blue"  : 0.8,
+                    "Alpha" : 0
+                },
+                "Diffuse"      : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Specular"     : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Shininess"    : 20,
+                "Reflective"   : 0,
+                "Transparency" : 0,
+                "Refraction"   : 1.015
+            }
+
+        },
+        {
+            "Id"       : "LIMITED_PARABOLOID",
+            "Object"   : {
+                "Extremum"  : {"x" : 20, "y" : 0, "z" : 20},
+                "Direction" : {"x" : 0, "y" : -0.7, "z" : -0.3},
+                "Distance"  : 0.5,
+                "Cut"       : 10
+            },
+            "Material" : {
+                "Color"        : "0000FF",
+                "Ambient"      : {
+                    "Red"   : 0.3,
+                    "Green" : 0.3,
+                    "Blue"  : 0.3,
+                    "Alpha" : 0
+                },
+                "Diffuse"      : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Specular"     : {
+                    "Red"   : 0.2,
+                    "Green" : 0.2,
+                    "Blue"  : 0.2,
+                    "Alpha" : 0
+                },
+                "Shininess"    : 7,
+                "Reflective"   : 0,
+                "Transparency" : 0,
+                "Refraction"   : 1
+            }
+        },
+
+        {
+            "Id"       : "DISC_WITH_HOLE",
+            "Object"   : {
+                "Disc" : {
+                    "Position"      : {"x" : 20, "y" : -4, "z" : 21.1},
+                    "Normal Vector" : {"x" : 0, "y" : 0, "z" : 10},
+                    "Radius"        : 1
+                },
+                "Hole" : {
+                    "Position" : {"x" : 20, "y" : -3.5, "z" : 21},
+                    "Radius"   : 1
+                }
+            },
+            "Material" : {
+                "Color"        : "ff2400",
+                "Ambient"      : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Diffuse"      : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Specular"     : {
+                    "Red"   : 0,
+                    "Green" : 0,
+                    "Blue"  : 0,
+                    "Alpha" : 0
+                },
+                "Shininess"    : 1,
+                "Reflective"   : 0,
+                "Transparency" : 0,
+                "Refraction"   : 1
+            }
+        },
+        {
+            "Id"       : "SPHERE",
+            "Object"   : {
+                "Position" : {"x" : 19, "y" : -3, "z" : 21.1},
+                "Radius"   : 0.5
+            },
+            "Material" : {
+                "Color"        : "000000",
+                "Ambient"      : {
+                    "Red"   : 0.8,
+                    "Green" : 0.8,
+                    "Blue"  : 0.8,
+                    "Alpha" : 0
+                },
+                "Diffuse"      : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Specular"     : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Shininess"    : 20,
+                "Reflective"   : 0,
+                "Transparency" : 0,
+                "Refraction"   : 1.015
+            }
+
+        },
+        {
+            "Id"       : "SPHERE",
+            "Object"   : {
+                "Position" : {"x" : 21, "y" : -3, "z" : 21.1},
+                "Radius"   : 0.5
+            },
+            "Material" : {
+                "Color"        : "000000",
+                "Ambient"      : {
+                    "Red"   : 0.8,
+                    "Green" : 0.8,
+                    "Blue"  : 0.8,
+                    "Alpha" : 0
+                },
+                "Diffuse"      : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Specular"     : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Shininess"    : 20,
+                "Reflective"   : 0,
+                "Transparency" : 0,
+                "Refraction"   : 1.015
+            }
+
+        },
+        {
+            "Id"       : "DISC",
+            "Object"   : {
+                "Position"      : {"x" : -20, "y" :  0, "z" : -50},
+                "Normal Vector" : {"x" : 0, "y" : 60, "z" : 10},
+                "Radius"        : 110
+            },
+            "Material" : {
+                "Color"        : "8290af",
+                "Ambient"      : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Diffuse"      : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Specular"     : {
+                    "Red"   : 0,
+                    "Green" : 0,
+                    "Blue"  : 0,
+                    "Alpha" : 0
+                },
+                "Shininess"    : 0,
+                "Reflective"   : 0.15,
+                "Transparency" : 0,
+                "Refraction"   : 1
+            }
+        }
+
+    ]
+}

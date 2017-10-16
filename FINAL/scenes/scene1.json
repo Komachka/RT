@@ -1,0 +1,943 @@
+{
+    "Light Model"             : "LAMBERT",
+    "Recursive Depth"         : 3,
+    "Samples Grid"            : 1,
+    "Background Color"        : "FFEFD5",
+    "Ambient Light Intensity" : {
+        "Red"   : 0.15,
+        "Green" : 0.15,
+        "Blue"  : 0.15,
+        "Alpha" : 0
+    },
+    "Camera"                  : {
+        "Type"                 : "STANDART",
+        "Positions"             : {"x" : 100, "y" : 150, "z" : 200},
+        "Position"               : {"x" : 150, "y" : 50, "z" : -150},
+        "Camera Rotate Angles" : [5, 25, 27],
+        "FOV"                  : 45
+    },
+    "Skybox"                  : {
+        "Radius"  : 100,
+        "Color"   : "00",
+        "Texture" : {
+            "Type" : "MAPPING",
+            "Path" : "starmap.jpg"
+        }
+    },
+    "Light"                   : [
+        {
+            "Type"                              : "SPOT_LIGHT",
+            "Position"                          : {
+                "x" : -200, "y" : 200, "z" : 100
+            },
+            "Direction"                         : {
+                "x" : 9, "y" : -5, "z" : 1
+            },
+            "Intensity"                         : {
+                "Red"   : 1,
+                "Green" : 1,
+                "Blue"  : 1,
+                "Alpha" : 0
+            },
+            "Constant Attenuation Coefficient"  : 1,
+            "Linear Attenuation Coefficient"    : 0,
+            "Quadratic Attenuation Coefficient" : 0,
+            "Inner Cone"                        : 20,
+            "Outer Cone"                        : 60
+        },
+        {
+            "Type"                              : "SPOT_LIGHT",
+            "Position"                          : {
+                "x" : 0, "y" : 150, "z" : 100
+            },
+            "Direction"                         : {
+                "x" : -250, "y" : 90, "z" : 0
+            },
+            "Intensity"                         : {
+                "Red"   : 1,
+                "Green" : 1,
+                "Blue"  : 1,
+                "Alpha" : 0
+            },
+            "Constant Attenuation Coefficient"  : 0,
+            "Linear Attenuation Coefficient"    : 0,
+            "Quadratic Attenuation Coefficient" : 0,
+            "Inner Cone"                        : 170,
+            "Outer Cone"                        : 0
+        },
+        {
+            "Type"                              : "SPOT_LIGHT",
+            "Position"                          : {
+                "x" : -350, "y" : 250, "z" : 0
+            },
+            "Direction"                         : {
+                "x" : 100, "y" : -10, "z" : 100
+            },
+            "Intensity"                         : {
+                "Red"   : 1,
+                "Green" : 1,
+                "Blue"  : 1,
+                "Alpha" : 0
+            },
+            "Constant Attenuation Coefficient"  : 0,
+            "Linear Attenuation Coefficient"    : 0,
+            "Quadratic Attenuation Coefficient" : 0,
+            "Inner Cone"                        : 39,
+            "Outer Cone"                        : 1
+        },
+        {
+            "Type"                              : "SPOT_LIGHT",
+            "Position"                          : {
+                "x" : -250, "y" : 250, "z" : -80
+            },
+            "Direction"                         : {
+                "x" : 0, "y" : -10, "z" : 180
+            },
+            "Intensity"                         : {
+                "Red"   : 1,
+                "Green" : 1,
+                "Blue"  : 1,
+                "Alpha" : 0
+            },
+            "Constant Attenuation Coefficient"  : 0,
+            "Linear Attenuation Coefficient"    : 0,
+            "Quadratic Attenuation Coefficient" : 0,
+            "Inner Cone"                        : 50,
+            "Outer Cone"                        : 1
+        },
+        {
+            "Type"                              : "SPOT_LIGHT",
+            "Position"                          : {
+                "x" : -250, "y" : 250, "z" : 200
+            },
+            "Direction"                         : {
+                "x" : 0, "y" : -10, "z" : -100
+            },
+            "Intensity"                         : {
+                "Red"   : 1,
+                "Green" : 1,
+                "Blue"  : 1,
+                "Alpha" : 0
+            },
+            "Constant Attenuation Coefficient"  : 0,
+            "Linear Attenuation Coefficient"    : 0,
+            "Quadratic Attenuation Coefficient" : 0,
+            "Inner Cone"                        : 60,
+            "Outer Cone"                        : 1
+        },
+        {
+            "Type"                              : "SPOT_LIGHT",
+            "Position"                          : {
+                "x" : -250, "y" : 400, "z" : 100
+            },
+            "Direction"                         : {
+                "x" : 0, "y" : -160, "z" : 0
+            },
+            "Intensity"                         : {
+                "Red"   : 1,
+                "Green" : 1,
+                "Blue"  : 1,
+                "Alpha" : 0
+            },
+            "Constant Attenuation Coefficient"  : 0,
+            "Linear Attenuation Coefficient"    : 0,
+            "Quadratic Attenuation Coefficient" : 0,
+            "Inner Cone"                        : 60,
+            "Outer Cone"                        : 1
+        },
+        {
+            "Type"                              : "SPOT_LIGHT",
+            "Position"                          : {
+                "x" : -250, "y" : 400, "z" : 100
+            },
+            "Direction"                         : {
+                "x" : 0, "y" : -160, "z" : 0
+            },
+            "Intensity"                         : {
+                "Red"   : 1,
+                "Green" : 1,
+                "Blue"  : 1,
+                "Alpha" : 0
+            },
+            "Constant Attenuation Coefficient"  : 0,
+            "Linear Attenuation Coefficient"    : 0,
+            "Quadratic Attenuation Coefficient" : 0,
+            "Inner Cone"                        : 60,
+            "Outer Cone"                        : 1
+        },
+        {
+            "Type"                              : "SPOT_LIGHT",
+            "Position"                          : {
+                "x" : -250, "y" : 0, "z" : 100
+            },
+            "Direction"                         : {
+                "x" : 0, "y" : 240, "z" : 0
+            },
+            "Intensity"                         : {
+                "Red"   : 1,
+                "Green" : 1,
+                "Blue"  : 1,
+                "Alpha" : 0
+            },
+            "Constant Attenuation Coefficient"  : 0,
+            "Linear Attenuation Coefficient"    : 0,
+            "Quadratic Attenuation Coefficient" : 0,
+            "Inner Cone"                        : 60,
+            "Outer Cone"                        : 1
+        }
+    ],
+    "Objects"                 : [
+        {
+            "Id"       : "SPHERE",
+            "Object"   : {
+                "Position" : {"x" : 300, "y" : -50, "z" : 120},
+                "Radius"   : 30
+            },
+            "Material" : {
+                "Color"        : "D3B980",
+                "Ambient"      : {
+                    "Red"   : 0.2,
+                    "Green" : 0.2,
+                    "Blue"  : 0.2,
+                    "Alpha" : 0
+                },
+                "Diffuse"      : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Specular"     : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Shininess"    : 0,
+                "Reflective"   : 0,
+                "Transparency" : 0,
+                "Refraction"   : 1.015
+            },
+            "Texture"  : {
+                "Type"          : "JUPITER",
+                "Band"          : "7c5f2c",
+                "Background"    : "f7dea0",
+                "Vortices"      : 0.2,
+                "Bands"         : 0.7,
+                "Perturbations" : 0.5,
+                "Bands Fade"    : 0.75
+            }
+        },
+        {
+            "Id"       : "DISC_WITH_HOLE",
+            "Object"   : {
+                "Disc" : {
+                    "Position"      : {"x" : 300, "y" : -50, "z" : 120},
+                    "Normal Vector" : {"x" : 0, "y" : -10, "z" : 0},
+                    "Radius"        : 50
+                },
+                "Hole" : {
+                    "Position" : {"x" : 300, "y" : -50, "z" : 120},
+                    "Radius"   : 45
+                }
+            },
+            "Material" : {
+                "Color"        : "5A5340",
+                "Ambient"      : {
+                    "Red"   : 0.1,
+                    "Green" : 0.1,
+                    "Blue"  : 0.1,
+                    "Alpha" : 0
+                },
+                "Diffuse"      : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Specular"     : {
+                    "Red"   : 0,
+                    "Green" : 0,
+                    "Blue"  : 0,
+                    "Alpha" : 0
+                },
+                "Shininess"    : 0.3,
+                "Reflective"   : 0,
+                "Transparency" : 0,
+                "Refraction"   : 1
+            },
+            "Texture"  : {
+                "Type"          : "JUPITER",
+                "Band"          : "AC966A",
+                "Background"    : "2F2D23",
+                "Vortices"      : 1,
+                "Bands"         : 0,
+                "Perturbations" : 1,
+                "Bands Fade"    : 1
+            }
+        },
+        {
+            "Id"       : "DISC_WITH_HOLE",
+            "Object"   : {
+                "Disc" : {
+                    "Position"      : {"x" : 300, "y" : -50, "z" : 120},
+                    "Normal Vector" : {"x" : 0, "y" : -10, "z" : 0},
+                    "Radius"        : 56
+                },
+                "Hole" : {
+                    "Position" : {"x" : 300, "y" : -50, "z" : 120},
+                    "Radius"   : 50
+                }
+            },
+            "Material" : {
+                "Color"        : "5A5340",
+                "Ambient"      : {
+                    "Red"   : 0.1,
+                    "Green" : 0.1,
+                    "Blue"  : 0.1,
+                    "Alpha" : 0
+                },
+                "Diffuse"      : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Specular"     : {
+                    "Red"   : 0,
+                    "Green" : 0,
+                    "Blue"  : 0,
+                    "Alpha" : 0
+                },
+                "Shininess"    : 0.3,
+                "Reflective"   : 0,
+                "Transparency" : 0,
+                "Refraction"   : 1
+            },
+            "Texture"  : {
+                "Type"          : "JUPITER",
+                "Band"          : "AC966A",
+                "Background"    : "5A5340",
+                "Vortices"      : 1,
+                "Bands"         : 0,
+                "Perturbations" : 1,
+                "Bands Fade"    : 1
+            }
+        },
+        {
+            "Id"       : "DISC_WITH_HOLE",
+            "Object"   : {
+                "Disc" : {
+                    "Position"      : {"x" : 300, "y" : -50, "z" : 120},
+                    "Normal Vector" : {"x" : 0, "y" : -10, "z" : 0},
+                    "Radius"        : 57
+                },
+                "Hole" : {
+                    "Position" : {"x" : 300, "y" : -50, "z" : 120},
+                    "Radius"   : 56
+                }
+            },
+            "Material" : {
+                "Color"        : "5A5340",
+                "Ambient"      : {
+                    "Red"   : 0.1,
+                    "Green" : 0.1,
+                    "Blue"  : 0.1,
+                    "Alpha" : 0
+                },
+                "Diffuse"      : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Specular"     : {
+                    "Red"   : 0,
+                    "Green" : 0,
+                    "Blue"  : 0,
+                    "Alpha" : 0
+                },
+                "Shininess"    : 0.3,
+                "Reflective"   : 0,
+                "Transparency" : 0,
+                "Refraction"   : 1
+            },
+            "Texture"  : {
+                "Type"          : "JUPITER",
+                "Band"          : "AC966A",
+                "Background"    : "D3B980",
+                "Vortices"      : 1,
+                "Bands"         : 0,
+                "Perturbations" : 1,
+                "Bands Fade"    : 1
+            }
+        },
+        {
+            "Id"       : "DISC_WITH_HOLE",
+            "Object"   : {
+                "Disc" : {
+                    "Position"      : {"x" : 300, "y" : -50, "z" : 120},
+                    "Normal Vector" : {"x" : 0, "y" : -10, "z" : 0},
+                    "Radius"        : 58
+                },
+                "Hole" : {
+                    "Position" : {"x" : 300, "y" : -50, "z" : 120},
+                    "Radius"   : 57
+                }
+            },
+            "Material" : {
+                "Color"        : "5A5340",
+                "Ambient"      : {
+                    "Red"   : 0.1,
+                    "Green" : 0.1,
+                    "Blue"  : 0.1,
+                    "Alpha" : 0
+                },
+                "Diffuse"      : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Specular"     : {
+                    "Red"   : 0,
+                    "Green" : 0,
+                    "Blue"  : 0,
+                    "Alpha" : 0
+                },
+                "Shininess"    : 0.3,
+                "Reflective"   : 0,
+                "Transparency" : 0,
+                "Refraction"   : 1
+            },
+            "Texture"  : {
+                "Type"          : "JUPITER",
+                "Band"          : "AC966A",
+                "Background"    : "5A5340",
+                "Vortices"      : 1,
+                "Bands"         : 0,
+                "Perturbations" : 1,
+                "Bands Fade"    : 1
+            }
+        },
+        {
+            "Id"       : "DISC_WITH_HOLE",
+            "Object"   : {
+                "Disc" : {
+                    "Position"      : {"x" : 300, "y" : -50, "z" : 120},
+                    "Normal Vector" : {"x" : 0, "y" : -10, "z" : 0},
+                    "Radius"        : 59
+                },
+                "Hole" : {
+                    "Position" : {"x" : 300, "y" : -50, "z" : 120},
+                    "Radius"   : 58
+                }
+            },
+            "Material" : {
+                "Color"        : "5A5340",
+                "Ambient"      : {
+                    "Red"   : 0.1,
+                    "Green" : 0.1,
+                    "Blue"  : 0.1,
+                    "Alpha" : 0
+                },
+                "Diffuse"      : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Specular"     : {
+                    "Red"   : 0,
+                    "Green" : 0,
+                    "Blue"  : 0,
+                    "Alpha" : 0
+                },
+                "Shininess"    : 0.3,
+                "Reflective"   : 0,
+                "Transparency" : 0,
+                "Refraction"   : 1
+            },
+            "Texture"  : {
+                "Type"          : "JUPITER",
+                "Band"          : "AC966A",
+                "Background"    : "D3B980",
+                "Vortices"      : 1,
+                "Bands"         : 0,
+                "Perturbations" : 1,
+                "Bands Fade"    : 1
+            }
+        },
+        {
+            "Id"       : "DISC_WITH_HOLE",
+            "Object"   : {
+                "Disc" : {
+                    "Position"      : {"x" : 300, "y" : -50, "z" : 120},
+                    "Normal Vector" : {"x" : 0, "y" : -10, "z" : 0},
+                    "Radius"        : 62
+                },
+                "Hole" : {
+                    "Position" : {"x" : 300, "y" : -50, "z" : 120},
+                    "Radius"   : 59
+                }
+            },
+            "Material" : {
+                "Color"        : "5A5340",
+                "Ambient"      : {
+                    "Red"   : 0.1,
+                    "Green" : 0.1,
+                    "Blue"  : 0.1,
+                    "Alpha" : 0
+                },
+                "Diffuse"      : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Specular"     : {
+                    "Red"   : 0,
+                    "Green" : 0,
+                    "Blue"  : 0,
+                    "Alpha" : 0
+                },
+                "Shininess"    : 0.3,
+                "Reflective"   : 0,
+                "Transparency" : 0,
+                "Refraction"   : 1
+            },
+            "Texture"  : {
+                "Type"          : "JUPITER",
+                "Band"          : "AC966A",
+                "Background"    : "5A5340",
+                "Vortices"      : 1,
+                "Bands"         : 0,
+                "Perturbations" : 1,
+                "Bands Fade"    : 1
+            }
+        },
+        {
+            "Id"       : "DISC_WITH_HOLE",
+            "Object"   : {
+                "Disc" : {
+                    "Position"      : {"x" : 300, "y" : -50, "z" : 120},
+                    "Normal Vector" : {"x" : 0, "y" : -10, "z" : 0},
+                    "Radius"        : 73
+                },
+                "Hole" : {
+                    "Position" : {"x" : 300, "y" : -50, "z" : 120},
+                    "Radius"   : 65
+                }
+            },
+            "Material" : {
+                "Color"        : "2F2D23",
+                "Ambient"      : {
+                    "Red"   : 0.1,
+                    "Green" : 0.1,
+                    "Blue"  : 0.1,
+                    "Alpha" : 0
+                },
+                "Diffuse"      : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Specular"     : {
+                    "Red"   : 0,
+                    "Green" : 0,
+                    "Blue"  : 0,
+                    "Alpha" : 0
+                },
+                "Shininess"    : 0,
+                "Reflective"   : 0,
+                "Transparency" : 0,
+                "Refraction"   : 1
+            },
+            "Texture"  : {
+                "Type"          : "JUPITER",
+                "Band"          : "AC966A",
+                "Background"    : "2F2D23",
+                "Vortices"      : 1,
+                "Bands"         : 0,
+                "Perturbations" : 1,
+                "Bands Fade"    : 1
+            }
+        },
+        {
+            "Id"       : "DISC_WITH_HOLE",
+            "Object"   : {
+                "Disc" : {
+                    "Position"      : {"x" : 300, "y" : -50, "z" : 120},
+                    "Normal Vector" : {"x" : 0, "y" : -10, "z" : 0},
+                    "Radius"        : 75
+                },
+                "Hole" : {
+                    "Position" : {"x" : 300, "y" : -50, "z" : 120},
+                    "Radius"   : 74
+                }
+            },
+            "Material" : {
+                "Color"        : "5A5340",
+                "Ambient"      : {
+                    "Red"   : 0.1,
+                    "Green" : 0.1,
+                    "Blue"  : 0.1,
+                    "Alpha" : 0
+                },
+                "Diffuse"      : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Specular"     : {
+                    "Red"   : 0,
+                    "Green" : 0,
+                    "Blue"  : 0,
+                    "Alpha" : 0
+                },
+                "Shininess"    : 0.3,
+                "Reflective"   : 0,
+                "Transparency" : 0,
+                "Refraction"   : 1
+            },
+            "Texture"  : {
+                "Type"          : "JUPITER",
+                "Band"          : "AC966A",
+                "Background"    : "5A5340",
+                "Vortices"      : 1,
+                "Bands"         : 0,
+                "Perturbations" : 1,
+                "Bands Fade"    : 1
+            }
+        },
+        {
+            "Id"       : "SPHERE",
+            "Object"   : {
+                "Position" : {"x" : 100, "y" : 0, "z" : 200},
+                "Radius"   : 10
+            },
+            "Material" : {
+                "Color"        : "FF",
+                "Ambient"      : {
+                    "Red"   : 0.1,
+                    "Green" : 0.1,
+                    "Blue"  : 0.1,
+                    "Alpha" : 0
+                },
+                "Diffuse"      : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Specular"     : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Shininess"    : 0,
+                "Reflective"   : 0,
+                "Transparency" : 0,
+                "Refraction"   : 1
+            },
+            "Texture"  : {
+                "Type" : "MAPPING",
+                "Path" : "earth.jpg"
+            }
+        },
+        {
+            "Id"       : "SPHERE",
+            "Object"   : {
+                "Position" : {"x" : 450, "y" : 50, "z" : 200},
+                "Radius"   : 40
+            },
+            "Material" : {
+                "Color"        : "94806A",
+                "Ambient"      : {
+                    "Red"   : 0.1,
+                    "Green" : 0.1,
+                    "Blue"  : 0.1,
+                    "Alpha" : 0
+                },
+                "Diffuse"      : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Specular"     : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Shininess"    : 0,
+                "Reflective"   : 0,
+                "Transparency" : 0,
+                "Refraction"   : 1
+            },
+            "Texture"  : {
+                "Type" : "MAPPING",
+                "Path" : "jupiter.jpg"
+            }
+        },
+        {
+            "Id"       : "SPHERE",
+            "Object"   : {
+                "Position" : {"x" : 100, "y" : -50, "z" : 150},
+                "Radius"   : 13
+            },
+            "Material" : {
+                "Color"        : "FF0000",
+                "Ambient"      : {
+                    "Red"   : 0.1,
+                    "Green" : 0.1,
+                    "Blue"  : 0.1,
+                    "Alpha" : 0
+                },
+                "Diffuse"      : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Specular"     : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Shininess"    : 0,
+                "Reflective"   : 0,
+                "Transparency" : 0,
+                "Refraction"   : 1
+            },
+            "Texture"  : {
+                "Type" : "MAPPING",
+                "Path" : "mars.jpg"
+            }
+        },
+        {
+            "Id"       : "SPHERE",
+            "Object"   : {
+                "Position" : {"x" : 50, "y" : 100, "z" : 200},
+                "Radius"   : 8
+            },
+            "Material" : {
+                "Color"        : "585858",
+                "Ambient"      : {
+                    "Red"   : 0.1,
+                    "Green" : 0.1,
+                    "Blue"  : 0.1,
+                    "Alpha" : 0
+                },
+                "Diffuse"      : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Specular"     : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Shininess"    : 0,
+                "Reflective"   : 0,
+                "Transparency" : 0,
+                "Refraction"   : 1
+            },
+            "Texture"  : {
+                "Type" : "MAPPING",
+                "Path" : "mercury.jpg"
+            }
+        },
+        {
+            "Id"       : "SPHERE",
+            "Object"   : {
+                "Position" : {"x" : 0, "y" : 0, "z" : 150},
+                "Radius"   : 8
+            },
+            "Material" : {
+                "Color"        : "97805B",
+                "Ambient"      : {
+                    "Red"   : 0.1,
+                    "Green" : 0.1,
+                    "Blue"  : 0.1,
+                    "Alpha" : 0
+                },
+                "Diffuse"      : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Specular"     : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Shininess"    : 0,
+                "Reflective"   : 0,
+                "Transparency" : 0,
+                "Refraction"   : 1
+            },
+            "Texture"  : {
+                "Type" : "MAPPING",
+                "Path" : "venus.jpg"
+            }
+        },
+        {
+            "Id"       : "SPHERE",
+            "Object"   : {
+                "Position" : {"x" : 400, "y" : 100, "z" : 300},
+                "Radius"   : 15
+            },
+            "Material" : {
+                "Color"        : "306FA9",
+                "Ambient"      : {
+                    "Red"   : 0.1,
+                    "Green" : 0.1,
+                    "Blue"  : 0.1,
+                    "Alpha" : 0
+                },
+                "Diffuse"      : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Specular"     : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Shininess"    : 0,
+                "Reflective"   : 0,
+                "Transparency" : 0,
+                "Refraction"   : 1
+            },
+            "Texture"  : {
+                "Type" : "MAPPING",
+                "Path" : "neptune.jpg"
+            }
+        },
+        {
+            "Id"       : "SPHERE",
+            "Object"   : {
+                "Position" : {"x" : 300, "y" : -100, "z" : 500},
+                "Radius"   : 20
+            },
+            "Material" : {
+                "Color"        : "7C9FA1",
+                "Ambient"      : {
+                    "Red"   : 0.1,
+                    "Green" : 0.1,
+                    "Blue"  : 0.1,
+                    "Alpha" : 0
+                },
+                "Diffuse"      : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Specular"     : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Shininess"    : 0,
+                "Reflective"   : 0,
+                "Transparency" : 0,
+                "Refraction"   : 1
+            },
+            "Texture"  : {
+                "Type" : "MAPPING",
+                "Path" : "uranus.jpg"
+            }
+        },
+        {
+            "Id"       : "DISC_WITH_HOLE",
+            "Object"   : {
+                "Disc" : {
+                    "Position"      : {"x" : 300, "y" : -100, "z" : 500},
+                    "Normal Vector" : {"x" : 150, "y" : -50, "z" : 50},
+                    "Radius"        : 36
+                },
+                "Hole" : {
+                    "Position" : {"x" : 300, "y" : -100, "z" : 500},
+                    "Radius"   : 35
+                }
+            },
+            "Material" : {
+                "Color"        : "EE9E68",
+                "Ambient"      : {
+                    "Red"   : 0.1,
+                    "Green" : 0.1,
+                    "Blue"  : 0.1,
+                    "Alpha" : 0
+                },
+                "Diffuse"      : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Specular"     : {
+                    "Red"   : 0,
+                    "Green" : 0,
+                    "Blue"  : 0,
+                    "Alpha" : 0
+                },
+                "Shininess"    : 0.3,
+                "Reflective"   : 0,
+                "Transparency" : 0,
+                "Refraction"   : 1
+            }
+        },
+        {
+            "Id"       : "SPHERE",
+            "Object"   : {
+                "Position" : {"x" : -250, "y" : 240, "z" : 100},
+                "Radius"   : 50
+            },
+            "Material" : {
+                "Color"        : "FF3000",
+                "Ambient"      : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Diffuse"      : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Specular"     : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Shininess"    : 0,
+                "Reflective"   : 0,
+                "Transparency" : 0,
+                "Refraction"   : 1
+            },
+            "Texture"  : {
+                "Type" : "MAPPING",
+                "Path" : "sun.jpg"
+            }
+        }
+    ]
+}

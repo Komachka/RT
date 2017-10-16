@@ -1,0 +1,358 @@
+{
+    "Light Model"             : "LAMBERT",
+    "Recursive Depth"         : 3,
+    "Samples Grid"            : 1,
+    "Background Color"        : "FFEFD5",
+    "Ambient Light Intensity" : {
+        "Red"   : 0.15,
+        "Green" : 0.15,
+        "Blue"  : 0.15,
+        "Alpha" : 0
+    },
+    "Camera"                  : {
+        "Type"                 : "STANDART",
+        "Position"             : {"x" : 0, "y" : 70, "z" : -100},
+        "Camera Rotate Angles" : [-20, 5, 0],
+        "FOV"                  : 45
+    },
+    "Light"                   : [
+        {
+            "Type"                              : "POINT_LIGHT",
+            "Position"                          : {"x" : 80, "y" : 100, "z" : 0},
+            "Direction"                         : {"x" : 0, "y" : 0, "z" : 0},
+            "Intensity"                         : {
+                "Red"   : 0.3,
+                "Green" : 0.3,
+                "Blue"  : 0.3,
+                "Alpha" : 0
+            },
+            "Constant Attenuation Coefficient"  : 1,
+            "Linear Attenuation Coefficient"    : 0.0014,
+            "Quadratic Attenuation Coefficient" : 0.000007
+        },
+        {
+            "Type"                              : "DIRECTIONAL_LIGHT",
+            "Position"                          : {"x" : 0, "y" : 100, "z" : 0},
+            "Direction"                         : {
+                "x" : 4, "y" : -10, "z" : 10
+            },
+            "Intensity"                         : {
+                "Red"   : 0.1,
+                "Green" : 0.1,
+                "Blue"  : 0.1,
+                "Alpha" : 0
+            },
+            "Constant Attenuation Coefficient"  : 0,
+            "Linear Attenuation Coefficient"    : 0,
+            "Quadratic Attenuation Coefficient" : 0
+        }
+    ],
+    "Objects"                 : [
+        {
+            "Id"       : "SPHERE",
+            "Object"   : {
+                "Position" : {"x" : -35, "y" : -10, "z" : 120},
+                "Radius"   : 20
+            },
+            "Material" : {
+                "Color"        : "BB0000",
+                "Ambient"      : {
+                    "Red"   : 0.8,
+                    "Green" : 0.8,
+                    "Blue"  : 0.8,
+                    "Alpha" : 0
+                },
+                "Diffuse"      : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Specular"     : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Shininess"    : 20,
+                "Reflective"   : 0,
+                "Transparency" : 0,
+                "Refraction"   : 1.015
+            },
+            "Texture"  : {
+                "Type"          : "MAPPING",
+                "Path"          : "ball.jpg"
+            }
+        },
+
+        {
+            "Id"       : "TORUS",
+            "Object"   : {
+                "Position"     : {"x" : 35, "y" : -26, "z" : 100},
+                "Direction"    : {"x" : 0, "y" : 180, "z" : 0},
+                "Minor Radius" : 4,
+                "Major Radius" : 35
+            },
+            "Material" : {
+                "Color"        : "eedd00",
+                "Ambient"      : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Diffuse"      : {
+                    "Red"   : 0.8,
+                    "Green" : 0.8,
+                    "Blue"  : 0.8,
+                    "Alpha" : 0
+                },
+                "Specular"     : {
+                    "Red"   : 0.4,
+                    "Green" : 0.4,
+                    "Blue"  : 0.4,
+                    "Alpha" : 0
+                },
+                "Shininess"    : 20,
+                "Reflective"   : 0,
+                "Transparency" : 0,
+                "Refraction"   : 1
+            }
+        },
+        {
+            "Id"       : "TORUS",
+            "Object"   : {
+                "Position"     : {"x" : 35, "y" : -20, "z" : 100},
+                "Direction"    : {"x" : 0, "y" : 180, "z" : 0},
+                "Minor Radius" : 4,
+                "Major Radius" : 30
+            },
+            "Material" : {
+                "Color"        : "ee0000",
+                "Ambient"      : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Diffuse"      : {
+                    "Red"   : 0.8,
+                    "Green" : 0.8,
+                    "Blue"  : 0.8,
+                    "Alpha" : 0
+                },
+                "Specular"     : {
+                    "Red"   : 0.4,
+                    "Green" : 0.4,
+                    "Blue"  : 0.4,
+                    "Alpha" : 0
+                },
+                "Shininess"    : 20,
+                "Reflective"   : 0,
+                "Transparency" : 0,
+                "Refraction"   : 1
+            }
+        },
+        {
+            "Id"       : "TORUS",
+            "Object"   : {
+                "Position"     : {"x" : 35, "y" : -14, "z" : 100},
+                "Direction"    : {"x" : 0, "y" : 180, "z" : 0},
+                "Minor Radius" : 4,
+                "Major Radius" : 25
+            },
+            "Material" : {
+                "Color"        : "0000ee",
+                "Ambient"      : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Diffuse"      : {
+                    "Red"   : 0.8,
+                    "Green" : 0.8,
+                    "Blue"  : 0.8,
+                    "Alpha" : 0
+                },
+                "Specular"     : {
+                    "Red"   : 0.4,
+                    "Green" : 0.4,
+                    "Blue"  : 0.4,
+                    "Alpha" : 0
+                },
+                "Shininess"    : 20,
+                "Reflective"   : 0,
+                "Transparency" : 0,
+                "Refraction"   : 1
+            }
+        },
+        {
+            "Id"       : "TORUS",
+            "Object"   : {
+                "Position"     : {"x" : 35, "y" : -8, "z" : 100},
+                "Direction"    : {"x" : 0, "y" : 180, "z" : 0},
+                "Minor Radius" : 4,
+                "Major Radius" : 20
+            },
+            "Material" : {
+                "Color"        : "006600",
+                "Ambient"      : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Diffuse"      : {
+                    "Red"   : 0.8,
+                    "Green" : 0.8,
+                    "Blue"  : 0.8,
+                    "Alpha" : 0
+                },
+                "Specular"     : {
+                    "Red"   : 0.4,
+                    "Green" : 0.4,
+                    "Blue"  : 0.4,
+                    "Alpha" : 0
+                },
+                "Shininess"    : 20,
+                "Reflective"   : 0,
+                "Transparency" : 0,
+                "Refraction"   : 1
+            }
+        },
+        {
+            "Id"       : "TORUS",
+            "Object"   : {
+                "Position"     : {"x" : 35, "y" : -2, "z" : 100},
+                "Direction"    : {"x" : 0, "y" : 180, "z" : 0},
+                "Minor Radius" : 4,
+                "Major Radius" : 15
+            },
+            "Material" : {
+                "Color"        : "ff6600",
+                "Ambient"      : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Diffuse"      : {
+                    "Red"   : 0.8,
+                    "Green" : 0.8,
+                    "Blue"  : 0.8,
+                    "Alpha" : 0
+                },
+                "Specular"     : {
+                    "Red"   : 0.4,
+                    "Green" : 0.4,
+                    "Blue"  : 0.4,
+                    "Alpha" : 0
+                },
+                "Shininess"    : 20,
+                "Reflective"   : 0,
+                "Transparency" : 0,
+                "Refraction"   : 1
+            }
+        },
+        {
+            "Id"       : "TORUS",
+            "Object"   : {
+                "Position"     : {"x" : 35, "y" : 4, "z" : 100},
+                "Direction"    : {"x" : 0, "y" : 180, "z" : 0},
+                "Minor Radius" : 4,
+                "Major Radius" : 10
+            },
+            "Material" : {
+                "Color"        : "bb00FF",
+                "Ambient"      : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Diffuse"      : {
+                    "Red"   : 0.8,
+                    "Green" : 0.8,
+                    "Blue"  : 0.8,
+                    "Alpha" : 0
+                },
+                "Specular"     : {
+                    "Red"   : 0.4,
+                    "Green" : 0.4,
+                    "Blue"  : 0.4,
+                    "Alpha" : 0
+                },
+                "Shininess"    : 20,
+                "Reflective"   : 0,
+                "Transparency" : 0,
+                "Refraction"   : 1
+            }
+        },
+        {
+            "Id"       : "SPHERE",
+            "Object"   : {
+                "Position" : {"x" : 35, "y" : 14, "z" : 100},
+                "Radius"   : 10
+            },
+            "Material" : {
+                "Color"        : "BB0000",
+                "Ambient"      : {
+                    "Red"   : 0.8,
+                    "Green" : 0.8,
+                    "Blue"  : 0.8,
+                    "Alpha" : 0
+                },
+                "Diffuse"      : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Specular"     : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Shininess"    : 20,
+                "Reflective"   : 0,
+                "Transparency" : 0,
+                "Refraction"   : 1.015
+            }
+        },
+
+        {
+            "Id"       : "PLANE",
+            "Object"   : {
+                "Point On The Plane" : {"x" : 0, "y" : -30, "z" : 0},
+                "Normal Vector"      : {"x" : 0, "y" : 1, "z" : 0}
+            },
+            "Material" : {
+                "Color"        : "009900",
+                "Ambient"      : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Diffuse"      : {
+                    "Red"   : 1,
+                    "Green" : 1,
+                    "Blue"  : 1,
+                    "Alpha" : 0
+                },
+                "Specular"     : {
+                    "Red"   : 0,
+                    "Green" : 0,
+                    "Blue"  : 0,
+                    "Alpha" : 0
+                },
+                "Shininess"    : 0,
+                "Reflective"   : 0,
+                "Transparency" : 0,
+                "Refraction"   : 1
+            }
+        }
+    ]
+}
