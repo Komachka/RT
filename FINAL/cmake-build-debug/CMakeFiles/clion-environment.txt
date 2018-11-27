@@ -1,2 +1,0 @@
-Options: 
-CMake: 3.8.2@/nfs/2016/p/pkolomiy/CLion.app/Contents/bin/cmake/bin/cmake

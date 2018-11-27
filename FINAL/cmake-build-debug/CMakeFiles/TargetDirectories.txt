@@ -1,3 +1,0 @@
-/nfs/2016/p/pkolomiy/unit/11/3/RT_SDL/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/nfs/2016/p/pkolomiy/unit/11/3/RT_SDL/cmake-build-debug/CMakeFiles/edit_cache.dir
-/nfs/2016/p/pkolomiy/unit/11/3/RT_SDL/cmake-build-debug/CMakeFiles/RT_SDL.dir
